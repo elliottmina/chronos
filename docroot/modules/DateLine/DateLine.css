@@ -1,0 +1,58 @@
+#DateLine,
+#DateLine .picker,
+#DateLine .curr_date {
+	width:25em;
+	height:6.5em;
+}
+#DateLine .picker,
+#DateLine .curr_date {
+	padding-top:1em;
+	position: absolute;
+	display: inline-block;
+}
+#DateLine .curr_date {
+	left:0;
+}
+#DateLine .curr_date .pos_wrapper {
+	height:100%;
+}
+#DateLine .picker {
+	left:25em;
+}
+#DateLine h1 {
+	font-size: 3em;	
+}
+#DateLine.today h1 {
+	color:hsl(213, 51%, 49%);
+}
+#DateLine h2 {
+	font-size: 1.3em;
+	color:hsl(0, 0%, 75%);
+}
+#DateLine .button_container {
+	position: absolute;
+	top:3.5em;
+	right:1em;
+}
+}
+#DateLine input[type="date"] {
+	font-size:2em;
+	width:7em;
+	padding:0.3em;
+	position: relative;
+	margin-bottom: 0.5em;
+}
+#DateLine input[type="date"]::-webkit-calendar-picker-indicator {
+	position: absolute;
+	right:0.2em;
+	padding:0.2em;
+	color:hsl(0, 0%, 60%);
+	border:1px solid hsl(0, 0%, 88%);
+	background-color: hsl(0, 0%, 98%);
+	box-shadow: 0 0 3px hsla(0, 0%, 90%, 1);
+	border-radius: 4px;
+	cursor: pointer;
+}
+#DateLine input[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}

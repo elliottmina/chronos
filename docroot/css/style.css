@@ -1,0 +1,127 @@
+* {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	padding:0;
+	margin:0;
+}
+body {
+	font-size: 16px;
+	padding:1em 1em 2em 1em;
+	background-color: #fff;
+	color:hsl(0, 0%, 25%);
+}
+.pos_wrapper {
+	position: relative;
+}
+table {
+	border-collapse: collapse;
+}
+section.region {
+	display: inline-block;
+	vertical-align: top;
+	padding:0 2em;
+}
+.region.left {
+	width:25em;
+}
+.region.summaries {
+	width:25em;
+}
+.logo {
+	position: fixed;
+	bottom:0;
+	left:0;
+	display: inline-block;
+	background-color: hsl(0, 0%, 90%);
+	padding:0.3em 0.5em;
+}
+.logo .version {
+	display: inline-block;
+	color:hsl(0, 0%, 50%);
+	font-size: 0.8em;
+	margin-left:0.25em;
+}
+.logo .version:before {
+	content: "v";
+}
+.no_content_container {
+	font-size:0.9em;
+	font-style: italic;
+}
+section>header {
+	margin-bottom: 1em;
+}
+@keyframes shake {
+	10%, 90% { transform: translate3d(-1px, 0, 0); }
+	20%, 80% { transform: translate3d(2px, 0, 0); }
+	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+	40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+@keyframes shake2 {
+	10%, 90% { transform: translate3d(-1px, 0, 0); }
+	20%, 80% { transform: translate3d(2px, 0, 0); }
+	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+	40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+.shake {
+	animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+.shake2 {
+	animation: shake2 0.42s cubic-bezier(.36,.07,.19,.97) both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+span.button {
+	cursor: pointer;
+	color:hsl(0, 0%, 70%);
+	padding:0.25em 0.4em;
+	border:1px solid transparent;
+	font-size: 0.9em;
+	display: inline-block;
+}
+span.button:hover {
+	color:hsl(0, 0%, 60%);
+	border:1px solid hsl(0, 0%, 88%);
+	background-color: hsl(0, 0%, 98%);
+	box-shadow: 0 0 3px hsla(0, 0%, 90%, 1);
+	border-radius: 4px;
+}
+
+/* POS */
+#Blasticator,
+#JsonExport,
+#JsonImport {
+	position: fixed;
+	bottom: 0;
+	background-color: #FFF;
+}
+#Blasticator {
+	right: 9.5em;
+}
+#JsonExport {
+	right: 5em;
+}
+#JsonImport {
+	right:0.5em;
+}
+#summary_nav {
+	margin-bottom: 1em;
+}
+#SpanSummary {
+	display: inline-block;
+}
+#JsonSummary {
+	position: relative;
+}
+#DateLine {
+	margin-bottom: 1em;
+	position: relative;
+	overflow: hidden;
+}
+#DailyGoal {
+	position: relative;
+}

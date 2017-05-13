@@ -1,0 +1,12 @@
+#summary_nav li {
+	display: inline-block;
+	cursor: pointer;
+	padding:0.2em;
+}
+#summary_nav li.selected {
+	font-weight: bold;
+	text-decoration: underline;
+}
+#summaries>section>header {
+	display:none;
+}

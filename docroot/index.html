@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chronos</title>
+	<!-- resource_files -->
+<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="/css/ModalDialogue.css">
+<link rel="stylesheet" type="text/css" href="/css/roboto-mono.css">
+<link rel="stylesheet" type="text/css" href="/css/roboto.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/modules/DailyGoal/DailyGoal.css">
+<link rel="stylesheet" type="text/css" href="/modules/DateLine/DateLine.css">
+<link rel="stylesheet" type="text/css" href="/modules/JsonSummary/JsonSummary.css">
+<link rel="stylesheet" type="text/css" href="/modules/ProjectSummary/ProjectSummary.css">
+<link rel="stylesheet" type="text/css" href="/modules/SpanCreator/SpanCreator.css">
+<link rel="stylesheet" type="text/css" href="/modules/SpanSummary/SpanSummary.css">
+<link rel="stylesheet" type="text/css" href="/modules/SummaryNav/SummaryNav.css">
+<script src="/js/app/App.js"></script>
+<script src="/js/app/LocalStoragePersister.js"></script>
+<script src="/js/app/LocalStorageRecordFormatter.js"></script>
+<script src="/js/app/ModuleLoader.js"></script>
+<script src="/js/util/Dispatcher.js"></script>
+<script src="/js/util/Downloader.js"></script>
+<script src="/js/util/GuidGenerator.js"></script>
+<script src="/js/util/ModalDialogue.js"></script>
+<script src="/js/util/MultiSoundPlayer.js"></script>
+<script src="/js/util/Padder.js"></script>
+<script src="/js/util/Rounder.js"></script>
+<script src="/js/util/ServiceRequest.js"></script>
+<script src="/js/util/TimeUtil.js"></script>
+<script src="/js/vendor/jquery-3.1.0.min.js"></script>
+<script src="/modules/Blasticator/Blasticator.js"></script>
+<script src="/modules/DailyGoal/DailyGoal.js"></script>
+<script src="/modules/DailyGoal/DailyGoalProgressBar.js"></script>
+<script src="/modules/DailyGoal/DailyGoalRocketLauncher.js"></script>
+<script src="/modules/DailyGoal/DailyGoalTemplate.js"></script>
+<script src="/modules/DailyGoal/DailyGoalText.js"></script>
+<script src="/modules/DateLine/DateLine.js"></script>
+<script src="/modules/DateLine/DateLineDatePicker.js"></script>
+<script src="/modules/DateNudgerShortcuts/DateNudgerShortcuts.js"></script>
+<script src="/modules/DeleteSpanDialogue/DeleteSpanDialogue.js"></script>
+<script src="/modules/JsonExport/JsonExport.js"></script>
+<script src="/modules/JsonExport/JsonExportCollector.js"></script>
+<script src="/modules/JsonImport/JsonImport.js"></script>
+<script src="/modules/JsonImport/JsonImportDialogue.js"></script>
+<script src="/modules/JsonSummary/JsonSummary.js"></script>
+<script src="/modules/PersistenceMarshaller/PersistenceMarshaller.js"></script>
+<script src="/modules/ProjectSummary/ProjectSummary.js"></script>
+<script src="/modules/ProjectSummary/ProjectSummaryDataBuilder.js"></script>
+<script src="/modules/SpanCreator/SpanCreator.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorAnalyzer.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorProjectSuggestor.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorRecentProjectBuilder.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorTaskList.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorTemplate.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorTimeField.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorTimeResolver.js"></script>
+<script src="/modules/SpanCreator/SpanCreatorValidator.js"></script>
+<script src="/modules/SpanSummary/SpanSummary.js"></script>
+<script src="/modules/SummaryNav/SummaryNav.js"></script>
+<script src="/modules/TimeFormatter12Hr/TimeFormatter12Hr.js"></script>
+<!-- /resource_files -->
+	<script>
+		jQuery(document).ready(function() {
+			App.init([Blasticator, DailyGoal, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, JsonExport, JsonImport, JsonSummary, PersistenceMarshaller, ProjectSummary, SpanCreator, SpanSummary, SummaryNav, TimeFormatter12Hr]);
+		});
+	</script>
+</head>
+<body>
+	<section class="region left">
+		<section id="DateLine"></section>
+		<section id="SpanCreator"></section>
+	</section>
+	<section class="region summaries">
+		<section id="DailyGoal"></section>
+		<ul id="summary_nav">
+			<li>Projects</li>
+			<li>Log</li>
+			<li>JSON</li>
+		</ul>
+		<section id="summaries">
+			<section id="ProjectSummary"></section>
+			<section id="SpanSummary"></section>
+			<section id="JsonSummary"></section>
+		</section>
+	</section>
+	<section>
+		<div id="Blasticator"></div>
+		<div id="JsonExport"></div>
+		<div id="JsonImport"></div>
+	</section>
+	<div class="logo">Chronos<span class="version">1.0</span></div>
+</body>
+</html>
