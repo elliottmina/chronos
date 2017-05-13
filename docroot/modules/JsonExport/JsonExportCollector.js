@@ -4,12 +4,17 @@ JsonExportCollector = function(timeUtil) {
 	var exportData;
 	var currDate;
 
-	var getStartingDate = function() {
+	var getStartDate = function() {
 		var startYmd = timeUtil.getNewDayStr(new Date(), range*-1);
 		return timeUtil.parseUtcYmd(startYmd);
 	};
 
+	var getFinishDate = function() {
+		return timeUtil.addDays(new Date(), 100);
+	};
+
 	var iterate = function() {
+		console.log(currDate);
 		var record = App.persister.fetch(timeUtil.getYmd(currDate));
 		if (Object.keys(record.spans).length)
 			exportData.push(record);
@@ -19,10 +24,10 @@ JsonExportCollector = function(timeUtil) {
 	return {
 		collect:function() {
 			exportData = [];
-			currDate = getStartingDate();
-			var today = new Date();
+			currDate = getStartDate();
+			endDate = getFinishDate();
 
-			while (currDate <= today)
+			while (currDate <= endDate)
 				iterate();
 
 			return exportData;
