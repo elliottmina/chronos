@@ -81,7 +81,7 @@ class TagBuilder(object):
 		[self.process_path(path) for path in glob(pattern)]
 
 	def process_path(self, path):
-		path = path.replace(docroot, '')
+		path = path.replace(docroot + '/', '')
 		self.tags.append(self.template.format(path))
 
 if __name__ == '__main__':
