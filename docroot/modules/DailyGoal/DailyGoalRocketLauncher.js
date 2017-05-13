@@ -20,17 +20,17 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 		targetTop = [-10, -10 + target.height() -10];
 		soundPlayer = new MultiSoundPlayer([{
 			key:'launch',
-			path:'/modules/DailyGoal/audio/launch.wav',
+			path:'modules/DailyGoal/audio/launch.wav',
 			volume:0.3,
 			num:10
 		},{
 			key:'explosion',
-			path:'/modules/DailyGoal/audio/explosion.wav',
+			path:'modules/DailyGoal/audio/explosion.wav',
 			volume:0.05,
 			num:10
 		},{
 			key:'fill',
-			path:'/modules/DailyGoal/audio/fill.wav',
+			path:'modules/DailyGoal/audio/fill.wav',
 			volume:0.4,
 			num:10
 		}]);
