@@ -44,7 +44,7 @@ var JsonImport = function() {
 		try {
 			var json = JSON.parse(contents);
 			jQuery.each(json, function(index, record) {
-				persistor.put(record);
+				App.persister.put(record);
 			});
 			if (processDialogue)
 				processDialogue.close();

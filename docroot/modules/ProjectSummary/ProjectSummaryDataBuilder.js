@@ -5,7 +5,7 @@ var ProjectSummaryDataBuilder = function() {
 	var processSpan = function(index, span) {
 		initProject(span);
 
-		var project = projects[span.project.toLowerCase()];
+		var project = projects[getKey(span)];
 
 		project.time += (span.finish - span.start)/1000/60;
 
@@ -17,14 +17,18 @@ var ProjectSummaryDataBuilder = function() {
 	};
 
 	var initProject = function(span) {
-		if (projects[span.project])
+		if (projects[getKey(span)])
 			return;
 
-		projects[span.project.toLowerCase()] = {
+		projects[getKey(span)] = {
 			label:span.project,
 			time:0,
 			tasks:[]
 		};
+	};
+
+	var getKey = function(span) {
+		return span.project.toLowerCase();
 	};
 
 	return {
