@@ -3,26 +3,35 @@ var SpanSummary = function() {
 	var html = `
 		<header>Spans</header>
 		<div class="no_content_container">Nothing to see here.  Move along.</div>
-		<div class="spans"></div>`;
+		<table>
+			<thead>
+				<tr>
+					<th class="start">Start</th>
+					<th class="finish">Finish</th>
+					<th class="project">Project</th>
+					<th class="tasks">Tasks</th>
+					<th class="hours">Hours</th>
+					<th class="time">Time</th>
+					<th class="actions">Actions</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>`;
 
 	var spanTemplate = `
-		<div class="span widget">
-			<header>
-				<span class="start_time"></span>
-				<span class="finish_time"></span>
-			</header>
-			<div class="project"></div>
-			<div class="elapsed">
-				<span class="hours"></span>
-				<span class="time"></span>
-			</div>
-			<ul></ul>
-			<div class="button_container">
+		<tr>
+			<td class="start"></td>
+			<td class="finish"></td>
+			<td class="project"></td>
+			<td class="tasks"><ul class="task_list"></ul></td>
+			<td class="hours"></td>
+			<td class="time"></td>
+			<td class="actions">
 				<span class="mini_button edit fa fa-pencil"></span>
 				<span class="mini_button delete fa fa-trash"></span>
 				<span class="mini_button repeat fa fa-repeat"></span>
-			</div>
-		</div>`;
+			</td>
+		</tr>`;
 
 	var spansContainer;
 	var nonContentContainer;
@@ -46,7 +55,7 @@ var SpanSummary = function() {
 	var build = function() {
 		var renderTo = $('#SpanSummary');
 		renderTo.html(html);
-		spansContainer = renderTo.find('.spans');
+		spansContainer = renderTo.find('tbody');
 		noContentContainer = renderTo.find('.no_content_container');
 	};
 
@@ -77,7 +86,7 @@ var SpanSummary = function() {
 
 	var addSpan = function(span) {
 		noContentContainer.hide();
-		var container = $(spanTemplate).appendTo(spansContainer);
+		var container = jQuery(spanTemplate).appendTo(spansContainer);
 		spanMap[span.guid] = container;
 		populateSpan(span, container);
 	};
@@ -92,8 +101,8 @@ var SpanSummary = function() {
 		container.find('.delete').data('guid', span.guid).click(deleteSpan);
 		container.find('.repeat').data('guid', span.guid).click(repeatSpan);
 
-		container.find('.start_time').text(timeFormatter.format(span.start));
-		container.find('.finish_time').text(timeFormatter.format(span.finish));
+		container.find('.start').text(timeFormatter.format(span.start));
+		container.find('.finish').text(timeFormatter.format(span.finish));
 		container.find('.project').text(span.project);
 		container.find('.time').text(elapsedHours + ':' + elapsedMinutes);
 		container.find('.hours').text(elapsedDecimal);
@@ -111,8 +120,8 @@ var SpanSummary = function() {
 		var el = jQuery(this);
 		var guid = el.data('guid');
 		App.dispatcher.update('EDIT_SPAN_REQUESTED', guid);
-		spansContainer.find('.span').removeClass('selected');
-		el.closest('.span').addClass('selected');
+		spansContainer.find('tr').removeClass('selected');
+		el.closest('tr').addClass('selected');
 	};
 
 	var deleteSpan = function() {

@@ -5,7 +5,7 @@ var ProjectSummary = function() {
 			<td class="project"></td>
 			<td class="hours"></td>
 			<td class="time"></td>
-			<td class="tasks"><ul></ul></td>
+			<td class="tasks"><ul class="task_list"></ul></td>
 		</li>
 	`;
 	
@@ -19,6 +19,7 @@ var ProjectSummary = function() {
 					<th class="hours">Hours</th>
 					<th class="time">Time</th>
 					<th class="tasks">Tasks</th>
+				</tr>
 			</thead>
 			<tbody></tbody>
 		</table>`;

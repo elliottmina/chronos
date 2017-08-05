@@ -1,70 +1,13 @@
-#SpanSummary .span {
-	padding: 1em;
-	border:1px solid transparent;
-	border-radius: 4px;
-	margin-top: 1em;
-	width: 16em;
-	margin-right: 1em;
-	display: inline-block;
-	vertical-align: top;
+#SpanSummary thead {
+	display: none;
 }
-#SpanSummary header span {
-	font-weight: bold;
-	margin-bottom: 0.4em;
-	font-size: 1.1em;
-}
-#SpanSummary .span:hover {
+#SpanSummary tbody tr:hover {
 	background-color: hsl(0, 0%, 97%);
-	border:1px solid hsl(0, 0%, 90%);
 }
-#SpanSummary .span.selected {
+#SpanSummary tbody tr.selected {
 	background-color: hsl(213, 51%, 80%);
-	border:1px solid hsl(213, 51%, 70%);
 }
-#SpanSummary .span .time .delete {
-	position: absolute;
-	right:0;
-}
-#SpanSummary .span .time .edit {
-	position: absolute;
-	right:1.75em;
-}
-#SpanSummary .start_time:after {
-	content:' - ';
-}
-#SpanSummary .start_time,
-#SpanSummary .finish_time {
-	display: inline-block;
-}
-#SpanSummary .project {margin-bottom: 0.5em;}
-#SpanSummary .button {
-}
-#SpanSummary .button:hover {
-	color:hsl(0, 0%, 40%);
-}
-#SpanSummary ul {
-	margin-left: 1.5em;
-}
-#SpanSummary .hours {
-	font-size: 1.1em;
-}
-#SpanSummary .hours:after {
-	content:' hrs';
-}
+#SpanSummary .hours,
 #SpanSummary .time {
-	font-size: 0.9em;
-}
-#SpanSummary .time:before {
-	content:'(';
-}
-#SpanSummary .time:after {
-	content:')';
-}
-#SpanSummary .button_container {
-	position: absolute;
-	top: 0.1em;
-	right: 0.1em;
-}
-#SpanSummary .elapsed {
-	margin-bottom: 0.5em;
+	text-align: center;
 }
