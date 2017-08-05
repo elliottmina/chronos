@@ -16,6 +16,7 @@ var SpanCreatorTaskList = function(topContainer) {
 
 	var addBehavior = function() {
 		input.keyup(onKeyUp);
+		new InputSizeAdjuster(input);
 	};
 
 	var onKeyUp = function(e) {
