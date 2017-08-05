@@ -18,7 +18,7 @@ var ModalDialogue = function(config) {
 	var build = function() {
 		jQuery(document.body).css('overflow', 'hidden');
 
-		topContainer = $(dialogueTemplate).appendTo(document.body);
+		topContainer = jQuery(dialogueTemplate).appendTo(document.body);
 		var buttonContainer = topContainer.find('.button_container');
 		var header = topContainer.find('header');
 

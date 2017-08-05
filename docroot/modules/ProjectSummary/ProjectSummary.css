@@ -1,43 +1,20 @@
-#ProjectSummary li {
-	list-style: none;
+#ProjectSummary table {
+	min-width: 40em;
 }
-#ProjectSummary header {
-	font-weight: bold;
-	margin-bottom: 0.4em;
-	font-size: 1.1em;
-}
-#ProjectSummary .summary_item {
-	margin-bottom: 1em;
-	width: 14em;
-	display: inline-block;
-	margin-right: 1em;
-	vertical-align: top;
-	margin-top: 1em;
-}
-#ProjectSummary .summary_item .time,
-#ProjectSummary .summary_item .hours {
-	display: inline-block;
-}
-#ProjectSummary .summary_item .time {
-	font-size: 0.9em;
-}
-#ProjectSummary .summary_item .time:before {
-	content:'(';
-}
-#ProjectSummary .summary_item .time:after {
-	content:')';
-}
-#ProjectSummary .summary_item .hours {
-	font-size: 1.1em;
-	margin-right: .25em;
-	margin-bottom: 0.5em;
-}
-#ProjectSummary .summary_item .hours:after {
+#ProjectSummary tbody .hours:after {
 	content:'hrs';
 	padding-left: 0.2em;
 }
 #ProjectSummary .tasks li {
-	padding:0.1em;
-	list-style: disc;
-	margin-left: 1em;
+	list-style: none;
+	display: inline-block;
+	border:1px solid #CCC;
+    padding: 0.25em 0.5em 0.25em 0.25em;
+    border-radius: 4px;
+    margin:0.2em;
+    background-color:hsl(0, 0%, 99%);
+}
+#ProjectSummary .hours,
+#ProjectSummary .time {
+	text-align: center;
 }

@@ -11,11 +11,11 @@ var Blasticator = function() {
 	};
 
 	var build = function() {
-		$('#Blasticator').html(html);
+		jQuery('#Blasticator').html(html);
 	};
 
 	var addBehavior = function() {
-		$('#Blasticator').find('.mini_button').click(showDialogue);
+		jQuery('#Blasticator').find('.mini_button').click(showDialogue);
 	};
 
 	var showDialogue = function() {

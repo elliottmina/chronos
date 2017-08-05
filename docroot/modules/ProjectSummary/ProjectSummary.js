@@ -1,20 +1,27 @@
 var ProjectSummary = function() {
 
 	var itemTemplate = `
-		<li class="summary_item widget">
-			<header></header>
-			<div>
-				<span class="hours"></span>
-				<span class="time"></span>
-			</div>
-			<ul class="tasks"></ul>
+		<tr>
+			<td class="project"></td>
+			<td class="hours"></td>
+			<td class="time"></td>
+			<td class="tasks"><ul></ul></td>
 		</li>
 	`;
 	
 	var html = `
 		<header>Project summary</header>
 		<div class="no_content_container">Nothing to see here.  Move along.</div>
-		<ul class="projects"></ul>`;
+		<table>
+			<thead>
+				<tr>
+					<th class="project">Project</th>
+					<th class="hours">Hours</th>
+					<th class="time">Time</th>
+					<th class="tasks">Tasks</th>
+			</thead>
+			<tbody></tbody>
+		</table>`;
 
 	var dataBuilder;
 	var listEl;
@@ -30,7 +37,7 @@ var ProjectSummary = function() {
 	var build = function() {
 		var renderTo = $('#ProjectSummary');
 		renderTo.html(html);
-		listEl = renderTo.find('ul.projects');
+		listEl = renderTo.find('tbody');
 		noContentContainer = renderTo.find('.no_content_container');
 	};
 
@@ -65,14 +72,14 @@ var ProjectSummary = function() {
 	};
 
 	var addProject = function(key, project) {
-		var itemContainer = $(itemTemplate)
+		var itemContainer = jQuery(itemTemplate)
 			.appendTo(listEl);
 
-		itemContainer.find('header').text(project.label);
+		itemContainer.find('.project').text(project.label);
 		itemContainer.find('.hours').text(formatHours(project.time));
 		itemContainer.find('.time').text(formatTime(project.time));
 		
-		var tasksContainer = itemContainer.find('.tasks');
+		var tasksContainer = itemContainer.find('ul');
 		jQuery.each(project.tasks, function(index, task) {
 			$('<li>')
 				.appendTo(tasksContainer)

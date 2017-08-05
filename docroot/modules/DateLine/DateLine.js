@@ -26,7 +26,7 @@ var DateLine = function() {
 	};
 
 	var build = function() {
-		topContainer = $('#DateLine');
+		topContainer = jQuery('#DateLine');
 		topContainer.html(html);
 		dayOfWeekContainer = topContainer.find('h1');
 		dateContainer = topContainer.find('h2');
