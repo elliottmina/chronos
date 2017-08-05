@@ -90,8 +90,8 @@ var SpanCreator = function() {
 	};
 
 	var save = function() {
-		submit();
-		prepareNext();
+		if (submit())
+			prepareNext();
 	};
 
 	var submit = function() {

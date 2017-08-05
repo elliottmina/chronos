@@ -50,7 +50,7 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 	};
 
 	var selectSuggestion = function() {
-		projectInput.val($(this).text());
+		projectInput.val(jQuery(this).text());
 		hide();
 	};
 

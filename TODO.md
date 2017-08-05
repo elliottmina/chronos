@@ -1,8 +1,10 @@
 # TODO
 
-* notes module?
 * Entering without span time clears form instead of rejecting save
-* Sometime cannot click on tasks
+* new shortcut keys
+* time end shoudl come after tasks
+* Sometimes the suggstions UL gets the click instead of the LI.
+* notes module?
 
 ## Backlog
 * Configuration system
