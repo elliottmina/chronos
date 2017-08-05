@@ -1,15 +1,8 @@
 # TODO
 
-* Indicate editing vs creating span (title and button text)
-
 * notes module?
-* Show example of running it from github
-
-## Testing
-* DST
-* Date overlap - adding entries after midnight.
-* Date overlap - editing dates before midnight, after it is past midnight
-* Date overlap - adding dates after midnight, before it is past midnight
+* Entering without span time clears form instead of rejecting save
+* Sometime cannot click on tasks
 
 ## Backlog
 * Configuration system

@@ -95,6 +95,7 @@ var SpanCreator = function() {
 	};
 
 	var submit = function() {
+		taskList.addCurrent();
 		var span = {
 			start:startTimeField.getTime(),
 			finish:getFinishDate(),
