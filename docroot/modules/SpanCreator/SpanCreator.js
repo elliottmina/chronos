@@ -58,9 +58,7 @@ var SpanCreator = function() {
 		validator = new SpanCreatorValidator();
 
 		new SpanCreatorShortcuts(
-			topContainer.find('.toggle_hotkeys'),
 			projectSuggestor, 
-			topContainer.find('.save'), 
 			save, 
 			startTimeField, 
 			finishTimeField);
