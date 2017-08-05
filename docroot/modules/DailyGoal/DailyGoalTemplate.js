@@ -10,6 +10,5 @@ var DailyGoalTemplate = `
 			<div class="progress_percent"></div>
 			<div class="progress_overage"></div>
 		</div>
-		
 	</div>
 `;

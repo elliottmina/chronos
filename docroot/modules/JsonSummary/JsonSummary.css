@@ -9,7 +9,9 @@
 	background-color: hsl(0, 0%, 99%);
 }
 #JsonSummary .copy {
-	margin-top: 0.5em;
+	margin-top: .5em;
+	display: inline-block;
+	margin-left: 0.5em;
 }
 #JsonSummary .clipboard {
 	position: absolute;

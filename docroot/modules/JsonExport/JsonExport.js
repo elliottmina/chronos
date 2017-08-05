@@ -1,7 +1,7 @@
 var JsonExport = function() {
 
 	var html = `
-		<span class="button export">
+		<span class="mini_button export">
 			<i class="fa fa-download"></i> Export
 		</span>`;
 	var button;
@@ -24,7 +24,7 @@ var JsonExport = function() {
 	var build = function() {
 		var renderTo = $('#JsonExport');
 		renderTo.html(html);
-		button = renderTo.find('.button.export');
+		button = renderTo.find('.mini_button');
 	};
 
 	var addBehavior = function() {

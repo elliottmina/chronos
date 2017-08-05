@@ -1,7 +1,7 @@
 var Blasticator = function() {
 
 	var html = `
-		<span class="button blasticate">
+		<span class="mini_button blasticate">
 			<i class="fa fa-trash"></i> Blasticate
 		</span>`;
 
@@ -15,7 +15,7 @@ var Blasticator = function() {
 	};
 
 	var addBehavior = function() {
-		$('#Blasticator').find('.button.blasticate').click(showDialogue);
+		$('#Blasticator').find('.mini_button').click(showDialogue);
 	};
 
 	var showDialogue = function() {

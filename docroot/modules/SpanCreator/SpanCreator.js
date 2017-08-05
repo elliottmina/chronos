@@ -11,6 +11,9 @@ var SpanCreator = function() {
 	var date;
 	var record;
 	var activeSpan;
+	var saveButton;
+	var saveButtonText;
+	var saveAndRepeatButton;
 
 	var init = function() {
 		gatherDependencies();
@@ -27,6 +30,9 @@ var SpanCreator = function() {
 	var buildHtml = function() {
 		topContainer = $('#SpanCreator');
 		topContainer.html(SpanCreatorTemplate);
+		saveButton = topContainer.find('.save');
+		saveButtonText = saveButton.find('.text')
+		saveAndRepeatButton = topContainer.find('.duplicate');
 	};
 
 	var build = function() {
@@ -56,14 +62,12 @@ var SpanCreator = function() {
 	};
 
 	var addBehavior = function() {
-		topContainer.find('.save')
-			.click(save)
-			.keyup(onSaveKeyUp);
-		topContainer.find('.duplicate')
-			.click(duplicate);
+		saveButton.click(save).keyup(onSaveKeyUp);
+		saveAndRepeatButton.click(saveAndRepeat);
 		jQuery(document).keydown(onKeyDown);
 		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('DATE_EDIT_REQUESTED', onDateEditRequested);
+		App.dispatcher.register('EDIT_SPAN_REQUESTED', onEditSpanRequested);
+		App.dispatcher.register('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
 	};
 
 	var onKeyDown = function(e) {
@@ -130,17 +134,31 @@ var SpanCreator = function() {
 		projectSuggestor.clear();
 		taskList.clear();
 		projectSuggestor.focus();
+		saveButtonText.text('Create');
+		saveAndRepeatButton.show();
 	};
 
-	 var onDateEditRequested = function(guid) {
-	 	activeSpan = record.spans[guid];
-	 	startTimeField.setTime(activeSpan.start);
-	 	finishTimeField.setTime(activeSpan.finish);
-	 	projectSuggestor.set(activeSpan.project);
-	 	taskList.setTasks(activeSpan.tasks);
-	 };
+	var onEditSpanRequested = function(guid) {
+		activeSpan = record.spans[guid];
+		startTimeField.setTime(activeSpan.start);
+		finishTimeField.setTime(activeSpan.finish);
+		projectSuggestor.set(activeSpan.project);
+		taskList.setTasks(activeSpan.tasks);
+		saveButtonText.text('Save');
+		saveAndRepeatButton.hide();
+	};
 
-	var duplicate = function() {
+	var onRepeatSpanRequested = function(guid) {
+		var span = record.spans[guid];
+		startTimeField.now();
+		finishTimeField.clear();
+		projectSuggestor.set(span.project);
+		taskList.setTasks(span.tasks);
+		saveButtonText.text('Create');
+		saveAndRepeatButton.show();
+	};
+
+	var saveAndRepeat = function() {
 		submit();
 		startTimeField.now();
 		finishTimeField.clear();

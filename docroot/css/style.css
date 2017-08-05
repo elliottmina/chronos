@@ -7,8 +7,8 @@
 body {
 	font-size: 16px;
 	padding:1em 1em 2em 1em;
-	background-color: #fff;
 	color:hsl(0, 0%, 25%);
+	background-color: hsl(0, 0%, 97%);
 }
 .pos_wrapper {
 	position: relative;
@@ -16,16 +16,15 @@ body {
 table {
 	border-collapse: collapse;
 }
-section.region {
-	display: inline-block;
-	vertical-align: top;
-	padding:0 2em;
-}
-.region.left {
-	width:25em;
-}
-.region.summaries {
-	width:25em;
+.widget {
+	border-radius: 2px;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
+	background-color: hsl(0, 0%, 100%);
+	border:1px solid hsl(0, 0%, 94%);
+	padding: 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	position: relative;
 }
 .logo {
 	position: fixed;
@@ -75,20 +74,16 @@ section>header {
 	backface-visibility: hidden;
 	perspective: 1000px;
 }
-span.button {
+.mini_button {
 	cursor: pointer;
 	color:hsl(0, 0%, 70%);
-	padding:0.25em 0.4em;
+	padding: 0.2em;
 	border:1px solid transparent;
 	font-size: 0.9em;
 	display: inline-block;
 }
-span.button:hover {
-	color:hsl(0, 0%, 60%);
-	border:1px solid hsl(0, 0%, 88%);
-	background-color: hsl(0, 0%, 98%);
-	box-shadow: 0 0 3px hsla(0, 0%, 90%, 1);
-	border-radius: 4px;
+.mini_button:hover {
+	color:hsl(217, 89%, 61%);
 }
 
 /* POS */
@@ -108,9 +103,7 @@ span.button:hover {
 #JsonImport {
 	right:0.5em;
 }
-#summary_nav {
-	margin-bottom: 1em;
-}
+#summary_nav {margin-top: 2em;}
 #SpanSummary {
 	display: inline-block;
 }
@@ -118,10 +111,15 @@ span.button:hover {
 	position: relative;
 }
 #DateLine {
-	margin-bottom: 1em;
-	position: relative;
-	overflow: hidden;
 }
 #DailyGoal {
-	position: relative;
+	position: absolute;
+	top:0;
+	right:0;
+}
+#DateSelector {
+	margin-top: 0.5em;
+}
+section.summaries {
+	margin-bottom:1em;
 }

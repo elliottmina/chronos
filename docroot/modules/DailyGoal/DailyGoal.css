@@ -5,6 +5,8 @@
 /* text */
 #DailyGoal .total {
 	margin-bottom: 1em;
+	display: inline-block;
+	margin-right: 1em;
 }
 #DailyGoal .total .amount {
 	font-size: 2.5em;

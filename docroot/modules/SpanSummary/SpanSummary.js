@@ -6,20 +6,21 @@ var SpanSummary = function() {
 		<div class="spans"></div>`;
 
 	var spanTemplate = `
-		<div class="span">
-			<div class="time">
+		<div class="span widget">
+			<header>
 				<span class="start_time"></span>
 				<span class="finish_time"></span>
-				<span class="elapsed"></span>
-				<span class="button edit fa fa-pencil"></span>
-				<span class="button delete fa fa-trash"></span>
+			</header>
+			<div class="project"></div>
+			<div class="elapsed">
+				<span class="hours"></span>
+				<span class="time"></span>
 			</div>
-			<div>
-				<div class="project">
-					<i class="fa fa-folder-o"></i>
-					<span class="target"></span>
-				</div>
-				<ul></ul>
+			<ul></ul>
+			<div class="button_container">
+				<span class="mini_button edit fa fa-pencil"></span>
+				<span class="mini_button delete fa fa-trash"></span>
+				<span class="mini_button repeat fa fa-repeat"></span>
 			</div>
 		</div>`;
 
@@ -87,18 +88,15 @@ var SpanSummary = function() {
 		var elapsedHours = Math.floor(elapsed);
 		var elapsedMinutes = padder.twoDigit(Math.floor((elapsed % 1) * 60));
 
-		container.find('.edit')
-			.data('guid', span.guid)
-			.click(editSpan);
-		container.find('.delete')
-			.data('guid', span.guid)
-			.click(deleteSpan);
+		container.find('.edit').data('guid', span.guid).click(editSpan);
+		container.find('.delete').data('guid', span.guid).click(deleteSpan);
+		container.find('.repeat').data('guid', span.guid).click(repeatSpan);
+
 		container.find('.start_time').text(timeFormatter.format(span.start));
 		container.find('.finish_time').text(timeFormatter.format(span.finish));
-		container.find('.project .target').text(span.project);
-		container.find('.elapsed').text(
-			elapsedHours + ':' + elapsedMinutes + 
-			' (' + elapsedDecimal + ' hrs)');
+		container.find('.project').text(span.project);
+		container.find('.time').text(elapsedHours + ':' + elapsedMinutes);
+		container.find('.hours').text(elapsedDecimal);
 
 		var taskContainer = container.find('ul');
 		taskContainer.empty();
@@ -112,13 +110,19 @@ var SpanSummary = function() {
 	var editSpan = function() {
 		var el = jQuery(this);
 		var guid = el.data('guid');
-		App.dispatcher.update('DATE_EDIT_REQUESTED', guid);
+		App.dispatcher.update('EDIT_SPAN_REQUESTED', guid);
+		spansContainer.find('.span').removeClass('selected');
 		el.closest('.span').addClass('selected');
 	};
 
 	var deleteSpan = function() {
 		var guid = jQuery(this).data('guid');
 		App.dispatcher.update('DELETE_SPAN_REQUESTED', guid);
+	};
+
+	var repeatSpan = function() {
+		var guid = jQuery(this).data('guid');
+		App.dispatcher.update('REPEAT_SPAN_REQUESTED', guid);
 	};
 
 	var onSpanDeleted = function(data) {

@@ -1,7 +1,7 @@
 var JsonImport = function() {
 
 	var html = `
-		<span class="button import">
+		<span class="mini_button import">
 			<i class="fa fa-upload"></i> Import
 		</span>`;
 	var progressTemplate = `<progress></progress`;
@@ -19,7 +19,7 @@ var JsonImport = function() {
 	};
 
 	var addBehavior = function() {
-		$('#JsonImport').find('.button.import').click(showImportDialogue);
+		$('#JsonImport').find('.mini_button').click(showImportDialogue);
 	};
 
 	var showImportDialogue = function() {

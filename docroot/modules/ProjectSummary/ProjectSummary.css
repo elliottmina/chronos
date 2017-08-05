@@ -1,32 +1,36 @@
 #ProjectSummary li {
 	list-style: none;
 }
-#ProjectSummary .content_container header {
-	text-align: center;
-}
-#ProjectSummary ul header {
-	border-bottom:1px solid hsl(0, 0%, 80%);
-	text-align: left;
-	margin-bottom: 0.2em;
+#ProjectSummary header {
+	font-weight: bold;
+	margin-bottom: 0.4em;
+	font-size: 1.1em;
 }
 #ProjectSummary .summary_item {
-	margin-bottom: 0.5em;
-}
-#ProjectSummary .summary_item .project {
+	margin-bottom: 1em;
+	width: 14em;
 	display: inline-block;
-	margin-bottom: 0.2em;
+	margin-right: 1em;
+	vertical-align: top;
+	margin-top: 1em;
 }
 #ProjectSummary .summary_item .time,
 #ProjectSummary .summary_item .hours {
 	display: inline-block;
-	text-align: right;
-	float:right;
 }
 #ProjectSummary .summary_item .time {
-	margin-right: 1em;
+	font-size: 0.9em;
+}
+#ProjectSummary .summary_item .time:before {
+	content:'(';
+}
+#ProjectSummary .summary_item .time:after {
+	content:')';
 }
 #ProjectSummary .summary_item .hours {
-	min-width: 4em;
+	font-size: 1.1em;
+	margin-right: .25em;
+	margin-bottom: 0.5em;
 }
 #ProjectSummary .summary_item .hours:after {
 	content:'hrs';
@@ -35,5 +39,5 @@
 #ProjectSummary .tasks li {
 	padding:0.1em;
 	list-style: disc;
-	margin-left:1em;
+	margin-left: 1em;
 }

@@ -1,0 +1,12 @@
+#DateSelector {
+	display: inline-block;
+	font-size: 0.9em;
+}
+input.date_picker[type="date"] {
+	font-size:2em;
+	width: 8em;
+	padding:0.3em;
+}
+input.date_picker[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}

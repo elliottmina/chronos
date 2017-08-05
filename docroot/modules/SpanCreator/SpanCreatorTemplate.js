@@ -1,47 +1,50 @@
 var SpanCreatorTemplate = `
-	<div class="project_suggestions pos_wrapper">
-		<label for="SpanCreatorProject">Project</label>
-		<input type="text" id="SpanCreatorProject" name="project" tabindex="1" required />
-		<ul></ul>
-	</div>
-	<div class="time_fields">
-		<div class="time_field_wrapper">
-			<label>Start time</label>
-			<span class="start">
-				<span class="time_field_container">
-					<span class="time" tabindex="1"></span>
-					<span class="period">AM</span>
-					<button class="now fa fa-clock-o" tabindex="-1"></button>
-					<span class="cursor"></span>
-				</span>
-			</span>
+	<section>
+		<div class="project_suggestions pos_wrapper">
+			<label for="SpanCreatorProject">Project</label>
+			<input type="text" id="SpanCreatorProject" name="project" tabindex="1" required />
+			<ul></ul>
 		</div>
-		<div class="time_field_wrapper">
-			<label>Finish time</label>
-			<span class="finish">
-				<span class="time_field_container">
-					<span class="time" tabindex="1"></span>
-					<span class="period">AM</span>
-					<button class="now fa fa-clock-o" tabindex="-1"></button>
-					<span class="cursor"></span>
+		<div class="time_fields">
+			<div class="time_field_wrapper">
+				<label>Start time</label>
+				<span class="start">
+					<span class="time_field_container">
+						<span class="time" tabindex="1"></span>
+						<span class="period">AM</span>
+						<button class="now fa fa-clock-o" tabindex="-1"></button>
+						<span class="cursor"></span>
+					</span>
 				</span>
-			</span>
+			</div>
+			<div class="time_field_wrapper">
+				<label>Finish time</label>
+				<span class="finish">
+					<span class="time_field_container">
+						<span class="time" tabindex="1"></span>
+						<span class="period">AM</span>
+						<button class="now fa fa-clock-o" tabindex="-1"></button>
+						<span class="cursor"></span>
+					</span>
+				</span>
+			</div>
 		</div>
-	</div>
+		<div class="button_container">
+			<div class="button save" tabindex="1">
+				<i class="fa fa-floppy-o"></i>
+				<span class="text">Create</span>
+			</div>
+			<div class="button duplicate" tabindex="1">
+				<i class="fa fa-repeat"></i>
+				Save + repeat
+			</div>
+		</div>
+	</section>
 	<div class="task_list">
 		<label for="SpanCreatorTask">Tasks</label>
 		<input type="text" id="SpanCreatorTask" tabindex="1" />
 		<ul></ul>
 	</div>
-	<div class="button_container">
-		<div class="button save" tabindex="1">
-			<i class="fa fa-floppy-o"></i>
-			Save
-		</div>
-		<div class="button duplicate" tabindex="1">
-			<i class="fa fa-clone"></i>
-			Save + Clone
-		</div>
 		<div class="hotkeys">
 			<span class="hotkey">
 				<span class="icon">⌘</span>+<span class="icon">P</span>
@@ -72,5 +75,4 @@ var SpanCreatorTemplate = `
 				<span class="text">Save</span>
 			</span>
 		</div>
-	</div>
 `;

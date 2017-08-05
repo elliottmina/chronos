@@ -1,5 +1,7 @@
 # TODO
 
+* Indicate editing vs creating span (title and button text)
+
 * notes module?
 * Show example of running it from github
 

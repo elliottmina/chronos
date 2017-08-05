@@ -1,13 +1,12 @@
 var ProjectSummary = function() {
 
 	var itemTemplate = `
-		<li class="summary_item">
-			<header>
-				<i class="fa fa-folder-o"></i>
-				<span class="project"></span>
+		<li class="summary_item widget">
+			<header></header>
+			<div>
 				<span class="hours"></span>
 				<span class="time"></span>
-			</header>
+			</div>
 			<ul class="tasks"></ul>
 		</li>
 	`;
@@ -69,7 +68,7 @@ var ProjectSummary = function() {
 		var itemContainer = $(itemTemplate)
 			.appendTo(listEl);
 
-		itemContainer.find('.project').text(project.label);
+		itemContainer.find('header').text(project.label);
 		itemContainer.find('.hours').text(formatHours(project.time));
 		itemContainer.find('.time').text(formatTime(project.time));
 		

@@ -1,11 +1,15 @@
 #SpanCreator {
-	background-color: hsl(0, 0%, 97%);
-	border:1px solid hsl(0, 0%, 94%);
-	padding:2em 2em 1em 2em;
-	border-radius: 4px;
 }
 #SpanCreator>* {
-	margin-bottom: 2em;
+	vertical-align: top;
+}
+#SpanCreator section {
+	display: inline-block;
+}
+#SpanCreator section>* {
+	margin-bottom: 1em;
+	margin-right: 1em;
+	vertical-align: top;
 }
 #SpanCreator input {
 	width:100%;
@@ -17,6 +21,7 @@
 	display: block;
 	color:hsl(0, 0%, 30%);
 }
+#SpanCreator .project_suggestions {display: inline-block;}
 #SpanCreator .start,
 #SpanCreator .finish {
 	display: inline-block;
@@ -24,6 +29,7 @@
 
 #SpanCreator .time_fields {
 	width:23em;
+	display: inline-block;
 }
 #SpanCreator .time_field_wrapper {
 	display: inline-block;
@@ -115,8 +121,6 @@
     box-sizing: border-box;
 }
 #SpanCreator .project_suggestions input:valid {
-	border:1px solid transparent;
-	background-color:transparent;
 }
 #SpanCreator .project_suggestions ul {
 	display: none;
@@ -152,11 +156,10 @@
 	position: relative;
 }
 
-#SpanCreator .task_list {
-}
+#SpanCreator .task_list {display: inline-block;width: 15em;}
 #SpanCreator .task_list input {
 	font-size: 1em;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 #SpanCreator .task_list ul {
 	padding:0;
@@ -205,22 +208,15 @@
     border: 1px solid hsl(215, 88%, 81%);
     color: hsl(215, 88%, 50%);
 }
-#SpanCreator .hotkeys {
-	margin-top: 2em;
-}
+#SpanCreator .hotkeys {position: absolute;bottom: 0.1em;right: 0;}
 #SpanCreator .hotkey {
 	display: inline-block;
 	font-size: 0.6em;
-	color:hsl(0, 0%, 50%);
+	color: hsl(0, 0%, 65%);
 }
 #SpanCreator .hotkey .icon {
 	display:inline-block;
-	padding:0.1em 0.4em;
 	border-radius: 4px;
-	border:1px solid hsl(0, 0%, 50%);
-	background-color: hsl(0, 0%, 100%);
-	color:hsl(0, 0%, 50%);
-	vertical-align: bottom;
 }
 #SpanCreator .hotkey .text {
 	display: inline-block;

@@ -14,7 +14,6 @@ JsonExportCollector = function(timeUtil) {
 	};
 
 	var iterate = function() {
-		console.log(currDate);
 		var record = App.persister.fetch(timeUtil.getYmd(currDate));
 		if (Object.keys(record.spans).length)
 			exportData.push(record);
