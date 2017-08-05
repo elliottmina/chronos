@@ -11,9 +11,8 @@ var SpanCreator = function() {
 	var date;
 	var record;
 	var activeSpan;
-	var saveButton;
-	var saveButtonText;
 	var saveAndRepeatButton;
+	var stateSetter;
 
 	var init = function() {
 		gatherDependencies();
@@ -30,8 +29,6 @@ var SpanCreator = function() {
 	var buildHtml = function() {
 		topContainer = $('#SpanCreator');
 		topContainer.html(SpanCreatorTemplate);
-		saveButton = topContainer.find('.save');
-		saveButtonText = saveButton.find('.text')
 		saveAndRepeatButton = topContainer.find('.duplicate');
 	};
 
@@ -59,39 +56,35 @@ var SpanCreator = function() {
 			topContainer.find('.task_list'));
 
 		validator = new SpanCreatorValidator();
+
+		new SpanCreatorShortcuts(
+			topContainer.find('.toggle_hotkeys'),
+			projectSuggestor, 
+			topContainer.find('.save'), 
+			save, 
+			startTimeField, 
+			finishTimeField);
+
+		stateSetter = new SpanCreatorStateSetter(
+			startTimeField,
+			finishTimeField,
+			projectSuggestor,
+			taskList,
+			topContainer.find('.save .text'),
+			saveAndRepeatButton);
 	};
 
 	var addBehavior = function() {
-		saveButton.click(save).keyup(onSaveKeyUp);
 		saveAndRepeatButton.click(saveAndRepeat);
-		jQuery(document).keydown(onKeyDown);
 		App.dispatcher.register('DATE_CHANGED', onDateChanged);
 		App.dispatcher.register('EDIT_SPAN_REQUESTED', onEditSpanRequested);
 		App.dispatcher.register('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
 	};
 
-	var onKeyDown = function(e) {
-		if (e.key == 's' && e.metaKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			save();
-		}
-
-		if (e.key == 'p' && e.metaKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			projectSuggestor.focus();
-		}
-	};
-
-	var onSaveKeyUp = function(e) {
-		if (e.key == 'Enter' || e.key == ' ')
-			save();
-	};
 
 	var save = function() {
 		if (submit())
-			prepareNext();
+			stateSetter.reset();
 	};
 
 	var submit = function() {
@@ -129,34 +122,13 @@ var SpanCreator = function() {
 		date = timeUtil.parseUtcYmd(data.date);
 	};
 
-	var prepareNext = function() {
-		startTimeField.now();
-		finishTimeField.clear();
-		projectSuggestor.clear();
-		taskList.clear();
-		projectSuggestor.focus();
-		saveButtonText.text('Create');
-		saveAndRepeatButton.show();
-	};
-
 	var onEditSpanRequested = function(guid) {
 		activeSpan = record.spans[guid];
-		startTimeField.setTime(activeSpan.start);
-		finishTimeField.setTime(activeSpan.finish);
-		projectSuggestor.set(activeSpan.project);
-		taskList.setTasks(activeSpan.tasks);
-		saveButtonText.text('Save');
-		saveAndRepeatButton.hide();
+		stateSetter.edit(activeSpan);
 	};
 
 	var onRepeatSpanRequested = function(guid) {
-		var span = record.spans[guid];
-		startTimeField.now();
-		finishTimeField.clear();
-		projectSuggestor.set(span.project);
-		taskList.setTasks(span.tasks);
-		saveButtonText.text('Create');
-		saveAndRepeatButton.show();
+		stateSetter.repeat(record.spans[guid]);
 	};
 
 	var saveAndRepeat = function() {

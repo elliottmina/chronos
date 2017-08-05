@@ -1,8 +1,8 @@
 # TODO
 
-* Entering without span time clears form instead of rejecting save
-* new shortcut keys
+* toggle shortcut display
 * time end shoudl come after tasks
+* cards to loose.  table?
 * Sometimes the suggstions UL gets the click instead of the LI.
 * notes module?
 

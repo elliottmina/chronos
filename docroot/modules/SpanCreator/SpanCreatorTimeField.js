@@ -229,6 +229,9 @@ var SpanCreatorTimeField = function(
 				setPeriodAm();
 		},
 		now:now,
-		setTime:setTime
+		setTime:setTime,
+		focus:function() {
+			timeEl.focus();
+		}
 	};
 };

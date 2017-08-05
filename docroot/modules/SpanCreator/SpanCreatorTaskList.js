@@ -20,11 +20,15 @@ var SpanCreatorTaskList = function(topContainer) {
 
 	var onKeyUp = function(e) {
 		if (e.key == 'Enter')
-			addTask();
+			addTypedTask();
 	};
 
-	var addTask = function() {
-		var task = jQuery.trim(input.val());
+	var addTypedTask = function() {
+		addTask(input.val());
+	};
+
+	var addTask = function(task) {
+		task = jQuery.trim(task);
 		if (!task || tasks.indexOf(task) > -1)
 			return;
 
@@ -60,7 +64,7 @@ var SpanCreatorTaskList = function(topContainer) {
 		getTasks:function() {
 			return tasks;
 		},
-		addCurrent:addTask,
+		addCurrent:addTypedTask,
 		clear:clear,
 		setTasks:function(tasks) {
 			clear();

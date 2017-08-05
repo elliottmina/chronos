@@ -45,34 +45,58 @@ var SpanCreatorTemplate = `
 		<input type="text" id="SpanCreatorTask" tabindex="1" />
 		<ul></ul>
 	</div>
-		<div class="hotkeys">
-			<span class="hotkey">
-				<span class="icon">⌘</span>+<span class="icon">P</span>
+	<section class="hotkeys">
+		<header>Hot keys</header>
+		<ul>
+			<li>
+				<span class="icon">Alt</span>+<span class="icon">P</span>
 				<span class="text">Project</span>
-			</span>
-			<span class="hotkey">
+			</li>
+
+			<li>
+				<span class="icon">Alt</span>+<span class="icon">S</span>
+				<span class="text">Start</span>
+			</li>
+
+			<li>
+				<span class="icon">Alt</span>+<span class="icon">F</span>
+				<span class="text">Finish</span>
+			</li>
+
+			<li>
+				<span class="icon">Alt</span>+<span class="icon">Enter</span>
+				<span class="text">Save</span>
+			</li>
+		</ul>
+		<ul>
+			<li>
 				<span class="icon"><i class="fa fa-arrow-up"></i></span>
 				<span class="text">Min</span>
-			</span>
-			<span class="hotkey">
+			</li>
+
+			<li>
 				<span class="icon"><i class="fa fa-arrow-down"></i></span>
 				<span class="text">Min</span>
-			</span>
-			<span class="hotkey">
+			</li>
+
+			<li>
 				<span class="icon">N</span>
-				<span class="text">ow</span>
-			</span>
-			<span class="hotkey">
+				<span class="text">Now</span>
+			</li>
+
+		</ul>
+		<ul>
+
+			<li>
 				<span class="icon">A</span>
-				<span class="text">M</span>
-			</span>
-			<span class="hotkey">
+				<span class="text">AM</span>
+			</li>
+
+			<li>
 				<span class="icon">P</span>
-				<span class="text">M</span>
-			</span>
-			<span class="hotkey">
-				<span class="icon">⌘</span>+<span class="icon">S</span>
-				<span class="text">Save</span>
-			</span>
-		</div>
+				<span class="text">PM</span>
+			</li>
+		</ul>
+	</section>
+	<button class="toggle_hotkeys"><i class="fa fa-chevron-down"></i></button>
 `;
