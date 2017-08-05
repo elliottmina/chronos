@@ -1,8 +1,9 @@
 # TODO
 
-* toggle shortcut display
 * time end shoudl come after tasks
 * cards to loose.  table?
+* dark theme?
+* rebuild index
 * Sometimes the suggstions UL gets the click instead of the LI.
 * notes module?
 

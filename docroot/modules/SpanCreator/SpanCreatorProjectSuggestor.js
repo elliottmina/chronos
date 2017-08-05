@@ -21,6 +21,7 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 		projectInput.blur(onBlur);
 		projectInput.keyup(onKeyUp);
 		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
+		new InputSizeAdjuster(projectInput);
 	};
 
 	var onSpanSaved = function(data) {
@@ -93,7 +94,7 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 				break;
 			default:
 				show();
-				adjustSize();
+				// adjustSize();
 		}
 	};
 
@@ -134,24 +135,6 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 	var ensureShowing = function() {
 		if (projectsContainer.is(':hidden'))
 			show();
-	};
-
-	var adjustSize = function() {
-		var threshold = 20;
-		var baseSize =  1.8;
-		var adjustmentCoefficient = 0.05;
-		var minSize = 1;
-
-		var len = projectInput.val().length;
-		var overage = len - threshold;
-		if (overage <= 0)
-			return;
-
-		var adjustment = overage*adjustmentCoefficient;
-		var size = baseSize - adjustment;
-		size = Math.max(size, minSize);
-
-		projectInput.css('font-size', size + 'em');
 	};
 
 	init();

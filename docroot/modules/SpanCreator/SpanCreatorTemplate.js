@@ -5,29 +5,32 @@ var SpanCreatorTemplate = `
 			<input type="text" id="SpanCreatorProject" name="project" tabindex="1" required />
 			<ul></ul>
 		</div>
-		<div class="time_fields">
-			<div class="time_field_wrapper">
-				<label>Start time</label>
-				<span class="start">
-					<span class="time_field_container">
-						<span class="time" tabindex="1"></span>
-						<span class="period">AM</span>
-						<button class="now fa fa-clock-o" tabindex="-1"></button>
-						<span class="cursor"></span>
-					</span>
+		<div class="time_field_wrapper">
+			<label>Start time</label>
+			<span class="start">
+				<span class="time_field_container">
+					<span class="time" tabindex="1"></span>
+					<span class="period">AM</span>
+					<button class="now fa fa-clock-o" tabindex="-1"></button>
+					<span class="cursor"></span>
 				</span>
-			</div>
-			<div class="time_field_wrapper">
-				<label>Finish time</label>
-				<span class="finish">
-					<span class="time_field_container">
-						<span class="time" tabindex="1"></span>
-						<span class="period">AM</span>
-						<button class="now fa fa-clock-o" tabindex="-1"></button>
-						<span class="cursor"></span>
-					</span>
+			</span>
+		</div>
+		<div class="task_list">
+			<label for="SpanCreatorTask">Tasks</label>
+			<input type="text" id="SpanCreatorTask" tabindex="1" />
+			<ul></ul>
+		</div>
+		<div class="time_field_wrapper">
+			<label>Finish time</label>
+			<span class="finish">
+				<span class="time_field_container">
+					<span class="time" tabindex="1"></span>
+					<span class="period">AM</span>
+					<button class="now fa fa-clock-o" tabindex="-1"></button>
+					<span class="cursor"></span>
 				</span>
-			</div>
+			</span>
 		</div>
 		<div class="button_container">
 			<div class="button save" tabindex="1">
@@ -40,11 +43,6 @@ var SpanCreatorTemplate = `
 			</div>
 		</div>
 	</section>
-	<div class="task_list">
-		<label for="SpanCreatorTask">Tasks</label>
-		<input type="text" id="SpanCreatorTask" tabindex="1" />
-		<ul></ul>
-	</div>
 	<section class="hotkeys">
 		<header>Hot keys</header>
 		<ul>

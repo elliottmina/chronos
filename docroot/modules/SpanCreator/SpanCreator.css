@@ -11,7 +11,7 @@
 	vertical-align: top;
 }
 #SpanCreator input {
-	width:100%;
+	width: 100%;
 	padding:0.5em;
 	border:1px solid hsl(0, 0%, 80%);
 }
@@ -116,8 +116,8 @@
 	background-color: hsla(0, 100%, 50%, 0.1);
 }
 #SpanCreator .project_suggestions input {
-	font-size: 1.8em;
-    box-sizing: border-box;
+	font-size: 1.35em;
+	box-sizing: border-box;
 }
 #SpanCreator .project_suggestions input:valid {
 }
@@ -157,11 +157,12 @@
 
 #SpanCreator .task_list {display: inline-block;width: 15em;}
 #SpanCreator .task_list input {
-	font-size: 1em;
+	font-size: 1.35em;
 	box-sizing: border-box;
 }
 #SpanCreator .task_list ul {
 	padding:0;
+	margin-top: 0.3em;
 }
 #SpanCreator .task_list li {
 	list-style: none;
