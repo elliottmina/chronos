@@ -26,7 +26,7 @@ var Blasticator = function() {
 				role:'secondary',
 				autoClose:true
 			},{
-				label:'Destory EVERYTHING.  FOREVER',
+				label:'BURN IT ALL',
 				role:'primary',
 				autoClose:true,
 				callback:function() {

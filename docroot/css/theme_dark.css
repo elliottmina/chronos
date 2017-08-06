@@ -1,0 +1,97 @@
+body.theme_dark {
+	color: #A1AE94;
+	background-color: hsl(256, 28%, 19%);
+}
+body.theme_dark .widget {
+	background-color: hsl(252, 23%, 22%);
+}
+body.theme_dark input {
+	background-color: hsla(0, 0%, 100%, 0.25);
+	color: hsl(0, 0%, 80%);
+	border: 1px solid hsl(0, 0%, 50%);
+}
+body.theme_dark #SpanCreator .time_field_container .time {
+	background-color: hsla(0, 0%, 100%, 0.25);
+}
+body.theme_dark .task_list li {
+	background-color: hsl(252, 23%, 32%);
+	border: 1px solid hsl(252, 23%, 43%);
+}
+body.theme_dark #DailyGoal .total .amount {
+	color:hsl(54, 92%, 64%)
+}
+body.theme_dark td {
+    border-top: 1px solid hsl(0, 1%, 30%);
+    border-right: 1px solid hsl(0, 0%,30%);
+}
+body.theme_dark tr:first-child td {
+	border-top:none;
+}
+body.theme_dark td:last-child {
+	border-right: none;
+}
+body.theme_dark section.auxiliary>div {
+	background-color: hsla(252, 23%, 32%, 1);
+	border: 1px solid hsl(252, 23%, 43%);
+}
+body.theme_dark #DailyGoal .progress_inner {
+    border-top: 1px solid hsl(106, 100%, 24%);
+    border-right: 1px solid hsl(106, 100%, 24%);
+    border-bottom: 1px solid hsl(106, 100%, 24%);
+    background-color: hsl(111, 53%, 54%);
+}
+body.theme_dark .logo {
+	background-color: hsla(252, 23%, 32%, 1);
+	border: 1px solid hsl(252, 23%, 43%);
+}
+body.theme_dark #JsonSummary .json {
+	background-color: hsl(256, 28%, 19%);
+	border: 1px solid hsl(256, 28%, 31%);
+}
+body.theme_dark #DailyGoal .progress_outer {
+	background-color: hsl(147, 30%, 80%);
+	border: 1px solid hsl(147, 30%, 88%);
+}
+body.theme_dark #DailyGoal .progress_inner {
+	background-color: hsl(147, 56%, 51%);
+}
+body.theme_dark #SpanCreator .finish .time {
+	border: 1px solid hsl(31, 90%, 45%);
+}
+body.theme_dark #SpanCreator .finish .now {
+	background-color: hsl(31, 90%, 45%);
+}
+body.theme_dark #SpanCreator .now {
+	color: hsl(0, 0%, 90%);
+}
+body.theme_dark #SpanCreator .start .time {
+	border: 1px solid hsl(95, 70%, 45%);
+}
+body.theme_dark #SpanCreator .start .now {
+	background-color: hsl(95, 70%, 45%);
+}
+body.theme_dark #SpanCreator .save {
+	background-color: hsl(143, 100%, 33%);
+	border:none;
+	color: hsl(0, 0%, 85%);
+}
+body.theme_dark #SpanCreator .duplicate {
+	background-color:hsl(223, 82%, 59%);
+	color: hsl(0, 0%, 85%);
+	border: none;
+}
+body.theme_dark #SpanCreator label {
+	color:hsl(90, 14%, 63%);
+}
+body.theme_dark .ModalDialogue .box {
+	background-color: hsl(252, 23%, 22%);
+}
+body.theme_dark .ModalDialogue .button.secondary {
+	background-color: hsl(252, 23%, 33%);
+	border: none;
+}
+body.theme_dark .ModalDialogue .button.primary {
+	background-color: hsl(143, 100%, 33%);
+	border:none;
+	color: hsl(0, 0%, 85%);
+}

@@ -39,7 +39,7 @@ var SpanCreatorTemplate = `
 			</div>
 			<div class="button duplicate" tabindex="1">
 				<i class="fa fa-repeat"></i>
-				Save + repeat
+				Create + repeat
 			</div>
 		</div>
 	</section>

@@ -11,9 +11,6 @@
 	vertical-align: top;
 }
 #SpanCreator input {
-	width: 100%;
-	padding:0.5em;
-	border:1px solid hsl(0, 0%, 80%);
 }
 #SpanCreator label {
 	margin-bottom: 0.2em;
@@ -159,6 +156,7 @@
 #SpanCreator .task_list input {
 	font-size: 1.35em;
 	box-sizing: border-box;
+	width: 100%;
 }
 #SpanCreator .task_list ul {
 	padding:0;
