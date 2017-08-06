@@ -13,6 +13,7 @@ var ThemeSelector = function() {
 		build();
 		gatherComponents();
 		addBehavior();
+		updateDisplay();
 	};
 
 	var build = function() {
@@ -30,14 +31,22 @@ var ThemeSelector = function() {
 	};
 
 	var toggle = function() {
-		if (body.hasClass('theme_dark')) {
-			body.removeClass('theme_dark');
-			buttonIcon.removeClass('fa-sun-o').addClass('fa-moon-o');
-			buttonText.text('Dark');
-		} else {
+		if (localStorage.getItem('theme') != 'theme_dark')
+			localStorage.setItem('theme', 'theme_dark');
+		else
+			localStorage.setItem('theme', 'theme_light');
+		updateDisplay();
+	};
+
+	var updateDisplay = function() {
+		if (localStorage.getItem('theme') == 'theme_dark') {
 			body.addClass('theme_dark');
 			buttonIcon.removeClass('fa-moon-o').addClass('fa-sun-o');
 			buttonText.text('Light');
+		} else {
+			body.removeClass('theme_dark');
+			buttonIcon.removeClass('fa-sun-o').addClass('fa-moon-o');
+			buttonText.text('Dark');
 		}
 	};
 
