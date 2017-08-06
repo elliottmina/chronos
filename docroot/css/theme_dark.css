@@ -95,3 +95,6 @@ body.theme_dark .ModalDialogue .button.primary {
 	border:none;
 	color: hsl(0, 0%, 85%);
 }
+body.theme_dark #SpanSummary tbody tr:hover {
+	background-color: hsl(252, 23%, 25%);
+}
