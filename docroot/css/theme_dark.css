@@ -13,6 +13,7 @@ body.theme_dark input {
 body.theme_dark #SpanCreator .time_field_container .time {
 	background-color: hsla(0, 0%, 100%, 0.25);
 }
+body.theme_dark #SpanCreator .task_list li,
 body.theme_dark .task_list li {
 	background-color: hsl(252, 23%, 32%);
 	border: 1px solid hsl(252, 23%, 43%);
@@ -101,3 +102,24 @@ body.theme_dark #SpanSummary tbody tr:hover {
 body.theme_dark #DailyGoal .progress_percent {
 	color: hsl(0, 0%, 30%);
 }
+body.theme_dark #SpanCreator .project_suggestions .suggestion:first-child {
+	border-top: 1px solid hsl(252, 10%, 50%);
+}
+body.theme_dark #SpanCreator .project_suggestions .suggestion {
+	background-color: hsla(252, 10%, 41%, 0.95);
+	border-bottom: 1px solid hsl(252, 10%, 50%);
+	border-left: 1px solid hsl(252, 10%, 50%);
+	border-right: 1px solid hsl(252, 10%, 50%);
+}
+body.theme_dark #SpanCreator .project_suggestions .suggestion:hover {
+	background-color: hsla(220, 100%, 90%, 0.95);
+	color:hsl(0, 0%, 25%);
+}
+body.theme_dark #SpanCreator .project_suggestions .suggestion.selected {
+	background-color: hsla(252, 10%, 55%, 0.95);
+	box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
+	z-index: 100;
+	position: relative;
+	color:hsl(256, 28%, 19%);
+}
+
