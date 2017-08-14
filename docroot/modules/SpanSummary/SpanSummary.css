@@ -2,7 +2,7 @@
 	display: none;
 }
 #SpanSummary tbody tr:hover {
-	background-color: hsl(0, 0%, 97%);
+	background-color: hsla(212, 51%, 90%, 1);
 }
 #SpanSummary tbody tr.selected {
 	background-color: hsl(213, 51%, 80%);

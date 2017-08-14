@@ -86,7 +86,7 @@ var SpanSummary = function() {
 
 	var addSpan = function(span) {
 		noContentContainer.hide();
-		var container = jQuery(spanTemplate).appendTo(spansContainer);
+		var container = jQuery(spanTemplate).prependTo(spansContainer);
 		spanMap[span.guid] = container;
 		populateSpan(span, container);
 	};

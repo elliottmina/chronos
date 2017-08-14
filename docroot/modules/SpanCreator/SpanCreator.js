@@ -81,6 +81,29 @@ var SpanCreator = function() {
 
 
 	var save = function() {
+		if (timeUtil.getYmd(new Date()) != record.date)
+			confirmPreviousDate();
+		else 
+			confirmedSave();
+	};
+
+	var confirmPreviousDate = function() {
+		new ModalDialogue({
+			message:'This record is not for today.  Is that cool?',
+			buttons:[{
+				label:'No, not cool.',
+				role:'secondary',
+				autoClose:true
+			},{
+				label:'Yeah man, it\'s totally chill',
+				role:'primary',
+				autoClose:true,
+				callback:confirmedSave
+			}]
+		});
+	};
+
+	var confirmedSave = function() {
 		if (submit())
 			stateSetter.reset();
 	};
