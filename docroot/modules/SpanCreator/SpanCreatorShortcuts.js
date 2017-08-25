@@ -4,12 +4,18 @@ var SpanCreatorShortcuts = function(
 	startTimeField, 
 	finishTimeField) {
 
+	var keyEvaluator;
 	var container;
 	var buttonIcon;
 
 	var init = function() {
+		buildDependencies();
 		gatherComponents();
 		addBehavior();
+	};
+
+	var buildDependencies = function() {
+		keyEvaluator = new MetaKeyEvaluator();
 	};
 
 	var gatherComponents = function() {
@@ -26,32 +32,31 @@ var SpanCreatorShortcuts = function(
 	};
 
 	var onKeyUp = function(e) {
-		if (e.key == 'Enter' && e.altKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			save();
-			return;
-		}
+		switch (keyEvaluator.get(e)) {
 
-		if (e.key == 'p' && e.altKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			projectSuggestor.focus();
-			return;
-		}
-
-		if (e.key == 's' && e.altKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			startTimeField.focus();
-			return;
-		}
-
-		if (e.key == 'f' && e.altKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			finishTimeField.focus();
-			return;
+			case 'Enter':
+				e.stopPropagation();
+				e.preventDefault();
+				save();
+				return;
+	
+			case 'P':
+				e.stopPropagation();
+				e.preventDefault();
+				projectSuggestor.focus();
+				return;
+	
+			case 'S':
+				e.stopPropagation();
+				e.preventDefault();
+				startTimeField.focus();
+				return;
+	
+			case 'F':
+				e.stopPropagation();
+				e.preventDefault();
+				finishTimeField.focus();
+				return;
 		}
 	};
 

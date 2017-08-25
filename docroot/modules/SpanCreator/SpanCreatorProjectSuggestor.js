@@ -8,6 +8,7 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 	var init = function() {
 		gatherComponents();
 		recentProjects = recentProjectsBuilder.build();
+		recentProjects.sort();
 		addBehavior();
 	};
 
@@ -25,8 +26,10 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 	};
 
 	var onSpanSaved = function(data) {
-		if (jQuery.inArray(data.span.project, recentProjects) == -1)
+		if (jQuery.inArray(data.span.project, recentProjects) == -1) {
 			recentProjects.push(data.span.project);
+			recentProjects.sort();
+		}
 	};
 
 	var show = function() {

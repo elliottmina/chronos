@@ -47,22 +47,22 @@ var SpanCreatorTemplate = `
 		<header>Hot keys</header>
 		<ul>
 			<li>
-				<span class="icon">Alt</span>+<span class="icon">P</span>
+				<span class="icon">Shift</span> + <span class="icon">Meta</span> + <span class="icon">P</span>
 				<span class="text">Project</span>
 			</li>
 
 			<li>
-				<span class="icon">Alt</span>+<span class="icon">S</span>
+				<span class="icon">Shift</span> + <span class="icon">Meta</span> + <span class="icon">S</span>
 				<span class="text">Start</span>
 			</li>
 
 			<li>
-				<span class="icon">Alt</span>+<span class="icon">F</span>
+				<span class="icon">Shift</span> + <span class="icon">Meta</span> + <span class="icon">F</span>
 				<span class="text">Finish</span>
 			</li>
 
 			<li>
-				<span class="icon">Alt</span>+<span class="icon">Enter</span>
+				<span class="icon">Shift</span> + <span class="icon">Meta</span> + <span class="icon">Enter</span>
 				<span class="text">Save</span>
 			</li>
 		</ul>

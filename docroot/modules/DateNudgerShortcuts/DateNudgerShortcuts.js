@@ -2,16 +2,18 @@ var DateNudgerShortcuts = function() {
 
 	var padder;
 	var timeUtil;
+	var keyEvaluator;
 	var date;
 
 	var init = function() {
-		gatherDependencies();
+		buildDependencies();
 		addBehavior();
 	};
 
-	var gatherDependencies = function() {
+	var buildDependencies = function() {
 		padder = new Padder();
 		timeUtil = new TimeUtil();
+		keyEvaluator = new MetaKeyEvaluator();
 	};
 
 	var addBehavior = function() {
@@ -19,24 +21,29 @@ var DateNudgerShortcuts = function() {
 		jQuery(document).keydown(onKeyDown);
 	};
 
-
 	var onDateChanged = function(data) {
 		date = timeUtil.parseUtcYmd(data.date);
 	};
 
 	var onKeyDown = function(e) {
-		if (e.key == 'ArrowRight' && e.metaKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			App.dispatcher.update('DATE_SUBMITTED', timeUtil.getNewDayStr(date, 1));
-		}
+		switch (keyEvaluator.get(e)) {
 
-		if (e.key == 'ArrowLeft' && e.metaKey) {
-			e.stopPropagation();
-			e.preventDefault();
-			App.dispatcher.update('DATE_SUBMITTED', timeUtil.getNewDayStr(date, -1));
-		}
+			case 'ARROWLEFT':
+				e.stopPropagation();
+				e.preventDefault();
+				App.dispatcher.update(
+					'DATE_SUBMITTED', 
+					timeUtil.getNewDayStr(date, -1));
+				return;
 
+			case 'ARROWRIGHT':
+				e.stopPropagation();
+				e.preventDefault();
+				App.dispatcher.update(
+					'DATE_SUBMITTED', 
+					timeUtil.getNewDayStr(date, 1));
+				return;
+		}
 	};
 
 	init();
