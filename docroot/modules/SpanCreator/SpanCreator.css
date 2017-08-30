@@ -210,8 +210,19 @@
 	margin-top: 1em;
 	display: none;
 }
-#SpanCreator .hotkeys ul {
+#SpanCreator .hotkeys .set {
 	display: inline-block;
+}
+#SpanCreator .hotkeys .keys {
+	display: inline-block;
+}
+#SpanCreator .hotkeys .global .keys {
+	min-width: 7em;
+}
+#SpanCreator .hotkeys .time .keys {
+	min-width: 2em;
+}
+#SpanCreator .hotkeys ul {
 	width: 15em;
 	vertical-align: top;
 }

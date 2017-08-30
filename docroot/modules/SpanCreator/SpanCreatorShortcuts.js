@@ -2,7 +2,8 @@ var SpanCreatorShortcuts = function(
 	projectSuggestor, 
 	save, 
 	startTimeField, 
-	finishTimeField) {
+	finishTimeField,
+	taskList) {
 
 	var keyEvaluator;
 	var container;
@@ -27,37 +28,45 @@ var SpanCreatorShortcuts = function(
 	var addBehavior = function() {
 		var topContainer = $('#SpanCreator');
 		topContainer.find('.toggle_hotkeys').click(toggleDisplay);
-		topContainer.find('.save').click(save).keyup(onSaveKeyUp);
-		jQuery(document).keyup(onKeyUp);
+		topContainer.find('.save')
+			.click(save)
+			.keyup(onSaveKeyUp);
+		jQuery(document).keydown(onKeyDown);
 	};
 
-	var onKeyUp = function(e) {
+	var onKeyDown = function(e) {
 		switch (keyEvaluator.get(e)) {
 
-			case 'Enter':
-				e.stopPropagation();
-				e.preventDefault();
+			case 'ENTER':
+				stopPropagation(e);
 				save();
 				return;
 	
-			case 'P':
-				e.stopPropagation();
-				e.preventDefault();
+			case 'J':
+				stopPropagation(e);
 				projectSuggestor.focus();
 				return;
 	
-			case 'S':
-				e.stopPropagation();
-				e.preventDefault();
+			case 'K':
+				stopPropagation(e);
 				startTimeField.focus();
 				return;
 	
-			case 'F':
-				e.stopPropagation();
-				e.preventDefault();
+			case 'L':
+				stopPropagation(e);
+				taskList.focus();
+				return;
+
+			case ';':
+				stopPropagation(e);
 				finishTimeField.focus();
 				return;
 		}
+	};
+
+	var stopPropagation = function(e) {
+		e.stopPropagation();
+		e.preventDefault();
 	};
 
 	var onSaveKeyUp = function(e) {

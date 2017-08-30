@@ -61,7 +61,8 @@ var SpanCreator = function() {
 			projectSuggestor, 
 			save, 
 			startTimeField, 
-			finishTimeField);
+			finishTimeField,
+			taskList);
 
 		stateSetter = new SpanCreatorStateSetter(
 			startTimeField,

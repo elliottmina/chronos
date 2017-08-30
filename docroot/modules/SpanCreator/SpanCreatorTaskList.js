@@ -72,6 +72,9 @@ var SpanCreatorTaskList = function(topContainer) {
 			jQuery.each(tasks, function(index, task) {
 				addTask(task);
 			})
+		},
+		focus:function() {
+			input.focus();
 		}
 	};
 };

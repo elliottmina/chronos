@@ -13,7 +13,7 @@ var MetaKeyEvaluator = function() {
 
 	return {
 		get:function(e) {
-			if (e[propKey] && e.shiftKey)
+			if (e.ctrlKey)
 				return e.key.toUpperCase();
 		}
 	}
