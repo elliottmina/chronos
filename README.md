@@ -4,6 +4,10 @@ Chronos is a static, modular web application for time tracking.  It is designed 
 
 [Try it out](https://elliottmina.github.io/chronos/docroot/index.html)
 
+Here is a short YouTube overview:
+
+[![Chronos overview](http://img.youtube.com/vi/TCqGEUQgYFY/0.jpg)](http://www.youtube.com/watch?v=TCqGEUQgYFY "Chronos overview")
+
 Being static allows you to drop the application into any server (or use the tiny server included).
 
 The modular design makes it easy for anyone to replace or add modules without disrupting existing functionality.
