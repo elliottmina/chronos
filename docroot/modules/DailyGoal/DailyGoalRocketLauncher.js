@@ -21,7 +21,7 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 		originLeft -= target.offset().left;
 		soundPlayer = new MultiSoundPlayer([{
 			key:'launch',
-			path:'modules/DailyGoal/audio/launch3.wav',
+			path:'modules/DailyGoal/audio/launch.wav',
 			volume:0.2,
 			num:10
 		},{
