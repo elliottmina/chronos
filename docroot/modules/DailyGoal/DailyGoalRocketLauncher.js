@@ -5,8 +5,8 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 	var rocketSize = [0.3, 0.7];
 	var rocketSizeFactor = 5;
 	var originTop = [-50, 50];
-	var originLeft = -600;
-	var durationFactor = 1300;
+	var originLeft = -50;
+	var durationFactor = 1800;
 	var deployInterval = 200;
 	var explosionBounceLeft = [-100, -20];
 	var explosionBounceTop = [-50, 130];
@@ -18,10 +18,11 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 
 	var init = function() {
 		targetTop = [-10, -10 + target.height() -10];
+		originLeft -= target.offset().left;
 		soundPlayer = new MultiSoundPlayer([{
 			key:'launch',
-			path:'modules/DailyGoal/audio/launch.wav',
-			volume:0.3,
+			path:'modules/DailyGoal/audio/launch3.wav',
+			volume:0.2,
 			num:10
 		},{
 			key:'explosion',
