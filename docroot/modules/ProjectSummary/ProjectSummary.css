@@ -11,3 +11,11 @@
 #ProjectSummary tbody .project {
 	font-weight: bold;
 }
+#ProjectSummary li.copy {
+	border:0;
+	cursor: pointer;
+}
+#ProjectSummary .button.copy {
+	vertical-align: text-bottom;
+	color: hsl(106, 100%, 24%);
+}

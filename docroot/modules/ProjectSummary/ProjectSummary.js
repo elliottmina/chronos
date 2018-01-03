@@ -8,6 +8,13 @@ var ProjectSummary = function() {
 			<td class="tasks"><ul class="task_list"></ul></td>
 		</li>
 	`;
+
+	var copyTemplate = `
+		<li class="copy">
+			<span class="copy button">
+				<i class="fa fa-copy"></i>
+			</span>
+		</li>`;
 	
 	var html = `
 		<header>Project summary</header>
@@ -25,12 +32,15 @@ var ProjectSummary = function() {
 		</table>`;
 
 	var dataBuilder;
+	var padder;
+	var copier;
 	var listEl;
 	var noContentContainer;
 
 	var init = function() {
 		dataBuilder = new ProjectSummaryDataBuilder();
 		padder = new Padder();
+		copier = new Copier();
 		build();
 		addBehavior();
 	};
@@ -82,10 +92,15 @@ var ProjectSummary = function() {
 		
 		var tasksContainer = itemContainer.find('ul');
 		jQuery.each(project.tasks, function(index, task) {
-			$('<li>')
+			jQuery('<li>')
 				.appendTo(tasksContainer)
 				.text(task);
 		});
+
+		var li = jQuery(copyTemplate)
+			.appendTo(tasksContainer)
+			.click(copy)
+			.data('tasks', project.tasks);
 	};
 
 	var formatTime = function(minutes) {
@@ -104,6 +119,11 @@ var ProjectSummary = function() {
 		var tempNumber = number * factor;
 		var roundedTempNumber = Math.round(tempNumber);
 		return roundedTempNumber / factor;
+	};
+
+	var copy = function() {
+		var text = jQuery(this).data('tasks').join('\n');
+		copier.copy(text);
 	};
 
 	init();

@@ -3,7 +3,7 @@ var JsonSummary = function() {
 	var html = `
 		<header>JSON</header>
 		<div class="json"></div>
-		<span class="copy button"><i class="fa fa-clipboard"></i> <span class="text">copy<span></span>`;
+		<span class="copy button"><i class="fa fa-copy"></i> <span class="text">copy<span></span>`;
 
 	var renderTo;
 	var jsonContainer;

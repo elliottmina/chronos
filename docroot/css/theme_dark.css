@@ -18,6 +18,9 @@ body.theme_dark .task_list li {
 	background-color: hsl(252, 23%, 32%);
 	border: 1px solid hsl(252, 23%, 43%);
 }
+body.theme_dark .task_list li.copy {
+	background-color: transparent;
+}
 body.theme_dark #DailyGoal .total .amount {
 	color:hsl(54, 92%, 64%)
 }
