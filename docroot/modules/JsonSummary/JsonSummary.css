@@ -12,6 +12,7 @@
 	margin-top: .5em;
 	display: inline-block;
 	margin-left: 0.5em;
+	cursor: pointer;
 }
 #JsonSummary .clipboard {
 	position: absolute;

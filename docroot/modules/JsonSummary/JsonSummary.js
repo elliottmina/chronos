@@ -3,11 +3,13 @@ var JsonSummary = function() {
 	var html = `
 		<header>JSON</header>
 		<div class="json"></div>
-		<span class="copy button"><i class="fa fa-clipboard"></i> copy</span>`;
+		<span class="copy button"><i class="fa fa-clipboard"></i> <span class="text">copy<span></span>`;
 
 	var renderTo;
 	var jsonContainer;
-	var copyButton;
+	var button;
+	var buttonText;
+	var copier;
 
 	var init = function() {
 		build();
@@ -15,17 +17,19 @@ var JsonSummary = function() {
 	};
 
 	var build = function() {
+		copier = new Copier();
 		renderTo = $('#JsonSummary');
 		renderTo.html(html);
 		jsonContainer = renderTo.find('.json');
-		copyButton = renderTo.find('.copy');
+		button = renderTo.find('.copy');
+		buttonText = button.find('.text');
 	};
 
 	var addBehavior = function() {
 		App.dispatcher.register('DATE_CHANGED', onDateChanged);
 		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
 		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
-		copyButton.click(copy);
+		button.click(copy);
 	};
 
 	var onDateChanged = function(date) {
@@ -45,26 +49,11 @@ var JsonSummary = function() {
 	};
 
 	var copy = function() {
-		var el = jQuery('<textarea>')
-			.appendTo(document.body)
-			.val(jsonContainer.text())
-			.select();
-		document.execCommand('copy');
-		el.remove();
-
-		var clip = jQuery('<i class="fa fa-clipboard clipboard"></i>')
-			.appendTo(renderTo)
-		clip.animate(
-			{ 
-				'font-size':'20em', 
-				'opacity':0,
-				'left':'-0.2em'
-			}, 
-			200,
-			'linear',
-			function() {
-				clip.remove();
-			});
+		copier.copy(jsonContainer.text());
+		buttonText.text('copied!');
+		setTimeout(function() {
+			buttonText.text('copy');
+		}, 1000);
 	};
 
 	init();
