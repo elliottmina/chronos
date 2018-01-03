@@ -14,6 +14,9 @@ js_root =		docroot + '/js'
 css_root =		docroot + '/css'
 index_path =	docroot + '/index.html'
 
+with open(project_root + '/version.txt', 'r') as f:
+	version = f.read()
+
 def main():
 	contents = rebuild()
 	with open(index_path, 'w') as f:
@@ -49,15 +52,13 @@ def update_modules(contents):
 	return modules_pattern.sub(module_replacement, contents)
 
 def update_version(contents):
-	with open(project_root + '/version.txt', 'r') as f:
-		version = f.read()
 	version_pattern = re.compile('(class="version">)([^<]*)')
 	version_replacement = r'\g<1>' + version
 	return version_pattern.sub(version_replacement, contents)
 
 def builld_tags():
-	js_builder = TagBuilder('<script src="{}"></script>', 'js')
-	css_builder = TagBuilder('<link rel="stylesheet" type="text/css" href="{}">', 'css')
+	js_builder = TagBuilder('<script src="{}?v={}"></script>', 'js')
+	css_builder = TagBuilder('<link rel="stylesheet" type="text/css" href="{}?v={}">', 'css')
 
 	js_dirs = glob(js_root + '/*')
 	module_dirs = glob(modules_root + '/*')
@@ -82,7 +83,7 @@ class TagBuilder(object):
 
 	def process_path(self, path):
 		path = path.replace(docroot + '/', '')
-		self.tags.append(self.template.format(path))
+		self.tags.append(self.template.format(path, version))
 
 if __name__ == '__main__':
 	main()
