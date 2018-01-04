@@ -19,7 +19,6 @@ var SpanCreatorTodaysProjectBuilder = function() {
 	return {
 		build:function() {
 			var today = App.persister.fetch(date);
-			console.log(date, today);
 			projects = [];
 			jQuery.each(today.spans, function(index, span) {
 				if (jQuery.inArray(span.project, projects) == -1)
