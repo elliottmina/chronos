@@ -1,20 +1,24 @@
-var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
+var SpanCreatorProjectSuggestor = function(
+	recentProjectBuilder, 
+	todaysProjectBuilder) {
 
 	var itemTemplate = `<li class="suggestion"></li>`;
 	var projectsContainer;
 	var recentProjects;
+	var todaysProjects;
 	var selectedIndex;
 
 	var init = function() {
 		gatherComponents();
-		recentProjects = recentProjectsBuilder.build();
+		recentProjects = recentProjectBuilder.build();
 		recentProjects.sort();
+		todaysProjects = todaysProjectBuilder.build();
 		addBehavior();
 	};
 
 	var gatherComponents = function() {
-		projectsContainer = $('#SpanCreator .project_suggestions ul');
-		projectInput = $('#SpanCreator input[name="project"]');
+		projectsContainer = jQuery('#SpanCreator .project_suggestions ul');
+		projectInput = jQuery('#SpanCreator input[name="project"]');
 	};
 
 	var addBehavior = function() {
@@ -29,6 +33,9 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 		if (jQuery.inArray(data.span.project, recentProjects) == -1) {
 			recentProjects.push(data.span.project);
 			recentProjects.sort();
+		}
+		if (jQuery.inArray(data.span.project, todaysProjects) == -1) {
+			todaysProjects.push(data.span.project);
 		}
 	};
 
@@ -46,11 +53,17 @@ var SpanCreatorProjectSuggestor = function(recentProjectsBuilder) {
 	};
 
 	var populateSuggestion = function(index, suggestion) {
-		$(itemTemplate)
+		var li = jQuery(itemTemplate)
 			.clone()
 			.appendTo(projectsContainer)
 			.text(suggestion)
 			.click(selectSuggestion);
+
+		if (jQuery.inArray(suggestion, todaysProjects) != -1) {
+			li.addClass('today');
+			jQuery('<i class="fa fa-clock-o"></i>')
+				.appendTo(li);
+		}
 	};
 
 	var selectSuggestion = function() {

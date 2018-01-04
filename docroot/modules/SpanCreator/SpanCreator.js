@@ -27,7 +27,7 @@ var SpanCreator = function() {
 	};
 	
 	var buildHtml = function() {
-		topContainer = $('#SpanCreator');
+		topContainer = jQuery('#SpanCreator');
 		topContainer.html(SpanCreatorTemplate);
 		saveAndRepeatButton = topContainer.find('.duplicate');
 	};
@@ -50,7 +50,8 @@ var SpanCreator = function() {
 			timeUtil);
 
 		projectSuggestor = new SpanCreatorProjectSuggestor(
-			new SpanCreatorRecentProjectBuilder());
+			new SpanCreatorRecentProjectBuilder(),
+			new SpanCreatorTodaysProjectBuilder());
 
 		taskList = new SpanCreatorTaskList(
 			topContainer.find('.task_list'));

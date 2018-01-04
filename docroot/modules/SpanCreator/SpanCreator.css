@@ -151,7 +151,13 @@
 	z-index: 100;
 	position: relative;
 }
-
+#SpanCreator .project_suggestions .suggestion.today {
+	background-color: hsla(215, 88%, 87%, 0.95);
+}
+#SpanCreator .project_suggestions .suggestion.today i {
+	position: absolute;
+	left:0.5em;
+}
 #SpanCreator .task_list {display: inline-block;width: 15em;}
 #SpanCreator .task_list input {
 	font-size: 1.35em;
