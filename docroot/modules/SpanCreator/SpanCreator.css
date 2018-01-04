@@ -142,9 +142,11 @@
 	border-left:1px solid hsla(0, 0%, 80%, 1);
 	background-color: hsla(0, 0%, 97%, 0.95);
 }
+#SpanCreator .project_suggestions .suggestion.today:hover,
 #SpanCreator .project_suggestions .suggestion:hover {
 	background-color: hsla(220, 100%, 90%, 0.95);
 }
+#SpanCreator .project_suggestions .suggestion.today.selected,
 #SpanCreator .project_suggestions .suggestion.selected {
 	background-color: hsla(0, 0%, 100%, 0.95);
 	box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
@@ -152,7 +154,7 @@
 	position: relative;
 }
 #SpanCreator .project_suggestions .suggestion.today {
-	background-color: hsla(215, 88%, 87%, 0.95);
+	background-color: hsla(215, 88%, 95%, 0.95);
 }
 #SpanCreator .project_suggestions .suggestion.today i {
 	position: absolute;

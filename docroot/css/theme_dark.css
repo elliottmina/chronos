@@ -114,18 +114,22 @@ body.theme_dark #SpanCreator .project_suggestions .suggestion:first-child {
 body.theme_dark #SpanCreator .project_suggestions .suggestion {
 	background-color: hsla(252, 10%, 41%, 0.95);
 	border-bottom: 1px solid hsl(252, 10%, 50%);
-	border-left: 1px solid hsl(252, 10%, 50%);
+	border-left: 1px s70%olid hsl(252, 10%, 50%);
 	border-right: 1px solid hsl(252, 10%, 50%);
 }
+body.theme_dark #SpanCreator .project_suggestions .suggestion.today:hover,
 body.theme_dark #SpanCreator .project_suggestions .suggestion:hover {
-	background-color: hsla(220, 100%, 90%, 0.95);
+	background-color: hsla(288, 10%, 49%, 0.95);
 	color:hsl(0, 0%, 25%);
 }
+body.theme_dark #SpanCreator .project_suggestions .suggestion.today.selected,
 body.theme_dark #SpanCreator .project_suggestions .suggestion.selected {
-	background-color: hsla(252, 10%, 55%, 0.95);
+	background-color: hsla(233, 58%, 60%, 0.95);
 	box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
 	z-index: 100;
 	position: relative;
 	color:hsl(256, 28%, 19%);
 }
-
+body.theme_dark #SpanCreator .project_suggestions .suggestion.today {
+	background-color: hsla(277, 26%, 43%, 0.95);
+}
