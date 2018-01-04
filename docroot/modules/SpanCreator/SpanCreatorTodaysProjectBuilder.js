@@ -1,16 +1,25 @@
 var SpanCreatorTodaysProjectBuilder = function() {
 	
-	var timeUtil;
+	var date;
 
 	var init = function() {
-		timeUtil = new TimeUtil();
+		addBehavior();
+	};
+
+	var addBehavior = function() {
+		App.dispatcher.register('DATE_CHANGED', onDateChanged);
+	};
+
+	var onDateChanged = function(data) {
+		date = data.date;
 	};
 
 	init();
 
 	return {
 		build:function() {
-			var today = App.persister.fetch(timeUtil.getYmd(new Date()));
+			var today = App.persister.fetch(date);
+			console.log(date, today);
 			projects = [];
 			jQuery.each(today.spans, function(index, span) {
 				if (jQuery.inArray(span.project, projects) == -1)

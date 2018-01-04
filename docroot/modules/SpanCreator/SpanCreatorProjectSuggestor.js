@@ -12,7 +12,6 @@ var SpanCreatorProjectSuggestor = function(
 		gatherComponents();
 		recentProjects = recentProjectBuilder.build();
 		recentProjects.sort();
-		todaysProjects = todaysProjectBuilder.build();
 		addBehavior();
 	};
 
@@ -34,9 +33,6 @@ var SpanCreatorProjectSuggestor = function(
 			recentProjects.push(data.span.project);
 			recentProjects.sort();
 		}
-		if (jQuery.inArray(data.span.project, todaysProjects) == -1) {
-			todaysProjects.push(data.span.project);
-		}
 	};
 
 	var show = function() {
@@ -45,6 +41,8 @@ var SpanCreatorProjectSuggestor = function(
 			hide();
 			return;
 		}
+
+		todaysProjects = todaysProjectBuilder.build();
 
 		projectsContainer.empty();
 		jQuery.each(suggestions, populateSuggestion);
