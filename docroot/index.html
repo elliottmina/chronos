@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/theme_dark.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="modules/DateLine/DateLine.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="modules/DailyGoal/DailyGoal.css?v=1.1">
+<link rel="stylesheet" type="text/css" href="modules/TextSummary/TextSummary.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="modules/JsonSummary/JsonSummary.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="modules/SpanSummary/SpanSummary.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="modules/SpanCreator/SpanCreator.css?v=1.1">
@@ -45,6 +46,7 @@
 <script src="modules/DailyGoal/DailyGoalTemplate.js?v=1.1"></script>
 <script src="modules/DailyGoal/DailyGoal.js?v=1.1"></script>
 <script src="modules/TimeFormatter12Hr/TimeFormatter12Hr.js?v=1.1"></script>
+<script src="modules/TextSummary/TextSummary.js?v=1.1"></script>
 <script src="modules/JsonExport/JsonExport.js?v=1.1"></script>
 <script src="modules/JsonExport/JsonExportCollector.js?v=1.1"></script>
 <script src="modules/JsonSummary/JsonSummary.js?v=1.1"></script>
@@ -71,7 +73,7 @@
 <!-- /resource_files -->
 	<script>
 		jQuery(document).ready(function() {
-			App.init([PersistenceMarshaller, Blasticator, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, DailyGoal, TimeFormatter12Hr, JsonExport, JsonSummary, SpanSummary, SpanCreator, SummaryNav, JsonImport, ThemeSelector, ProjectSummary, DateSelector]);
+			App.init([PersistenceMarshaller, Blasticator, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, DailyGoal, TimeFormatter12Hr, TextSummary, JsonExport, JsonSummary, SpanSummary, SpanCreator, SummaryNav, JsonImport, ThemeSelector, ProjectSummary, DateSelector]);
 		});
 	</script>
 </head>
@@ -85,11 +87,13 @@
 			<li>Projects</li>
 			<li>Log</li>
 			<li>JSON</li>
+			<li>Text</li>
 		</ul>
 		<section id="summaries">
 			<section id="ProjectSummary"></section>
 			<section id="SpanSummary"></section>
 			<section id="JsonSummary"></section>
+			<section id="TextSummary"></section>
 		</section>
 	</section>
 	<section class="auxiliary">
