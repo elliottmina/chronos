@@ -4,8 +4,8 @@ var SummaryNav = function() {
 	var sections;
 
 	var init = function() {
-		sections = $('#summaries section');
-		tabs = $('#summary_nav li');
+		sections = jQuery('#summaries section');
+		tabs = jQuery('#summary_nav li');
 		tabs.click(select);
 		tabs.get(0).click();
 

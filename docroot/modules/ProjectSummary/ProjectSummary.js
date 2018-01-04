@@ -46,7 +46,7 @@ var ProjectSummary = function() {
 	};
 
 	var build = function() {
-		var renderTo = $('#ProjectSummary');
+		var renderTo = jQuery('#ProjectSummary');
 		renderTo.html(html);
 		listEl = renderTo.find('tbody');
 		noContentContainer = renderTo.find('.no_content_container');

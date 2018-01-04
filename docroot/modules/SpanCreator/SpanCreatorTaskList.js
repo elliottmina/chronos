@@ -36,9 +36,9 @@ var SpanCreatorTaskList = function(topContainer) {
 		input.val('');
 		tasks.push(task);
 
-		var li = $('<li>').appendTo(list);
+		var li = jQuery('<li>').appendTo(list);
 
-		$('<a>')
+		jQuery('<a>')
 			.appendTo(li)
 			.addClass('fa fa-times')
 			.click(removeItem);
@@ -47,7 +47,7 @@ var SpanCreatorTaskList = function(topContainer) {
 	};
 
 	var removeItem = function() {
-		var anchor = $(this);
+		var anchor = jQuery(this);
 		var taskText = anchor[0].nextSibling;
 		tasks.splice(tasks.indexOf(taskText), 1);
 		anchor.parent().remove();

@@ -22,7 +22,7 @@ var JsonExport = function() {
 	};
 
 	var build = function() {
-		var renderTo = $('#JsonExport');
+		var renderTo = jQuery('#JsonExport');
 		renderTo.html(html);
 		button = renderTo.find('.mini_button');
 	};

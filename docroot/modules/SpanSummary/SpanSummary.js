@@ -53,7 +53,7 @@ var SpanSummary = function() {
 	};
 
 	var build = function() {
-		var renderTo = $('#SpanSummary');
+		var renderTo = jQuery('#SpanSummary');
 		renderTo.html(html);
 		spansContainer = renderTo.find('tbody');
 		noContentContainer = renderTo.find('.no_content_container');
@@ -110,7 +110,7 @@ var SpanSummary = function() {
 		var taskContainer = container.find('ul');
 		taskContainer.empty();
 		jQuery.each(span.tasks, function(index, task) {
-			var li = $('<li>')
+			var li = jQuery('<li>')
 				.appendTo(taskContainer)
 				.text(task);
 		});

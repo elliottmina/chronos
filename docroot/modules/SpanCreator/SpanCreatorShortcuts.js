@@ -20,13 +20,13 @@ var SpanCreatorShortcuts = function(
 	};
 
 	var gatherComponents = function() {
-		var topContainer = $('#SpanCreator');
+		var topContainer = jQuery('#SpanCreator');
 		container = topContainer.find('.hotkeys');
 		buttonIcon = topContainer.find('.toggle_hotkeys i');
 	};
 	
 	var addBehavior = function() {
-		var topContainer = $('#SpanCreator');
+		var topContainer = jQuery('#SpanCreator');
 		topContainer.find('.toggle_hotkeys').click(toggleDisplay);
 		topContainer.find('.save')
 			.click(save)

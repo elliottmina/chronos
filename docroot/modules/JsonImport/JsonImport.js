@@ -13,13 +13,13 @@ var JsonImport = function() {
 	};
 
 	var build = function() {
-		var renderTo = $('#JsonImport');
+		var renderTo = jQuery('#JsonImport');
 		renderTo.html(html);
 		fileInput = renderTo.find('input[type="file"]');
 	};
 
 	var addBehavior = function() {
-		$('#JsonImport').find('.mini_button').click(showImportDialogue);
+		jQuery('#JsonImport').find('.mini_button').click(showImportDialogue);
 	};
 
 	var showImportDialogue = function() {

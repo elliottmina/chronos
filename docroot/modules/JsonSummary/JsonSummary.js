@@ -18,7 +18,7 @@ var JsonSummary = function() {
 
 	var build = function() {
 		copier = new Copier();
-		renderTo = $('#JsonSummary');
+		renderTo = jQuery('#JsonSummary');
 		renderTo.html(html);
 		jsonContainer = renderTo.find('.json');
 		button = renderTo.find('.copy');
