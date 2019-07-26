@@ -1,23 +1,16 @@
 # TODO
 
-* Filter spans?
 * rebuild index
 * Sometimes the suggstions UL gets the click instead of the LI.
-* notes module?
 
 ## Backlog
-* Configuration system
-    * Expose mutable settings to the user.
-    * Modules can register settings.
-        * rocket volume toggle/scale
-        * export's historical range
-        * recent projects historical range
-* override goal for a given day
+* Shared configuration system for app and modules
+  * Configure hours/week, hours/day.
 * sub projects
-* Persister as a replaceable module (SQLite, XHR)
-
-## Server version
-* metrics over time (project, sub project, time spent, trends)
-* teams
-* project management tools
-
+  * Perhaps just configurable delimiters (|:/.][)
+* Remove less text and JSON tabs.
+* Get rid of tabs.  Show overview and log together.
+* Show volume per project/sub project for day, week, month, quarter year
+* Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
+* Bug: sometimes tasks are no properly set when repeating.
+* Persister as a replaceable module (SQLite, XHR, git)
