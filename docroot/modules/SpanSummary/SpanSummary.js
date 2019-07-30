@@ -27,9 +27,9 @@ var SpanSummary = function() {
 			<td class="hours"></td>
 			<td class="time"></td>
 			<td class="actions">
-				<span class="mini_button edit fa fa-pencil"></span>
-				<span class="mini_button delete fa fa-trash"></span>
-				<span class="mini_button repeat fa fa-repeat"></span>
+				<span class="mini_button edit far fa-pencil"></span>
+				<span class="mini_button delete far fa-trash"></span>
+				<span class="mini_button repeat far fa-repeat"></span>
 			</td>
 		</tr>`;
 

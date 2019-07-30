@@ -1,6 +1,5 @@
 var ModuleLoader = function() {
 
-
 	return {
 		load:function(moduleNames) {
 			var modules = jQuery.map(moduleNames, function(moduleName, index) {

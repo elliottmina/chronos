@@ -11,7 +11,7 @@ var SpanCreatorTemplate = `
 				<span class="time_field_container">
 					<span class="time" tabindex="1"></span>
 					<span class="period">AM</span>
-					<button class="now fa fa-clock-o" tabindex="-1"></button>
+					<button class="now far fa-clock-o" tabindex="-1"></button>
 					<span class="cursor"></span>
 				</span>
 			</span>
@@ -27,18 +27,18 @@ var SpanCreatorTemplate = `
 				<span class="time_field_container">
 					<span class="time" tabindex="1"></span>
 					<span class="period">AM</span>
-					<button class="now fa fa-clock-o" tabindex="-1"></button>
+					<button class="now far fa-clock-o" tabindex="-1"></button>
 					<span class="cursor"></span>
 				</span>
 			</span>
 		</div>
 		<div class="button_container">
 			<div class="button save" tabindex="1">
-				<i class="fa fa-floppy-o"></i>
+				<i class="fas fa-save"></i>
 				<span class="text">Create</span>
 			</div>
 			<div class="button duplicate" tabindex="1">
-				<i class="fa fa-repeat"></i>
+				<i class="far fa-repeat"></i>
 				Create + repeat
 			</div>
 		</div>
@@ -85,14 +85,14 @@ var SpanCreatorTemplate = `
 
 				<li>
 					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon"><i class="fa fa-arrow-left"></i></span>
+						<span class="icon">Ctrl</span> + <span class="icon"><i class="far fa-arrow-left"></i></span>
 					</span>
 					<span class="text">Previous day</span>
 				</li>
 
 				<li>
 					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon"><i class="fa fa-arrow-right"></i></span>
+						<span class="icon">Ctrl</span> + <span class="icon"><i class="far fa-arrow-right"></i></span>
 					</span>
 					<span class="text">Next day</span>
 				</li>
@@ -103,14 +103,14 @@ var SpanCreatorTemplate = `
 			<ul>
 				<li>
 					<span class="keys">
-						<span class="icon"><i class="fa fa-arrow-up"></i></span>
+						<span class="icon"><i class="far fa-arrow-up"></i></span>
 					</span>
 					<span class="text">Min</span>
 				</li>
 
 				<li>
 					<span class="keys">
-						<span class="icon"><i class="fa fa-arrow-down"></i></span>
+						<span class="icon"><i class="far fa-arrow-down"></i></span>
 					</span>
 					<span class="text">Min</span>
 				</li>
@@ -138,5 +138,5 @@ var SpanCreatorTemplate = `
 			</ul>
 		</div>
 	</section>
-	<button class="toggle_hotkeys"><i class="fa fa-chevron-down"></i></button>
+	<button class="toggle_hotkeys"><i class="far fa-chevron-down"></i></button>
 `;

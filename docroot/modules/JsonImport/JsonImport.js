@@ -1,25 +1,20 @@
 var JsonImport = function() {
 
-	var html = `
-		<span class="mini_button import">
-			<i class="fa fa-upload"></i> Import
-		</span>`;
-	var progressTemplate = `<progress></progress`;
+	var progressTemplate = `<progress></progress>`;
 	var processDialogue;
 
 	var init = function() {
-		build();
-		addBehavior();
+		registerSettings();
 	};
 
-	var build = function() {
-		var renderTo = jQuery('#JsonImport');
-		renderTo.html(html);
-		fileInput = renderTo.find('input[type="file"]');
-	};
-
-	var addBehavior = function() {
-		jQuery('#JsonImport').find('.mini_button').click(showImportDialogue);
+	var registerSettings = function() {
+		App.settings.register([{
+			section:'Data',
+			label:'Import backup',
+			type:'button',
+			iconClass:'fa-upload',
+			callback:showImportDialogue
+		}]);
 	};
 
 	var showImportDialogue = function() {

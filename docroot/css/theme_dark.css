@@ -34,7 +34,7 @@ body.theme_dark tr:first-child td {
 body.theme_dark td:last-child {
 	border-right: none;
 }
-body.theme_dark section.auxiliary>div {
+body.theme_dark #Settings>.mini_button {
 	background-color: hsla(252, 23%, 32%, 1);
 	border: 1px solid hsl(252, 23%, 43%);
 }

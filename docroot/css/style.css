@@ -68,6 +68,7 @@ input {
 	display: inline-block;
 	background-color: hsl(0, 0%, 90%);
 	padding:0.3em 0.5em;
+	font-size: 0.75em;
 }
 .logo .version {
 	display: inline-block;
@@ -119,38 +120,22 @@ section>header {
 .mini_button:hover {
 	color:hsl(217, 89%, 61%);
 }
-
+#Settings section {
+	border: 1px solid #FFF;
+	margin:1em 0;
+}
 /* POS */
-section.auxiliary>div {
+#Settings>.mini_button {
 	position: fixed;
 	bottom: 0;
+	right:0;
 	background-color: hsl(0, 0%, 100%);
 	border-top: 1px solid hsl(0, 0%, 90%);
 	border-left: 1px solid hsl(0, 0%, 90%);
 	border-right: 1px solid hsl(0, 0%, 90%);
 }
-#Blasticator {
-	right: 9.5em;
-}
-#JsonExport {
-	right: 5em;
-}
-#JsonImport {
-	right:0.5em;
-}
-#ThemeSelector {
-	right:15.25em
-}
-#summary_nav {
-    margin-bottom: 1em;
-}
 #SpanSummary {
 	display: inline-block;
-}
-#JsonSummary {
-	position: relative;
-}
-#DateLine {
 }
 #DailyGoal {
 	position: absolute;
@@ -159,7 +144,4 @@ section.auxiliary>div {
 }
 #DateSelector {
 	margin-top: 0.5em;
-}
-section.summaries {
-	margin-bottom:1em;
 }

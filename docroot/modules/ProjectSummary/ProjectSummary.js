@@ -12,7 +12,7 @@ var ProjectSummary = function() {
 	var copyTemplate = `
 		<li class="copy">
 			<span class="copy button">
-				<i class="fa fa-copy"></i>
+				<i class="far fa-copy"></i>
 			</span>
 		</li>`;
 	

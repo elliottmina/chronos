@@ -95,7 +95,7 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 		soundPlayer.play('launch');
 
 		var color = 'hsl(' + rand([0, 359]) + ', 100%, 50%)';
-		var rocket = jQuery('<i class="fa fa-rocket rocket"></i>')
+		var rocket = jQuery('<i class="far fa-rocket rocket"></i>')
 			.appendTo(target)
 			.css('font-size', config.fontSize + 'em')
 			.css('left', originLeft + 'px')
@@ -130,7 +130,7 @@ var DailyGoalRocketLauncher = function(textController, progressBar, target) {
 	var addExplosion = function(top, fontSize) {
 		soundPlayer.play('explosion');
 
-		var explosion = jQuery('<i class="fa fa-hourglass"></i>')
+		var explosion = jQuery('<i class="far fa-hourglass"></i>')
 			.appendTo(target)
 			.css('font-size', fontSize + 'em')
 			.css('top', top + 'px')

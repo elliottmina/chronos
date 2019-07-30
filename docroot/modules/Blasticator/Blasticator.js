@@ -1,21 +1,7 @@
 var Blasticator = function() {
 
-	var html = `
-		<span class="mini_button blasticate">
-			<i class="fa fa-trash"></i> Blasticate
-		</span>`;
-
 	var init = function() {
-		build();
-		addBehavior();
-	};
-
-	var build = function() {
-		jQuery('#Blasticator').html(html);
-	};
-
-	var addBehavior = function() {
-		jQuery('#Blasticator').find('.mini_button').click(showDialogue);
+		registerSettings();
 	};
 
 	var showDialogue = function() {
@@ -35,6 +21,16 @@ var Blasticator = function() {
 				}
 			}]
 		});
+	};
+
+	var registerSettings = function() {
+		App.settings.register([{
+			section:'Data',
+			label:'Clear data',
+			type:'button',
+			iconClass:'fa-trash',
+			callback:showDialogue
+		}]);
 	};
 
 	init();

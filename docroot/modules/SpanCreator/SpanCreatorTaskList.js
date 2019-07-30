@@ -40,7 +40,7 @@ var SpanCreatorTaskList = function(topContainer) {
 
 		jQuery('<a>')
 			.appendTo(li)
-			.addClass('fa fa-times')
+			.addClass('far fa-times')
 			.click(removeItem);
 
 		li.append(task);
