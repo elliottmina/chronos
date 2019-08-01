@@ -25,3 +25,4 @@
 * don't auto select first item
 * Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Avatar with words of encouragement?  Also coach Z.
+* Move today's items to the top

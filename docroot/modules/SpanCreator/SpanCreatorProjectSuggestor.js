@@ -7,6 +7,7 @@ var SpanCreatorProjectSuggestor = function(
 	var recentProjects;
 	var todaysProjects;
 	var selectedIndex;
+	var showing = false;
 
 	var init = function() {
 		gatherComponents();
@@ -23,7 +24,6 @@ var SpanCreatorProjectSuggestor = function(
 	var addBehavior = function() {
 		projectInput.focus(show);
 		projectInput.blur(onBlur);
-		projectInput.keyup(onKeyUp);
 		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
 		new InputSizeAdjuster(projectInput);
 	};
@@ -36,6 +36,16 @@ var SpanCreatorProjectSuggestor = function(
 	};
 
 	var show = function() {
+		if (showing)
+			return;
+
+		populate();
+		projectsContainer.show();
+		bindKeys();
+		showing = true;
+	};
+
+	var populate = function() {
 		var suggestions = getSuggestions();
 		if (suggestions.length == 0) {
 			hide();
@@ -43,11 +53,9 @@ var SpanCreatorProjectSuggestor = function(
 		}
 
 		todaysProjects = todaysProjectBuilder.build();
-
 		projectsContainer.empty();
 		jQuery.each(suggestions, populateSuggestion);
 		selectFirst();
-		projectsContainer.show();
 	};
 
 	var populateSuggestion = function(index, suggestion) {
@@ -85,12 +93,25 @@ var SpanCreatorProjectSuggestor = function(
 	};
 
 	var hide = function() {
+		if(!showing)
+			return;
+
 		deselectAll();
 		projectsContainer.hide();
+		unbindKeys();
+		showing = false;
 	};
 
 	var onBlur = function() {
 		setTimeout(hide, 100);
+	};
+
+	var bindKeys = function() {
+		projectInput.keyup(onKeyUp);
+	};
+
+	var unbindKeys = function() {
+		projectInput.unbind('keyup', onKeyUp);
 	};
 
 	var onKeyUp = function(e) {
@@ -108,8 +129,7 @@ var SpanCreatorProjectSuggestor = function(
 				selectDown();
 				break;
 			default:
-				show();
-				// adjustSize();
+				populate();
 		}
 	};
 

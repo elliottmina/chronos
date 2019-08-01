@@ -107,7 +107,7 @@ var SpanCreator = function() {
 
 	var confirmedSave = function() {
 		if (submit())
-			stateSetter.reset();
+			setTimeout(stateSetter.reset, 100);
 	};
 
 	var submit = function() {
