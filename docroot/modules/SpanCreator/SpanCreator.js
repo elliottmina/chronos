@@ -13,6 +13,7 @@ var SpanCreator = function() {
 	var activeSpan;
 	var saveAndRepeatButton;
 	var stateSetter;
+	var spanAssembler;
 
 	var init = function() {
 		gatherDependencies();
@@ -72,6 +73,11 @@ var SpanCreator = function() {
 			taskList,
 			topContainer.find('.save .text'),
 			saveAndRepeatButton);
+
+		spanAssembler = new SpanCreatorSpanAssembler(
+			startTimeField, 
+			finishTimeField,
+			taskList);
 	};
 
 	var addBehavior = function() {
@@ -112,13 +118,9 @@ var SpanCreator = function() {
 
 	var submit = function() {
 		taskList.addCurrent();
-		var span = {
-			start:startTimeField.getTime(),
-			finish:getFinishDate(),
-			project:projectSuggestor.getProject(),
-			tasks:taskList.getTasks(),
-			guid:activeSpan ? activeSpan.guid : guidGenerator.generate()
-		};
+
+		var span = spanAssembler.assemble();
+		span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
 
 		if (!validator.validate(span))
 			return false;
@@ -126,18 +128,6 @@ var SpanCreator = function() {
 		App.dispatcher.update('SPAN_SUBMITTED', span);
 		activeSpan = undefined;
 		return true;
-	};
-
-	var getFinishDate = function() {
-		var finish = finishTimeField.getTime();
-		if (finish)
-			return finish;
-
-		var now = new Date();
-		now.setFullYear(date.getFullYear());
-		now.setMonth(date.getMonth());
-		now.setDate(date.getDate());
-		return now;
 	};
 
 	var onDateChanged = function(data) {

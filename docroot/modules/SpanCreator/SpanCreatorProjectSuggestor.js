@@ -175,9 +175,6 @@ var SpanCreatorProjectSuggestor = function(
 	init();
 
 	return {
-		getProject:function() {
-			return jQuery.trim(projectInput.val());
-		},
 		clear:function() {
 			projectInput.val('');
 		},
