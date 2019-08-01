@@ -24,6 +24,7 @@ var SpanCreatorProjectSuggestor = function(
 	var addBehavior = function() {
 		projectInput.focus(show);
 		projectInput.blur(onBlur);
+		projectInput.keyup(publishChange);
 		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
 		new InputSizeAdjuster(projectInput);
 	};
@@ -75,6 +76,7 @@ var SpanCreatorProjectSuggestor = function(
 	var selectSuggestion = function() {
 		projectInput.val(jQuery(this).text());
 		hide();
+		publishChange();
 	};
 
 	var getSuggestions = function() {
@@ -172,6 +174,10 @@ var SpanCreatorProjectSuggestor = function(
 			show();
 	};
 
+	var publishChange = function() {
+		App.dispatcher.update('SPAN_CHANGED');
+	};
+
 	init();
 
 	return {
@@ -180,6 +186,9 @@ var SpanCreatorProjectSuggestor = function(
 		},
 		focus:function() {
 			projectInput.focus();
+		},
+		get:function() {
+			return jQuery.trim(projectInput.val());
 		},
 		set:function(val) {
 			projectInput.val(val);

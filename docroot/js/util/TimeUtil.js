@@ -45,6 +45,9 @@ var TimeUtil = function() {
 			return newDate.getUTCFullYear() + '-' + 
 				padder.twoDigit(newDate.getUTCMonth()+1) + '-' + 
 				padder.twoDigit(newDate.getUTCDate());
+		},
+		isValidDate: function(d) {
+			return d instanceof Date && !isNaN(d);
 		}
 	}	
 };

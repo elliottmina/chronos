@@ -11,7 +11,7 @@ var SpanCreatorTemplate = `
 				<span class="time_field_container">
 					<span class="time" tabindex="1"></span>
 					<span class="period">AM</span>
-					<button class="now far fa-clock-o" tabindex="-1"></button>
+					<button class="now far fa-clock" tabindex="-1"></button>
 					<span class="cursor"></span>
 				</span>
 			</span>
@@ -27,7 +27,7 @@ var SpanCreatorTemplate = `
 				<span class="time_field_container">
 					<span class="time" tabindex="1"></span>
 					<span class="period">AM</span>
-					<button class="now far fa-clock-o" tabindex="-1"></button>
+					<button class="now far fa-clock" tabindex="-1"></button>
 					<span class="cursor"></span>
 				</span>
 			</span>

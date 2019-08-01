@@ -44,6 +44,7 @@ var SpanCreatorTaskList = function(topContainer) {
 			.click(removeItem);
 
 		li.append(task);
+		publishChange();
 	};
 
 	var removeItem = function() {
@@ -51,12 +52,18 @@ var SpanCreatorTaskList = function(topContainer) {
 		var taskText = anchor[0].nextSibling;
 		tasks.splice(tasks.indexOf(taskText), 1);
 		anchor.parent().remove();
+		publishChange();
 	};
 
 	var clear = function() {
 		tasks = [];
 		list.empty();
 		input.val('');
+		publishChange();
+	};
+
+	var publishChange = function() {
+		App.dispatcher.update('SPAN_CHANGED');
 	};
 
 	init();
@@ -71,7 +78,7 @@ var SpanCreatorTaskList = function(topContainer) {
 			clear();
 			jQuery.each(tasks, function(index, task) {
 				addTask(task);
-			})
+			});
 		},
 		focus:function() {
 			input.focus();

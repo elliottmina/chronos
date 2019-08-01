@@ -5,8 +5,19 @@
 
 ## Backlog
 
-* Save input state (to survive refresh)
-* indicate you are editing vs saving a span
+* TimeField.getTime was returning "now" whenever you read, and it is empty.  Move this to save processing.
+```js
+    var finish = finishTimeField.getTime();
+    if (finish)
+      return finish;
+    var now = new Date();
+    now.setFullYear(date.getFullYear());
+    now.setMonth(date.getMonth());
+    now.setDate(date.getDate());
+    return now;
+```
+
+* Make it more obvious when you are editing a span.
 * Make decimal or minute display configuration based
 * Configure hours/week, hours/day.
 * sub projects
@@ -27,9 +38,10 @@
 
 * Get rid of jquery
 * Persister as a replaceable module (SQLite, XHR, git)
+* Move current date to App, so modules don't have to track it
 
 ## Done
 
 * Removed JSON and text summaries
 * Fixed issue where saving a span caused the first project to be selected.
-* 
+* App remembers your work-in-progress span, in case you refresh the browser.

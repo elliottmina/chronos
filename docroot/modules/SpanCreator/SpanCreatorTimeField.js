@@ -52,26 +52,33 @@ var SpanCreatorTimeField = function(
 
 			case 'a':
 			case 'A':
-				return setPeriodAm();
+				setPeriodAm();
+				break;
 
 			case 'p':
 			case 'P':
-				return setPeriodPm();
+				setPeriodPm();
+				break;
 
 			case 'Backspace':
-				return removeChar();
+				removeChar();
+				break;
 
 			case ':':
-				return addColon();
+				addColon();
+				break;
 
 			case 'n':
-				return now();
+				now();
+				break;
 
 			case 'ArrowUp':
-				return minuteUp(e);
+				minuteUp(e);
+				break;
 
 			case 'ArrowDown':
-				return minuteDown(e);
+				minuteDown(e);
+				break;
 
 			case '0':
 			case '1':
@@ -83,8 +90,11 @@ var SpanCreatorTimeField = function(
 			case '7':
 			case '8':
 			case '9':
-				return addNumber(e.key);
+				addNumber(e.key);
+				break;
 		}
+
+		App.dispatcher.update('SPAN_CHANGED');
 	};
 
 	var minuteUp = function(e) {
@@ -150,6 +160,7 @@ var SpanCreatorTimeField = function(
 			periodEl.text('PM');
 		else 
 			periodEl.text('AM');
+		App.dispatcher.update('SPAN_CHANGED');
 	};
 
 	var checkForErrorOnCompletion = function() {
@@ -181,9 +192,13 @@ var SpanCreatorTimeField = function(
 	var now = function() {
 		setTime(new Date());
 		timeEl.focus();
+		App.dispatcher.update('SPAN_CHANGED');
 	};
 
 	var getTimeFromElements = function() {
+		if (!date)
+			return;
+		
 		var dateCopy = new Date(date.getTime());
 
 		var parts = timeEl.text().split(':');
@@ -216,7 +231,8 @@ var SpanCreatorTimeField = function(
 				return;
 
 			if (isEmpty())
-				return getNow();
+				return;
+
 			return getTimeFromElements();
 		},
 		clear:function() {

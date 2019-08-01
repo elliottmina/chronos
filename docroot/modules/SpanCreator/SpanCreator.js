@@ -14,12 +14,14 @@ var SpanCreator = function() {
 	var saveAndRepeatButton;
 	var stateSetter;
 	var spanAssembler;
+	var wipSaver;
 
 	var init = function() {
 		gatherDependencies();
 		buildHtml();
 		build();
 		addBehavior();
+		restoreWip();
 	};
 
 	var gatherDependencies = function() {
@@ -72,12 +74,16 @@ var SpanCreator = function() {
 			projectSuggestor,
 			taskList,
 			topContainer.find('.save .text'),
-			saveAndRepeatButton);
+			saveAndRepeatButton,
+			timeUtil);
 
 		spanAssembler = new SpanCreatorSpanAssembler(
 			startTimeField, 
 			finishTimeField,
-			taskList);
+			taskList,
+			projectSuggestor);
+
+		wipSaver = new SpanCreatorWipSaver(spanAssembler);
 	};
 
 	var addBehavior = function() {
@@ -86,7 +92,6 @@ var SpanCreator = function() {
 		App.dispatcher.register('EDIT_SPAN_REQUESTED', onEditSpanRequested);
 		App.dispatcher.register('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
 	};
-
 
 	var save = function() {
 		if (timeUtil.getYmd(new Date()) != record.date)
@@ -148,6 +153,12 @@ var SpanCreator = function() {
 		submit();
 		startTimeField.now();
 		finishTimeField.clear();
+	};
+
+	var restoreWip = function() {
+		var span = wipSaver.get();
+		if (span)
+			stateSetter.restore(span);
 	};
 
 	init();

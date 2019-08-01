@@ -4,7 +4,8 @@ var SpanCreatorStateSetter = function(
 	projectSuggestor,
 	taskList,
 	saveButtonText,
-	saveAndRepeatButton) {
+	saveAndRepeatButton,
+	timeUtil) {
 
 	return {
 		reset:function() {
@@ -32,6 +33,14 @@ var SpanCreatorStateSetter = function(
 			saveButtonText.text('Create');
 			saveAndRepeatButton.show();
 			finishTimeField.focus();
+		},
+		restore:function(span) {
+			if (timeUtil.isValidDate(span.start))
+				startTimeField.setTime(span.start);
+			if (timeUtil.isValidDate(span.finish))
+				finishTimeField.setTime(span.finish);
+			projectSuggestor.set(span.project);
+			taskList.setTasks(span.tasks);
 		}
 	};
 };
