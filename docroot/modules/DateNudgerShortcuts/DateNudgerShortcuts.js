@@ -28,7 +28,7 @@ var DateNudgerShortcuts = function() {
 	var onKeyDown = function(e) {
 		switch (keyEvaluator.get(e)) {
 
-			case 'ARROWLEFT':
+			case '[':
 				e.stopPropagation();
 				e.preventDefault();
 				App.dispatcher.update(
@@ -36,7 +36,7 @@ var DateNudgerShortcuts = function() {
 					timeUtil.getNewDayStr(date, -1));
 				return;
 
-			case 'ARROWRIGHT':
+			case ']':
 				e.stopPropagation();
 				e.preventDefault();
 				App.dispatcher.update(

@@ -1,27 +1,26 @@
 # TODO
 
 * rebuild index
-* Sometimes the suggstions UL gets the click instead of the LI.
 
 ## Backlog
 
-* Make it more obvious when you are editing a span.
 * Make decimal or minute display configuration based
-* sub projects
-  * Perhaps just configurable delimiters (|:/.][)
-* Show volume per project/sub project for day, week, month, quarter year
+* Make it more obvious when you are editing a span.
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
-* Bug: sometimes tasks are no properly set when repeating.
 * Allow repeat of summary
 * copy button for time
-* Edit tasks
-* Suggest tasks
-* Allow text selection key shortcuts
-* Track time elapsed (start of first entry vs end of last entry) vs time worked
+* Tasks
+  * Edit tasks
+  * Suggest tasks
+* Metrics
+  * Show volume per project/sub project for day, week, month, quarter year
+    * sub projects
+      * Perhaps just configurable delimiters (|:/.][)
+  * Track time elapsed (start of first entry vs end of last entry) vs time worked
+  * Goal section to display daily and weekly goals.
 * Avatar with words of encouragement?  Also coach Z.
 * Move today's items to the top
 * Sound no longer plays
-* Goal section to display daily and weekly goals.
 
 ## Future
 
@@ -35,3 +34,5 @@
 * Fixed issue where saving a span caused the first project to be selected.
 * App remembers your work-in-progress span, in case you refresh the browser.
 * Goal hours per day, and hours per week are configurable.
+* Fixed bug that sometimes caused suggestions to not populate when clicked.
+* Changed date navigation keys to square brackets, so text can be selected with keyboard controls.
