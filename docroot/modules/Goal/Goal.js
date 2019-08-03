@@ -1,6 +1,8 @@
 var Goal = function() {
 
 	var goal = 8;
+	var defaultHoursPerDay = 8;
+	var defaultHoursPerWeek = 40;
 	var rocketLauncher;
 	
 	var init = function() {
@@ -53,25 +55,39 @@ var Goal = function() {
 		return totalMillis/1000/60/60;
 	};
 
+	var getHoursPerDay = function() {
+		var savedValue = parseInt(localStorage.getItem('goal_hours_day'));
+		if (isNaN(savedValue))
+			return defaultHoursPerDay;
+		else return savedValue;
+	};
+
+	var getHoursPerWeek = function() {
+		var savedValue = parseInt(localStorage.getItem('goal_hours_week'));
+		if (isNaN(savedValue))
+			return defaultHoursPerWeek;
+		else return savedValue;
+	};
+
 	var onHoursPerDayChange = function(newValue) {
-		console.log('per day', newValue);
+		localStorage.setItem('goal_hours_day', newValue);
 	};
 
 	var onHoursPerWeekChange = function(newValue) {
-		console.log('per week', newValue);
+		localStorage.setItem('goal_hours_week', newValue);
 	};
 
 	var registerSettings = function() {
 		App.settings.register([{
 			section:'Goal',
 			label:'Hours per day',
-			value:parseInt(localStorage.getItem('goal_hours_day')),
+			value:getHoursPerDay(),
 			type:'integer',
 			callback:onHoursPerDayChange
 		},{
 			section:'Goal',
 			label:'Hours per week',
-			value:parseInt(localStorage.getItem('goal_hours_week')),
+			value:getHoursPerWeek(),
 			type:'integer',
 			callback:onHoursPerWeekChange
 		}]);

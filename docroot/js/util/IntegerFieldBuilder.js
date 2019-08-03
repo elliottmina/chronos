@@ -10,7 +10,9 @@ var IntegerFieldBuilder = function() {
     build:function(config, container) {
       var field = jQuery(template).appendTo(container);
       field.find('label').text(config.label);
+
       var input = field.find('input');
+      input.val(config.value);
 
       input.keyup(function() {
         config.callback(input.val());
