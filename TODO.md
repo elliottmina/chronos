@@ -16,6 +16,7 @@
 * Allow repeat of summary
 * copy button for time
 * Edit tasks
+* Suggest tasks
 * Allow text selection key shortcuts
 * Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Avatar with words of encouragement?  Also coach Z.

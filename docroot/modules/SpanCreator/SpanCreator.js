@@ -97,7 +97,7 @@ var SpanCreator = function() {
 		if (timeUtil.getYmd(new Date()) != record.date)
 			confirmPreviousDate();
 		else 
-			confirmedSave();
+			submit();
 	};
 
 	var confirmPreviousDate = function() {
@@ -111,40 +111,30 @@ var SpanCreator = function() {
 				label:'Yeah man, it\'s totally chill',
 				role:'primary',
 				autoClose:true,
-				callback:confirmedSave
+				callback:submit
 			}]
 		});
 	};
 
-	var confirmedSave = function() {
-		if (submit())
-			setTimeout(stateSetter.reset, 100);
-	};
-
 	var submit = function() {
-		taskList.addCurrent();
+		commitPartialWork();
 
 		var span = spanAssembler.assemble();
 		span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
-		span.finish = calcFinishDate(span);
 
-		if (!validator.validate(span))
-			return false;
-		
-		App.dispatcher.update('SPAN_SUBMITTED', span);
-		activeSpan = undefined;
-		return true;
+		if (validator.validate(span)) {
+			App.dispatcher.update('SPAN_SUBMITTED', span);
+			activeSpan = undefined;
+			setTimeout(stateSetter.reset, 100);
+		}
 	};
 
-	var calcFinishDate = function(span) {
-		if (span.finish)
-			return span;
+	var commitPartialWork = function() {
+		taskList.addCurrent();
 
-    var now = new Date();
-    now.setFullYear(date.getFullYear());
-    now.setMonth(date.getMonth());
-    now.setDate(date.getDate());
-    return now;
+		if (!finishTimeField.now()) {
+			finishTimeField.now();
+		}
 	};
 
 	var onDateChanged = function(data) {
