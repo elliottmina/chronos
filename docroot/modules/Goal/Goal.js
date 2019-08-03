@@ -1,4 +1,4 @@
-var DailyGoal = function() {
+var Goal = function() {
 
 	var goal = 8;
 	var rocketLauncher;
@@ -6,6 +6,7 @@ var DailyGoal = function() {
 	var init = function() {
 		build();
 		addBehavior();
+		registerSettings();
 	};
 
 	var build = function() {
@@ -50,6 +51,30 @@ var DailyGoal = function() {
 		});
 
 		return totalMillis/1000/60/60;
+	};
+
+	var onHoursPerDayChange = function(newValue) {
+		console.log('per day', newValue);
+	};
+
+	var onHoursPerWeekChange = function(newValue) {
+		console.log('per week', newValue);
+	};
+
+	var registerSettings = function() {
+		App.settings.register([{
+			section:'Goal',
+			label:'Hours per day',
+			value:parseInt(localStorage.getItem('goal_hours_day')),
+			type:'integer',
+			callback:onHoursPerDayChange
+		},{
+			section:'Goal',
+			label:'Hours per week',
+			value:parseInt(localStorage.getItem('goal_hours_week')),
+			type:'integer',
+			callback:onHoursPerWeekChange
+		}]);
 	};
 
 	init();
