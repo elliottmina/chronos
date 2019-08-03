@@ -68,7 +68,7 @@ var SpanCreatorProjectSuggestor = function(
 
 		if (jQuery.inArray(suggestion, todaysProjects) != -1) {
 			li.addClass('today');
-			jQuery('<i class="far fa-clock-o"></i>')
+			jQuery('<i class="far fa-clock"></i>')
 				.appendTo(li);
 		}
 	};
@@ -105,7 +105,7 @@ var SpanCreatorProjectSuggestor = function(
 	};
 
 	var onBlur = function() {
-		setTimeout(hide, 100);
+		setTimeout(hide, 200);
 	};
 
 	var bindKeys = function() {

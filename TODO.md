@@ -7,7 +7,6 @@
 
 * Make it more obvious when you are editing a span.
 * Make decimal or minute display configuration based
-* Configure hours/week, hours/day.
 * sub projects
   * Perhaps just configurable delimiters (|:/.][)
 * Show volume per project/sub project for day, week, month, quarter year
@@ -22,6 +21,7 @@
 * Avatar with words of encouragement?  Also coach Z.
 * Move today's items to the top
 * Sound no longer plays
+* Goal section to display daily and weekly goals.
 
 ## Future
 
@@ -34,3 +34,4 @@
 * Removed JSON and text summaries
 * Fixed issue where saving a span caused the first project to be selected.
 * App remembers your work-in-progress span, in case you refresh the browser.
+* Goal hours per day, and hours per week are configurable.
