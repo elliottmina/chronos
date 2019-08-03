@@ -13,9 +13,13 @@
 }
 #ProjectSummary li.copy {
 	border:0;
-	cursor: pointer;
+  background-color: transparent;
 }
 #ProjectSummary .button.copy {
+	cursor: pointer;
 	vertical-align: text-bottom;
 	color: hsl(106, 100%, 24%);
+  display: inline-block;
+  margin-left:.2em;
+  font-size: 0.9em;
 }

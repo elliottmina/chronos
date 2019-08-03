@@ -3,7 +3,12 @@ var ProjectSummary = function() {
 	var itemTemplate = `
 		<tr>
 			<td class="project"></td>
-			<td class="hours"></td>
+			<td class="hours">
+				<span class="value"></span>
+				<span class="copy button">
+					<i class="fas fa-copy"></i>
+				</span>
+			</td>
 			<td class="time"></td>
 			<td class="tasks"><ul class="task_list"></ul></td>
 		</li>
@@ -12,7 +17,7 @@ var ProjectSummary = function() {
 	var copyTemplate = `
 		<li class="copy">
 			<span class="copy button">
-				<i class="far fa-copy"></i>
+				<i class="fas fa-copy"></i>
 			</span>
 		</li>`;
 	
@@ -87,8 +92,12 @@ var ProjectSummary = function() {
 			.appendTo(listEl);
 
 		itemContainer.find('.project').text(project.label);
-		itemContainer.find('.hours').text(formatHours(project.time));
 		itemContainer.find('.time').text(formatTime(project.time));
+		
+		itemContainer.find('.hours .value').text(formatHours(project.time));
+		itemContainer.find('.hours .copy')
+			.click(copy)
+			.data('copy', formatHours(project.time));
 		
 		var tasksContainer = itemContainer.find('ul');
 		jQuery.each(project.tasks, function(index, task) {
@@ -97,10 +106,12 @@ var ProjectSummary = function() {
 				.text(task);
 		});
 
-		var li = jQuery(copyTemplate)
-			.appendTo(tasksContainer)
-			.click(copy)
-			.data('tasks', project.tasks);
+		if (project.tasks.length) {
+			var li = jQuery(copyTemplate)
+				.appendTo(tasksContainer)
+				.click(copy)
+				.data('copy', project.tasks.join('\n'));			
+		}
 	};
 
 	var formatTime = function(minutes) {
@@ -122,7 +133,7 @@ var ProjectSummary = function() {
 	};
 
 	var copy = function() {
-		var text = jQuery(this).data('tasks').join('\n');
+		var text = jQuery(this).data('copy');
 		copier.copy(text);
 	};
 

@@ -4,8 +4,6 @@
 
 ## Backlog
 
-* copy button for time
-* Move today's items to the top
 * Make decimal or minute display configuration based
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * Allow repeat of summary
@@ -37,3 +35,4 @@
 * Changed date navigation keys to square brackets, so text can be selected with keyboard controls.
 * Made it more obvious when you are editing a previous span.
 * Moved today's projects to top of list.
+* Added copy button for time values.
