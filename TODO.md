@@ -4,7 +4,6 @@
 
 ## Backlog
 
-* Make decimal or minute display configuration based
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * Allow repeat of summary
 * Tasks
@@ -18,6 +17,8 @@
   * Goal section to display daily and weekly goals.
 * Avatar with words of encouragement?  Also coach Z.
 * Sound no longer plays
+* Don't play goal animation on page load
+* Reverse order of spans
 
 ## Future
 
@@ -36,3 +37,4 @@
 * Made it more obvious when you are editing a previous span.
 * Moved today's projects to top of list.
 * Added copy button for time values.
+* Made hours display only decimal or minute values, based on configuration settings.

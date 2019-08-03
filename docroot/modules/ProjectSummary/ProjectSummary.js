@@ -1,26 +1,5 @@
 var ProjectSummary = function() {
 
-	var itemTemplate = `
-		<tr>
-			<td class="project"></td>
-			<td class="hours">
-				<span class="value"></span>
-				<span class="copy button">
-					<i class="fas fa-copy"></i>
-				</span>
-			</td>
-			<td class="time"></td>
-			<td class="tasks"><ul class="task_list"></ul></td>
-		</li>
-	`;
-
-	var copyTemplate = `
-		<li class="copy">
-			<span class="copy button">
-				<i class="fas fa-copy"></i>
-			</span>
-		</li>`;
-	
 	var html = `
 		<header>Project summary</header>
 		<div class="no_content_container">Nothing to see here.  Move along.</div>
@@ -37,17 +16,20 @@ var ProjectSummary = function() {
 		</table>`;
 
 	var dataBuilder;
-	var padder;
 	var copier;
 	var listEl;
 	var noContentContainer;
+	var spans;
 
 	var init = function() {
 		dataBuilder = new ProjectSummaryDataBuilder();
-		padder = new Padder();
 		copier = new Copier();
 		build();
 		addBehavior();
+		registerSettings();
+
+		itemBuilder = new ProjectSummaryItemBuilder(listEl, new Padder());
+		itemBuilder.setUseDecimal(currentUseDecimalValue());
 	};
 
 	var build = function() {
@@ -64,77 +46,51 @@ var ProjectSummary = function() {
 	};
 
 	var onDateChanged = function(date) {
-		populate(date.spans);
+		spans = date.spans;
+		populate();
 	};
 
 	var onSpanSaved = function(data) {
-		populate(data.record.spans);
+		spans = data.record.spans;
+		populate();
 	};
 
 	var onSpanDeleted = function(data) {
-		populate(data.record.spans);
+		spans = data.record.spans;
+		populate();
 	};
 
-	var populate = function(spans) {
+	var registerSettings = function() {
+		App.settings.register([{
+			section:'General',
+			label:'Use decimal hours',
+			value:currentUseDecimalValue(),
+			type:'boolean',
+			callback:onSettingChange
+		}]);
+	};
+
+	var currentUseDecimalValue = function() {
+		var result = localStorage.getItem('use_decimal_hours');
+		return result == null ? true : JSON.parse(result);
+	};
+
+	var onSettingChange = function(newValue) {
+		localStorage.setItem('use_decimal_hours', newValue);
+		itemBuilder.setUseDecimal(newValue);
+		populate();
+	};
+
+	var populate = function() {
 		var summaryData = dataBuilder.build(spans);
 		if (Object.keys(summaryData).length) {
 			noContentContainer.hide();
 			listEl.empty().show();
-			jQuery.each(summaryData, addProject);
+			jQuery.each(summaryData, itemBuilder.build);
 		} else {
 			noContentContainer.show();
 			listEl.hide();
 		}
-	};
-
-	var addProject = function(key, project) {
-		var itemContainer = jQuery(itemTemplate)
-			.appendTo(listEl);
-
-		itemContainer.find('.project').text(project.label);
-		itemContainer.find('.time').text(formatTime(project.time));
-		
-		itemContainer.find('.hours .value').text(formatHours(project.time));
-		itemContainer.find('.hours .copy')
-			.click(copy)
-			.data('copy', formatHours(project.time));
-		
-		var tasksContainer = itemContainer.find('ul');
-		jQuery.each(project.tasks, function(index, task) {
-			jQuery('<li>')
-				.appendTo(tasksContainer)
-				.text(task);
-		});
-
-		if (project.tasks.length) {
-			var li = jQuery(copyTemplate)
-				.appendTo(tasksContainer)
-				.click(copy)
-				.data('copy', project.tasks.join('\n'));			
-		}
-	};
-
-	var formatTime = function(minutes) {
-		var hours = parseInt(minutes/60);
-		var remainder = Math.ceil(minutes%60);
-		remainder = padder.twoDigit(remainder);
-		return hours + ':' + remainder;
-	};
-	
-	var formatHours = function(minutes) {
-		return round(minutes/60, 2);
-	};
-	
-	var round = function(number, precision) {
-		var factor = Math.pow(10, precision);
-		var tempNumber = number * factor;
-		var roundedTempNumber = Math.round(tempNumber);
-		return roundedTempNumber / factor;
-	};
-
-	var copy = function() {
-		var text = jQuery(this).data('copy');
-		copier.copy(text);
 	};
 
 	init();
