@@ -178,9 +178,3 @@ section>header {
 	border-left: 1px solid hsl(0, 0%, 90%);
 	border-right: 1px solid hsl(0, 0%, 90%);
 }
-#SpanSummary {
-	display: inline-block;
-}
-#DateSelector {
-	margin-top: 0.5em;
-}

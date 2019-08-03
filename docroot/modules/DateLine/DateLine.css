@@ -4,6 +4,7 @@
 #DateLine h1 {
   display: inline-block;
 	font-size: 2em;
+  margin-right:0.25em;
 }
 #DateLine.today h1 {
 	color:hsl(213, 51%, 49%);
@@ -12,4 +13,5 @@
   display: inline-block;
 	font-size: 1.3em;
 	color:hsl(0, 0%, 75%);
+  margin-right:0.25em;
 }

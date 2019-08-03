@@ -38,10 +38,10 @@ var DateLine = function() {
 
 	var onDateChanged = function(data) {
 		date = timeUtil.parseUtcYmd(data.date);
+		month = parseInt(date.getUTCMonth()) +1;
 
 		dateContainer.text(
-			months[date.getUTCMonth()] + ' ' +
-			date.getUTCDate());
+			month + '/' + date.getUTCDate());
 
 		dayOfWeekContainer.text(days[date.getUTCDay()]);
 
