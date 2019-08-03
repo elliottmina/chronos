@@ -5,6 +5,7 @@ var SpanCreatorStateSetter = function(
 	taskList,
 	saveButtonText,
 	saveAndRepeatButton,
+	editingIndicator,
 	timeUtil) {
 
 	return {
@@ -16,6 +17,7 @@ var SpanCreatorStateSetter = function(
 			saveAndRepeatButton.show();
 			projectSuggestor.clear();
 			projectSuggestor.focus();
+			editingIndicator.hide();
 		},
 		edit:function(span) {
 			startTimeField.setTime(span.start);
@@ -24,6 +26,7 @@ var SpanCreatorStateSetter = function(
 			taskList.setTasks(span.tasks);
 			saveButtonText.text('Save');
 			saveAndRepeatButton.hide();
+			editingIndicator.show();
 		},
 		repeat:function(span) {
 			startTimeField.now();
@@ -32,6 +35,7 @@ var SpanCreatorStateSetter = function(
 			taskList.setTasks(span.tasks);
 			saveButtonText.text('Create');
 			saveAndRepeatButton.show();
+			editingIndicator.hide();
 			finishTimeField.focus();
 		},
 		restore:function(span) {
@@ -41,6 +45,7 @@ var SpanCreatorStateSetter = function(
 				finishTimeField.setTime(span.finish);
 			projectSuggestor.set(span.project);
 			taskList.setTasks(span.tasks);
+			editingIndicator.hide();
 		}
 	};
 };

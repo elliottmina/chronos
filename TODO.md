@@ -4,8 +4,8 @@
 
 ## Backlog
 
-* Make decimal or minute display configuration based
 * Make it more obvious when you are editing a span.
+* Make decimal or minute display configuration based
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * Allow repeat of summary
 * copy button for time
@@ -36,3 +36,4 @@
 * Goal hours per day, and hours per week are configurable.
 * Fixed bug that sometimes caused suggestions to not populate when clicked.
 * Changed date navigation keys to square brackets, so text can be selected with keyboard controls.
+* Made it more obvious when you are editing a previous span.

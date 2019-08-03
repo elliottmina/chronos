@@ -12,6 +12,7 @@ var SpanCreator = function() {
 	var record;
 	var activeSpan;
 	var saveAndRepeatButton;
+	var editingIndicator;
 	var stateSetter;
 	var spanAssembler;
 	var wipSaver;
@@ -33,6 +34,7 @@ var SpanCreator = function() {
 		topContainer = jQuery('#SpanCreator');
 		topContainer.html(SpanCreatorTemplate);
 		saveAndRepeatButton = topContainer.find('.duplicate');
+		editingIndicator = topContainer.find('.editing_indicator');
 	};
 
 	var build = function() {
@@ -75,6 +77,7 @@ var SpanCreator = function() {
 			taskList,
 			topContainer.find('.save .text'),
 			saveAndRepeatButton,
+			editingIndicator,
 			timeUtil);
 
 		spanAssembler = new SpanCreatorSpanAssembler(

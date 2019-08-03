@@ -41,6 +41,9 @@ var SpanCreatorTemplate = `
 				<i class="far fa-repeat"></i>
 				Create + repeat
 			</div>
+			<span class="editing_indicator">
+				<span class="far fa-pencil"></span> Editing
+			</span>
 		</div>
 	</section>
 `;
