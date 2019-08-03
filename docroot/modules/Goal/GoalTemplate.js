@@ -1,4 +1,4 @@
-var DailyGoalTemplate = `
+var GoalTemplate = `
 	<div class="total">
 		<span class="amount"></span>
 		<span class="unit">hours</span>

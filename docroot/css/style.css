@@ -159,6 +159,16 @@ section>header {
 }
 
 /* POS */
+#body {
+	display: flex;
+}
+#main {
+	flex:1 1 40em;
+}
+#metrics {
+	flex:0 0 20em;
+	background-color: grey;
+}
 #Settings>.mini_button {
 	position: fixed;
 	bottom: 0;
@@ -170,11 +180,6 @@ section>header {
 }
 #SpanSummary {
 	display: inline-block;
-}
-#DailyGoal {
-	position: absolute;
-	top:0;
-	right:0;
 }
 #DateSelector {
 	margin-top: 0.5em;

@@ -4,21 +4,20 @@
 
 ## Backlog
 
-* Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * Allow repeat of summary
-* Tasks
-  * Edit tasks
-  * Suggest tasks
+* Periodically check if today is still today
 * Metrics
   * Show volume per project/sub project for day, week, month, quarter year
     * sub projects
       * Perhaps just configurable delimiters (|:/.][)
   * Track time elapsed (start of first entry vs end of last entry) vs time worked
-  * Goal section to display daily and weekly goals.
-* Avatar with words of encouragement?  Also coach Z.
 * Sound no longer plays
-* Don't play goal animation on page load
-* Reverse order of spans
+* Goals
+  * Goal section to display daily and weekly goals.
+  * Don't play goal animation on page load
+  * Avatar with words of encouragement?  Also coach Z.
+* Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
+* New colors
 
 ## Future
 

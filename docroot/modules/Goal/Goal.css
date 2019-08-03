@@ -1,45 +1,45 @@
-#DailyGoal {
+#Goal {
 	padding:1em;
 	text-align: right;
 }
 /* text */
-#DailyGoal .total {
+#Goal .total {
 	margin-bottom: 1em;
 	display: inline-block;
 	margin-right: 1em;
 }
-#DailyGoal .total .amount {
+#Goal .total .amount {
 	font-size: 2.5em;
 }
-#DailyGoal .total .unit {
+#Goal .total .unit {
 	font-size: 0.9em;
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 0.5em;
 }
-#DailyGoal .remaining {
+#Goal .remaining {
 	font-size: 0.8em;
 }
 /* rockets */
-#DailyGoal .fa-rocket,
-#DailyGoal .fa-hourglass {
+#Goal .fa-rocket,
+#Goal .fa-hourglass {
 	position: absolute;
 	left:0;
 	top:0;
 }
-#DailyGoal .fa-rocket {
+#Goal .fa-rocket {
 	transform: rotate(45deg);
 }
-#DailyGoal .fa-hourglass {
+#Goal .fa-hourglass {
 	color:hsl(111, 53%, 54%);
 }
 /* progress */
-#DailyGoal .progress_wrapper {
+#Goal .progress_wrapper {
 	position: relative;
 	text-align: left;
 	display: inline-block;
 }
-#DailyGoal .progress_outer {
+#Goal .progress_outer {
 	display: inline-block;
 	position: relative;
 	height:3em;
@@ -48,13 +48,13 @@
 	border:1px solid hsl(106, 100%, 24%);
 	background-color:hsl(106, 100%, 92%);
 }
-#DailyGoal .progress_overage,
-#DailyGoal .progress_inner {
+#Goal .progress_overage,
+#Goal .progress_inner {
 	display: inline-block;
 	height:100%;
 	border-radius: 4px;
 }
-#DailyGoal .progress_inner {
+#Goal .progress_inner {
 	box-sizing: border-box;
 	border-top:1px solid hsl(106, 100%, 24%);
 	border-right:1px solid hsl(106, 100%, 24%);
@@ -62,7 +62,7 @@
 	background-color: hsl(111, 53%, 54%);
 	box-shadow:2px 0 4px 0 hsla(0, 0%, 50%, 0.4)
 }
-#DailyGoal .progress_overage {
+#Goal .progress_overage {
 	background-color: hsl(60, 100%, 50%);
 	position: absolute;
 	height:100%;
@@ -71,7 +71,7 @@
 	top:0;
 	left:0;
 }
-#DailyGoal .progress_percent {
+#Goal .progress_percent {
 	position: absolute;
 	bottom:0.75em;
 	right:0.5em;

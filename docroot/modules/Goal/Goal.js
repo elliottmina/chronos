@@ -3,7 +3,6 @@ var Goal = function() {
 	var goal = 8;
 	var defaultHoursPerDay = 8;
 	var defaultHoursPerWeek = 40;
-	var rocketLauncher;
 	
 	var init = function() {
 		build();
@@ -13,13 +12,7 @@ var Goal = function() {
 
 	var build = function() {
 		var renderTo = jQuery('#DailyGoal');
-		renderTo.html(DailyGoalTemplate);
-		
-		rocketLauncher = new DailyGoalRocketLauncher(
-			new DailyGoalProgressBar(goal, renderTo),
-			new DailyGoalText(goal, renderTo),
-			renderTo.find('.progress_outer'));
-		
+		renderTo.html(GoalTemplate);
 	};
 
 	var addBehavior = function() {
@@ -37,13 +30,12 @@ var Goal = function() {
 	};
 
 	var onDateChanged = function(record) {
-		rocketLauncher.reset();
 		updateProgress(record.spans);
 	};
 
 	var updateProgress = function(spans) {
 		var hours = getHoursFromSpans(spans);
-		rocketLauncher.update(hours);
+		// rocketLauncher.update(hours);
 	};
 
 	var getHoursFromSpans = function(spans) {
