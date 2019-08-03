@@ -4,11 +4,11 @@
 
 ## Backlog
 
-* Make it more obvious when you are editing a span.
+* copy button for time
+* Move today's items to the top
 * Make decimal or minute display configuration based
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * Allow repeat of summary
-* copy button for time
 * Tasks
   * Edit tasks
   * Suggest tasks
@@ -19,7 +19,6 @@
   * Track time elapsed (start of first entry vs end of last entry) vs time worked
   * Goal section to display daily and weekly goals.
 * Avatar with words of encouragement?  Also coach Z.
-* Move today's items to the top
 * Sound no longer plays
 
 ## Future
@@ -37,3 +36,4 @@
 * Fixed bug that sometimes caused suggestions to not populate when clicked.
 * Changed date navigation keys to square brackets, so text can be selected with keyboard controls.
 * Made it more obvious when you are editing a previous span.
+* Moved today's projects to top of list.

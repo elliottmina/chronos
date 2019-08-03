@@ -56,6 +56,7 @@ var SpanCreatorProjectSuggestor = function(
 		todaysProjects = todaysProjectBuilder.build();
 		projectsContainer.empty();
 		jQuery.each(suggestions, populateSuggestion);
+		reorder();
 		selectFirst();
 	};
 
@@ -71,6 +72,12 @@ var SpanCreatorProjectSuggestor = function(
 			jQuery('<i class="far fa-clock"></i>')
 				.appendTo(li);
 		}
+	};
+
+	var reorder = function() {
+		projectsContainer.find('li.today').each(function(index, el) {
+			projectsContainer.prepend(el);
+		});
 	};
 
 	var selectSuggestion = function() {
