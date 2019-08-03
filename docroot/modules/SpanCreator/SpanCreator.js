@@ -126,6 +126,7 @@ var SpanCreator = function() {
 
 		var span = spanAssembler.assemble();
 		span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
+		span.finish = calcFinishDate(span);
 
 		if (!validator.validate(span))
 			return false;
@@ -133,6 +134,17 @@ var SpanCreator = function() {
 		App.dispatcher.update('SPAN_SUBMITTED', span);
 		activeSpan = undefined;
 		return true;
+	};
+
+	var calcFinishDate = function(span) {
+		if (span.finish)
+			return span;
+
+    var now = new Date();
+    now.setFullYear(date.getFullYear());
+    now.setMonth(date.getMonth());
+    now.setDate(date.getDate());
+    return now;
 	};
 
 	var onDateChanged = function(data) {

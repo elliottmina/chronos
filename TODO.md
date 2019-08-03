@@ -5,18 +5,6 @@
 
 ## Backlog
 
-* TimeField.getTime was returning "now" whenever you read, and it is empty.  Move this to save processing.
-```js
-    var finish = finishTimeField.getTime();
-    if (finish)
-      return finish;
-    var now = new Date();
-    now.setFullYear(date.getFullYear());
-    now.setMonth(date.getMonth());
-    now.setDate(date.getDate());
-    return now;
-```
-
 * Make it more obvious when you are editing a span.
 * Make decimal or minute display configuration based
 * Configure hours/week, hours/day.
