@@ -8,7 +8,6 @@ var SpanCreator = function() {
 	var projectSuggestor;
 	var taskList;
 	var validator;
-	var date;
 	var record;
 	var activeSpan;
 	var saveAndRepeatButton;
@@ -123,6 +122,7 @@ var SpanCreator = function() {
 		commitPartialWork();
 
 		var span = spanAssembler.assemble();
+		console.log(span.start);
 		span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
 
 		if (validator.validate(span)) {
@@ -135,14 +135,13 @@ var SpanCreator = function() {
 	var commitPartialWork = function() {
 		taskList.addCurrent();
 
-		if (!finishTimeField.now()) {
+		if (!finishTimeField.getTime()) {
 			finishTimeField.now();
 		}
 	};
 
 	var onDateChanged = function(data) {
 		record = data;
-		date = timeUtil.parseUtcYmd(data.date);
 	};
 
 	var onEditSpanRequested = function(guid) {

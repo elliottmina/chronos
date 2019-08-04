@@ -1,14 +1,9 @@
 var GoalTemplate = `
-	<div class="total">
-		<span class="amount"></span>
-		<span class="unit">hours</span>
-		<div class="remaining"></div>
-	</div>
-	<div class="progress_wrapper">
-		<div class="progress_outer">
-			<div class="progress_inner"></div>
-			<div class="progress_percent"></div>
-			<div class="progress_overage"></div>
-		</div>
-	</div>
+<section class="doughnut" id="GoalToday">
+  <label>Day</label>
+  <canvas id="GoalTodayChart"></canvas>
+  <span class="hour_value"></span>
+  <span class="percent_value"></span>
+  <span class="hours_remaining"></span>
+</section>
 `;

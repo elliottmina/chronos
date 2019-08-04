@@ -4,6 +4,7 @@
 
 ## Backlog
 
+* delete Goal.css?
 * Allow repeat of summary
 * Periodically check if today is still today
 * Metrics

@@ -1,82 +1,37 @@
 #Goal {
-	padding:1em;
-	text-align: right;
 }
-/* text */
-#Goal .total {
-	margin-bottom: 1em;
-	display: inline-block;
-	margin-right: 1em;
+#Goal section>label {
 }
-#Goal .total .amount {
-	font-size: 2.5em;
-}
-#Goal .total .unit {
-	font-size: 0.9em;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 0.5em;
-}
-#Goal .remaining {
-	font-size: 0.8em;
-}
-/* rockets */
-#Goal .fa-rocket,
-#Goal .fa-hourglass {
-	position: absolute;
-	left:0;
-	top:0;
-}
-#Goal .fa-rocket {
-	transform: rotate(45deg);
-}
-#Goal .fa-hourglass {
-	color:hsl(111, 53%, 54%);
-}
-/* progress */
-#Goal .progress_wrapper {
+#Goal section {
 	position: relative;
-	text-align: left;
-	display: inline-block;
 }
-#Goal .progress_outer {
-	display: inline-block;
-	position: relative;
-	height:3em;
-	width:22em;
-	border-radius: 4px;
-	border:1px solid hsl(106, 100%, 24%);
-	background-color:hsl(106, 100%, 92%);
+#Goal canvas {
 }
-#Goal .progress_overage,
-#Goal .progress_inner {
-	display: inline-block;
-	height:100%;
-	border-radius: 4px;
-}
-#Goal .progress_inner {
-	box-sizing: border-box;
-	border-top:1px solid hsl(106, 100%, 24%);
-	border-right:1px solid hsl(106, 100%, 24%);
-	border-bottom:1px solid hsl(106, 100%, 24%);
-	background-color: hsl(111, 53%, 54%);
-	box-shadow:2px 0 4px 0 hsla(0, 0%, 50%, 0.4)
-}
-#Goal .progress_overage {
-	background-color: hsl(60, 100%, 50%);
+#Goal section.doughnut .hour_value {
 	position: absolute;
-	height:100%;
-	width: 100%;
-	opacity: 0;
-	top:0;
-	left:0;
+	top:2.5em;
+	left:40%;
+	font-size:2em;
 }
-#Goal .progress_percent {
+#Goal section.doughnut .hour_value:after {
+	content:' hr';
+	font-size:0.5em;
+}
+#Goal section.doughnut .percent_value {
 	position: absolute;
-	bottom:0.75em;
-	right:0.5em;
-	padding-left:0.25em;
+	top:7.5em;
+	left:45%;
+	font-size:1em;
 }
-
-
-
+#Goal section.doughnut .percent_value:after {
+	content:'%';
+}
+#Goal section.doughnut .hours_remaining {
+	font-size:0.8em;
+	position: absolute;
+	top:14em;
+	left:30%;
+}
+#Goal section.doughnut .hours_remaining:after {
+	content:' hours remaining';
+}

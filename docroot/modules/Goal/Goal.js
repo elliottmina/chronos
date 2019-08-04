@@ -1,18 +1,57 @@
 var Goal = function() {
 
-	var goal = 8;
 	var defaultHoursPerDay = 8;
 	var defaultHoursPerWeek = 40;
+	var hoursPerDay;
+	var hoursPerWeek;
+	var chart;
+	var hourField;
+	var percentField;
+	var hoursRemainingField;
 	
 	var init = function() {
+		calcInitialHoursPerDay();
+		calcInitialHoursPerWeek();
+		Chart.platform.disableCSSInjection = true;
+		setTimeout(function() {
+			chart.options.animation.duration = 500;
+		}, 3000);
 		build();
+		gatherComponents();
 		addBehavior();
 		registerSettings();
 	};
 
 	var build = function() {
-		var renderTo = jQuery('#DailyGoal');
-		renderTo.html(GoalTemplate);
+		jQuery('#Goal').html(GoalTemplate);
+		chart = new Chart('GoalTodayChart',{
+			type:'pie',
+			options:{
+				responsive:true,
+				cutoutPercentage:90,
+				animation:{
+					duration:0,
+					animateRotate:false
+				},
+				tooltips:{
+					enabled:false
+				}
+			},
+			data:{
+				datasets:[{
+					data:[70, 30],
+					backgroundColor:['green', 'transparent'],
+					hoverBackgroundColor:['green', 'transparent'],
+					borderWidth:0
+				}]
+			}
+		});
+	};
+
+	var gatherComponents = function() {
+		hourField = jQuery('#GoalToday .hour_value');
+		percentField = jQuery('#GoalToday .percent_value');
+		hoursRemainingField = jQuery('#GoalToday .hours_remaining');
 	};
 
 	var addBehavior = function() {
@@ -30,12 +69,25 @@ var Goal = function() {
 	};
 
 	var onDateChanged = function(record) {
+		console.log(record);
 		updateProgress(record.spans);
 	};
 
 	var updateProgress = function(spans) {
 		var hours = getHoursFromSpans(spans);
-		// rocketLauncher.update(hours);
+		var hoursRounded = Number.parseFloat(hours).toFixed(2);
+		var hoursRemaining = Number.parseFloat(hoursPerDay - hours).toFixed(2);
+
+		var percent = Math.round((hours/hoursPerDay)*100);
+		if (percent > 100)
+			percent = 100;
+		chart.data.datasets[0].data = [
+			percent, 100-percent
+		];
+		chart.update();
+		hourField.text(hoursRounded);
+		percentField.text(percent);
+		hoursRemainingField.text(hoursRemaining);
 	};
 
 	var getHoursFromSpans = function(spans) {
@@ -47,39 +99,41 @@ var Goal = function() {
 		return totalMillis/1000/60/60;
 	};
 
-	var getHoursPerDay = function() {
+	var calcInitialHoursPerDay = function() {
 		var savedValue = parseInt(localStorage.getItem('goal_hours_day'));
 		if (isNaN(savedValue))
-			return defaultHoursPerDay;
-		else return savedValue;
+			hoursPerDay = defaultHoursPerDay;
+		hoursPerDay = savedValue;
 	};
 
-	var getHoursPerWeek = function() {
+	var calcInitialHoursPerWeek = function() {
 		var savedValue = parseInt(localStorage.getItem('goal_hours_week'));
 		if (isNaN(savedValue))
-			return defaultHoursPerWeek;
-		else return savedValue;
+			hoursPerWeek = defaultHoursPerWeek;
+		hoursPerWeek = savedValue;
 	};
 
 	var onHoursPerDayChange = function(newValue) {
 		localStorage.setItem('goal_hours_day', newValue);
+		hoursPerDay = newValue;
 	};
 
 	var onHoursPerWeekChange = function(newValue) {
 		localStorage.setItem('goal_hours_week', newValue);
+		hoursPerWeek = newValue;
 	};
 
 	var registerSettings = function() {
 		App.settings.register([{
 			section:'Goal',
 			label:'Hours per day',
-			value:getHoursPerDay(),
+			value:hoursPerDay,
 			type:'integer',
 			callback:onHoursPerDayChange
 		},{
 			section:'Goal',
 			label:'Hours per week',
-			value:getHoursPerWeek(),
+			value:hoursPerWeek,
 			type:'integer',
 			callback:onHoursPerWeekChange
 		}]);

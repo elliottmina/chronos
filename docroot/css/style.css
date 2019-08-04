@@ -166,8 +166,9 @@ section>header {
 	flex:1 1 40em;
 }
 #metrics {
-	flex:0 0 20em;
-	background-color: grey;
+	padding:1em;
+	flex:0 1 18em;
+	background-color: white;
 }
 #Settings>.mini_button {
 	position: fixed;
