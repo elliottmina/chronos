@@ -4,8 +4,12 @@
 
 ## Backlog
 
+* repeat task wtih 3 items, remove the first two tasks, repeat and save
+  -> First task is retained
+* SVG icons instead of font? 
 * delete Goal.css?
 * Allow repeat of summary
+* filter span list
 * Periodically check if today is still today
 * Metrics
   * Show volume per project/sub project for day, week, month, quarter year

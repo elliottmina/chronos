@@ -4,54 +4,45 @@ var Goal = function() {
 	var defaultHoursPerWeek = 40;
 	var hoursPerDay;
 	var hoursPerWeek;
-	var chart;
-	var hourField;
-	var percentField;
-	var hoursRemainingField;
-	
+	var dailyChart;
+	var weeklyChart;
+	var dailyContainer;
+	var weeklyContainer;
+	var weeklyCalculator;
+	var durationCalculator;
+	var chartBuilder;
+
 	var init = function() {
 		calcInitialHoursPerDay();
 		calcInitialHoursPerWeek();
+		buildDependencies();
 		Chart.platform.disableCSSInjection = true;
-		setTimeout(function() {
-			chart.options.animation.duration = 500;
-		}, 3000);
 		build();
 		gatherComponents();
 		addBehavior();
 		registerSettings();
 	};
 
+	var buildDependencies = function() {
+		durationCalculator = new GoalSpanDurationCalculator();
+		weeklyCalculator = new GoalWeeklyCalculator(durationCalculator);
+		chartBuilder = new GoalPieChartBuilder();
+	};
+
 	var build = function() {
 		jQuery('#Goal').html(GoalTemplate);
-		chart = new Chart('GoalTodayChart',{
-			type:'pie',
-			options:{
-				responsive:true,
-				cutoutPercentage:90,
-				animation:{
-					duration:0,
-					animateRotate:false
-				},
-				tooltips:{
-					enabled:false
-				}
-			},
-			data:{
-				datasets:[{
-					data:[70, 30],
-					backgroundColor:['green', 'transparent'],
-					hoverBackgroundColor:['green', 'transparent'],
-					borderWidth:0
-				}]
-			}
-		});
+
+		dailyChart = chartBuilder.build('GoalTodayChart', 'green');
+		setTimeout(function() {
+			dailyChart.options.animation.duration = 500;
+		}, 3000);
+
+		weeklyChart = chartBuilder.build('GoalWeeklyChart', 'blue');
 	};
 
 	var gatherComponents = function() {
-		hourField = jQuery('#GoalToday .hour_value');
-		percentField = jQuery('#GoalToday .percent_value');
-		hoursRemainingField = jQuery('#GoalToday .hours_remaining');
+		dailyContainer = jQuery('#GoalToday');
+		weeklyContainer = jQuery('#GoalWeekly');
 	};
 
 	var addBehavior = function() {
@@ -69,34 +60,43 @@ var Goal = function() {
 	};
 
 	var onDateChanged = function(record) {
-		console.log(record);
 		updateProgress(record.spans);
 	};
 
 	var updateProgress = function(spans) {
-		var hours = getHoursFromSpans(spans);
-		var hoursRounded = Number.parseFloat(hours).toFixed(2);
-		var hoursRemaining = Number.parseFloat(hoursPerDay - hours).toFixed(2);
+		var dailyHours = durationCalculator.calcHours(spans);
+		updateChart(dailyChart, dailyHours, hoursPerDay);
+		updateChartNumbers(dailyContainer, dailyHours, hoursPerDay);
 
-		var percent = Math.round((hours/hoursPerDay)*100);
-		if (percent > 100)
-			percent = 100;
+		var weeklyHours = weeklyCalculator.getTotal();
+		updateChart(weeklyChart, weeklyHours, hoursPerWeek);
+		updateChartNumbers(weeklyContainer, weeklyHours, hoursPerWeek);
+	};
+
+	var updateChartNumbers = function(container, value, goal) {
+		var hours = Number.parseFloat(value).toFixed(2);
+		var remaining = Number.parseFloat(goal - hours).toFixed(2);
+		var percent = Math.round((value/goal)*100);
+
+		container.find('.hour_value').text(hours);
+		container.find('.percent_value').text(percent);
+		container.find('.hours_remaining').text(remaining);
+	};
+
+	var updateChart = function(chart, value, goal) {
+		var percent = calcMaxPercent(value/goal);
+
 		chart.data.datasets[0].data = [
 			percent, 100-percent
 		];
 		chart.update();
-		hourField.text(hoursRounded);
-		percentField.text(percent);
-		hoursRemainingField.text(hoursRemaining);
 	};
 
-	var getHoursFromSpans = function(spans) {
-		var totalMillis = 0;
-		jQuery.each(spans, function(key, span) {
-			totalMillis += new Date(span.finish) - new Date(span.start);
-		});
-
-		return totalMillis/1000/60/60;
+	var calcMaxPercent = function(ratio) {
+		var percent = Math.round(ratio*100);
+		if (percent > 100)
+			percent = 100;
+		return percent;
 	};
 
 	var calcInitialHoursPerDay = function() {

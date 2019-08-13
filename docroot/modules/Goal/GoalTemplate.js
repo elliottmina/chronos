@@ -6,4 +6,11 @@ var GoalTemplate = `
   <span class="percent_value"></span>
   <span class="hours_remaining"></span>
 </section>
+<section class="doughnut" id="GoalWeekly">
+  <label>Week</label>
+  <canvas id="GoalWeeklyChart"></canvas>
+  <span class="hour_value"></span>
+  <span class="percent_value"></span>
+  <span class="hours_remaining"></span>
+</section>
 `;
