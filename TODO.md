@@ -4,9 +4,13 @@
 
 ## Backlog
 
+* Filter spans and summaries
+* ensure date nav buttons don't move
+* generate deterministic icons or abbreviations for projects
 * repeat task wtih 3 items, remove the first two tasks, repeat and save
   -> First task is retained
-* SVG icons instead of font? 
+* SVG icons instead of font?
+* Sort project summary 
 * delete Goal.css?
 * Allow repeat of summary
 * filter span list
@@ -18,8 +22,6 @@
   * Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Sound no longer plays
 * Goals
-  * Goal section to display daily and weekly goals.
-  * Don't play goal animation on page load
   * Avatar with words of encouragement?  Also coach Z.
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 * New colors

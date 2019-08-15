@@ -76,6 +76,8 @@ var Goal = function() {
 	var updateChartNumbers = function(container, value, goal) {
 		var hours = Number.parseFloat(value).toFixed(2);
 		var remaining = Number.parseFloat(goal - hours).toFixed(2);
+		if (remaining < 0)
+			remaining = 0;
 		var percent = Math.round((value/goal)*100);
 
 		container.find('.hour_value').text(hours);
