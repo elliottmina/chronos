@@ -20,8 +20,6 @@ var ProjectSummaryItemBuilder = function(listEl, padder) {
       </span>
     </li>`;
 
-  var useDecimal;
-
   var addProject = function(key, project) {
     var itemContainer = jQuery(itemTemplate)
       .appendTo(listEl);
@@ -50,7 +48,7 @@ var ProjectSummaryItemBuilder = function(listEl, padder) {
   };
 
   var formatTime = function(minutes) {
-    if (useDecimal)
+    if (App.globalSettings.useDecimalHours)
       return formatDecimal(minutes);
     return formatMinutes(minutes);
   };
@@ -79,10 +77,7 @@ var ProjectSummaryItemBuilder = function(listEl, padder) {
   };
 
   return {
-    build:addProject,
-    setUseDecimal:function(newValue) {
-      useDecimal = newValue;
-    }
+    build:addProject
   };
   
 };

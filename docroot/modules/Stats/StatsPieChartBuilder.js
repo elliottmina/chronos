@@ -15,8 +15,7 @@ var StatsPieChartBuilder = function() {
             animateRotate:false
           },
           legend:{
-            position:'bottom',
-            display:true
+            display:false
           }
         },
         data:{

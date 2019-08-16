@@ -5,6 +5,7 @@ var App = function() {
 			this.dispatcher = new Dispatcher();
 			this.persister = new LocalStoragePersister();
       this.settings = new Settings();
+      this.globalSettings = new GlobalSettings();
 			new ModuleLoader().load(moduleNames);
 		}
 	};

@@ -26,10 +26,8 @@ var ProjectSummary = function() {
 		copier = new Copier();
 		build();
 		addBehavior();
-		registerSettings();
 
 		itemBuilder = new ProjectSummaryItemBuilder(listEl, new Padder());
-		itemBuilder.setUseDecimal(currentUseDecimalValue());
 	};
 
 	var build = function() {
@@ -43,6 +41,7 @@ var ProjectSummary = function() {
 		App.dispatcher.register('DATE_CHANGED', onDateChanged);
 		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
 		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
+		App.dispatcher.register('USE_DECIMAL_HOURS_CHANGE', populate);
 	};
 
 	var onDateChanged = function(date) {
@@ -57,27 +56,6 @@ var ProjectSummary = function() {
 
 	var onSpanDeleted = function(data) {
 		spans = data.record.spans;
-		populate();
-	};
-
-	var registerSettings = function() {
-		App.settings.register([{
-			section:'General',
-			label:'Use decimal hours',
-			value:currentUseDecimalValue(),
-			type:'boolean',
-			callback:onSettingChange
-		}]);
-	};
-
-	var currentUseDecimalValue = function() {
-		var result = localStorage.getItem('use_decimal_hours');
-		return result == null ? true : JSON.parse(result);
-	};
-
-	var onSettingChange = function(newValue) {
-		localStorage.setItem('use_decimal_hours', newValue);
-		itemBuilder.setUseDecimal(newValue);
 		populate();
 	};
 

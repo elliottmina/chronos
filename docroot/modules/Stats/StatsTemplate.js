@@ -11,5 +11,4 @@ var StatsTemplate = `
 <section class="pie" id="StatsWeeklyRoot">
   <canvas id="StatusWeeklyRootChart" height="200" width="400"></canvas>
 </section>
-
 `;
