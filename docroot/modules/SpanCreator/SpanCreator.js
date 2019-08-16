@@ -96,13 +96,34 @@ var SpanCreator = function() {
   };
 
   var save = function() {
-    if (timeUtil.getYmd(new Date()) != record.date)
-      confirmPreviousDate();
-    else 
-      submit();
+    preSubmit(resetCleanup);
   };
 
-  var confirmPreviousDate = function() {
+  var saveAndRepeat = function() {
+    preSubmit(repeatCleanup);
+  };
+
+  var resetCleanup = function() {
+    setTimeout(stateSetter.reset, 100);
+  };
+
+  var repeatCleanup = function() {
+    startTimeField.now();
+    finishTimeField.clear();
+  };
+
+  var preSubmit = function(cleanupFunc) {
+    if (isToday())
+      submit(cleanupFunc);
+    else 
+      confirmPreviousDate(cleanupFunc);
+  };
+
+  var isToday = function() {
+    return timeUtil.getYmd(new Date()) == record.date;
+  };
+
+  var confirmPreviousDate = function(cleanupFunc) {
     new ModalDialogue({
       message:'This record is not for today.  Is that cool?',
       buttons:[{
@@ -113,22 +134,26 @@ var SpanCreator = function() {
         label:'Yeah man, it\'s totally chill',
         role:'primary',
         autoClose:true,
-        callback:submit
+        callback:function() { submit(cleanupFunc); }
       }]
     });
   };
 
-  var submit = function() {
-    commitPartialWork();
+  var submit = function(cleanupFunc) {
+    var span = buildSpan();
+    if (!validator.validate(span))
+      return;
 
+    App.dispatcher.publish('SPAN_SUBMITTED', span);
+    activeSpan = undefined;
+    cleanupFunc();
+  };
+
+  var buildSpan = function() {
+    commitPartialWork();
     var span = spanAssembler.assemble();
     span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
-
-    if (validator.validate(span)) {
-      App.dispatcher.publish('SPAN_SUBMITTED', span);
-      activeSpan = undefined;
-      setTimeout(stateSetter.reset, 100);
-    }
+    return span;
   };
 
   var commitPartialWork = function() {
@@ -150,12 +175,6 @@ var SpanCreator = function() {
 
   var onRepeatSpanRequested = function(guid) {
     stateSetter.repeat(record.spans[guid]);
-  };
-
-  var saveAndRepeat = function() {
-    submit();
-    startTimeField.now();
-    finishTimeField.clear();
   };
 
   var restoreWip = function() {

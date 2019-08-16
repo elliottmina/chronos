@@ -51,4 +51,5 @@
 * Date display periodically checks if you have changed days.
 * Added charts to show distribution of hours across projects.
 * Summary now sorts projects alphabetically.
-* Made project summary and span summary filterable
+* Made project summary and span summary filterable.
+* Fixed bug that didn't confirm save-and-repeat on previous/future dates.
