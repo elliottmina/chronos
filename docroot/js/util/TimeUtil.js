@@ -6,15 +6,17 @@ var TimeUtil = function() {
 		return new Date(date.getTime() + dayAdjustment*86400000);
 	};
 
+	var parseUtcYmd = function(ymd) {
+		var parts = ymd.split('-');
+		return new Date(Date.UTC(
+			parts[0],
+			parseInt(parts[1]) -1, 
+			parts[2],
+			0, 0, 0));
+	};
+
 	return {
-		parseUtcYmd:function(ymd) {
-			var parts = ymd.split('-');
-			return new Date(Date.UTC(
-				parts[0],
-				parseInt(parts[1]) -1, 
-				parts[2],
-				0, 0, 0));
-		},
+		parseUtcYmd:parseUtcYmd,
 		getYmd:function(date) {
 			return date.getFullYear() + '-' +
 				padder.twoDigit(date.getMonth()+1) + '-' +
@@ -48,6 +50,13 @@ var TimeUtil = function() {
 		},
 		isValidDate: function(d) {
 			return d instanceof Date && !isNaN(d);
+		},
+		getWeekStart:function(date) {
+	    var d = parseUtcYmd(date);
+	    if (d.getDay() != 6)
+	      d.setDate(d.getDate() - d.getDay());
+	    return d;
 		}
-	}	
+	};
+
 };

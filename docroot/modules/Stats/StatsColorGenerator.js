@@ -1,7 +1,15 @@
 var StatsColorGenerator = function() {
   
   var assignedColors = {};
-  var pallete = ['red', 'blue', 'green'];
+  var pallete = [
+    '#ffa600',
+    '#ff7c43',
+    '#f95d6a',
+    '#d45087',
+    '#a05195',
+    '#665191',
+    '#2f4b7c',
+    '#003f5c'];
   var palleteIndex = -1;
 
   var getColor = function(key) {

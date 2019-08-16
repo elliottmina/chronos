@@ -16,13 +16,6 @@ var GoalWeeklyCalculator = function(durationCalculator) {
     date = data.date;
   };
 
-  var calcWeekStart = function() {
-    var d = timeUtil.parseUtcYmd(date);
-    if (d.getDay() != 6)
-      d.setDate(d.getDate() - d.getDay());
-    return d;
-  };
-
   var extractTime = function(day) {
     var dayStr = timeUtil.getYmd(day);
     var day = App.persister.fetch(dayStr);
@@ -33,7 +26,7 @@ var GoalWeeklyCalculator = function(durationCalculator) {
 
   return {
     getTotal:function(){
-      var weekStart = calcWeekStart();
+      var weekStart = timeUtil.getWeekStart(date);
 
       var totalTime = extractTime(weekStart);
 
