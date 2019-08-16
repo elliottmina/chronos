@@ -8,7 +8,7 @@ var DateLine = function() {
   var dateContainer;
   var dayOfWeekContainer;
   var timeUtil;
-  var date;
+  var dateYmd;
 
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 
     'Thursday', 'Friday', 'Saturday'];
@@ -34,6 +34,7 @@ var DateLine = function() {
 
   var addBehavior = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+    setInterval(updateTodayTreatment, 1000*60*10);
   };
 
   var onDateChanged = function(data) {
@@ -44,12 +45,16 @@ var DateLine = function() {
       month + '/' + date.getUTCDate());
 
     dayOfWeekContainer.text(days[date.getUTCDay()]);
+    dateYmd = data.date;
+    updateTodayTreatment();
+  };
 
-    if (data.date == timeUtil.getYmd(new Date()))
+  var updateTodayTreatment = function() {
+    if (dateYmd == timeUtil.getYmd(new Date()))
       topContainer.addClass('today');
     else 
       topContainer.removeClass('today');
-  };
+  }
 
   init();
 

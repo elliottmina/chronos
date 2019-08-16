@@ -6,6 +6,7 @@
 
 * Filter spans and summaries
 * ensure date nav buttons don't move
+* Configuration to control stats charts (don't show root?)
 * generate deterministic icons or abbreviations for projects
 * repeat task wtih 3 items, remove the first two tasks, repeat and save
   -> First task is retained
@@ -37,10 +38,13 @@
 * Removed JSON and text summaries
 * Fixed issue where saving a span caused the first project to be selected.
 * App remembers your work-in-progress span, in case you refresh the browser.
+* Added hours per week goal.
 * Goal hours per day, and hours per week are configurable.
 * Fixed bug that sometimes caused suggestions to not populate when clicked.
 * Changed date navigation keys to square brackets, so text can be selected with keyboard controls.
 * Made it more obvious when you are editing a previous span.
-* Moved today's projects to top of list.
+* Moved today's projects to top of suggestion list.
 * Added copy button for time values.
 * Made hours display only decimal or minute values, based on configuration settings.
+* Date display periodically checks if you have changed days.
+* Added charts to show distribution of hours across projects.
