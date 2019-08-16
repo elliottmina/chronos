@@ -4,7 +4,8 @@
 
 ## Backlog
 
-* Filter spans and summaries
+* filter span list
+* More chart colors?
 * ensure date nav buttons don't move
 * Configuration to control stats charts (don't show root?)
 * generate deterministic icons or abbreviations for projects
@@ -13,7 +14,6 @@
 * SVG icons instead of font?
 * delete Goal.css?
 * Allow repeat of summary
-* filter span list
 * Metrics
   * Show volume per project/sub project for day, week, month, quarter year
     * sub projects
@@ -47,3 +47,4 @@
 * Date display periodically checks if you have changed days.
 * Added charts to show distribution of hours across projects.
 * Summary now sorts projects alphabetically.
+* Made project summary filterable
