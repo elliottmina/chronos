@@ -3,20 +3,22 @@ var SpanSummary = function() {
   var html = `
     <header>Spans</header>
     <div class="no_content_container">Nothing to see here.  Move along.</div>
-    <table>
-      <thead>
-        <tr>
-          <th class="start">Start</th>
-          <th class="finish">Finish</th>
-          <th class="project">Project</th>
-          <th class="tasks">Tasks</th>
-          <th class="hours">Hours</th>
-          <th class="time">Time</th>
-          <th class="actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>`;
+    <div class="content_container">
+      <table>
+        <thead>
+          <tr>
+            <th class="start">Start</th>
+            <th class="finish">Finish</th>
+            <th class="project">Project</th>
+            <th class="tasks">Tasks</th>
+            <th class="hours">Hours</th>
+            <th class="time">Time</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>`;
 
   var spanTemplate = `
     <tr>
