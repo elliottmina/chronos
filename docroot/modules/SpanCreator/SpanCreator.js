@@ -90,9 +90,9 @@ var SpanCreator = function() {
 
 	var addBehavior = function() {
 		saveAndRepeatButton.click(saveAndRepeat);
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('EDIT_SPAN_REQUESTED', onEditSpanRequested);
-		App.dispatcher.register('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('EDIT_SPAN_REQUESTED', onEditSpanRequested);
+		App.dispatcher.subscribe('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
 	};
 
 	var save = function() {
@@ -126,7 +126,7 @@ var SpanCreator = function() {
 		span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
 
 		if (validator.validate(span)) {
-			App.dispatcher.update('SPAN_SUBMITTED', span);
+			App.dispatcher.publish('SPAN_SUBMITTED', span);
 			activeSpan = undefined;
 			setTimeout(stateSetter.reset, 100);
 		}

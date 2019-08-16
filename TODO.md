@@ -4,7 +4,6 @@
 
 ## Backlog
 
-* Move decimal hour setting to global
 * Filter spans and summaries
 * ensure date nav buttons don't move
 * generate deterministic icons or abbreviations for projects

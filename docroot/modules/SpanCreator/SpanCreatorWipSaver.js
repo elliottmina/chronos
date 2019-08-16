@@ -5,7 +5,7 @@ var SpanCreatorWipSaver = function(spanAssembler) {
   };
 
   var addBehavior = function() {
-    App.dispatcher.register('SPAN_CHANGED', onSpanChanged);
+    App.dispatcher.subscribe('SPAN_CHANGED', onSpanChanged);
   };
 
   var onSpanChanged = function() {

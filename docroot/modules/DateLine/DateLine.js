@@ -33,7 +33,7 @@ var DateLine = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
 	};
 
 	var onDateChanged = function(data) {

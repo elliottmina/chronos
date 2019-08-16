@@ -38,10 +38,10 @@ var ProjectSummary = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
-		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
-		App.dispatcher.register('USE_DECIMAL_HOURS_CHANGE', populate);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
+		App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+		App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGE', populate);
 	};
 
 	var onDateChanged = function(date) {

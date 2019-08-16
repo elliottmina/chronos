@@ -60,9 +60,9 @@ var SpanSummary = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
-		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
+		App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
 	};
 
 	var onDateChanged = function(data) {
@@ -119,19 +119,19 @@ var SpanSummary = function() {
 	var editSpan = function() {
 		var el = jQuery(this);
 		var guid = el.data('guid');
-		App.dispatcher.update('EDIT_SPAN_REQUESTED', guid);
+		App.dispatcher.publish('EDIT_SPAN_REQUESTED', guid);
 		spansContainer.find('tr').removeClass('selected');
 		el.closest('tr').addClass('selected');
 	};
 
 	var deleteSpan = function() {
 		var guid = jQuery(this).data('guid');
-		App.dispatcher.update('DELETE_SPAN_REQUESTED', guid);
+		App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
 	};
 
 	var repeatSpan = function() {
 		var guid = jQuery(this).data('guid');
-		App.dispatcher.update('REPEAT_SPAN_REQUESTED', guid);
+		App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
 	};
 
 	var onSpanDeleted = function(data) {

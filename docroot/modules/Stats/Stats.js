@@ -34,9 +34,9 @@ var Stats = function() {
   };
 
   var addBehavior = function() {
-    App.dispatcher.register('DATE_CHANGED', onDateChanged);
-    App.dispatcher.register('SPAN_SAVED', updateCharts);
-    App.dispatcher.register('SPAN_DELETED', updateCharts);
+    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+    App.dispatcher.subscribe('SPAN_SAVED', updateCharts);
+    App.dispatcher.subscribe('SPAN_DELETED', updateCharts);
   };
 
   var onDateChanged = function(data) {

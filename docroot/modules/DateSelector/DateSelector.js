@@ -32,7 +32,7 @@ var DateSelector = function() {
 		topContainer.find('.picker_button').click(showDialogue);
 		topContainer.find('.previous').click(previous);
 		topContainer.find('.next').click(next);
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
 	};
 
 	var onDateChanged = function(data) {
@@ -40,11 +40,11 @@ var DateSelector = function() {
 	};
 
 	var next = function() {
-		App.dispatcher.update('DATE_SUBMITTED', timeUtil.getNewDayStr(date, 1));
+		App.dispatcher.publish('DATE_SUBMITTED', timeUtil.getNewDayStr(date, 1));
 	};
 
 	var previous = function() {
-		App.dispatcher.update('DATE_SUBMITTED', timeUtil.getNewDayStr(date, -1));
+		App.dispatcher.publish('DATE_SUBMITTED', timeUtil.getNewDayStr(date, -1));
 	};
 
 	var showDialogue = function() {
@@ -67,7 +67,7 @@ var DateSelector = function() {
 		var date = jQuery(this).val();
 		if (date) {
 			dialog.close();
-			App.dispatcher.update('DATE_SUBMITTED', date);
+			App.dispatcher.publish('DATE_SUBMITTED', date);
 		}
 	};
 

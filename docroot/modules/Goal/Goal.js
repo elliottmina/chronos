@@ -46,9 +46,9 @@ var Goal = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
-		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
+		App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
 	};
 
 	var onSpanSaved = function(data) {

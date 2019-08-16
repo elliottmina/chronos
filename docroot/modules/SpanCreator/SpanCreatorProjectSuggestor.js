@@ -25,7 +25,7 @@ var SpanCreatorProjectSuggestor = function(
 		projectInput.focus(show);
 		projectInput.blur(onBlur);
 		projectInput.keyup(publishChange);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
+		App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
 		new InputSizeAdjuster(projectInput);
 	};
 
@@ -182,7 +182,7 @@ var SpanCreatorProjectSuggestor = function(
 	};
 
 	var publishChange = function() {
-		App.dispatcher.update('SPAN_CHANGED');
+		App.dispatcher.publish('SPAN_CHANGED');
 	};
 
 	init();

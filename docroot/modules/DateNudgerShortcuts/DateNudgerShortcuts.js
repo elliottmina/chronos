@@ -17,7 +17,7 @@ var DateNudgerShortcuts = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
 		jQuery(document).keydown(onKeyDown);
 	};
 
@@ -31,7 +31,7 @@ var DateNudgerShortcuts = function() {
 			case '[':
 				e.stopPropagation();
 				e.preventDefault();
-				App.dispatcher.update(
+				App.dispatcher.publish(
 					'DATE_SUBMITTED', 
 					timeUtil.getNewDayStr(date, -1));
 				return;
@@ -39,7 +39,7 @@ var DateNudgerShortcuts = function() {
 			case ']':
 				e.stopPropagation();
 				e.preventDefault();
-				App.dispatcher.update(
+				App.dispatcher.publish(
 					'DATE_SUBMITTED', 
 					timeUtil.getNewDayStr(date, 1));
 				return;

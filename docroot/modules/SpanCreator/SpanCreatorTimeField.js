@@ -24,7 +24,7 @@ var SpanCreatorTimeField = function(
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
+		App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
 		timeEl
 			.keydown(onKeyDown)
 			.blur(onBlur)
@@ -94,7 +94,7 @@ var SpanCreatorTimeField = function(
 				break;
 		}
 
-		App.dispatcher.update('SPAN_CHANGED');
+		App.dispatcher.publish('SPAN_CHANGED');
 	};
 
 	var minuteUp = function(e) {
@@ -160,7 +160,7 @@ var SpanCreatorTimeField = function(
 			periodEl.text('PM');
 		else 
 			periodEl.text('AM');
-		App.dispatcher.update('SPAN_CHANGED');
+		App.dispatcher.publish('SPAN_CHANGED');
 	};
 
 	var checkForErrorOnCompletion = function() {
@@ -192,7 +192,7 @@ var SpanCreatorTimeField = function(
 	var now = function() {
 		setTime(new Date());
 		timeEl.focus();
-		App.dispatcher.update('SPAN_CHANGED');
+		App.dispatcher.publish('SPAN_CHANGED');
 	};
 
 	var getTimeFromElements = function() {

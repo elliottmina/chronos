@@ -63,7 +63,7 @@ var SpanCreatorTaskList = function(topContainer) {
 	};
 
 	var publishChange = function() {
-		App.dispatcher.update('SPAN_CHANGED');
+		App.dispatcher.publish('SPAN_CHANGED');
 	};
 
 	init();

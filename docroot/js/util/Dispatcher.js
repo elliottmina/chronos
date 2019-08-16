@@ -9,11 +9,11 @@ var Dispatcher = function() {
 	};
 
 	return {
-		register:function(eventName, callback) {
+		subscribe:function(eventName, callback) {
 			ensureKeyExists(eventName);
 			list[eventName].push(callback);
 		},
-		update:function(eventName, payload) {
+		publish:function(eventName, payload) {
 			ensureKeyExists(eventName);
 			jQuery.each(list[eventName], function(index, callback) {
 				callback(payload);

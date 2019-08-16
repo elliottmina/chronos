@@ -1,7 +1,7 @@
 var DeleteSpanDialogue = function() {
 
 	var init = function() {
-		App.dispatcher.register('DELETE_SPAN_REQUESTED', create);
+		App.dispatcher.subscribe('DELETE_SPAN_REQUESTED', create);
 	};
 
 	var create = function(guid) {
@@ -16,7 +16,7 @@ var DeleteSpanDialogue = function() {
 				role:'primary',
 				autoClose:true,
 				callback:function() {
-					App.dispatcher.update('DELETE_SPAN_SUBMITTED', guid);
+					App.dispatcher.publish('DELETE_SPAN_SUBMITTED', guid);
 				}
 			}]
 		});

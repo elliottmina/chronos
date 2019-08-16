@@ -13,15 +13,15 @@ var PersistenceMarshaller = function() {
 	};
 
 	var addBehavior = function() {
-		App.dispatcher.register('SPAN_SUBMITTED', onSpanSubmitted);
-		App.dispatcher.register('DATE_SUBMITTED', loadDate);
-		App.dispatcher.register('DELETE_SPAN_SUBMITTED', onDeleteSpanSubmitted);
+		App.dispatcher.subscribe('SPAN_SUBMITTED', onSpanSubmitted);
+		App.dispatcher.subscribe('DATE_SUBMITTED', loadDate);
+		App.dispatcher.subscribe('DELETE_SPAN_SUBMITTED', onDeleteSpanSubmitted);
 	};
 
 	var onSpanSubmitted = function(span) {
 		record.spans[span.guid] = span;
 		App.persister.put(record);
-		App.dispatcher.update('SPAN_SAVED', {
+		App.dispatcher.publish('SPAN_SAVED', {
 			span:span,
 			record:record}
 		);
@@ -31,7 +31,7 @@ var PersistenceMarshaller = function() {
 		var span = record.spans[guid];
 		delete(record.spans[guid]);
 		App.persister.put(record);
-		App.dispatcher.update('SPAN_DELETED', {
+		App.dispatcher.publish('SPAN_DELETED', {
 			span:span,
 			record:record}
 		);
@@ -39,7 +39,7 @@ var PersistenceMarshaller = function() {
 
 	var loadDate = function(dateStr) {
 		record = App.persister.fetch(dateStr);
-		App.dispatcher.update('DATE_CHANGED', record);
+		App.dispatcher.publish('DATE_CHANGED', record);
 	};
 
 	init();

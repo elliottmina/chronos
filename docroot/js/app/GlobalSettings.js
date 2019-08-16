@@ -24,7 +24,7 @@ var GlobalSettings = function() {
   var onDecimalHoursChange = function(newValue) {
     useDecimalHours = newValue;
     localStorage.setItem('use_decimal_hours', newValue);
-    App.dispatcher.update('USE_DECIMAL_HOURS_CHANGE');
+    App.dispatcher.publish('USE_DECIMAL_HOURS_CHANGE');
   };
 
   init();
