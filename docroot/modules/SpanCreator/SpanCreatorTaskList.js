@@ -49,7 +49,7 @@ var SpanCreatorTaskList = function(topContainer) {
 
   var removeItem = function() {
     var anchor = jQuery(this);
-    var taskText = anchor[0].nextSibling;
+    var taskText = anchor[0].nextSibling.textContent;
     tasks.splice(tasks.indexOf(taskText), 1);
     anchor.parent().remove();
     publishChange();
