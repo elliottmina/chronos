@@ -105,14 +105,16 @@ var Goal = function() {
     var savedValue = parseInt(localStorage.getItem('goal_hours_day'));
     if (isNaN(savedValue))
       hoursPerDay = defaultHoursPerDay;
-    hoursPerDay = savedValue;
+    else
+      hoursPerDay = savedValue;
   };
 
   var calcInitialHoursPerWeek = function() {
     var savedValue = parseInt(localStorage.getItem('goal_hours_week'));
     if (isNaN(savedValue))
       hoursPerWeek = defaultHoursPerWeek;
-    hoursPerWeek = savedValue;
+    else
+      hoursPerWeek = savedValue;
   };
 
   var onHoursPerDayChange = function(newValue) {

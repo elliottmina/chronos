@@ -122,7 +122,6 @@ var SpanCreator = function() {
     commitPartialWork();
 
     var span = spanAssembler.assemble();
-    console.log(span.start);
     span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
 
     if (validator.validate(span)) {
