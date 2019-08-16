@@ -19,7 +19,7 @@ var Stats = function() {
 
   var buildDependencies = function() {
     chartBuilder = new StatsPieChartBuilder();
-    statsCalculator = new StatsDataCalculator();
+    statsCalculator = new StatsDataCalculator(new RegEx());
     colorGenerator = new StatsColorGenerator();
     timeUtil = new TimeUtil();
   };
@@ -30,13 +30,18 @@ var Stats = function() {
     dailyRootChart = chartBuilder.build('StatusTodayRootChart');
     weeklyChart = chartBuilder.build('StatusWeeklyChart');
     weeklyRootChart = chartBuilder.build('StatusWeeklyRootChart');
-
   };
 
   var addBehavior = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', updateCharts);
     App.dispatcher.subscribe('SPAN_DELETED', updateCharts);
+    App.dispatcher.subscribe('PROJECT_DELIMITERS_CHANGED', onProjectDelimiterChanged);
+  };
+
+  var onProjectDelimiterChanged = function() {
+    statsCalculator.buildMatcher();
+    updateCharts();
   };
 
   var onDateChanged = function(data) {

@@ -48,7 +48,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   };
 
   var formatTime = function(minutes) {
-    if (App.globalSettings.useDecimalHours)
+    if (App.globalSettings.use_decimal_hours)
       return formatDecimal(minutes);
     return formatMinutes(minutes);
   };

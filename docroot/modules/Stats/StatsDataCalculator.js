@@ -1,4 +1,18 @@
-var StatsDataCalculator = function() {
+var StatsDataCalculator = function(regEx) {
+
+  var re;
+
+  var init = function() {
+    buildMatcher();
+  };
+
+  var buildMatcher = function() {
+    var chars = App.globalSettings.project_delimiters;
+    if (chars.trim() == '')
+      re = undefined;
+    else
+      re = regEx.delimiter(chars);
+  };
 
   var calc = function(spans, projectCalcFunc) {
     var distribution = {};
@@ -26,18 +40,22 @@ var StatsDataCalculator = function() {
     var milliDelta = new Date(span.finish) - new Date(span.start);
     return milliDelta/1000/60/60;
   };
+
+  init();
   
   return {
     calc:function(spans, projCalc) {
       return calc(spans, projCalc);
     },
     rootProjCalc: function(project) {
-      var parts = project.split(/[:|\|\/]/g);
-      return parts[0];
+      if (re)
+        return project.split(re)[0];
+      return project;
     },
     noopProjCalc: function(project) {
       return project;
-    }
+    },
+    buildMatcher:buildMatcher
   };
 
 };

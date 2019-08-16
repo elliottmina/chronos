@@ -52,7 +52,7 @@ var ProjectSummary = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
-    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGE', updateDisplay);
+    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
     jQuery('#ProjectSummary input.filter').keyup(onFilterChange);
   };
 

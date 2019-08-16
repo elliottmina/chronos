@@ -6,16 +6,17 @@
 
 ### Bugs
 
-* repeat task wtih 3 items, remove the first two tasks, repeat and save
-  -> First task is retained
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
 
 ### Stuff
 
+* split project text and color code
 * Configuration to control stats charts (don't show root?)
   * configure delimeters
-* generate deterministic icons or abbreviations for projects
 * Allow repeat of summary
+
+* span summary to use decimals/minutes
+
 * Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Sound no longer plays
 * Goals
@@ -53,3 +54,4 @@
 * Summary now sorts projects alphabetically.
 * Made project summary and span summary filterable.
 * Fixed bug that didn't confirm save-and-repeat on previous/future dates.
+* Fixed bug that sometimes caused edited task list to silently include the wrong items when executing save-and-repeat.

@@ -1,6 +1,9 @@
 var GlobalSettings = function() {
 
-  var useDecimalHours = true;
+  var settings = {
+    use_decimal_hours: true,
+    project_delimiters:':|/'
+  };
 
   var init = function() {
     registerSettings();
@@ -10,27 +13,36 @@ var GlobalSettings = function() {
     App.settings.register([{
       section:'General',
       label:'Use decimal hours',
-      value:getWithDefault('use_decimal_hours', useDecimalHours),
+      value:getWithDefault('use_decimal_hours'),
       type:'boolean',
-      callback:onDecimalHoursChange
+      callback:function(newValue) {
+        newValue = JSON.parse(newValue);
+        saveAndPublish('use_decimal_hours', newValue)
+      }
+    },{
+      section:'General',
+      label:'Project delimiter characters',
+      value:getWithDefault('project_delimiters'),
+      type:'text',
+      callback:function(newValue) { 
+        saveAndPublish('project_delimiters', newValue)
+      }
     }]);
   };
 
-  var getWithDefault = function(key, fallback) {
+  var getWithDefault = function(key) {
     var result = localStorage.getItem(key);
-    return result == null ? fallback : JSON.parse(result);
+    return result == null ? settings[key] : result;
   };
 
-  var onDecimalHoursChange = function(newValue) {
-    useDecimalHours = newValue;
-    localStorage.setItem('use_decimal_hours', newValue);
-    App.dispatcher.publish('USE_DECIMAL_HOURS_CHANGE');
+  var saveAndPublish = function(key, newValue) {
+    settings[key] = newValue;
+    localStorage.setItem(key, newValue);
+    App.dispatcher.publish(key.toUpperCase() + '_CHANGED');
   };
 
   init();
 
-  return {
-    useDecimalHours:useDecimalHours
-  };
+  return settings;
 
 };
