@@ -1,208 +1,208 @@
 #SpanCreator {
 }
 #SpanCreator>* {
-	vertical-align: top;
+  vertical-align: top;
 }
 #SpanCreator section {
 }
 #SpanCreator section>* {
-	margin-bottom: 1em;
-	margin-right: 1em;
-	vertical-align: top;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  vertical-align: top;
 }
 #SpanCreator input {
 }
 #SpanCreator label {
-	margin-bottom: 0.2em;
-	display: block;
-	color:hsl(0, 0%, 30%);
+  margin-bottom: 0.2em;
+  display: block;
+  color:hsl(0, 0%, 30%);
 }
 #SpanCreator .project_suggestions {display: inline-block;}
 #SpanCreator .start,
 #SpanCreator .finish {
-	display: inline-block;
+  display: inline-block;
 }
 
 #SpanCreator .time_fields {
-	width:23em;
-	display: inline-block;
+  width:23em;
+  display: inline-block;
 }
 #SpanCreator .time_field_wrapper {
-	display: inline-block;
+  display: inline-block;
 }
 #SpanCreator .time_field_wrapper:first-child {
-	margin-right: 1em;
+  margin-right: 1em;
 }
 #SpanCreator .time_field_container {
-	display: inline-block;
-	position: relative;
-	font-size: 1.3em;
-	letter-spacing: .1em;
+  display: inline-block;
+  position: relative;
+  font-size: 1.3em;
+  letter-spacing: .1em;
 }
 #SpanCreator .time_field_container>* {
-	vertical-align: top;
+  vertical-align: top;
 }
 #SpanCreator .time_field_container .time {
-	display: inline-block;
-	width: 3em;
-	height: 1.25em;
-	padding: 0.5em;
-	text-align: right;
-	padding-right: 4em;
-	background-color: #fff;
-	user-select: none;
+  display: inline-block;
+  width: 3em;
+  height: 1.25em;
+  padding: 0.5em;
+  text-align: right;
+  padding-right: 4em;
+  background-color: #fff;
+  user-select: none;
 }
 #SpanCreator .start .time {
-	border: 1px solid hsl(95, 100%, 45%);
+  border: 1px solid hsl(95, 100%, 45%);
 }
 #SpanCreator .finish .time {
-	border: 1px solid hsl(31, 100%, 45%);
+  border: 1px solid hsl(31, 100%, 45%);
 }
 #SpanCreator .time_field_container.has_focus .time {
-	box-shadow: 0 0 4px 0 hsla(220, 100%, 50%, 0.4);
-	border:1px solid #FFF;
+  box-shadow: 0 0 4px 0 hsla(220, 100%, 50%, 0.4);
+  border:1px solid #FFF;
 }
 #SpanCreator .time_field_container .period {
-	cursor:pointer;
-	display: inline-block;
-	border: 1px solid transparent;
-	height: 1.25em;
-	padding: 0.25em;
-	position: absolute;
-	left:3.5em;
-	top:0.25em;
-	text-transform: lowercase;
+  cursor:pointer;
+  display: inline-block;
+  border: 1px solid transparent;
+  height: 1.25em;
+  padding: 0.25em;
+  position: absolute;
+  left:3.5em;
+  top:0.25em;
+  text-transform: lowercase;
 }
 #SpanCreator .time_field_container button.now {
-	display: inline-block;
-	border:0;
-	position: absolute;
-	right:1px;
-	top:1px;
-	height:1.8em;
-	font-size: 1.25em;
-	cursor: pointer;
-	padding:0.2em;
+  display: inline-block;
+  border:0;
+  position: absolute;
+  right:1px;
+  top:1px;
+  height:1.8em;
+  font-size: 1.25em;
+  cursor: pointer;
+  padding:0.2em;
 }
 #SpanCreator .time_field_container button.now:hover {
-	box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
+  box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
 }
 #SpanCreator .start .now {
-	background-color: hsl(95, 100%, 45%);
-	color:#fff;
+  background-color: hsl(95, 100%, 45%);
+  color:#fff;
 }
 #SpanCreator .finish .now {
-	background-color: hsl(31, 100%, 45%);
-	color:#fff;
+  background-color: hsl(31, 100%, 45%);
+  color:#fff;
 }
 #SpanCreator .time_field_container .cursor {
-	display: none;
-	position: absolute;
-	height: 1.45em;
-	border-left: 1px solid hsla(0, 0%, 0%, 0.3);
-	top:.38em;
-	left:3.55em;
-	text-decoration: blink;
+  display: none;
+  position: absolute;
+  height: 1.45em;
+  border-left: 1px solid hsla(0, 0%, 0%, 0.3);
+  top:.38em;
+  left:3.55em;
+  text-decoration: blink;
 }
 #SpanCreator .time_field_container.has_focus .cursor {
-	display: inline-block;
+  display: inline-block;
 }
 #SpanCreator .error,
 #SpanCreator .time_field_container .time.error {
-	border:1px solid red;
-	background-color: hsla(0, 100%, 50%, 0.1);
+  border:1px solid red;
+  background-color: hsla(0, 100%, 50%, 0.1);
 }
 #SpanCreator .project_suggestions input {
-	font-size: 1.35em;
-	box-sizing: border-box;
+  font-size: 1.35em;
+  box-sizing: border-box;
 }
 #SpanCreator .project_suggestions input:valid {
 }
 #SpanCreator .project_suggestions ul {
-	display: none;
-	z-index: 10;
-	position: absolute;
-	top: 4.5em;
-	left:0;
-	min-height: 3em;
-	padding:0;
-	margin:0;
-	box-shadow: 0 3px 5px hsla(0, 0%, 90%, 1);
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 4.5em;
+  left:0;
+  min-height: 3em;
+  padding:0;
+  margin:0;
+  box-shadow: 0 3px 5px hsla(0, 0%, 90%, 1);
 }
 #SpanCreator .project_suggestions .suggestion:first-child {
-	border-top:1px solid hsla(0, 0%, 80%, 1);
+  border-top:1px solid hsla(0, 0%, 80%, 1);
 }
 #SpanCreator .project_suggestions .suggestion {
-	width: 100%;
-	cursor: pointer;
-	list-style: none;
-	padding:1em 2em;
-	border-bottom:1px solid hsla(0, 0%, 80%, 1);
-	border-right:1px solid hsla(0, 0%, 80%, 1);
-	border-left:1px solid hsla(0, 0%, 80%, 1);
-	background-color: hsla(0, 0%, 97%, 0.95);
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  padding:1em 2em;
+  border-bottom:1px solid hsla(0, 0%, 80%, 1);
+  border-right:1px solid hsla(0, 0%, 80%, 1);
+  border-left:1px solid hsla(0, 0%, 80%, 1);
+  background-color: hsla(0, 0%, 97%, 0.95);
 }
 #SpanCreator .project_suggestions .suggestion.today:hover,
 #SpanCreator .project_suggestions .suggestion:hover {
-	background-color: hsla(220, 100%, 90%, 0.95);
+  background-color: hsla(220, 100%, 90%, 0.95);
 }
 #SpanCreator .project_suggestions .suggestion.today.selected,
 #SpanCreator .project_suggestions .suggestion.selected {
-	background-color: hsla(0, 0%, 100%, 0.95);
-	box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
-	z-index: 100;
-	position: relative;
+  background-color: hsla(0, 0%, 100%, 0.95);
+  box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
+  z-index: 100;
+  position: relative;
 }
 #SpanCreator .project_suggestions .suggestion.today {
-	background-color: hsla(215, 88%, 95%, 0.95);
+  background-color: hsla(215, 88%, 95%, 0.95);
 }
 #SpanCreator .project_suggestions .suggestion.today i {
-	position: absolute;
-	left:0.5em;
+  position: absolute;
+  left:0.5em;
 }
 #SpanCreator .task_list {display: inline-block;width: 15em;}
 #SpanCreator .task_list input {
-	font-size: 1.35em;
-	box-sizing: border-box;
-	width: 100%;
+  font-size: 1.35em;
+  box-sizing: border-box;
+  width: 100%;
 }
 #SpanCreator .task_list ul {
-	padding:0;
-	margin-top: 0.3em;
+  padding:0;
+  margin-top: 0.3em;
 }
 #SpanCreator .task_list li {
-	list-style: none;
-	display: inline-block;
-	border:1px solid #CCC;
+  list-style: none;
+  display: inline-block;
+  border:1px solid #CCC;
     padding: 0.25em 0.5em 0.25em 0.25em;
     border-radius: 4px;
     margin:0.2em;
     background-color:hsl(0, 0%, 99%);
 }
 #SpanCreator .task_list li a {
-	cursor: pointer;
-	display: inline-block;
-	padding:0.25em;
+  cursor: pointer;
+  display: inline-block;
+  padding:0.25em;
 }
 
 #SpanCreator .button_container {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 #SpanCreator .button {
-	display: inline-block;
-	cursor: pointer;
-	padding: 0.5em 1em;
-	border-radius: 4px;
-	font-size: 1em;
-	text-transform: uppercase;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  text-transform: uppercase;
 }
 #SpanCreator .button:hover {
-	box-shadow: 0 0px 2px 0 hsla(0, 0%, 0%, 0.4);
+  box-shadow: 0 0px 2px 0 hsla(0, 0%, 0%, 0.4);
 }
 #SpanCreator .button i {
-	font-size: 1.5em;
-	margin-right:0.2em;
-	vertical-align: text-bottom;
+  font-size: 1.5em;
+  margin-right:0.2em;
+  vertical-align: text-bottom;
 }
 #SpanCreator .save {
     background-color: hsl(106, 100%, 70%);
@@ -215,5 +215,5 @@
     color: hsl(215, 88%, 50%);
 }
 #SpanCreator .editing_indicator {
-	display: none;
+  display: none;
 }

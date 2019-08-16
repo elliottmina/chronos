@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chronos</title>
-	<!-- resource_files -->
+  <title>Chronos</title>
+  <!-- resource_files -->
 <link rel="stylesheet" type="text/css" href="css/ModalDialogue.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="css/style.css?v=1.1">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.css?v=1.1">
@@ -71,126 +71,126 @@
 <script src="modules/ProjectSummary/ProjectSummary.js?v=1.1"></script>
 <script src="modules/DateSelector/DateSelector.js?v=1.1"></script>
 <!-- /resource_files -->
-	<script>
-		jQuery(document).ready(function() {
-			App.init([PersistenceMarshaller, Blasticator, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, DailyGoal, TimeFormatter12Hr, TextSummary, JsonExport, JsonSummary, SpanSummary, SpanCreator, SummaryNav, JsonImport, ThemeSelector, ProjectSummary, DateSelector]);
-		});
-	</script>
+  <script>
+    jQuery(document).ready(function() {
+      App.init([PersistenceMarshaller, Blasticator, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, DailyGoal, TimeFormatter12Hr, TextSummary, JsonExport, JsonSummary, SpanSummary, SpanCreator, SummaryNav, JsonImport, ThemeSelector, ProjectSummary, DateSelector]);
+    });
+  </script>
 </head>
 <body>
-	<section id="head">
-		<section id="DateLine"></section>
-		<section id="DateSelector"></section>
-	</section>
-	<section id="body">
-		<section id="main">
-			<section class="widget" id="SpanCreator"></section>
-			<section id="ProjectSummary"></section>
-			<section id="SpanSummary"></section>
-		</section>
-		<section id="metrics">
-			<section id="Goal"></section>
-			<section id="Stats"></section>
-		</section>
-	</section>
-	<section id="Settings">
-		<span class="mini_button"><i class="fas fa-cog"></i> Settings</span>
-	</section>
-	<section id="hotkeys">
-		<button class="toggle_hotkeys"></button>
-		<header>Hot keys</header>
-		<div class="set global">
-			<header>Global</header>
-			<ul>
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon">J</span>
-					</span>
-					<span class="text">Project</span>
-				</li>
+  <section id="head">
+    <section id="DateLine"></section>
+    <section id="DateSelector"></section>
+  </section>
+  <section id="body">
+    <section id="main">
+      <section class="widget" id="SpanCreator"></section>
+      <section id="ProjectSummary"></section>
+      <section id="SpanSummary"></section>
+    </section>
+    <section id="metrics">
+      <section id="Goal"></section>
+      <section id="Stats"></section>
+    </section>
+  </section>
+  <section id="Settings">
+    <span class="mini_button"><i class="fas fa-cog"></i> Settings</span>
+  </section>
+  <section id="hotkeys">
+    <button class="toggle_hotkeys"></button>
+    <header>Hot keys</header>
+    <div class="set global">
+      <header>Global</header>
+      <ul>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">J</span>
+          </span>
+          <span class="text">Project</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon">K</span>
-					</span>
-					<span class="text">Start</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">K</span>
+          </span>
+          <span class="text">Start</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon">L</span>
-					</span>
-					<span class="text">Task</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">L</span>
+          </span>
+          <span class="text">Task</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon pad">;</span>
-					</span>
-					<span class="text">Finish</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon pad">;</span>
+          </span>
+          <span class="text">Finish</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon">Enter</span>
-					</span>
-					<span class="text">Save</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">Enter</span>
+          </span>
+          <span class="text">Save</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon pad">[</span>
-					</span>
-					<span class="text">Previous day</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon pad">[</span>
+          </span>
+          <span class="text">Previous day</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">Ctrl</span> + <span class="icon pad">]</span>
-					<span class="text">Next day</span>
-				</li>
-			</ul>
-		</div>
-		<div class="set time">
-			<header>Time field</header>
-			<ul>
-				<li>
-					<span class="keys">
-						<span class="icon"><i class="far fa-arrow-up"></i></span>
-					</span>
-					<span class="text">Min</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon pad">]</span>
+          <span class="text">Next day</span>
+        </li>
+      </ul>
+    </div>
+    <div class="set time">
+      <header>Time field</header>
+      <ul>
+        <li>
+          <span class="keys">
+            <span class="icon"><i class="far fa-arrow-up"></i></span>
+          </span>
+          <span class="text">Min</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon"><i class="far fa-arrow-down"></i></span>
-					</span>
-					<span class="text">Min</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon"><i class="far fa-arrow-down"></i></span>
+          </span>
+          <span class="text">Min</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">N</span>
-					</span>
-					<span class="text">Now</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">N</span>
+          </span>
+          <span class="text">Now</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">A</span>
-					</span>
-					<span class="text">AM</span>
-				</li>
+        <li>
+          <span class="keys">
+            <span class="icon">A</span>
+          </span>
+          <span class="text">AM</span>
+        </li>
 
-				<li>
-					<span class="keys">
-						<span class="icon">P</span>
-					</span>
-					<span class="text">PM</span>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<div class="logo">Chronos<span class="version">1.3</span></div>
+        <li>
+          <span class="keys">
+            <span class="icon">P</span>
+          </span>
+          <span class="text">PM</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <div class="logo">Chronos<span class="version">1.3</span></div>
 </body>
 </html>

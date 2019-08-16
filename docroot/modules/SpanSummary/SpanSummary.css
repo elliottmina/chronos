@@ -1,13 +1,13 @@
 #SpanSummary thead {
-	display: none;
+  display: none;
 }
 #SpanSummary tbody tr:hover {
-	background-color: hsla(212, 51%, 90%, 1);
+  background-color: hsla(212, 51%, 90%, 1);
 }
 #SpanSummary tbody tr.selected {
-	background-color: hsl(213, 51%, 80%);
+  background-color: hsl(213, 51%, 80%);
 }
 #SpanSummary .hours,
 #SpanSummary .time {
-	text-align: center;
+  text-align: center;
 }

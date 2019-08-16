@@ -1,20 +1,20 @@
 var MetaKeyEvaluator = function() {
 
-	var propKey;
+  var propKey;
 
-	var init = function() {
-		if (navigator.userAgent.indexOf('Macintosh') > -1)
-			propKey = 'metaKey';
-		else
-			propKey = 'altKey';
-	};
+  var init = function() {
+    if (navigator.userAgent.indexOf('Macintosh') > -1)
+      propKey = 'metaKey';
+    else
+      propKey = 'altKey';
+  };
 
-	init();
+  init();
 
-	return {
-		get:function(e) {
-			if (e.ctrlKey)
-				return e.key.toUpperCase();
-		}
-	}
+  return {
+    get:function(e) {
+      if (e.ctrlKey)
+        return e.key.toUpperCase();
+    }
+  }
 };

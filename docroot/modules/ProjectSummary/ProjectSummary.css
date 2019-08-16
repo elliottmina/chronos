@@ -1,24 +1,24 @@
 #ProjectSummary table {
-	min-width: 40em;
+  min-width: 40em;
 }
 #ProjectSummary thead {
-	display: none;
+  display: none;
 }
 #ProjectSummary .hours,
 #ProjectSummary .time {
-	text-align: center;
+  text-align: center;
 }
 #ProjectSummary tbody .project {
-	font-weight: bold;
+  font-weight: bold;
 }
 #ProjectSummary li.copy {
-	border:0;
+  border:0;
   background-color: transparent;
 }
 #ProjectSummary .button.copy {
-	cursor: pointer;
-	vertical-align: text-bottom;
-	color: hsl(106, 100%, 24%);
+  cursor: pointer;
+  vertical-align: text-bottom;
+  color: hsl(106, 100%, 24%);
   display: inline-block;
   margin-left:.2em;
   font-size: 0.9em;
