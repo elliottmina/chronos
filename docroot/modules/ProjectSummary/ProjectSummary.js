@@ -27,7 +27,10 @@ var ProjectSummary = function() {
     build();
     addBehavior();
 
-    itemBuilder = new ProjectSummaryItemBuilder(listEl, new Padder());
+    itemBuilder = new ProjectSummaryItemBuilder(
+      copier,
+      new Padder(),
+      listEl);
   };
 
   var build = function() {

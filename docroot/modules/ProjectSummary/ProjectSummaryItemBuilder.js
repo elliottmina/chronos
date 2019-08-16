@@ -1,4 +1,4 @@
-var ProjectSummaryItemBuilder = function(listEl, padder) {
+var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var itemTemplate = `
     <tr>
