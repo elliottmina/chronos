@@ -41,34 +41,48 @@ var ProjectSummary = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
-    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGE', populate);
+    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGE', updateDisplay);
   };
 
   var onDateChanged = function(date) {
     spans = date.spans;
-    populate();
+    updateDisplay();
   };
 
   var onSpanSaved = function(data) {
     spans = data.record.spans;
-    populate();
+    updateDisplay();
   };
 
   var onSpanDeleted = function(data) {
     spans = data.record.spans;
-    populate();
+    updateDisplay();
   };
 
-  var populate = function() {
+  var updateDisplay = function() {
     var summaryData = dataBuilder.build(spans);
-    if (Object.keys(summaryData).length) {
-      noContentContainer.hide();
-      listEl.empty().show();
-      jQuery.each(summaryData, itemBuilder.build);
-    } else {
-      noContentContainer.show();
-      listEl.hide();
+
+    if (Object.keys(summaryData).length)
+      populate(summaryData);
+    else
+      showNoContent();
+  };
+
+  var populate = function(summaryData) {
+    noContentContainer.hide();
+    listEl.empty().show();
+
+    var sortedKeys = Object.keys(summaryData).sort();
+
+    for (var i = 0; i < sortedKeys.length; i++) {
+      var key = sortedKeys[i];
+      itemBuilder.build(summaryData[key]);
     }
+  };
+
+  var showNoContent = function() {
+    noContentContainer.show();
+    listEl.hide();
   };
 
   init();

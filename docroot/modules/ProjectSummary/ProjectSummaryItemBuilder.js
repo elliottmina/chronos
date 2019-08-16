@@ -20,7 +20,7 @@ var ProjectSummaryItemBuilder = function(listEl, padder) {
       </span>
     </li>`;
 
-  var addProject = function(key, project) {
+  var addProject = function(project) {
     var itemContainer = jQuery(itemTemplate)
       .appendTo(listEl);
 

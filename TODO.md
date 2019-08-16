@@ -11,11 +11,9 @@
 * repeat task wtih 3 items, remove the first two tasks, repeat and save
   -> First task is retained
 * SVG icons instead of font?
-* Sort project summary 
 * delete Goal.css?
 * Allow repeat of summary
 * filter span list
-* Periodically check if today is still today
 * Metrics
   * Show volume per project/sub project for day, week, month, quarter year
     * sub projects
@@ -48,3 +46,4 @@
 * Made hours display only decimal or minute values, based on configuration settings.
 * Date display periodically checks if you have changed days.
 * Added charts to show distribution of hours across projects.
+* Summary now sorts projects alphabetically.
