@@ -4,6 +4,7 @@ var SpanSummary = function() {
     <header>Spans</header>
     <div class="no_content_container">Nothing to see here.  Move along.</div>
     <div class="content_container">
+      <input type="text" placeholder="filter" class="filter" />
       <table>
         <thead>
           <tr>
@@ -37,6 +38,7 @@ var SpanSummary = function() {
 
   var spansContainer;
   var nonContentContainer;
+  var contentContainer;
   var timeFormatter;
   var roundDecimal;
   var padder;
@@ -59,12 +61,14 @@ var SpanSummary = function() {
     renderTo.html(html);
     spansContainer = renderTo.find('tbody');
     noContentContainer = renderTo.find('.no_content_container');
+    contentContainer = renderTo.find('content_container');
   };
 
   var addBehavior = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    jQuery('#SpanSummary input.filter').keyup(onFilterChange);
   };
 
   var onDateChanged = function(data) {
@@ -88,6 +92,7 @@ var SpanSummary = function() {
 
   var addSpan = function(span) {
     noContentContainer.hide();
+    contentContainer.show();
     var container = jQuery(spanTemplate).prependTo(spansContainer);
     spanMap[span.guid] = container;
     populateSpan(span, container);
@@ -142,6 +147,23 @@ var SpanSummary = function() {
     delete(spanMap[guid]);
     if (spansContainer.children().length == 0)
       noContentContainer.show();
+  };
+
+  var onFilterChange = function() {
+    spansContainer.find('tr').show();
+
+    var projectText = jQuery(this).val().toLowerCase();
+    if (projectText == '')
+      return;
+    
+    var re = new RegExp(projectText.split('').join('.*'));
+
+    spansContainer.find('tr').each(function(index, tr) {
+      tr = jQuery(tr);
+      var project = tr.find('.project').text().toLowerCase();
+      if (!re.test(project))
+        tr.hide();
+    });
   };
 
   init();
