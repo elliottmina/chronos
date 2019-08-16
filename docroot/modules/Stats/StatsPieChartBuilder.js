@@ -5,18 +5,23 @@ var StatsPieChartBuilder = function() {
       return new Chart(el,{
         type:'pie',
         options:{
-          responsive:true,
+          title:{
+            display:true,
+            text:'test'
+          },
+          responsive:false,
           animation:{
             duration:0,
             animateRotate:false
+          },
+          legend:{
+            position:'bottom',
+            display:true
           }
         },
         data:{
           datasets:[{
-            data:[],
-            // backgroundColor:[color, 'transparent'],
-            // hoverBackgroundColor:[color, 'transparent'],
-            // borderWidth:0
+            data:[]
           }]
         }
       });

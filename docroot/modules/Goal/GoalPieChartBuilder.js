@@ -4,7 +4,7 @@ var GoalPieChartBuilder = function() {
       return new Chart(el,{
         type:'pie',
         options:{
-          responsive:true,
+          responsive:false,
           cutoutPercentage:90,
           animation:{
             duration:0,

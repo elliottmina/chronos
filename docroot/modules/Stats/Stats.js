@@ -7,7 +7,9 @@ var Stats = function() {
   var date;
   var weekStart;
   var dailyChart;
+  var dailyRootChart;
   var weeklyChart;
+  var weeklyRootChart
 
   var init = function() {
     buildDependencies();
@@ -25,8 +27,9 @@ var Stats = function() {
   var build = function() {
     jQuery('#Stats').html(StatsTemplate);
     dailyChart = chartBuilder.build('StatusTodayChart');
+    dailyRootChart = chartBuilder.build('StatusTodayRootChart');
     weeklyChart = chartBuilder.build('StatusWeeklyChart');
-    // project, project:task
+    weeklyRootChart = chartBuilder.build('StatusWeeklyRootChart');
 
   };
 
@@ -49,7 +52,8 @@ var Stats = function() {
 
   var updateToday = function() {
     var today = App.persister.fetch(date);
-    updateChart(dailyChart, today.spans);
+    updateChart(dailyChart, today.spans, statsCalculator.noopProjCalc);
+    updateChart(dailyRootChart, today.spans, statsCalculator.rootProjCalc);
   };
 
   var updateWeek = function() {
@@ -61,11 +65,12 @@ var Stats = function() {
         spans.push(span);
       });
     }
-    updateChart(weeklyChart, spans);
+    updateChart(weeklyChart, spans, statsCalculator.noopProjCalc);
+    updateChart(weeklyRootChart, spans, statsCalculator.rootProjCalc);
   };
 
-  var updateChart = function(chart, spans) {
-    var kv = statsCalculator.calc(spans);
+  var updateChart = function(chart, spans, projCalcFunc) {
+    var kv = statsCalculator.calc(spans, projCalcFunc);
     var labels = kv[0];
     var values = kv[1];
 
