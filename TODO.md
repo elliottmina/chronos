@@ -16,8 +16,6 @@
   * configure delimeters
 * Allow repeat of summary
 
-* span summary to use decimals/minutes
-
 * Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Sound no longer plays
 * Goals

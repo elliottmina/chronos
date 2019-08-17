@@ -55,7 +55,8 @@ var SpanCreator = function() {
 
     projectSuggestor = new SpanCreatorProjectSuggestor(
       new SpanCreatorRecentProjectBuilder(),
-      new SpanCreatorTodaysProjectBuilder());
+      new SpanCreatorTodaysProjectBuilder(),
+      new RegEx());
 
     taskList = new SpanCreatorTaskList(
       topContainer.find('.task_list'));

@@ -1,6 +1,7 @@
 var SpanCreatorProjectSuggestor = function(
   recentProjectBuilder, 
-  todaysProjectBuilder) {
+  todaysProjectBuilder,
+  regEx) {
 
   var itemTemplate = `<li class="suggestion"></li>`;
   var projectsContainer;
@@ -22,8 +23,9 @@ var SpanCreatorProjectSuggestor = function(
   };
 
   var addBehavior = function() {
-    projectInput.focus(show);
+    projectInput.focus(considerShowing);
     projectInput.blur(onBlur);
+    projectInput.keyup(onKeyUp);
     projectInput.keyup(publishChange);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     new InputSizeAdjuster(projectInput);
@@ -40,19 +42,11 @@ var SpanCreatorProjectSuggestor = function(
     if (showing)
       return;
 
-    populate();
     projectsContainer.show();
-    bindKeys();
     showing = true;
   };
 
-  var populate = function() {
-    var suggestions = getSuggestions();
-    if (suggestions.length == 0) {
-      hide();
-      return;
-    }
-
+  var populate = function(suggestions) {
     todaysProjects = todaysProjectBuilder.build();
     projectsContainer.empty();
     jQuery.each(suggestions, populateSuggestion);
@@ -91,10 +85,7 @@ var SpanCreatorProjectSuggestor = function(
     if (projectText == '')
       return recentProjects;
 
-    var chars = projectText.split('');
-    var rePattern = '\\' + chars.join('.*\\');
-    var re = new RegExp(rePattern);
-
+    var re = regEx.squishyMatch(projectText);
     var suggestions = [];
     jQuery.each(recentProjects, function(index, project) {
       if (re.test(project.toLowerCase()))
@@ -109,20 +100,11 @@ var SpanCreatorProjectSuggestor = function(
 
     deselectAll();
     projectsContainer.hide();
-    unbindKeys();
     showing = false;
   };
 
   var onBlur = function() {
     setTimeout(hide, 200);
-  };
-
-  var bindKeys = function() {
-    projectInput.keyup(onKeyUp);
-  };
-
-  var unbindKeys = function() {
-    projectInput.unbind('keyup', onKeyUp);
   };
 
   var onKeyUp = function(e) {
@@ -140,9 +122,19 @@ var SpanCreatorProjectSuggestor = function(
         selectDown();
         break;
       default:
-        populate();
+        considerShowing();
     }
   };
+
+  var considerShowing = function() {
+    var suggestions = getSuggestions();
+    if (suggestions.length == 0) {
+      hide();
+      return;
+    }
+    populate(suggestions);
+    show();
+  }
 
   var selectUp = function() {
     ensureShowing();
