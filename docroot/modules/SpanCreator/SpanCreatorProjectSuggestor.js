@@ -87,11 +87,13 @@ var SpanCreatorProjectSuggestor = function(
   };
 
   var getSuggestions = function() {
-    var projectFilter = projectInput.val().toLowerCase();
-    var re = new RegExp(projectFilter.split('').join('.*'));
-
-    if (projectFilter == '')
+    var projectText = projectInput.val().toLowerCase();
+    if (projectText == '')
       return recentProjects;
+
+    var chars = projectText.split('');
+    var rePattern = '\\' + chars.join('.*\\');
+    var re = new RegExp(rePattern);
 
     var suggestions = [];
     jQuery.each(recentProjects, function(index, project) {

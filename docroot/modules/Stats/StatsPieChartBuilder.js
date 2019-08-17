@@ -20,7 +20,8 @@ var StatsPieChartBuilder = function() {
         },
         data:{
           datasets:[{
-            data:[]
+            data:[],
+            borderWidth:0
           }]
         }
       });

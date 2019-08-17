@@ -12,7 +12,7 @@ var SpanSummary = function() {
             <th class="finish">Finish</th>
             <th class="project">Project</th>
             <th class="tasks">Tasks</th>
-            <th class="hours">Hours</th>
+            <th class="elapsed">Hours</th>
             <th class="time">Time</th>
             <th class="actions">Actions</th>
           </tr>
@@ -27,8 +27,7 @@ var SpanSummary = function() {
       <td class="finish"></td>
       <td class="project"></td>
       <td class="tasks"><ul class="task_list"></ul></td>
-      <td class="hours"></td>
-      <td class="time"></td>
+      <td class="elapsed"></td>
       <td class="actions">
         <span class="mini_button edit far fa-pencil"></span>
         <span class="mini_button delete far fa-trash"></span>
@@ -42,6 +41,7 @@ var SpanSummary = function() {
   var timeFormatter;
   var roundDecimal;
   var padder;
+  var spans;
   var spanMap = {};
 
   var init = function() {
@@ -68,14 +68,20 @@ var SpanSummary = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
     jQuery('#SpanSummary input.filter').keyup(onFilterChange);
   };
 
   var onDateChanged = function(data) {
+    spans = data.spans;
+    populateSpans();
+  };
+
+  var populateSpans = function() {
     noContentContainer.show();
     spansContainer.empty();
     spanMap = {};
-    jQuery.each(data.spans, function(index, span) {
+    jQuery.each(spans, function(index, span) {
       addSpan(span)
     });
   };
@@ -99,10 +105,8 @@ var SpanSummary = function() {
   };
 
   var populateSpan = function(span, container) {
-    var elapsed = (span.finish - span.start)/1000/60/60;
-    var elapsedDecimal = roundDecimal(elapsed, 2)
-    var elapsedHours = Math.floor(elapsed);
-    var elapsedMinutes = padder.twoDigit(Math.floor((elapsed % 1) * 60));
+    var elapsedHours = (span.finish - span.start)/1000/60/60;
+    var elapsed = formatElapsed(elapsedHours);
 
     container.find('.edit').data('guid', span.guid).click(editSpan);
     container.find('.delete').data('guid', span.guid).click(deleteSpan);
@@ -111,8 +115,7 @@ var SpanSummary = function() {
     container.find('.start').text(timeFormatter.format(span.start));
     container.find('.finish').text(timeFormatter.format(span.finish));
     container.find('.project').text(span.project);
-    container.find('.time').text(elapsedHours + ':' + elapsedMinutes);
-    container.find('.hours').text(elapsedDecimal);
+    container.find('.elapsed').text(elapsed);
 
     var taskContainer = container.find('ul');
     taskContainer.empty();
@@ -121,6 +124,22 @@ var SpanSummary = function() {
         .appendTo(taskContainer)
         .text(task);
     });
+  };
+
+  var formatElapsed = function(elapsedHours) {
+    if (App.globalSettings.use_decimal_hours)
+      return formatDecimal(elapsedHours);
+    return formatMinutes(elapsedHours);
+  };
+
+  var formatMinutes = function(elapsedHours) {
+    var hours = Math.floor(elapsedHours);
+    var minutes = padder.twoDigit(Math.floor((elapsedHours % 1) * 60));
+    return hours + ':' + minutes;
+  };
+
+  var formatDecimal = function(elapsedHours) {
+    return roundDecimal(elapsedHours, 2)
   };
 
   var editSpan = function() {
