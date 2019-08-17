@@ -8,8 +8,20 @@
 #ProjectSummary .time {
   text-align: center;
 }
-#ProjectSummary tbody .project {
-  font-weight: bold;
+#ProjectSummary .segment {
+  display: inline-block;
+  margin-right: 0.5em;
+  font-style: italic;
+}
+#ProjectSummary .segment_1 {
+  color:red;
+}
+#ProjectSummary .segment_2 {
+  color:blue;
+}
+#ProjectSummary .segment_separator {
+  display: inline-block;
+  margin-right: 0.5em;
 }
 #ProjectSummary li.copy {
   border:0;

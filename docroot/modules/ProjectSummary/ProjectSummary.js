@@ -34,6 +34,7 @@ var ProjectSummary = function() {
     itemBuilder = new ProjectSummaryItemBuilder(
       copier,
       new Padder(),
+      new RegEx(),
       itemContainer);
   };
 
