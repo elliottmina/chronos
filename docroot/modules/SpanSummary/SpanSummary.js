@@ -1,64 +1,31 @@
 var SpanSummary = function() {
 
-  var html = `
-    <header>Spans</header>
-    <div class="no_content_container">Nothing to see here.  Move along.</div>
-    <div class="content_container">
-      <input type="text" placeholder="filter" class="filter" />
-      <table>
-        <thead>
-          <tr>
-            <th class="start">Start</th>
-            <th class="finish">Finish</th>
-            <th class="project">Project</th>
-            <th class="tasks">Tasks</th>
-            <th class="elapsed">Hours</th>
-            <th class="time">Time</th>
-            <th class="actions">Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>`;
-
-  var spanTemplate = `
-    <tr>
-      <td class="start"></td>
-      <td class="finish"></td>
-      <td class="project"></td>
-      <td class="tasks"><ul class="task_list"></ul></td>
-      <td class="elapsed"></td>
-      <td class="actions">
-        <span class="mini_button edit far fa-pencil"></span>
-        <span class="mini_button delete far fa-trash"></span>
-        <span class="mini_button repeat far fa-repeat"></span>
-      </td>
-    </tr>`;
-
   var spansContainer;
   var nonContentContainer;
   var contentContainer;
-  var timeFormatter;
-  var roundDecimal;
-  var padder;
+  var itemBuilder
+  var regEx;
   var spans;
   var spanMap = {};
 
   var init = function() {
-    getDependencies();
     build();
+    buildDependencies();
     addBehavior();
   };
 
-  var getDependencies = function() {
-    timeFormatter = new TimeFormatter12Hr();
-    roundDecimal = Rounder.roundDecimal;
-    padder = new Padder();
+  var buildDependencies = function() {
+    itemBuilder = new SpanSummaryItemBuilder(
+      new Padder(),
+      Rounder.roundDecimal,
+      new TimeFormatter12Hr(),
+      spansContainer);
+    regEx = new RegEx();
   };
 
   var build = function() {
     var renderTo = jQuery('#SpanSummary');
-    renderTo.html(html);
+    renderTo.html(SpanSummaryTemplate);
     spansContainer = renderTo.find('tbody');
     noContentContainer = renderTo.find('.no_content_container');
     contentContainer = renderTo.find('content_container');
@@ -90,7 +57,7 @@ var SpanSummary = function() {
     var span = data.span;
     var container = spanMap[span.guid];
     if (container)
-      populateSpan(span, container);
+      itemBuilder.build(span, container);
     else
       addSpan(span);
     spansContainer.find('.selected').removeClass('selected');
@@ -99,65 +66,10 @@ var SpanSummary = function() {
   var addSpan = function(span) {
     noContentContainer.hide();
     contentContainer.show();
-    var container = jQuery(spanTemplate).prependTo(spansContainer);
+    var container = jQuery(SpanSummaryItemTemplate)
+      .prependTo(spansContainer);
     spanMap[span.guid] = container;
-    populateSpan(span, container);
-  };
-
-  var populateSpan = function(span, container) {
-    var elapsedHours = (span.finish - span.start)/1000/60/60;
-    var elapsed = formatElapsed(elapsedHours);
-
-    container.find('.edit').data('guid', span.guid).click(editSpan);
-    container.find('.delete').data('guid', span.guid).click(deleteSpan);
-    container.find('.repeat').data('guid', span.guid).click(repeatSpan);
-
-    container.find('.start').text(timeFormatter.format(span.start));
-    container.find('.finish').text(timeFormatter.format(span.finish));
-    container.find('.project').text(span.project);
-    container.find('.elapsed').text(elapsed);
-
-    var taskContainer = container.find('ul');
-    taskContainer.empty();
-    jQuery.each(span.tasks, function(index, task) {
-      var li = jQuery('<li>')
-        .appendTo(taskContainer)
-        .text(task);
-    });
-  };
-
-  var formatElapsed = function(elapsedHours) {
-    if (App.globalSettings.use_decimal_hours)
-      return formatDecimal(elapsedHours);
-    return formatMinutes(elapsedHours);
-  };
-
-  var formatMinutes = function(elapsedHours) {
-    var hours = Math.floor(elapsedHours);
-    var minutes = padder.twoDigit(Math.floor((elapsedHours % 1) * 60));
-    return hours + ':' + minutes;
-  };
-
-  var formatDecimal = function(elapsedHours) {
-    return roundDecimal(elapsedHours, 2)
-  };
-
-  var editSpan = function() {
-    var el = jQuery(this);
-    var guid = el.data('guid');
-    App.dispatcher.publish('EDIT_SPAN_REQUESTED', guid);
-    spansContainer.find('tr').removeClass('selected');
-    el.closest('tr').addClass('selected');
-  };
-
-  var deleteSpan = function() {
-    var guid = jQuery(this).data('guid');
-    App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
-  };
-
-  var repeatSpan = function() {
-    var guid = jQuery(this).data('guid');
-    App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
+    itemBuilder.build(span, container);
   };
 
   var onSpanDeleted = function(data) {
@@ -175,7 +87,7 @@ var SpanSummary = function() {
     if (projectText == '')
       return;
     
-    var re = new RegExp(projectText.split('').join('.*'));
+    var re = regEx.squishyMatch(projectText);
 
     spansContainer.find('tr').each(function(index, tr) {
       tr = jQuery(tr);

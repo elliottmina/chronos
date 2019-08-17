@@ -7,7 +7,6 @@
 ### Bugs
 
 * Bug: JSON exporter does not include full data with large data sets.  Likely exceeding maximum string size.
-* backspacing in project does not update suggestions
 
 ### Stuff
 
