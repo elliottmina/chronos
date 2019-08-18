@@ -10,11 +10,6 @@
 
 ### Stuff
 
-* Configuration to control stats charts (don't show root?)
-  * configure delimeters
-* Allow repeat of summary
-
-* Track time elapsed (start of first entry vs end of last entry) vs time worked
 * Sound no longer plays
 * Goals
   * Avatar with words of encouragement?  Also coach Z.
@@ -52,3 +47,4 @@
 * Made project summary and span summary filterable.
 * Fixed bug that didn't confirm save-and-repeat on previous/future dates.
 * Fixed bug that sometimes caused edited task list to silently include the wrong items when executing save-and-repeat.
+* Added project name segmentation based on configurable char list.

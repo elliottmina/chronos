@@ -8,17 +8,19 @@ var Stats = function() {
   var weekStart;
   var showRootCharts;
   var showFullCharts;
+  var today;
 
   var dailyChart;
   var dailyRootChart;
   var weeklyChart;
   var weeklyRootChart;
+  var efficiencyChart;
 
   var dailyChartContainer;
   var dailyRootChartContainer;
   var weeklyChartContainer;
   var weeklyRootChartContainer;
-
+  var efficiencyChartContainer;
 
   var init = function() {
     initSettings();
@@ -48,6 +50,10 @@ var Stats = function() {
     dailyRootChart = chartBuilder.build('StatsTodayRootChart');
     weeklyChart = chartBuilder.build('StatsWeeklyChart');
     weeklyRootChart = chartBuilder.build('StatsWeeklyRootChart');
+    efficiencyChart = chartBuilder.build('StatsEfficiencyChart');
+    
+    efficiencyChart.data.labels = ['Work', 'Waste'];
+    efficiencyChart.data.datasets[0].backgroundColor = ['red', 'blue'];
   };
 
   var gatherComponents = function() {
@@ -55,6 +61,7 @@ var Stats = function() {
     dailyRootChartContainer = jQuery('#StatsTodayRoot');
     weeklyChartContainer = jQuery('#StatsWeekly');
     weeklyRootChartContainer = jQuery('#StatsWeeklyRoot');
+    efficiencyChartContainer = jQuery('#StatsEfficiency');
   };
 
   var addBehavior = function() {
@@ -117,12 +124,13 @@ var Stats = function() {
   };
 
   var updateCharts = function() {
+    today = App.persister.fetch(date);
     updateToday();
     updateWeek();
+    updateEfficiency();
   }
 
   var updateToday = function() {
-    var today = App.persister.fetch(date);
     updateChart(dailyChart, today.spans, statsCalculator.noopProjCalc);
     updateChart(dailyRootChart, today.spans, statsCalculator.rootProjCalc);
   };
@@ -149,7 +157,37 @@ var Stats = function() {
     chart.data.datasets[0].backgroundColor = colorGenerator.generate(labels);
     chart.data.labels = labels;
     chart.update();
-  }
+  };
+
+  var updateEfficiency = function() {
+    var keys = Object.keys(today.spans);
+    
+    if (keys.length == 0) {
+      efficiencyChartContainer.hide();
+      return;
+    }
+
+    efficiencyChartContainer.show();
+
+    var first = today.spans[keys[0]];
+    var last = today.spans[keys[keys.length-1]];
+
+    var elapsed = (last.finish - first.start)/1000/60/60;
+    var totalWorked = calcHours(today.spans);
+    var waste = elapsed - totalWorked;
+
+    efficiencyChart.data.datasets[0].data = [totalWorked.toFixed(2), waste.toFixed(2)];
+    efficiencyChart.update();
+  };
+
+  var calcHours = function(spans) {
+    var totalMillis = 0;
+    jQuery.each(spans, function(key, span) {
+      totalMillis += new Date(span.finish) - new Date(span.start);
+    });
+
+    return totalMillis/1000/60/60;
+  };
 
   init();
 };

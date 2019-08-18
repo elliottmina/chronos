@@ -1,4 +1,7 @@
 var StatsTemplate = `
+<section class="pie" id="StatsEfficiency">
+  <canvas id="StatsEfficiencyChart" height="200" width="400"></canvas>
+</section>
 <section class="pie" id="StatsToday">
   <canvas id="StatsTodayChart" height="200" width="400"></canvas>
 </section>
