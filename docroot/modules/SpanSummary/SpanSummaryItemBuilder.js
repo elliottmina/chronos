@@ -2,8 +2,21 @@ var SpanSummaryItemBuilder = function(
   padder, 
   roundDecimal, 
   timeFormatter,
+  regEx,
   spansContainer) {
+
+  var init = function() {
+    buildMatcher();
+  };
   
+  var buildMatcher = function() {
+    var chars = App.globalSettings.project_delimiters;
+    if (chars.trim() == '')
+      re = undefined;
+    else
+      re = regEx.delimiter(chars);
+  };
+
   var populateSpan = function(span, container) {
     addBehavior(span, container);
     setText(span, container);
@@ -32,8 +45,26 @@ var SpanSummaryItemBuilder = function(
 
     container.find('.start').text(timeFormatter.format(span.start));
     container.find('.finish').text(timeFormatter.format(span.finish));
-    container.find('.project').text(span.project);
+    container.find('.project').html(buildLabel(span.project));
     container.find('.elapsed').text(elapsed);
+  };
+
+  var buildLabel = function(project) {
+    if (!re)
+      return segmentify(project, 1);
+
+    var parts = project.split(re);
+    if (parts.length == 1)
+      return segmentify(project, 1);
+
+    parts[0] = segmentify(parts[0], 1);
+    parts[1] = segmentify(parts[1], 2);
+
+    return parts.join('<span class="segment_separator fal fa-angle-right"></span>');
+  };
+
+  var segmentify = function(text, num) {
+    return '<span class="segment segment_' + num + '">' + text + '</span>';
   };
 
   var formatElapsed = function(elapsedHours) {
@@ -69,6 +100,8 @@ var SpanSummaryItemBuilder = function(
     var guid = jQuery(this).data('guid');
     App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
   };
+
+  init();
 
   return {
     build:populateSpan
