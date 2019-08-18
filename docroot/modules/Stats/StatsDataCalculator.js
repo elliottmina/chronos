@@ -1,31 +1,28 @@
-var StatsDataCalculator = function(regEx) {
-
-  var re;
-
-  var init = function() {
-    buildMatcher();
-  };
-
-  var buildMatcher = function() {
-    var chars = App.globalSettings.project_delimiters;
-    if (chars.trim() == '')
-      re = undefined;
-    else
-      re = regEx.delimiter(chars);
-  };
+var StatsDataCalculator = function() {
 
   var calc = function(spans, projectCalcFunc) {
+    var distribution = buildDistribution(spans, projectCalcFunc);
+    return buildKeysValues(distribution);
+  };
+
+  var buildDistribution = function(spans, projectCalcFunc) {
     var distribution = {};
 
     jQuery.each(spans, function(key, span) {
       var project = projectCalcFunc(span.project);
-
-      if (!distribution[project])
-        distribution[project] = 0;
-
+      initProject(distribution, project);
       distribution[project] += calcHours(span);
     });
 
+    return distribution;
+  };
+
+  var initProject = function(distribution, project) {
+    if (!distribution[project])
+      distribution[project] = 0;
+  };
+
+  var buildKeysValues = function(distribution) {
     var keys = [];
     var values = [];
     jQuery.each(distribution, function(k, v) {
@@ -41,21 +38,14 @@ var StatsDataCalculator = function(regEx) {
     return milliDelta/1000/60/60;
   };
 
-  init();
-  
   return {
-    calc:function(spans, projCalc) {
-      return calc(spans, projCalc);
-    },
+    calc:calc,
     rootProjCalc: function(project) {
-      if (re)
-        return project.split(re)[0];
-      return project;
+      return App.projectSegmentor.segment(project)[0];
     },
     noopProjCalc: function(project) {
       return project;
-    },
-    buildMatcher:buildMatcher
+    }
   };
 
 };

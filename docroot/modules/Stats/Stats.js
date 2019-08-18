@@ -19,7 +19,7 @@ var Stats = function() {
 
   var buildDependencies = function() {
     chartBuilder = new StatsPieChartBuilder();
-    statsCalculator = new StatsDataCalculator(new RegEx());
+    statsCalculator = new StatsDataCalculator();
     colorGenerator = new StatsColorGenerator();
     timeUtil = new TimeUtil();
   };
@@ -36,12 +36,7 @@ var Stats = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', updateCharts);
     App.dispatcher.subscribe('SPAN_DELETED', updateCharts);
-    App.dispatcher.subscribe('PROJECT_DELIMITERS_CHANGED', onProjectDelimiterChanged);
-  };
-
-  var onProjectDelimiterChanged = function() {
-    statsCalculator.buildMatcher();
-    updateCharts();
+    App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateCharts);
   };
 
   var onDateChanged = function(data) {

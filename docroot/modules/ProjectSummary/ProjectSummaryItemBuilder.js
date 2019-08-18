@@ -1,4 +1,4 @@
-var ProjectSummaryItemBuilder = function(copier, padder, regEx, listEl) {
+var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var itemTemplate = `
     <tr>
@@ -22,23 +22,11 @@ var ProjectSummaryItemBuilder = function(copier, padder, regEx, listEl) {
 
   var re;
 
-  var init = function() {
-    buildMatcher();
-  };
-
-  var buildMatcher = function() {
-    var chars = App.globalSettings.project_delimiters;
-    if (chars.trim() == '')
-      re = undefined;
-    else
-      re = regEx.delimiter(chars);
-  };
-
   var addProject = function(project) {
     var itemContainer = jQuery(itemTemplate)
       .appendTo(listEl);
 
-    itemContainer.find('.project').html(buildLabel(project.label));
+    itemContainer.find('.project').html(App.projectSegmentor.getFormatted(project.label));
     
     var time = formatTime(project.time)
     itemContainer.find('.hours .value').text(time);
@@ -59,24 +47,6 @@ var ProjectSummaryItemBuilder = function(copier, padder, regEx, listEl) {
         .click(copy)
         .data('copy', project.tasks.join('\n'));      
     }
-  };
-
-  var buildLabel = function(project) {
-    if (!re)
-      return segmentify(project, 1);
-
-    var parts = project.split(re);
-    if (parts.length == 1)
-      return segmentify(project, 1);
-
-    parts[0] = segmentify(parts[0], 1);
-    parts[1] = segmentify(parts[1], 2);
-
-    return parts.join('<span class="segment_separator fal fa-angle-right"></span>');
-  };
-
-  var segmentify = function(text, num) {
-    return '<span class="segment segment_' + num + '">' + text + '</span>';
   };
 
   var formatTime = function(minutes) {
@@ -107,8 +77,6 @@ var ProjectSummaryItemBuilder = function(copier, padder, regEx, listEl) {
     var text = jQuery(this).data('copy');
     copier.copy(text);
   };
-
-  init();
   
   return {
     build:addProject

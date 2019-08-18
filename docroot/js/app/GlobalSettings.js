@@ -9,7 +9,7 @@ var GlobalSettings = function() {
 
   var initSettings = function() {
     settings = {
-      use_decimal_hours: getWithDefault('use_decimal_hours', '1'),
+      use_decimal_hours: getWithDefault('use_decimal_hours', true),
       project_delimiters: getWithDefault('project_delimiters', ':|/')
     };
   };

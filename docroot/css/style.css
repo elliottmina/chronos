@@ -179,3 +179,19 @@ section>header {
   border-left: 1px solid hsl(0, 0%, 90%);
   border-right: 1px solid hsl(0, 0%, 90%);
 }
+
+.segment {
+  display: inline-block;
+  margin-right: 0.5em;
+  font-style: italic;
+}
+.segment_1 {
+  color:red;
+}
+.segment_2 {
+  color:blue;
+}
+.segment_separator {
+  display: inline-block;
+  margin-right: 0.5em;
+}

@@ -34,7 +34,6 @@ var ProjectSummary = function() {
     itemBuilder = new ProjectSummaryItemBuilder(
       copier,
       new Padder(),
-      new RegEx(),
       itemContainer);
   };
 
@@ -54,6 +53,7 @@ var ProjectSummary = function() {
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
+    App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateDisplay);
     jQuery('#ProjectSummary input.filter').keyup(onFilterChange);
   };
 

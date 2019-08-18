@@ -6,6 +6,7 @@ var App = function() {
       this.persister = new LocalStoragePersister();
       this.settings = new Settings();
       this.globalSettings = new GlobalSettings();
+      this.projectSegmentor = new ProjectSegmentor();
       new ModuleLoader().load(moduleNames);
     }
   };

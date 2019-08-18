@@ -11,18 +11,3 @@
 #SpanSummary .time {
   text-align: center;
 }
-#SpanSummary .segment {
-  display: inline-block;
-  margin-right: 0.5em;
-  font-style: italic;
-}
-#SpanSummary .segment_1 {
-  color:red;
-}
-#SpanSummary .segment_2 {
-  color:blue;
-}
-#SpanSummary .segment_separator {
-  display: inline-block;
-  margin-right: 0.5em;
-}

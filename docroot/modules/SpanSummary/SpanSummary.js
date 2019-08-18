@@ -37,6 +37,7 @@ var SpanSummary = function() {
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
+    App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', populateSpans);
     jQuery('#SpanSummary input.filter').keyup(onFilterChange);
   };
 
