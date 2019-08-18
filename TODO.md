@@ -4,6 +4,8 @@
 
 ## Backlog
 
+* Test with real data
+
 ### Design
 
 * SVG icons instead of font?
@@ -38,3 +40,6 @@
 * Fixed bug that didn't confirm save-and-repeat on previous/future dates.
 * Fixed bug that sometimes caused edited task list to silently include the wrong items when executing save-and-repeat.
 * Added project name segmentation based on configurable char list.
+* Added chart to show elapsed time vs worked time.
+* Fixed bug in exporter that broken downloads when hash present in data.
+

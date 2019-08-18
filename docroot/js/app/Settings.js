@@ -1,8 +1,17 @@
 var Settings = function() {
 
-  var topContainer;
+  var contentContainer;
+  var background;
   var fieldBuilder;
   var sections = {};
+  var template = `
+    <span class="mini_button settings"><i class="fas fa-cog"></i> Settings</span>
+    <div class="background">
+      <div class="content">
+        <span class="close fas fa-window-close"></span>
+      </div>
+    </div>
+  `;
   var sectionTemplate = `
     <section>
       <label class="section_label"></label>
@@ -10,13 +19,19 @@ var Settings = function() {
     </section>`;
 
   var init = function() {
+    build();
     gatherComponents();
     buildDependencies();
     addBehavior();
   };
 
+  var build = function() {
+    jQuery('#Settings').html(template);
+  };
+
   var gatherComponents = function() {
-    topContainer = jQuery('#Settings');
+    contentContainer = jQuery('#Settings .content');
+    background = jQuery('#Settings .background');
   };
 
   var buildDependencies = function() {
@@ -24,11 +39,18 @@ var Settings = function() {
   };
 
   var addBehavior = function() {
-    jQuery('#Settings').find('.mini_button.settings').click(showPanel);
+    jQuery('#Settings .mini_button.settings').click(show);
+    jQuery('#Settings .close').click(hide);
   };
 
-  var showPanel = function() {
-    console.log('showing panel');
+  var hide = function() {
+    contentContainer.hide();
+    background.hide();
+  };
+
+  var show = function() {
+    background.show();
+    contentContainer.show();
   };
 
   var addControl = function(index, config) {
@@ -40,7 +62,7 @@ var Settings = function() {
   };
 
   var createSection = function(name) {
-    sections[name] = jQuery(sectionTemplate).appendTo(topContainer);
+    sections[name] = jQuery(sectionTemplate).appendTo(contentContainer);
     sections[name].find('.section_label').text(name);
   };
 

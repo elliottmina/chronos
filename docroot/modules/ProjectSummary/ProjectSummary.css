@@ -4,9 +4,9 @@
 #ProjectSummary thead {
   display: none;
 }
-#ProjectSummary .hours,
-#ProjectSummary .time {
+#ProjectSummary .hours {
   text-align: center;
+  white-space: nowrap;
 }
 #ProjectSummary li.copy {
   border:0;
