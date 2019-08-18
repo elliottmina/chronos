@@ -6,7 +6,7 @@ var Downloader = function() {
 				.appendTo(document.body)
 				.text('export')
 				.attr('download', title)
-				.attr('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURI(content))
+        .attr('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(content))
 			
 			anchor.get(0).click();
 			anchor.remove();
