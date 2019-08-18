@@ -62,9 +62,6 @@ input {
   background-color:hsl(0, 0%, 99%);
 }
 .logo {
-  position: fixed;
-  bottom:0;
-  left:0;
   display: inline-block;
   background-color: hsl(0, 0%, 90%);
   padding:0.3em 0.5em;
@@ -83,32 +80,11 @@ input {
   font-size:0.9em;
   font-style: italic;
 }
+.hidden {
+  display: none;
+}
 section>header {
   margin-bottom: 1em;
-}
-@keyframes shake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
-}
-@keyframes shake2 {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
-}
-.shake {
-  animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-.shake2 {
-  animation: shake2 0.42s cubic-bezier(.36,.07,.19,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
 }
 .mini_button {
   cursor: pointer;
@@ -188,9 +164,6 @@ section>header {
 }
 
 #Settings>.mini_button {
-  position: fixed;
-  bottom: 0;
-  right:0;
   background-color: hsl(0, 0%, 100%);
   border-top: 1px solid hsl(0, 0%, 90%);
   border-left: 1px solid hsl(0, 0%, 90%);
@@ -208,12 +181,13 @@ section>header {
   background-color: hsla(0, 0%, 0%, 0.35);
 }
 #Settings .content {
-  display: none;
+  display: inline-block;
   background-color: white;
   text-align: left;
   padding:1em;
-  margin:10%;
+  margin-top:10%;
   position: relative;
+  z-index: 10000;
 }
 #Settings .close {
   position: absolute;
@@ -222,4 +196,32 @@ section>header {
   font-size: 2em;
   color: blue;
   cursor: pointer;
+}
+#Settings .fa-toggle-on,
+#Settings .fa-toggle-off {
+  font-size: 1.5em;
+  position: relative;
+  top:0.1em;
+  margin-right:0.25em;
+}
+#Settings label {
+  display: inline-block;
+}
+#Settings .settings_group {
+  margin-bottom: 2em;
+}
+#Settings .settings_group_label {
+  font-size: 1.5em;
+  min-width: 12em;
+  margin-bottom: 0.3em;
+}
+#Settings h2 {
+  font-size: 1.8em;
+}
+#Settings .field_wrapper {
+  min-height: 1.5em;
+  padding:0.25em;
+}
+#Settings .field_wrapper label {
+  min-width: 15em;
 }

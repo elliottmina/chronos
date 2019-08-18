@@ -5,17 +5,16 @@ var Settings = function() {
   var fieldBuilder;
   var sections = {};
   var template = `
-    <span class="mini_button settings"><i class="fas fa-cog"></i> Settings</span>
     <div class="background">
       <div class="content">
+        <h2>Settings</h2>
         <span class="close fas fa-window-close"></span>
       </div>
     </div>
   `;
   var sectionTemplate = `
-    <section>
-      <label class="section_label"></label>
-      <dl></dl>
+    <section class="settings_group">
+      <label class="settings_group_label"></label>
     </section>`;
 
   var init = function() {
@@ -39,12 +38,17 @@ var Settings = function() {
   };
 
   var addBehavior = function() {
-    jQuery('#Settings .mini_button.settings').click(show);
+    jQuery('#settings_button').click(show);
     jQuery('#Settings .close').click(hide);
+    jQuery('#Settings .background').click(hide);
+    jQuery('#Settings .content').click(function() {
+      event.stopPropagation();
+      event.preventDefault();
+    });
   };
 
   var hide = function() {
-    contentContainer.hide();
+    contentContainer.css('display', 'inline-block');
     background.hide();
   };
 
@@ -57,13 +61,13 @@ var Settings = function() {
     if (!(config.section in sections))
       createSection(config.section);
 
-    var fieldWrapper = jQuery('<div>').appendTo(sections[config.section]);
+    var fieldWrapper = jQuery('<div class="field_wrapper">').appendTo(sections[config.section]);
     fieldBuilder.build(config, fieldWrapper);
   };
 
   var createSection = function(name) {
     sections[name] = jQuery(sectionTemplate).appendTo(contentContainer);
-    sections[name].find('.section_label').text(name);
+    sections[name].find('.settings_group_label').text(name);
   };
 
   init();

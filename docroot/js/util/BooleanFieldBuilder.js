@@ -2,8 +2,8 @@ var BooleanFieldBuilder = function() {
   
   var template = `
     <span class="field boolean">
-      <label></label>
       <span class="fas fa-toggle-on"></span>
+      <label></label>
     </span>`;
 
   var toggle = function(el, callback) {
