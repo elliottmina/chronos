@@ -1,6 +1,6 @@
 JsonExportCollector = function(timeUtil) {
 	
-	var range = 1000;
+	var range = 500;
 	var exportData;
 	var currDate;
 
