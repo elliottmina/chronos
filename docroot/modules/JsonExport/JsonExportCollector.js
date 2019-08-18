@@ -10,7 +10,7 @@ JsonExportCollector = function(timeUtil) {
   };
 
   var getFinishDate = function() {
-    return timeUtil.addDays(new Date(), 100);
+    return timeUtil.addDays(new Date(), 10);
   };
 
   var iterate = function() {
