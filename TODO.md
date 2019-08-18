@@ -10,10 +10,6 @@
 
 ### Stuff
 
-* Sound no longer plays
-* Goals
-  * Avatar with words of encouragement?  Also coach Z.
-
 ### Design
 
 * SVG icons instead of font?
