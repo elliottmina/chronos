@@ -10,7 +10,6 @@
 
 ### Stuff
 
-* split project text and color code
 * Configuration to control stats charts (don't show root?)
   * configure delimeters
 * Allow repeat of summary

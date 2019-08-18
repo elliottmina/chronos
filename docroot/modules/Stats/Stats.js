@@ -6,15 +6,33 @@ var Stats = function() {
   var timeUtil;
   var date;
   var weekStart;
+  var showRootCharts;
+  var showFullCharts;
+
   var dailyChart;
   var dailyRootChart;
   var weeklyChart;
-  var weeklyRootChart
+  var weeklyRootChart;
+
+  var dailyChartContainer;
+  var dailyRootChartContainer;
+  var weeklyChartContainer;
+  var weeklyRootChartContainer;
+
 
   var init = function() {
+    initSettings();
     buildDependencies();
     build();
+    gatherComponents();
+    updateVisibility();
     addBehavior();
+    registerSettings();
+  };
+
+  var initSettings = function() {
+    showRootCharts = JSON.parse(localStorage.getItem('stats_show_root_charts'));
+    showFullCharts = JSON.parse(localStorage.getItem('stats_show_full_charts'));
   };
 
   var buildDependencies = function() {
@@ -26,10 +44,17 @@ var Stats = function() {
 
   var build = function() {
     jQuery('#Stats').html(StatsTemplate);
-    dailyChart = chartBuilder.build('StatusTodayChart');
-    dailyRootChart = chartBuilder.build('StatusTodayRootChart');
-    weeklyChart = chartBuilder.build('StatusWeeklyChart');
-    weeklyRootChart = chartBuilder.build('StatusWeeklyRootChart');
+    dailyChart = chartBuilder.build('StatsTodayChart');
+    dailyRootChart = chartBuilder.build('StatsTodayRootChart');
+    weeklyChart = chartBuilder.build('StatsWeeklyChart');
+    weeklyRootChart = chartBuilder.build('StatsWeeklyRootChart');
+  };
+
+  var gatherComponents = function() {
+    dailyChartContainer = jQuery('#StatsToday');
+    dailyRootChartContainer = jQuery('#StatsTodayRoot');
+    weeklyChartContainer = jQuery('#StatsWeekly');
+    weeklyRootChartContainer = jQuery('#StatsWeeklyRoot');
   };
 
   var addBehavior = function() {
@@ -37,6 +62,52 @@ var Stats = function() {
     App.dispatcher.subscribe('SPAN_SAVED', updateCharts);
     App.dispatcher.subscribe('SPAN_DELETED', updateCharts);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateCharts);
+  };
+
+  var registerSettings = function() {
+    App.settings.register([{
+      section:'General',
+      label:'Show root project charts',
+      value:showRootCharts,
+      type:'boolean',
+      callback:onShowRootChartsChange
+    },{
+      section:'General',
+      label:'Show full project charts',
+      value:showFullCharts,
+      type:'boolean',
+      callback:onShowFullChartsChange
+    }]);
+  };
+
+  var onShowRootChartsChange = function(newValue) {
+    showRootCharts = newValue;
+    localStorage.setItem('stats_show_root_charts', JSON.stringify(newValue));
+    updateVisibility();
+  };
+
+  var onShowFullChartsChange = function(newValue) {
+    showFullCharts = newValue;
+    localStorage.setItem('stats_show_full_charts', JSON.stringify(newValue));
+    updateVisibility();
+  };
+
+  var updateVisibility = function() {
+    if (showFullCharts) {
+      dailyChartContainer.show();
+      weeklyChartContainer.show();
+    } else {
+      dailyChartContainer.hide();
+      weeklyChartContainer.hide();
+    }
+
+    if (showRootCharts) {
+      dailyRootChartContainer.show();
+      weeklyRootChartContainer.show();
+    } else {
+      dailyRootChartContainer.hide();
+      weeklyRootChartContainer.hide();
+    }
   };
 
   var onDateChanged = function(data) {
