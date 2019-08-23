@@ -4,8 +4,8 @@
 
 ## Backlog
 
-* shortcut for save and repeat
 * Test with real data
+* move settings button to top right
 
 ### Design
 
@@ -44,3 +44,4 @@
 * Added chart to show elapsed time vs worked time.
 * Fixed bug in exporter that broken downloads when hash present in data.
 * Added save-and-repeat shortcut
+* Span and project summaries are always displayed.  These are stacked at low screen widths, and side-by-side at higher screen widths.
