@@ -217,12 +217,22 @@
 #SpanCreator .editing_indicator {
   display: none;
 }
+#SpanCreator .hotkeys_button {
+font-size: 0.9em;
+cursor: pointer;
+}
 #SpanCreator section.hotkeys {
+  display: none;
   margin-top:1em;
+  margin-bottom: 0;
+  font-size: 0.9em;
+}
+#SpanCreator section.hotkeys.active {
+  display: block;
 }
 #SpanCreator .hotkeys .set {
   display: inline-block;
-  margin-right: 1em;
+  margin-right: 2em;
 }
 #SpanCreator .hotkeys .set header {
   border-bottom: 1px solid grey;
@@ -232,13 +242,13 @@
   display: inline-block;
 }
 #SpanCreator .hotkeys .global .keys {
-  min-width: 7em;
+  min-width: 11em;
 }
 #SpanCreator .hotkeys .time .keys {
   min-width: 2em;
 }
 #SpanCreator .hotkeys ul {
-  width: 15em;
+  width: 20em;
   vertical-align: top;
 }
 #SpanCreator .hotkeys li {

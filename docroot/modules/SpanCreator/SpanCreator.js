@@ -94,6 +94,9 @@ var SpanCreator = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('EDIT_SPAN_REQUESTED', onEditSpanRequested);
     App.dispatcher.subscribe('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
+    topContainer.find('.hotkeys_button').click(function() {
+      topContainer.find('section.hotkeys').toggleClass('active');
+    })
   };
 
   var save = function() {

@@ -46,6 +46,8 @@ var SpanCreatorTemplate = `
       </span>
     </div>
 
+    <span class="hotkeys_button"><span class="far fa-keyboard"></span> Shortcuts</span>
+
     <section class="hotkeys">
       <div class="set global">
         <header>Global</header>
@@ -83,6 +85,13 @@ var SpanCreatorTemplate = `
               <span class="icon">Ctrl</span> + <span class="icon">Enter</span>
             </span>
             <span class="text">Save</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon">Shift</span> + <span class="icon">Enter</span>
+            </span>
+            <span class="text">Save and repeat</span>
           </li>
 
         </ul>
