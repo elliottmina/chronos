@@ -168,20 +168,12 @@ var Stats = function() {
       return;
     }
 
-    var totalWorked = result[0];
-    var waste = result[1];
+    var totalWorked, waste;
+    [totalWorked, waste] = result;
 
+    efficiencyChartContainer.show();
     efficiencyChart.data.datasets[0].data = [totalWorked.toFixed(2), waste.toFixed(2)];
     efficiencyChart.update();
-  };
-
-  var calcHours = function(spans) {
-    var totalMillis = 0;
-    jQuery.each(spans, function(key, span) {
-      totalMillis += new Date(span.finish) - new Date(span.start);
-    });
-
-    return totalMillis/1000/60/60;
   };
 
   init();

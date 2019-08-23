@@ -45,5 +45,89 @@ var SpanCreatorTemplate = `
         <span class="far fa-pencil"></span> Editing
       </span>
     </div>
+
+    <section class="hotkeys">
+      <div class="set global">
+        <header>Global</header>
+        <ul>
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon">J</span>
+            </span>
+            <span class="text">Project</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon">K</span>
+            </span>
+            <span class="text">Start</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon">L</span>
+            </span>
+            <span class="text">Task</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon pad">;</span>
+            </span>
+            <span class="text">Finish</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">Ctrl</span> + <span class="icon">Enter</span>
+            </span>
+            <span class="text">Save</span>
+          </li>
+
+        </ul>
+      </div>
+      <div class="set time">
+        <header>Time field</header>
+        <ul>
+          <li>
+            <span class="keys">
+              <span class="icon"><i class="far fa-arrow-up"></i></span>
+            </span>
+            <span class="text">Minute up</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon"><i class="far fa-arrow-down"></i></span>
+            </span>
+            <span class="text">Minute down</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">N</span>
+            </span>
+            <span class="text">Now</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">A</span>
+            </span>
+            <span class="text">AM</span>
+          </li>
+
+          <li>
+            <span class="keys">
+              <span class="icon">P</span>
+            </span>
+            <span class="text">PM</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
   </section>
 `;

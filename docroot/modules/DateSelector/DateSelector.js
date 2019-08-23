@@ -7,8 +7,8 @@ var DateSelector = function() {
   var dialog;
 
   var html = `
-    <span class="mini_button previous far fa-chevron-left"></span>
-    <span class="mini_button next far fa-chevron-right"></span>
+    <span class="mini_button previous far fa-chevron-left" title="Ctrl + ["></span>
+    <span class="mini_button next far fa-chevron-right" title="Ctrl + ]"></span>
     <span class="mini_button picker_button far fa-calendar"></span>`;
 
   var dateHtml = `<input type="date" class="date_picker" />`;
