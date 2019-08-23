@@ -11,11 +11,12 @@ var StatsPieChartBuilder = function() {
           },
           responsive:false,
           animation:{
-            duration:0,
+            duration:400,
             animateRotate:false
           },
           legend:{
-            display:false
+            display:false,
+            position:'bottom'
           }
         },
         data:{

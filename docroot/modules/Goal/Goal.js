@@ -33,10 +33,6 @@ var Goal = function() {
     jQuery('#Goal').html(GoalTemplate);
 
     dailyChart = chartBuilder.build('GoalTodayChart', 'green');
-    setTimeout(function() {
-      dailyChart.options.animation.duration = 500;
-    }, 3000);
-
     weeklyChart = chartBuilder.build('GoalWeeklyChart', 'blue');
   };
 

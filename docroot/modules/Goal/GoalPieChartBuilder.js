@@ -5,9 +5,9 @@ var GoalPieChartBuilder = function() {
         type:'pie',
         options:{
           responsive:false,
-          cutoutPercentage:90,
+          cutoutPercentage:75,
           animation:{
-            duration:0,
+            duration:400,
             animateRotate:false
           },
           tooltips:{
@@ -17,9 +17,9 @@ var GoalPieChartBuilder = function() {
         data:{
           datasets:[{
             data:[],
-            backgroundColor:[color, 'transparent'],
+            backgroundColor:[color, 'cornflowerblue'],
             hoverBackgroundColor:[color, 'transparent'],
-            borderWidth:0
+            borderWidth:1
           }]
         }
       });
