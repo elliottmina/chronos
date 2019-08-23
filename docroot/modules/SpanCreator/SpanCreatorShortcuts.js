@@ -1,6 +1,7 @@
 var SpanCreatorShortcuts = function(
   projectSuggestor, 
   save, 
+  saveAndRepeat,
   startTimeField, 
   finishTimeField,
   taskList) {
@@ -39,7 +40,7 @@ var SpanCreatorShortcuts = function(
 
       case 'ENTER':
         stopPropagation(e);
-        save();
+        e.shiftKey ? saveAndRepeat() : save();
         return;
   
       case 'J':

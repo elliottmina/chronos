@@ -66,6 +66,7 @@ var SpanCreator = function() {
     new SpanCreatorShortcuts(
       projectSuggestor, 
       save, 
+      saveAndRepeat,
       startTimeField, 
       finishTimeField,
       taskList);

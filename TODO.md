@@ -43,4 +43,4 @@
 * Added project name segmentation based on configurable char list.
 * Added chart to show elapsed time vs worked time.
 * Fixed bug in exporter that broken downloads when hash present in data.
-
+* Added save-and-repeat shortcut
