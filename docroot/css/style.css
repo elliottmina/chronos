@@ -107,7 +107,7 @@ section>header {
     flex-wrap: nowrap;
   }
   #summary_container>section {
-    flex-grow:1;
+    flex:1 1 0;
   }
 }
 

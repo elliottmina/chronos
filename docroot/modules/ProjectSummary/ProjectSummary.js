@@ -91,7 +91,7 @@ var ProjectSummary = function() {
   };
 
   var onFilterChange = function() {
-    itemContainer.find('tr').show();
+    itemContainer.find('li').show();
 
     var projectText = jQuery(this).val().toLowerCase();
     if (projectText == '')
@@ -99,11 +99,11 @@ var ProjectSummary = function() {
     
     var re = new RegExp(projectText.split('').join('.*'));
 
-    itemContainer.find('tr').each(function(index, tr) {
-      tr = jQuery(tr);
-      var project = tr.find('.project').text().toLowerCase();
+    itemContainer.find('li').each(function(index, container) {
+      container = jQuery(container);
+      var project = container.find('.project').text().toLowerCase();
       if (!re.test(project))
-        tr.hide();
+        container.hide();
     });
   };
 
