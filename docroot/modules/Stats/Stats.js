@@ -4,6 +4,7 @@ var Stats = function() {
   var statsCalculator;
   var colorGenerator;
   var timeUtil;
+  var efficiencyCalculator;
   var date;
   var weekStart;
   var showRootCharts;
@@ -42,6 +43,7 @@ var Stats = function() {
     statsCalculator = new StatsDataCalculator();
     colorGenerator = new StatsColorGenerator();
     timeUtil = new TimeUtil();
+    efficiencyCalculator =  new StatsEfficiencyCalculator();
   };
 
   var build = function() {
@@ -160,21 +162,14 @@ var Stats = function() {
   };
 
   var updateEfficiency = function() {
-    var keys = Object.keys(today.spans);
-    
-    if (keys.length == 0) {
+    result = efficiencyCalculator.calc(today.spans);
+    if (result == undefined) {
       efficiencyChartContainer.hide();
       return;
     }
 
-    efficiencyChartContainer.show();
-
-    var first = today.spans[keys[0]];
-    var last = today.spans[keys[keys.length-1]];
-
-    var elapsed = (last.finish - first.start)/1000/60/60;
-    var totalWorked = calcHours(today.spans);
-    var waste = elapsed - totalWorked;
+    var totalWorked = result[0];
+    var waste = result[1];
 
     efficiencyChart.data.datasets[0].data = [totalWorked.toFixed(2), waste.toFixed(2)];
     efficiencyChart.update();
