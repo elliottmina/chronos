@@ -27,7 +27,7 @@ var SpanSummary = function() {
   var build = function() {
     var renderTo = jQuery('#SpanSummary');
     renderTo.html(SpanSummaryTemplate);
-    spansContainer = renderTo.find('tbody');
+    spansContainer = renderTo.find('.item_container');
     noContentContainer = renderTo.find('.no_content_container');
     contentContainer = renderTo.find('content_container');
   };
@@ -83,7 +83,7 @@ var SpanSummary = function() {
   };
 
   var onFilterChange = function() {
-    spansContainer.find('tr').show();
+    spansContainer.find('li').show();
 
     var projectText = jQuery(this).val().toLowerCase();
     if (projectText == '')
@@ -91,11 +91,11 @@ var SpanSummary = function() {
     
     var re = regEx.squishyMatch(projectText);
 
-    spansContainer.find('tr').each(function(index, tr) {
-      tr = jQuery(tr);
-      var project = tr.find('.project').text().toLowerCase();
+    spansContainer.find('li').each(function(index, container) {
+      container = jQuery(container);
+      var project = container.find('.project').text().toLowerCase();
       if (!re.test(project))
-        tr.hide();
+        container.hide();
     });
   };
 

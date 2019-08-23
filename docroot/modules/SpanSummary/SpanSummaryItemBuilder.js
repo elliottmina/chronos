@@ -30,7 +30,7 @@ var SpanSummaryItemBuilder = function(
   };
 
   var buildTasks = function(span, container) {
-    var taskContainer = container.find('ul');
+    var taskContainer = container.find('.task_list');
     taskContainer.empty();
     jQuery.each(span.tasks, function(index, task) {
       var li = jQuery('<li>')

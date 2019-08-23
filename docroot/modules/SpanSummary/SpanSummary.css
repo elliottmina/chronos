@@ -1,13 +1,36 @@
-#SpanSummary thead {
-  display: none;
+#SpanSummary .item_container {
+  margin-top:1em;
 }
-#SpanSummary tbody tr:hover {
-  background-color: hsla(212, 51%, 90%, 1);
+#SpanSummary .item_container>li {
+  list-style: none;
+  padding:0.5em;
+  border-bottom:1px solid hsl(0, 0%, 88%);
 }
-#SpanSummary tbody tr.selected {
+#SpanSummary .item_container>li header {
+}
+#SpanSummary .item_container>li .actions {
+  float:right;
+}
+#SpanSummary .item_container>li .time {
+  font-size: 0.8em;
+}
+#SpanSummary .item_container>li .time>span {
+  display: inline-block;
+}
+#SpanSummary .item_container>li .start:after {
+  content: " - ";
+}
+#SpanSummary .item_container>li .elapsed {
+  margin-left:1em;
+}
+#SpanSummary .item_container>li .elapsed:after {
+  content: " hours";
+}
+#SpanSummary .task_list {
+  margin-top:1em;
+}
+
+/*#SpanSummary tbody tr.selected {
   background-color: hsl(213, 51%, 80%);
 }
-#SpanSummary .hours,
-#SpanSummary .time {
-  text-align: center;
-}
+*/
