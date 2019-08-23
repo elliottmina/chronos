@@ -1,15 +1,19 @@
 var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var itemTemplate = `
-    <tr>
-      <td class="project"></td>
-      <td class="hours">
-        <span class="value"></span>
-        <span class="copy button">
-          <i class="fas fa-copy"></i>
-        </span>
-      </td>
-      <td class="tasks"><ul class="task_list"></ul></td>
+    <li>
+      <header>
+        <span class="project"></span>
+        <span class="hours">
+          <span class="value"></span>
+          <span class="copy button">
+            <i class="fas fa-copy"></i>
+          </span>
+        </div>
+      </header>
+      <div class="tasks">
+        <ul class="task_list"></ul>
+      </div>
     </li>
   `;
 

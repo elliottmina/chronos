@@ -5,17 +5,7 @@ var ProjectSummary = function() {
     <div class="no_content_container">Nothing to see here.  Move along.</div>
     <div class="content_container">
       <input type="text" placeholder="filter" class="filter" />
-      <table>
-        <thead>
-          <tr>
-            <th class="project">Project</th>
-            <th class="hours">Hours</th>
-            <th class="time">Time</th>
-            <th class="tasks">Tasks</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <ul class="item_container"></ul>
     </div>`;
 
   var dataBuilder;
@@ -43,7 +33,7 @@ var ProjectSummary = function() {
   };
 
   var gatherComponents = function() {
-    itemContainer = jQuery('#ProjectSummary tbody');
+    itemContainer = jQuery('#ProjectSummary .item_container');
     noContentContainer = jQuery('#ProjectSummary .no_content_container');
     contentContainer = jQuery('#ProjectSummary .content_container');
   };

@@ -14,6 +14,7 @@
 * More chart colors?
 * ensure date nav buttons don't move
 * delete Goal.css?
+* Settings buttons are not cursor:pointer
 
 ## Future
 

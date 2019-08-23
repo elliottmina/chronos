@@ -1,9 +1,16 @@
-#ProjectSummary thead {
-  display: none;
+#ProjectSummary .item_container>li {
+  list-style: none;
+  margin:1em 0;
+  padding:0.5em;
+  border:1px solid #ccc;
+  border-radius: 2px;
+}
+#ProjectSummary .item_container>li header {
+  margin-bottom: 1em;
 }
 #ProjectSummary .hours {
-  text-align: center;
   white-space: nowrap;
+  float: right;
 }
 #ProjectSummary li.copy {
   border:0;
