@@ -4,6 +4,7 @@
 
 ## Backlog
 
+* shortcut for save and repeat
 * Test with real data
 
 ### Design
