@@ -24,6 +24,8 @@
 * Alternating bg colors in span summary
 * selected treatment for editing span
 * Suggested project should not change background color.  replace outer glow with inner glow?
+* Confirmation dialogue needs to take focus on submit button
+* project item button to copy the whole thing
 
 ## Future
 
@@ -55,3 +57,4 @@
 * Fixed bug in exporter that broken downloads when hash present in data.
 * Added save-and-repeat shortcut
 * Span and project summaries are always displayed.  These are stacked at low screen widths, and side-by-side at higher screen widths.
+* Project root controls colors for spans, projects and charts.

@@ -31,9 +31,9 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
       .appendTo(listEl);
 
     var projectLabel = App.projectSegmentor.getFormatted(project.label);
-    var projectRoot = App.projectSegmentor.segment(project.label)[0];
     itemContainer.find('.project').html(projectLabel);
-    // itemContainer.css('background-color', App.colorGenerator.generate(projectRoot));
+
+    setColorTreatment(project.label, itemContainer);
     
     var time = formatTime(project.time)
     itemContainer.find('.hours .value').text(time);
@@ -54,6 +54,14 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
         .click(copy)
         .data('copy', project.tasks.join('\n'));      
     }
+  };
+
+  var setColorTreatment = function(label, container) {
+    var projectRoot = App.projectSegmentor.segment(label)[0];
+    var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
+    var color = App.colorGenerator.generate(projectRoot);
+    container.css('background-color', colorTrans);
+    container.css('border-color', color);
   };
 
   var formatTime = function(minutes) {
