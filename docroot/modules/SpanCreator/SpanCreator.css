@@ -136,10 +136,11 @@
   border-top:1px solid hsla(0, 0%, 80%, 1);
 }
 #SpanCreator .project_suggestions .suggestion {
-  width: 100%;
+  min-width: 17em;
+  position: relative;
   cursor: pointer;
   list-style: none;
-  padding:1em 2em;
+  padding:1em 1em;
   border-bottom:1px solid hsla(0, 0%, 80%, 1);
   border-right:1px solid hsla(0, 0%, 80%, 1);
   border-left:1px solid hsla(0, 0%, 80%, 1);
@@ -149,19 +150,25 @@
 #SpanCreator .project_suggestions .suggestion:hover {
   background-color: hsla(220, 100%, 90%, 0.95);
 }
-#SpanCreator .project_suggestions .suggestion.today.selected,
-#SpanCreator .project_suggestions .suggestion.selected {
-  background-color: hsla(0, 0%, 100%, 0.95);
-  box-shadow: 0 0 8px 0 hsla(220, 100%, 50%, 0.4);
-  z-index: 100;
-  position: relative;
+#SpanCreator .project_suggestions .suggestion .recent_indicator,
+#SpanCreator .project_suggestions .suggestion .selected_indicator {
+  display: none;
+}
+#SpanCreator .project_suggestions .suggestion.today .recent_indicator {
+  display: inline;
+}
+#SpanCreator .project_suggestions .suggestion.selected.today .selected_indicator,
+#SpanCreator .project_suggestions .suggestion.selected .selected_indicator {
+  display: inline-block;
+  margin-right:0.1em;
 }
 #SpanCreator .project_suggestions .suggestion.today {
   background-color: hsla(215, 88%, 95%, 0.95);
 }
-#SpanCreator .project_suggestions .suggestion.today i {
+#SpanCreator .project_suggestions .suggestion .recent_indicator {
   position: absolute;
-  left:0.5em;
+  right:0.2em;
+  opacity: 0.6;
 }
 #SpanCreator .task_list {display: inline-block;width: 15em;}
 #SpanCreator .task_list input {

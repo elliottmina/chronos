@@ -3,7 +3,12 @@ var SpanCreatorProjectSuggestor = function(
   todaysProjectBuilder,
   regEx) {
 
-  var itemTemplate = `<li class="suggestion"></li>`;
+  var itemTemplate = `
+    <li class="suggestion">
+      <i class="far fa-clock recent_indicator"></i>
+      <i class="far fa-chevron-right selected_indicator"></i>
+      <span class="text"></span>
+    </li>`;
   var projectsContainer;
   var recentProjects;
   var todaysProjects;
@@ -58,14 +63,12 @@ var SpanCreatorProjectSuggestor = function(
     var li = jQuery(itemTemplate)
       .clone()
       .appendTo(projectsContainer)
-      .text(suggestion)
       .click(selectSuggestion);
 
-    if (jQuery.inArray(suggestion, todaysProjects) != -1) {
+    li.find('.text').text(suggestion)
+
+    if (jQuery.inArray(suggestion, todaysProjects) != -1)
       li.addClass('today');
-      jQuery('<i class="far fa-clock"></i>')
-        .appendTo(li);
-    }
   };
 
   var reorder = function() {
@@ -75,7 +78,7 @@ var SpanCreatorProjectSuggestor = function(
   };
 
   var selectSuggestion = function() {
-    projectInput.val(jQuery(this).text());
+    projectInput.val(jQuery(this).find('.text').text());
     hide();
     publishChange();
   };
@@ -145,8 +148,6 @@ var SpanCreatorProjectSuggestor = function(
   };
 
   var selectDown = function() {
-    ensureShowing();
-
     selectedIndex++;
     selectedIndex = Math.min(selectedIndex, getSuggestions().length -1);
     showSelected();
