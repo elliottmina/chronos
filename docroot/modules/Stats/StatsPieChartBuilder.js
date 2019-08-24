@@ -9,7 +9,7 @@ var StatsPieChartBuilder = function() {
             display:true,
             text:'test'
           },
-          responsive:true,
+          responsive:false,
           animation:{
             duration:400,
             animateRotate:false
