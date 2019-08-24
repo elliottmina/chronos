@@ -19,7 +19,7 @@ var GoalPieChartBuilder = function() {
             data:[],
             backgroundColor:[primaryColor, secondaryColor],
             hoverBackgroundColor:[primaryColor, secondaryColor],
-            borderWidth:1
+            borderWidth:0
           }]
         }
       });

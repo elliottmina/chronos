@@ -5,10 +5,6 @@ var StatsPieChartBuilder = function() {
       return new Chart(el,{
         type:'pie',
         options:{
-          title:{
-            display:true,
-            text:'test'
-          },
           responsive:false,
           animation:{
             duration:400,

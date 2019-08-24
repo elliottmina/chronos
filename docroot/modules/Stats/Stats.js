@@ -38,7 +38,7 @@ var Stats = function() {
     
     var data = efficiencyChart.data;
     data.labels = ['Work', 'Waste'];
-    data.datasets[0].backgroundColor = ['#fb6c3b', '#5e2473'];
+    data.datasets[0].backgroundColor = ['#f5b829', '#f29728'];
   };
 
   var gatherComponents = function() {
@@ -98,8 +98,11 @@ var Stats = function() {
       return;
     }
 
-    var totalWorked, waste;
-    [totalWorked, waste] = result;
+    var totalWorked, waste, elapsed;
+    [totalWorked, waste, elapsed] = result;
+
+    var percent = (totalWorked/elapsed)*100;
+    efficiencyChartContainer.find('.percent').text(percent.toFixed(0));
 
     efficiencyChartContainer.show();
     efficiencyChart.data.datasets[0].data = [

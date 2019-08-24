@@ -6,16 +6,12 @@
 
 ### Design
 
-* project item button to copy the whole thing
-* SVG icons instead of font?
+* Center text in daily charts
 * New colors (including dark)
 * Colors for cancelbutton
-* ensure date nav buttons don't move
-* delete Goal.css?
 * Draw custom legend for stats charts.
   * order DESc
   * Take top 4
-* Center text in daily charts
 
 ## Future
 

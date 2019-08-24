@@ -29,7 +29,7 @@ var SpanSummary = function() {
     renderTo.html(SpanSummaryTemplate);
     spansContainer = renderTo.find('.item_container');
     noContentContainer = renderTo.find('.no_content_container');
-    contentContainer = renderTo.find('content_container');
+    contentContainer = renderTo.find('.content_container');
   };
 
   var addBehavior = function() {
@@ -48,8 +48,10 @@ var SpanSummary = function() {
 
   var populateSpans = function() {
     noContentContainer.show();
+    contentContainer.hide();
     spansContainer.empty();
     spanMap = {};
+
     jQuery.each(spans, function(index, span) {
       addSpan(span)
     });

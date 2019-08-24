@@ -6,23 +6,19 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
         <span class="project"></span>
         <span class="hours">
           <span class="value"></span>
-          <span class="copy button">
-            <i class="far fa-copy"></i>
-          </span>
+          <i class="far fa-copy copy"></i>
         </div>
       </header>
       <div class="tasks">
         <ul class="task_list"></ul>
       </div>
-      <i class="far fa-copy copy project-copy"></i>
+      <i class="far fa-copy copy project_copy"></i>
     </li>
   `;
 
   var copyTemplate = `
     <li class="copy">
-      <span class="copy button">
-        <i class="far fa-copy"></i>
-      </span>
+      <i class="far fa-copy copy"></i>
     </li>`;
 
   var build = function(project) {
@@ -61,7 +57,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
       formatTime(project.time) + '\n' + 
       project.tasks.join('\n');
 
-    container.find('.project-copy')
+    container.find('.project_copy')
       .data('copy', text)
       .click(copy);
   }
@@ -108,24 +104,16 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var copy = function() {
     var button = jQuery(this);
-    var icon = button.find('i');
     var text = button.data('copy');
 
-    icon.removeClass('fa-copy').addClass('fa-check');
+    button.removeClass('fa-copy').addClass('fa-check');
     setTimeout(function() {
-      icon.removeClass('fa-check').addClass('fa-copy');
+      button.removeClass('fa-check').addClass('fa-copy');
     }, 400);
 
     copier.copy(text);
   };
 
-  var copyProject = function() {
-    var li = jQuery(this).closest('li');
-    var text = li.find('.project').text() + '\n';
-    text += li.find('.hours .value').text() + '\n';
-    console.log(text);
-  };
-  
   return {
     build:build
   };

@@ -1,3 +1,6 @@
+#SpanSummary .content_container {
+  display: none;
+}
 #SpanSummary .item_container {
   margin-top:1em;
 }

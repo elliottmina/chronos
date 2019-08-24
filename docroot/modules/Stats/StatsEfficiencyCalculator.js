@@ -35,7 +35,7 @@ var StatsEfficiencyCalculator = function() {
       if (waste < 0)
         waste = 0;
 
-      return [totalWorked, waste];
+      return [totalWorked, waste, elapsed];
     }
   };
 

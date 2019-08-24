@@ -1,6 +1,6 @@
 #DateSelector {
-  display: inline-block;
-  font-size: 0.9em;
+  display: block;
+  font-size: 0.8em;
 }
 input.date_picker[type="date"] {
   font-size:2em;

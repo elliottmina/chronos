@@ -1,7 +1,7 @@
 var ProjectSummary = function() {
 
   var html = `
-    <header>Project summary</header>
+    <header>Projects</header>
     <div class="no_content_container">Nothing to see here.  Move along.</div>
     <div class="content_container">
       <input type="text" placeholder="filter" class="filter" />
