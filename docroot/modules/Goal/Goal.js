@@ -32,8 +32,8 @@ var Goal = function() {
   var build = function() {
     jQuery('#Goal').html(GoalTemplate);
 
-    dailyChart = chartBuilder.build('GoalTodayChart', 'green');
-    weeklyChart = chartBuilder.build('GoalWeeklyChart', 'blue');
+    dailyChart = chartBuilder.build('GoalTodayChart', '#2982db', '#f3f9ff');
+    weeklyChart = chartBuilder.build('GoalWeeklyChart', '#fb9e01', '#fefdd5');
   };
 
   var gatherComponents = function() {

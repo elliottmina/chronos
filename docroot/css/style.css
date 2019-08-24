@@ -120,13 +120,11 @@ section>header {
 .segment {
   display: inline-block;
   margin-right: 0.5em;
-  font-style: italic;
 }
 .segment_1 {
-  color:red;
+  font-weight: bold;
 }
 .segment_2 {
-  color:blue;
 }
 .segment_separator {
   display: inline-block;

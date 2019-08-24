@@ -7,7 +7,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
         <span class="hours">
           <span class="value"></span>
           <span class="copy button">
-            <i class="fas fa-copy"></i>
+            <i class="far fa-copy"></i>
           </span>
         </div>
       </header>
@@ -20,7 +20,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   var copyTemplate = `
     <li class="copy">
       <span class="copy button">
-        <i class="fas fa-copy"></i>
+        <i class="far fa-copy"></i>
       </span>
     </li>`;
 
@@ -78,7 +78,15 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   };
 
   var copy = function() {
-    var text = jQuery(this).data('copy');
+    var button = jQuery(this);
+    var icon = button.find('i');
+    var text = button.data('copy');
+
+    icon.removeClass('fa-copy').addClass('fa-check');
+    setTimeout(function() {
+      icon.removeClass('fa-check').addClass('fa-copy');
+    }, 400);
+
     copier.copy(text);
   };
   

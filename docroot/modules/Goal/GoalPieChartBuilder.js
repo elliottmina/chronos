@@ -1,6 +1,6 @@
 var GoalPieChartBuilder = function() {
   return {
-    build:function(el, color) {
+    build:function(el, primaryColor, secondaryColor) {
       return new Chart(el,{
         type:'pie',
         options:{
@@ -17,8 +17,8 @@ var GoalPieChartBuilder = function() {
         data:{
           datasets:[{
             data:[],
-            backgroundColor:[color, 'cornflowerblue'],
-            hoverBackgroundColor:[color, 'transparent'],
+            backgroundColor:[primaryColor, secondaryColor],
+            hoverBackgroundColor:[primaryColor, secondaryColor],
             borderWidth:1
           }]
         }

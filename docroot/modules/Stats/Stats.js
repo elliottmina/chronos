@@ -7,35 +7,21 @@ var Stats = function() {
   var efficiencyCalculator;
   var date;
   var weekStart;
-  var showRootCharts;
-  var showFullCharts;
   var today;
 
-  var dailyChart;
   var dailyRootChart;
-  var weeklyChart;
   var weeklyRootChart;
   var efficiencyChart;
 
-  var dailyChartContainer;
   var dailyRootChartContainer;
-  var weeklyChartContainer;
   var weeklyRootChartContainer;
   var efficiencyChartContainer;
 
   var init = function() {
-    initSettings();
     buildDependencies();
     build();
     gatherComponents();
-    updateVisibility();
     addBehavior();
-    registerSettings();
-  };
-
-  var initSettings = function() {
-    showRootCharts = JSON.parse(localStorage.getItem('stats_show_root_charts'));
-    showFullCharts = JSON.parse(localStorage.getItem('stats_show_full_charts'));
   };
 
   var buildDependencies = function() {
@@ -48,20 +34,16 @@ var Stats = function() {
 
   var build = function() {
     jQuery('#Stats').html(StatsTemplate);
-    dailyChart = chartBuilder.build('StatsTodayChart');
     dailyRootChart = chartBuilder.build('StatsTodayRootChart');
-    weeklyChart = chartBuilder.build('StatsWeeklyChart');
     weeklyRootChart = chartBuilder.build('StatsWeeklyRootChart');
     efficiencyChart = chartBuilder.build('StatsEfficiencyChart');
     
     efficiencyChart.data.labels = ['Work', 'Waste'];
-    efficiencyChart.data.datasets[0].backgroundColor = ['red', 'blue'];
+    efficiencyChart.data.datasets[0].backgroundColor = ['#fb6c3b', '#5e2473'];
   };
 
   var gatherComponents = function() {
-    dailyChartContainer = jQuery('#StatsToday');
     dailyRootChartContainer = jQuery('#StatsTodayRoot');
-    weeklyChartContainer = jQuery('#StatsWeekly');
     weeklyRootChartContainer = jQuery('#StatsWeeklyRoot');
     efficiencyChartContainer = jQuery('#StatsEfficiency');
   };
@@ -73,52 +55,6 @@ var Stats = function() {
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateCharts);
   };
 
-  var registerSettings = function() {
-    App.settings.register([{
-      section:'General',
-      label:'Show root project charts',
-      value:showRootCharts,
-      type:'boolean',
-      callback:onShowRootChartsChange
-    },{
-      section:'General',
-      label:'Show full project charts',
-      value:showFullCharts,
-      type:'boolean',
-      callback:onShowFullChartsChange
-    }]);
-  };
-
-  var onShowRootChartsChange = function(newValue) {
-    showRootCharts = newValue;
-    localStorage.setItem('stats_show_root_charts', JSON.stringify(newValue));
-    updateVisibility();
-  };
-
-  var onShowFullChartsChange = function(newValue) {
-    showFullCharts = newValue;
-    localStorage.setItem('stats_show_full_charts', JSON.stringify(newValue));
-    updateVisibility();
-  };
-
-  var updateVisibility = function() {
-    if (showFullCharts) {
-      dailyChartContainer.show();
-      weeklyChartContainer.show();
-    } else {
-      dailyChartContainer.hide();
-      weeklyChartContainer.hide();
-    }
-
-    if (showRootCharts) {
-      dailyRootChartContainer.show();
-      weeklyRootChartContainer.show();
-    } else {
-      dailyRootChartContainer.hide();
-      weeklyRootChartContainer.hide();
-    }
-  };
-
   var onDateChanged = function(data) {
     date = data.date;
     weekStart = timeUtil.getWeekStart(date);
@@ -127,15 +63,10 @@ var Stats = function() {
 
   var updateCharts = function() {
     today = App.persister.fetch(date);
-    updateToday();
+    updateChart(dailyRootChart, today.spans, statsCalculator.rootProjCalc);
     updateWeek();
     updateEfficiency();
   }
-
-  var updateToday = function() {
-    updateChart(dailyChart, today.spans, statsCalculator.noopProjCalc);
-    updateChart(dailyRootChart, today.spans, statsCalculator.rootProjCalc);
-  };
 
   var updateWeek = function() {
     var spans = [];
@@ -146,7 +77,6 @@ var Stats = function() {
         spans.push(span);
       });
     }
-    updateChart(weeklyChart, spans, statsCalculator.noopProjCalc);
     updateChart(weeklyRootChart, spans, statsCalculator.rootProjCalc);
   };
 

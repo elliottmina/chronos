@@ -15,6 +15,14 @@
 * ensure date nav buttons don't move
 * delete Goal.css?
 * Settings buttons are not cursor:pointer
+* Draw custom legend for stats charts.
+  * order DESc
+  * Take top 4
+* Background color for goal charts
+* Center text in daily charts
+* Alternating bg colors in span summary
+* selected treatment for editing span
+* Suggested project should not change background color.  replace outer glow with inner glow?
 
 ## Future
 

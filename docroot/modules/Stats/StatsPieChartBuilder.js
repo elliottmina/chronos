@@ -9,14 +9,13 @@ var StatsPieChartBuilder = function() {
             display:true,
             text:'test'
           },
-          responsive:false,
+          responsive:true,
           animation:{
             duration:400,
             animateRotate:false
           },
           legend:{
-            display:false,
-            position:'bottom'
+            display:false
           }
         },
         data:{
