@@ -33,7 +33,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
     var projectLabel = App.projectSegmentor.getFormatted(project.label);
     var projectRoot = App.projectSegmentor.segment(project.label)[0];
     itemContainer.find('.project').html(projectLabel);
-    itemContainer.css('background-color', App.colorGenerator.generate(projectRoot));
+    // itemContainer.css('background-color', App.colorGenerator.generate(projectRoot));
     
     var time = formatTime(project.time)
     itemContainer.find('.hours .value').text(time);

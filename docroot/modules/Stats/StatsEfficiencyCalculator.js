@@ -32,6 +32,8 @@ var StatsEfficiencyCalculator = function() {
       var elapsed = (last - first)/1000/60/60;
       var totalWorked = calcHours(spans);
       var waste = elapsed - totalWorked;
+      if (waste < 0)
+        waste = 0;
 
       return [totalWorked, waste];
     }

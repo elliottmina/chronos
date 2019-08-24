@@ -36,8 +36,9 @@ var Stats = function() {
     weeklyRootChart = chartBuilder.build('StatsWeeklyRootChart');
     efficiencyChart = chartBuilder.build('StatsEfficiencyChart');
     
-    efficiencyChart.data.labels = ['Work', 'Waste'];
-    efficiencyChart.data.datasets[0].backgroundColor = ['#fb6c3b', '#5e2473'];
+    var data = efficiencyChart.data;
+    data.labels = ['Work', 'Waste'];
+    data.datasets[0].backgroundColor = ['#fb6c3b', '#5e2473'];
   };
 
   var gatherComponents = function() {
@@ -83,8 +84,9 @@ var Stats = function() {
     var labels = kv[0];
     var values = kv[1];
 
-    chart.data.datasets[0].data = values;
-    chart.data.datasets[0].backgroundColor = App.colorGenerator.generate(labels);
+    var dataSet = chart.data.datasets[0];
+    dataSet.data = values;
+    dataSet.backgroundColor = App.colorGenerator.generateList(labels);
     chart.data.labels = labels;
     chart.update();
   };
@@ -100,7 +102,9 @@ var Stats = function() {
     [totalWorked, waste] = result;
 
     efficiencyChartContainer.show();
-    efficiencyChart.data.datasets[0].data = [totalWorked.toFixed(2), waste.toFixed(2)];
+    efficiencyChart.data.datasets[0].data = [
+      totalWorked.toFixed(2), 
+      waste.toFixed(2)];
     efficiencyChart.update();
   };
 

@@ -18,15 +18,18 @@ var SpanSummaryItemBuilder = function(
   };
 
   var populateSpan = function(span, container) {
-    setBackgroundColor(span, container);
+    setColorTreatment(span, container);
     addBehavior(span, container);
     setText(span, container);
     buildTasks(span, container);
   };
 
-  var setBackgroundColor = function(span, container) {
+  var setColorTreatment = function(span, container) {
     var projectRoot = App.projectSegmentor.segment(span.project)[0];
-    container.css('background-color', App.colorGenerator.generate(projectRoot));
+    var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
+    var color = App.colorGenerator.generate(projectRoot);
+    container.css('background-color', colorTrans);
+    container.css('border-color', color);
   };
 
   var addBehavior = function(span, container) {
@@ -66,7 +69,8 @@ var SpanSummaryItemBuilder = function(
     parts[0] = segmentify(parts[0], 1);
     parts[1] = segmentify(parts[1], 2);
 
-    return parts.join('<span class="segment_separator fal fa-angle-right"></span>');
+    return parts.join(
+      '<span class="segment_separator fal fa-angle-right"></span>');
   };
 
   var segmentify = function(text, num) {

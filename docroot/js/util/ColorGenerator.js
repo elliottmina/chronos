@@ -1,7 +1,28 @@
 var ColorGenerator = function() {
   
   var assignedColors = {};
-  var pallete = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5'];
+  var pallete = [
+    ['71', ' 176', '103'],
+    ['187', '226', '173'],
+    ['97', ' 150', '188'],
+    ['185', '210', '213'],
+    ['237', '180', '39'],
+    ['239', '211', '157'],
+    ['235', '102', '113'],
+    ['238', '167', '167'],
+    ['158', '140', '174'],
+    ['208', '202', '219'],
+    ['127', '215', '193'],
+    ['187', '242', '213'],
+    ['55', ' 108', '114'],
+    ['125', '184', '185'],
+    ['238', '157', '204'],
+    ['241', '201', '221'],
+    ['241', '201', '221'],
+    ['255', '192', '151'],
+    ['159', '118', '93'],
+    ['218', '193', '177']];
+
   var palleteIndex = -1;
 
   var getColor = function(key) {
@@ -17,21 +38,24 @@ var ColorGenerator = function() {
 
     assignedColors[key] = pallete[palleteIndex];
   };
+
+  var stringify = function(rgb, a) {
+    var rgba = rgb.concat(a);
+    return 'rgba(' + rgba.join(',') + ')';
+  };
   
   return {
-    generate:function(keys) {
-      var doSingle = !Array.isArray(keys);
-
-      if (doSingle)
-        keys = [keys];
+    generate:function(key, alpha) {
+      alpha = alpha || 1;
+      return stringify(getColor(key), alpha);
+    },
+    generateList:function(keys, alpha) {
+      alpha = alpha || 1;
 
       var colors = [];
       jQuery.each(keys, function(index, key) {
-        colors.push(getColor(key))
+        colors.push(stringify(getColor(key), alpha))
       });
-
-      if (doSingle)
-        colors = colors[0];
       return colors;
     }
   };

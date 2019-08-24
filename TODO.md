@@ -11,6 +11,7 @@
 
 * SVG icons instead of font?
 * New colors (including dark)
+* flex doesn't resize when narrow
 * More chart colors?
 * ensure date nav buttons don't move
 * delete Goal.css?
