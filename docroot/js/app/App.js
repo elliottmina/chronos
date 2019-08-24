@@ -7,6 +7,7 @@ var App = function() {
       this.settings = new Settings();
       this.globalSettings = new GlobalSettings();
       this.projectSegmentor = new ProjectSegmentor();
+      this.colorGenerator = new ColorGenerator();
       new ModuleLoader().load(moduleNames);
     }
   };

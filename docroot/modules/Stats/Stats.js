@@ -2,7 +2,6 @@ var Stats = function() {
   
   var chartBuilder;
   var statsCalculator;
-  var colorGenerator;
   var timeUtil;
   var efficiencyCalculator;
   var date;
@@ -27,7 +26,6 @@ var Stats = function() {
   var buildDependencies = function() {
     chartBuilder = new StatsPieChartBuilder();
     statsCalculator = new StatsDataCalculator();
-    colorGenerator = new StatsColorGenerator();
     timeUtil = new TimeUtil();
     efficiencyCalculator =  new StatsEfficiencyCalculator();
   };
@@ -86,7 +84,7 @@ var Stats = function() {
     var values = kv[1];
 
     chart.data.datasets[0].data = values;
-    chart.data.datasets[0].backgroundColor = colorGenerator.generate(labels);
+    chart.data.datasets[0].backgroundColor = App.colorGenerator.generate(labels);
     chart.data.labels = labels;
     chart.update();
   };

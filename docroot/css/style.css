@@ -59,7 +59,7 @@ input {
   padding: 0.2em;
   border-radius: 2px;
   margin:0.1em;
-  background-color:hsl(0, 0%, 99%);
+  background-color:hsla(0, 0%, 100%, 0.5);
   font-size:0.9em;
 }
 .no_content_container {

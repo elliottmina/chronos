@@ -18,9 +18,15 @@ var SpanSummaryItemBuilder = function(
   };
 
   var populateSpan = function(span, container) {
+    setBackgroundColor(span, container);
     addBehavior(span, container);
     setText(span, container);
     buildTasks(span, container);
+  };
+
+  var setBackgroundColor = function(span, container) {
+    var projectRoot = App.projectSegmentor.segment(span.project)[0];
+    container.css('background-color', App.colorGenerator.generate(projectRoot));
   };
 
   var addBehavior = function(span, container) {
