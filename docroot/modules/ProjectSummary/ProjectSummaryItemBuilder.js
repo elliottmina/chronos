@@ -14,6 +14,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
       <div class="tasks">
         <ul class="task_list"></ul>
       </div>
+      <i class="far fa-copy copy project-copy"></i>
     </li>
   `;
 
@@ -24,45 +25,46 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
       </span>
     </li>`;
 
-  var re;
+  var build = function(project) {
+    var container = jQuery(itemTemplate).appendTo(listEl);
 
-  var addProject = function(project) {
-    var itemContainer = jQuery(itemTemplate)
-      .appendTo(listEl);
-
-    var projectLabel = App.projectSegmentor.getFormatted(project.label);
-    itemContainer.find('.project').html(projectLabel);
-
-    setColorTreatment(project.label, itemContainer);
-    
-    var time = formatTime(project.time)
-    itemContainer.find('.hours .value').text(time);
-    itemContainer.find('.hours .copy')
-      .click(copy)
-      .data('copy', time);
-    
-    var tasksContainer = itemContainer.find('ul');
-    jQuery.each(project.tasks, function(index, task) {
-      jQuery('<li>')
-        .appendTo(tasksContainer)
-        .text(task);
-    });
-
-    if (project.tasks.length) {
-      var li = jQuery(copyTemplate)
-        .appendTo(tasksContainer)
-        .click(copy)
-        .data('copy', project.tasks.join('\n'));      
-    }
+    buildLabel(container, project);
+    buildColorTreatment(container, project);
+    buildTime(container, project);
+    buildTasks(container, project);
+    buildProjectCopy(container, project);
   };
 
-  var setColorTreatment = function(label, container) {
-    var projectRoot = App.projectSegmentor.segment(label)[0];
+  var buildLabel = function(container, project) {
+    var projectLabel = App.projectSegmentor.getFormatted(project.label);
+    container.find('.project').html(projectLabel);
+  };
+
+  var buildTime = function(container, project) {
+    var time = formatTime(project.time)
+    container.find('.hours .value').text(time);
+    container.find('.hours .copy')
+      .click(copy)
+      .data('copy', time);
+  };
+
+  var buildColorTreatment = function(container, project) {
+    var projectRoot = App.projectSegmentor.segment(project.label)[0];
     var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
     var color = App.colorGenerator.generate(projectRoot);
     container.css('background-color', colorTrans);
     container.css('border-color', color);
   };
+
+  var buildProjectCopy = function(container, project) {
+    var text = project.label + '\n' + 
+      formatTime(project.time) + '\n' + 
+      project.tasks.join('\n');
+
+    container.find('.project-copy')
+      .data('copy', text)
+      .click(copy);
+  }
 
   var formatTime = function(minutes) {
     if (App.globalSettings.use_decimal_hours)
@@ -88,6 +90,22 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
     return roundedTempNumber / factor;
   };
 
+  var buildTasks = function(container, project) {
+    var tasksContainer = container.find('ul');
+    jQuery.each(project.tasks, function(index, task) {
+      jQuery('<li>')
+        .appendTo(tasksContainer)
+        .text(task);
+    });
+
+    if (project.tasks.length) {
+      var li = jQuery(copyTemplate)
+        .appendTo(tasksContainer)
+        .click(copy)
+        .data('copy', project.tasks.join('\n'));      
+    }
+  };
+
   var copy = function() {
     var button = jQuery(this);
     var icon = button.find('i');
@@ -100,9 +118,16 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
     copier.copy(text);
   };
+
+  var copyProject = function() {
+    var li = jQuery(this).closest('li');
+    var text = li.find('.project').text() + '\n';
+    text += li.find('.hours .value').text() + '\n';
+    console.log(text);
+  };
   
   return {
-    build:addProject
+    build:build
   };
   
 };
