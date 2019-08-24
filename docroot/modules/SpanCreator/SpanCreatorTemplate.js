@@ -41,9 +41,10 @@ var SpanCreatorTemplate = `
         <i class="far fa-repeat"></i>
         Create + repeat
       </div>
-      <span class="editing_indicator">
-        <span class="far fa-pencil"></span> Editing
-      </span>
+      <div class="button cancel" tabindex="1">
+        <i class="far fa-times-circle"></i>
+        Cancel
+      </div>
     </div>
 
     <span class="hotkeys_button"><span class="far fa-keyboard"></span> Shortcuts</span>

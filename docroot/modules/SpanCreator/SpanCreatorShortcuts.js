@@ -27,11 +27,6 @@ var SpanCreatorShortcuts = function(
   };
   
   var addBehavior = function() {
-    var topContainer = jQuery('#SpanCreator');
-    topContainer.find('.toggle_hotkeys').click(toggleDisplay);
-    topContainer.find('.save')
-      .click(save)
-      .keyup(onSaveKeyUp);
     jQuery(document).keydown(onKeyDown);
   };
 
@@ -73,14 +68,6 @@ var SpanCreatorShortcuts = function(
   var onSaveKeyUp = function(e) {
     if (e.key == 'Enter' || e.key == ' ')
       save();
-  };
-
-  var toggleDisplay = function() {
-    container.toggle();
-    if (container.css('display') == 'block')
-      buttonIcon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-    else
-      buttonIcon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
   };
 
   init();

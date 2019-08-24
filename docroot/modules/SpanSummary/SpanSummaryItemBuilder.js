@@ -97,8 +97,8 @@ var SpanSummaryItemBuilder = function(
     var el = jQuery(this);
     var guid = el.data('guid');
     App.dispatcher.publish('EDIT_SPAN_REQUESTED', guid);
-    spansContainer.find('tr').removeClass('selected');
-    el.closest('tr').addClass('selected');
+    spansContainer.find('.selected').removeClass('selected');
+    el.closest('li').addClass('selected');
   };
 
   var deleteSpan = function() {

@@ -217,6 +217,11 @@
     border: 1px solid hsl(215, 88%, 81%);
     color: hsl(215, 88%, 50%);
 }
+#SpanCreator .cancel {
+    background-color: hsl(151, 46%, 81%);
+    border: 1px solid hsl(151, 10%, 50%);
+    color: hsl(151, 10%, 50%);
+}
 #SpanCreator .editing_indicator {
   display: none;
 }

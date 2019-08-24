@@ -11,7 +11,7 @@ var SpanCreator = function() {
   var record;
   var activeSpan;
   var saveAndRepeatButton;
-  var editingIndicator;
+  var cancelButton;
   var stateSetter;
   var spanAssembler;
   var wipSaver;
@@ -33,7 +33,7 @@ var SpanCreator = function() {
     topContainer = jQuery('#SpanCreator');
     topContainer.html(SpanCreatorTemplate);
     saveAndRepeatButton = topContainer.find('.duplicate');
-    editingIndicator = topContainer.find('.editing_indicator');
+    cancelButton = topContainer.find('.cancel');
   };
 
   var build = function() {
@@ -78,7 +78,7 @@ var SpanCreator = function() {
       taskList,
       topContainer.find('.save .text'),
       saveAndRepeatButton,
-      editingIndicator,
+      cancelButton,
       timeUtil);
 
     spanAssembler = new SpanCreatorSpanAssembler(
@@ -91,7 +91,9 @@ var SpanCreator = function() {
   };
 
   var addBehavior = function() {
+    jQuery('#SpanCreator').find('.save').click(save);
     saveAndRepeatButton.click(saveAndRepeat);
+    cancelButton.click(cancel);
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('EDIT_SPAN_REQUESTED', onEditSpanRequested);
     App.dispatcher.subscribe('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
@@ -100,7 +102,13 @@ var SpanCreator = function() {
     })
   };
 
+  var cancel = function() {
+    activeSpan = undefined;
+    stateSetter.reset();
+  };
+
   var save = function() {
+    console.trace();
     preSubmit(resetCleanup);
   };
 
