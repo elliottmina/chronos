@@ -11,7 +11,7 @@ var ModalDialogue = function(config) {
     </div>`;
 
   var buttonTemplate = `
-    <span class="button"></span>`;
+    <button></button`;
 
   var topContainer;
 
@@ -41,6 +41,8 @@ var ModalDialogue = function(config) {
             button.callback();
         });
     });
+
+    topContainer.find('button')[0].focus();
   };
 
   var close = function() {

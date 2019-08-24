@@ -4,18 +4,12 @@
 
 ## Backlog
 
-* Test with real data
-* move settings button to top right
-
 ### Design
 
-* Suggested project should not change background color.
-  replace outer glow with inner glow?
-* Confirmation dialogue needs to take focus on submit button
 * project item button to copy the whole thing
-* Settings buttons are not cursor:pointer
 * SVG icons instead of font?
 * New colors (including dark)
+* Colors for cancelbutton
 * ensure date nav buttons don't move
 * delete Goal.css?
 * Draw custom legend for stats charts.
@@ -25,6 +19,7 @@
 
 ## Future
 
+* Replace .button with <button>
 * Get rid of jquery
 * Persister as a replaceable module (SQLite, XHR, git)
 * Move current date to App, so modules don't have to track it

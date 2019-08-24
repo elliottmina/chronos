@@ -26,7 +26,7 @@
 .ModalDialogue .contents {
   padding:1em;
 }
-.ModalDialogue .button {
+.ModalDialogue button {
     display: inline-block;
     cursor: pointer;
     padding: 0.5em 1em;
@@ -34,15 +34,16 @@
     font-size: 1em;
     margin:1em;
 }
-.ModalDialogue .button:hover {
+.ModalDialogue button:focus,
+.ModalDialogue button:hover {
   box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
 }
-.ModalDialogue .button.primary {
+.ModalDialogue button.primary {
     background-color: hsl(106, 100%, 70%);
     border: 1px solid hsl(106, 39%, 64%);
     color: hsl(106, 100%, 24%);
 }
-.ModalDialogue .button.secondary {
+.ModalDialogue button.secondary {
   background-color:hsl(0, 0%, 100%);
   border:1px solid hsl(0, 0%, 75%)
 }
