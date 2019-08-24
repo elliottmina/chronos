@@ -10,34 +10,6 @@ body {
   color:hsl(0, 0%, 25%);
   background-color: hsl(0, 0%, 97%);
 }
-.pos_wrapper {
-  position: relative;
-}
-table {
-  border-collapse: collapse;
-}
-th {
-  text-align: left;
-  font-weight: bold;
-}
-td {
-  border-top: 1px solid hsl(0, 0%, 88%);
-  border-right: 1px solid hsl(0, 0%,88%);
-  padding: .5em;
-}
-tr:first-child td {
-  border-top:none;
-}
-td:last-child {
-  border-right: none;
-}
-dd {
-  display: inline-block;
-  width:50%;
-}
-dt {
-  display: inline-block;
-  width: 45%;
 }
 input {
   border: 1px solid hsl(0, 0%, 80%);
@@ -102,7 +74,6 @@ section>header {
   flex-wrap: wrap;
   align-items: flex-start;
 }
-
 @media only screen and (min-width: 1200px) {
   #summary_container {
     flex-wrap: nowrap;

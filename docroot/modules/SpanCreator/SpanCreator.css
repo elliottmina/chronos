@@ -17,7 +17,10 @@
   display: block;
   color:hsl(0, 0%, 30%);
 }
-#SpanCreator .project_suggestions {display: inline-block;}
+#SpanCreator .project_suggestions {
+  display: inline-block;
+  position: relative;
+}
 #SpanCreator .start,
 #SpanCreator .finish {
   display: inline-block;

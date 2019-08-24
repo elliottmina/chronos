@@ -1,6 +1,6 @@
 var SpanCreatorTemplate = `
   <section>
-    <div class="project_suggestions pos_wrapper">
+    <div class="project_suggestions">
       <label for="SpanCreatorProject">Project</label>
       <input type="text" id="SpanCreatorProject" name="project" tabindex="1" required />
       <ul></ul>
