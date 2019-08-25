@@ -4,16 +4,17 @@ var Stats = function() {
   var statsCalculator;
   var timeUtil;
   var efficiencyCalculator;
+  var legendBuilder;
   var date;
   var weekStart;
   var today;
 
-  var dailyRootChart;
-  var weeklyRootChart;
+  var dailyChart;
+  var weeklyChart;
   var efficiencyChart;
 
-  var dailyRootChartContainer;
-  var weeklyRootChartContainer;
+  var dailyChartContainer;
+  var weeklyChartContainer;
   var efficiencyChartContainer;
 
   var init = function() {
@@ -28,12 +29,13 @@ var Stats = function() {
     statsCalculator = new StatsDataCalculator();
     timeUtil = new TimeUtil();
     efficiencyCalculator =  new StatsEfficiencyCalculator();
+    legendBuilder = new StatsLegendBuilder();
   };
 
   var build = function() {
     jQuery('#Stats').html(StatsTemplate);
-    dailyRootChart = chartBuilder.build('StatsTodayRootChart');
-    weeklyRootChart = chartBuilder.build('StatsWeeklyRootChart');
+    dailyChart = chartBuilder.build('StatsTodayRootChart');
+    weeklyChart = chartBuilder.build('StatsWeeklyRootChart');
     efficiencyChart = chartBuilder.build('StatsEfficiencyChart');
     
     var data = efficiencyChart.data;
@@ -42,8 +44,8 @@ var Stats = function() {
   };
 
   var gatherComponents = function() {
-    dailyRootChartContainer = jQuery('#StatsTodayRoot');
-    weeklyRootChartContainer = jQuery('#StatsWeeklyRoot');
+    dailyChartContainer = jQuery('#StatsTodayRoot');
+    weeklyChartContainer = jQuery('#StatsWeeklyRoot');
     efficiencyChartContainer = jQuery('#StatsEfficiency');
   };
 
@@ -62,27 +64,44 @@ var Stats = function() {
 
   var updateCharts = function() {
     today = App.persister.fetch(date);
-    updateChart(dailyRootChart, today.spans, statsCalculator.rootProjCalc);
+    updateDay();
     updateWeek();
     updateEfficiency();
-  }
+  };
+
+  var updateDay = function() {
+    var distribution = statsCalculator.buildDistribution(today.spans);
+    updateChart(dailyChart, distribution);
+    legendBuilder.build(dailyChartContainer, distribution);
+  };
 
   var updateWeek = function() {
+    var spans = gatherWeekSpans();
+    var distribution = statsCalculator.buildDistribution(spans);
+
+    updateChart(weeklyChart, distribution);
+    legendBuilder.build(weeklyChartContainer, distribution);
+  };
+
+  var gatherWeekSpans = function() {
     var spans = [];
     for (var i = 1; i < 7; i++) {
       var currDay = timeUtil.addDays(weekStart, i);
       var day = App.persister.fetch(timeUtil.getYmd(currDay));
+
       jQuery.each(day.spans, function(index, span) {
         spans.push(span);
       });
     }
-    updateChart(weeklyRootChart, spans, statsCalculator.rootProjCalc);
+    return spans;
   };
 
-  var updateChart = function(chart, spans, projCalcFunc) {
-    var kv = statsCalculator.calc(spans, projCalcFunc);
-    var labels = kv[0];
-    var values = kv[1];
+  var updateChart = function(chart, distribution) {
+    var labels = Object.keys(distribution);
+    var values = Object.values(distribution);
+
+    for (var i = 0; i < values.length; i++)
+      values[i] = values[i].toFixed(1);
 
     var dataSet = chart.data.datasets[0];
     dataSet.data = values;

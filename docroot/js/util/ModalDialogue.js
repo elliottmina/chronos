@@ -42,7 +42,9 @@ var ModalDialogue = function(config) {
         });
     });
 
-    topContainer.find('button')[0].focus();
+    var buttons = topContainer.find('button');
+    if (buttons.length)
+      buttons[0].focus();
   };
 
   var close = function() {

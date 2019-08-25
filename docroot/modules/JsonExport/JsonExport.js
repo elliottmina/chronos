@@ -19,7 +19,7 @@ var JsonExport = function() {
     var now = new Date();
     var dateStr = 
       now.getFullYear() + '-' +
-      padder.twoDigit(now.getMonth()) + '-' +
+      padder.twoDigit(now.getMonth()+1) + '-' +
       padder.twoDigit(now.getDate()) + ' ' +
       now.getHours() + ':' +
       now.getMinutes() + ':' +

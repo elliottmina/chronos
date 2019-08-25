@@ -1,15 +1,10 @@
 var StatsDataCalculator = function() {
 
-  var calc = function(spans, projectCalcFunc) {
-    var distribution = buildDistribution(spans, projectCalcFunc);
-    return buildKeysValues(distribution);
-  };
-
-  var buildDistribution = function(spans, projectCalcFunc) {
+  var buildDistribution = function(spans) {
     var distribution = {};
 
     jQuery.each(spans, function(key, span) {
-      var project = projectCalcFunc(span.project);
+      var project = App.projectSegmentor.segment(span.project)[0];
       initProject(distribution, project);
       distribution[project] += calcHours(span);
     });
@@ -39,13 +34,8 @@ var StatsDataCalculator = function() {
   };
 
   return {
-    calc:calc,
-    rootProjCalc: function(project) {
-      return App.projectSegmentor.segment(project)[0];
-    },
-    noopProjCalc: function(project) {
-      return project;
-    }
+    calc:buildKeysValues,
+    buildDistribution:buildDistribution
   };
 
 };
