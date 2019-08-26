@@ -6,9 +6,6 @@
 
 ### Design
 
-* Draw custom legend for stats charts.
-  * order DESc
-  * Take top 4
 * New colors (including dark)
 * Colors for cancelbutton
 
