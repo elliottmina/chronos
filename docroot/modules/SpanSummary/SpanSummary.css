@@ -41,3 +41,7 @@
 #SpanSummary li.selected {
   left:-0.5em;
 }
+#SpanSummary .mini_button {
+  color:hsl(0, 0%, 44%);
+}
+
