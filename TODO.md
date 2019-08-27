@@ -2,6 +2,8 @@
 
 ## Backlog
 
+Modal dialogue (blasticate) colors.
+
 ## Future
 
 * Replace .button with <button>
