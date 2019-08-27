@@ -96,7 +96,8 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
     if (project.tasks.length) {
       var li = jQuery(copyTemplate)
-        .appendTo(tasksContainer)
+        .appendTo(tasksContainer);
+      li.find('i')
         .click(copy)
         .data('copy', project.tasks.join('\n'));      
     }

@@ -40,7 +40,7 @@ var Stats = function() {
     
     var data = efficiencyChart.data;
     data.labels = ['Work', 'Waste'];
-    data.datasets[0].backgroundColor = ['#f5b829', '#f29728'];
+    data.datasets[0].backgroundColor = ['#f97677', '#ffe9ea'];
   };
 
   var gatherComponents = function() {

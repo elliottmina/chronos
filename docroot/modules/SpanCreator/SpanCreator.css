@@ -56,10 +56,10 @@
   user-select: none;
 }
 #SpanCreator .start .time {
-  border: 1px solid hsl(95, 100%, 45%);
+  border: 1px solid hsl(0, 0%, 80%)
 }
 #SpanCreator .finish .time {
-  border: 1px solid hsl(31, 100%, 45%);
+  border: 1px solid hsl(0, 0%, 80%)
 }
 #SpanCreator .time_field_container.has_focus .time {
   box-shadow: 0 0 4px 0 hsla(220, 100%, 50%, 0.4);
@@ -91,11 +91,11 @@
   box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
 }
 #SpanCreator .start .now {
-  background-color: hsl(95, 100%, 45%);
+  background-color: hsl(191, 72%, 75%);
   color:#fff;
 }
 #SpanCreator .finish .now {
-  background-color: hsl(31, 100%, 45%);
+  background-color: hsl(191, 72%, 75%);
   color:#fff;
 }
 #SpanCreator .time_field_container .cursor {
@@ -113,7 +113,6 @@
 #SpanCreator .error,
 #SpanCreator .time_field_container .time.error {
   border:1px solid red;
-  background-color: hsla(0, 100%, 50%, 0.1);
 }
 #SpanCreator .project_suggestions input {
   font-size: 1.35em;
@@ -215,19 +214,19 @@
   vertical-align: text-bottom;
 }
 #SpanCreator .save {
-    background-color: hsl(106, 100%, 70%);
-    border: 1px solid hsl(106, 39%, 64%);
-    color: hsl(106, 100%, 24%);
+  background-color: hsl(191, 71%, 75%);
+  border: 1px solid hsl(191, 34%, 32%);
+  color: hsl(191, 46%, 28%);
 }
 #SpanCreator .duplicate {
-    background-color: hsl(215, 88%, 87%);
-    border: 1px solid hsl(215, 88%, 81%);
-    color: hsl(215, 88%, 50%);
+  background-color: hsl(191, 92%, 33%);
+  border: 1px solid hsl(191, 34%, 32%);
+  color: hsl(0, 0%, 100%);
 }
 #SpanCreator .cancel {
-    background-color: hsl(151, 46%, 81%);
-    border: 1px solid hsl(151, 10%, 50%);
-    color: hsl(151, 10%, 50%);
+  background-color: hsl(191, 92%, 33%);
+  border: 1px solid hsl(191, 34%, 32%);
+  color: hsl(0, 0%, 100%);
 }
 #SpanCreator .editing_indicator {
   display: none;

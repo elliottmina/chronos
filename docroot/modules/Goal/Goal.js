@@ -11,6 +11,7 @@ var Goal = function() {
   var weeklyCalculator;
   var durationCalculator;
   var chartBuilder;
+  var spans;
 
   var init = function() {
     calcInitialHoursPerDay();
@@ -32,8 +33,8 @@ var Goal = function() {
   var build = function() {
     jQuery('#Goal').html(GoalTemplate);
 
-    dailyChart = chartBuilder.build('GoalTodayChart', '#2982db', '#f3f9ff');
-    weeklyChart = chartBuilder.build('GoalWeeklyChart', '#fb9e01', '#fefdd5');
+    dailyChart = chartBuilder.build('GoalTodayChart', '#5bdd81', '#e7f9ec');
+    weeklyChart = chartBuilder.build('GoalWeeklyChart', '#2982db', '#f3f9ff');
   };
 
   var gatherComponents = function() {
@@ -48,18 +49,21 @@ var Goal = function() {
   };
 
   var onSpanSaved = function(data) {
-    updateProgress(data.record.spans);
+    spans = data.record.spans;
+    updateProgress();
   };
 
   var onSpanDeleted = function(data) {
-    updateProgress(data.spans);
+    spans = data.spans
+    updateProgress();
   };
 
   var onDateChanged = function(record) {
-    updateProgress(record.spans);
+    spans = record.spans;
+    updateProgress();
   };
 
-  var updateProgress = function(spans) {
+  var updateProgress = function() {
     var dailyHours = durationCalculator.calcHours(spans);
     updateChart(dailyChart, dailyHours, hoursPerDay);
     updateChartNumbers(dailyContainer, dailyHours, hoursPerDay);
@@ -114,13 +118,15 @@ var Goal = function() {
   };
 
   var onHoursPerDayChange = function(newValue) {
-    localStorage.setItem('goal_hours_day', newValue);
     hoursPerDay = newValue;
+    localStorage.setItem('goal_hours_day', newValue);
+    updateProgress();
   };
 
   var onHoursPerWeekChange = function(newValue) {
-    localStorage.setItem('goal_hours_week', newValue);
     hoursPerWeek = newValue;
+    localStorage.setItem('goal_hours_week', newValue);
+    updateProgress();
   };
 
   var registerSettings = function() {
