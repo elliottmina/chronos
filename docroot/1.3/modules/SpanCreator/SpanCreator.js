@@ -20,6 +20,7 @@ var SpanCreator = function() {
     gatherDependencies();
     buildHtml();
     build();
+    stateSetter.reset();
     addBehavior();
     restoreWip();
   };
