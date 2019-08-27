@@ -55,10 +55,7 @@
   background-color: #fff;
   user-select: none;
 }
-#SpanCreator .start .time {
-  border: 1px solid hsl(0, 0%, 80%)
-}
-#SpanCreator .finish .time {
+#SpanCreator .time {
   border: 1px solid hsl(0, 0%, 80%)
 }
 #SpanCreator .time_field_container.has_focus .time {
@@ -145,6 +142,8 @@
   border-left:1px solid hsla(0, 0%, 80%, 1);
   background-color: hsla(0, 0%, 97%, 0.95);
 }
+#SpanCreator .project_suggestions .suggestion.today.selected,
+#SpanCreator .project_suggestions .suggestion.selected,
 #SpanCreator .project_suggestions .suggestion.today:hover,
 #SpanCreator .project_suggestions .suggestion:hover {
   background-color: hsla(220, 100%, 90%, 0.95);
