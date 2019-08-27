@@ -3,77 +3,95 @@
 <head>
   <title>Chronos v1.3</title>
   <!-- resource_files -->
-<link rel="stylesheet" type="text/css" href="css/ModalDialogue.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="css/style.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="css/roboto-mono.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="css/roboto.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="css/theme_dark.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/DateLine/DateLine.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/DailyGoal/DailyGoal.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/TextSummary/TextSummary.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/JsonSummary/JsonSummary.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/SpanSummary/SpanSummary.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/SpanCreator/SpanCreator.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/SummaryNav/SummaryNav.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/ProjectSummary/ProjectSummary.css?v=1.1">
-<link rel="stylesheet" type="text/css" href="modules/DateSelector/DateSelector.css?v=1.1">
-<script src="js/vendor/jquery-3.1.0.min.js?v=1.1"></script>
-<script src="js/app/ModuleLoader.js?v=1.1"></script>
-<script src="js/app/LocalStoragePersister.js?v=1.1"></script>
-<script src="js/app/App.js?v=1.1"></script>
-<script src="js/app/LocalStorageRecordFormatter.js?v=1.1"></script>
-<script src="js/util/Dispatcher.js?v=1.1"></script>
-<script src="js/util/GuidGenerator.js?v=1.1"></script>
-<script src="js/util/TimeUtil.js?v=1.1"></script>
-<script src="js/util/Downloader.js?v=1.1"></script>
-<script src="js/util/InputSizeAdjuster.js?v=1.1"></script>
-<script src="js/util/MultiSoundPlayer.js?v=1.1"></script>
-<script src="js/util/Rounder.js?v=1.1"></script>
-<script src="js/util/Padder.js?v=1.1"></script>
-<script src="js/util/ServiceRequest.js?v=1.1"></script>
-<script src="js/util/Copier.js?v=1.1"></script>
-<script src="js/util/ModalDialogue.js?v=1.1"></script>
-<script src="js/util/MetaKeyEvaluator.js?v=1.1"></script>
-<script src="modules/PersistenceMarshaller/PersistenceMarshaller.js?v=1.1"></script>
-<script src="modules/Blasticator/Blasticator.js?v=1.1"></script>
-<script src="modules/DateLine/DateLine.js?v=1.1"></script>
-<script src="modules/DateNudgerShortcuts/DateNudgerShortcuts.js?v=1.1"></script>
-<script src="modules/DeleteSpanDialogue/DeleteSpanDialogue.js?v=1.1"></script>
-<script src="modules/DailyGoal/DailyGoalProgressBar.js?v=1.1"></script>
-<script src="modules/DailyGoal/DailyGoalRocketLauncher.js?v=1.1"></script>
-<script src="modules/DailyGoal/DailyGoalText.js?v=1.1"></script>
-<script src="modules/DailyGoal/DailyGoalTemplate.js?v=1.1"></script>
-<script src="modules/DailyGoal/DailyGoal.js?v=1.1"></script>
-<script src="modules/TimeFormatter12Hr/TimeFormatter12Hr.js?v=1.1"></script>
-<script src="modules/TextSummary/TextSummary.js?v=1.1"></script>
-<script src="modules/JsonExport/JsonExport.js?v=1.1"></script>
-<script src="modules/JsonExport/JsonExportCollector.js?v=1.1"></script>
-<script src="modules/JsonSummary/JsonSummary.js?v=1.1"></script>
-<script src="modules/SpanSummary/SpanSummary.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorAnalyzer.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreator.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorTimeResolver.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorTimeField.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorValidator.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorStateSetter.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorTaskList.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorTodaysProjectBuilder.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorShortcuts.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorTemplate.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorRecentProjectBuilder.js?v=1.1"></script>
-<script src="modules/SpanCreator/SpanCreatorProjectSuggestor.js?v=1.1"></script>
-<script src="modules/SummaryNav/SummaryNav.js?v=1.1"></script>
-<script src="modules/JsonImport/JsonImportDialogue.js?v=1.1"></script>
-<script src="modules/JsonImport/JsonImport.js?v=1.1"></script>
-<script src="modules/ThemeSelector/ThemeSelector.js?v=1.1"></script>
-<script src="modules/ProjectSummary/ProjectSummaryDataBuilder.js?v=1.1"></script>
-<script src="modules/ProjectSummary/ProjectSummary.js?v=1.1"></script>
-<script src="modules/DateSelector/DateSelector.js?v=1.1"></script>
+<link rel="stylesheet" type="text/css" href="css/Chart.min.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/style.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/ModalDialogue.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/theme_dark.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/roboto.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/roboto-mono.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/Stats/Stats.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/ProjectSummary/ProjectSummary.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/Goal/Goal.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/DateLine/DateLine.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/DateSelector/DateSelector.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/SpanSummary/SpanSummary.css?v=1.3">
+<link rel="stylesheet" type="text/css" href="modules/SpanCreator/SpanCreator.css?v=1.3">
+<script src="js/app/App.js?v=1.3"></script>
+<script src="js/app/GlobalSettings.js?v=1.3"></script>
+<script src="js/app/Settings.js?v=1.3"></script>
+<script src="js/app/ModuleLoader.js?v=1.3"></script>
+<script src="js/app/LocalStorageRecordFormatter.js?v=1.3"></script>
+<script src="js/app/LocalStoragePersister.js?v=1.3"></script>
+<script src="js/util/GuidGenerator.js?v=1.3"></script>
+<script src="js/util/RegEx.js?v=1.3"></script>
+<script src="js/util/ProjectSegmentor.js?v=1.3"></script>
+<script src="js/util/ModalDialogue.js?v=1.3"></script>
+<script src="js/util/IntegerFieldBuilder.js?v=1.3"></script>
+<script src="js/util/Copier.js?v=1.3"></script>
+<script src="js/util/Rounder.js?v=1.3"></script>
+<script src="js/util/Downloader.js?v=1.3"></script>
+<script src="js/util/ServiceRequest.js?v=1.3"></script>
+<script src="js/util/TextFieldBuilder.js?v=1.3"></script>
+<script src="js/util/Dispatcher.js?v=1.3"></script>
+<script src="js/util/BooleanFieldBuilder.js?v=1.3"></script>
+<script src="js/util/ButtonFieldBuilder.js?v=1.3"></script>
+<script src="js/util/InputSizeAdjuster.js?v=1.3"></script>
+<script src="js/util/MetaKeyEvaluator.js?v=1.3"></script>
+<script src="js/util/TimeUtil.js?v=1.3"></script>
+<script src="js/util/Padder.js?v=1.3"></script>
+<script src="js/util/FieldBuilder.js?v=1.3"></script>
+<script src="js/util/ColorGenerator.js?v=1.3"></script>
+<script src="js/vendor/Chart.min.js?v=1.3"></script>
+<script src="js/vendor/jquery-3.1.0.min.js?v=1.3"></script>
+<script src="modules/Stats/StatsTemplate.js?v=1.3"></script>
+<script src="modules/Stats/StatsLegendBuilder.js?v=1.3"></script>
+<script src="modules/Stats/StatsDataCalculator.js?v=1.3"></script>
+<script src="modules/Stats/StatsEfficiencyCalculator.js?v=1.3"></script>
+<script src="modules/Stats/Stats.js?v=1.3"></script>
+<script src="modules/Stats/StatsPieChartBuilder.js?v=1.3"></script>
+<script src="modules/PersistenceMarshaller/PersistenceMarshaller.js?v=1.3"></script>
+<script src="modules/ProjectSummary/ProjectSummaryItemBuilder.js?v=1.3"></script>
+<script src="modules/ProjectSummary/ProjectSummaryDataBuilder.js?v=1.3"></script>
+<script src="modules/ProjectSummary/ProjectSummary.js?v=1.3"></script>
+<script src="modules/Blasticator/Blasticator.js?v=1.3"></script>
+<script src="modules/JsonImport/JsonImport.js?v=1.3"></script>
+<script src="modules/JsonImport/JsonImportDialogue.js?v=1.3"></script>
+<script src="modules/Goal/GoalWeeklyCalculator.js?v=1.3"></script>
+<script src="modules/Goal/Goal.js?v=1.3"></script>
+<script src="modules/Goal/GoalSpanDurationCalculator.js?v=1.3"></script>
+<script src="modules/Goal/GoalTemplate.js?v=1.3"></script>
+<script src="modules/Goal/GoalPieChartBuilder.js?v=1.3"></script>
+<script src="modules/JsonExport/JsonExportCollector.js?v=1.3"></script>
+<script src="modules/JsonExport/JsonExport.js?v=1.3"></script>
+<script src="modules/ThemeSelector/ThemeSelector.js?v=1.3"></script>
+<script src="modules/DateNudgerShortcuts/DateNudgerShortcuts.js?v=1.3"></script>
+<script src="modules/DateLine/DateLine.js?v=1.3"></script>
+<script src="modules/DateSelector/DateSelector.js?v=1.3"></script>
+<script src="modules/SpanSummary/SpanSummaryItemBuilder.js?v=1.3"></script>
+<script src="modules/SpanSummary/SpanSummary.js?v=1.3"></script>
+<script src="modules/SpanSummary/SpanSummaryItemTemplate.js?v=1.3"></script>
+<script src="modules/SpanSummary/SpanSummaryTemplate.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorSpanAssembler.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorProjectSuggestor.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorTimeField.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorRecentProjectBuilder.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorTaskList.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorAnalyzer.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorWipSaver.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorTimeResolver.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorValidator.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorTemplate.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorTodaysProjectBuilder.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorShortcuts.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreatorStateSetter.js?v=1.3"></script>
+<script src="modules/SpanCreator/SpanCreator.js?v=1.3"></script>
+<script src="modules/TimeFormatter12Hr/TimeFormatter12Hr.js?v=1.3"></script>
+<script src="modules/DeleteSpanDialogue/DeleteSpanDialogue.js?v=1.3"></script>
 <!-- /resource_files -->
   <script>
     jQuery(document).ready(function() {
-      App.init([PersistenceMarshaller, Blasticator, DateLine, DateNudgerShortcuts, DeleteSpanDialogue, DailyGoal, TimeFormatter12Hr, TextSummary, JsonExport, JsonSummary, SpanSummary, SpanCreator, SummaryNav, JsonImport, ThemeSelector, ProjectSummary, DateSelector]);
+      App.init([Stats, PersistenceMarshaller, ProjectSummary, Blasticator, JsonImport, Goal, JsonExport, ThemeSelector, DateNudgerShortcuts, DateLine, DateSelector, SpanSummary, SpanCreator, TimeFormatter12Hr, DeleteSpanDialogue]);
     });
   </script>
 </head>
