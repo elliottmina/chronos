@@ -1,48 +1,50 @@
 .ModalDialogue {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width:100%;
-	height:100%;
-	text-align:center;
-	z-index: 1000;
-	background-color: hsla(0, 0%, 0%, 0.35);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1000;
+  background-color: hsla(0, 0%, 0%, 0.35);
 }
 .ModalDialogue .box {
-	display: inline-block;
-	position: relative;
-	top:20%;
-	min-width: 25em;
-	min-height:10em;
-	border-radius: 4px;
-	background-color: hsl(0, 0%, 98%);
-	padding:2em;
-	box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
+  display: inline-block;
+  position: relative;
+  top:20%;
+  min-width: 25em;
+  min-height:10em;
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 98%);
+  padding:2em;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
 }
 .ModalDialogue header {
-	font-size: 1.5em;
-	margin-bottom: 1em;
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
 .ModalDialogue .contents {
-	padding:1em;
+  padding:1em;
 }
-.ModalDialogue .button {
-    display: inline-block;
-    cursor: pointer;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    font-size: 1em;
-    margin:1em;
+.ModalDialogue button {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  margin:1em;
 }
-.ModalDialogue .button:hover {
-	box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
+.ModalDialogue button:focus,
+.ModalDialogue button:hover {
+  box-shadow:0 0px 5px hsla(0, 0%, 0%, 0.4)
 }
-.ModalDialogue .button.primary {
-    background-color: hsl(106, 100%, 70%);
-    border: 1px solid hsl(106, 39%, 64%);
-    color: hsl(106, 100%, 24%);
+.ModalDialogue button.primary {
+  background-color: hsl(191, 71%, 75%);
+  border: 1px solid hsl(191, 34%, 32%);
+  color: hsl(191, 46%, 28%);
 }
-.ModalDialogue .button.secondary {
-	background-color:hsl(0, 0%, 100%);
-	border:1px solid hsl(0, 0%, 75%)
+.ModalDialogue button.secondary {
+  background-color: hsl(191, 92%, 33%);
+  border: 1px solid hsl(191, 34%, 32%);
+  color: hsl(0, 0%, 100%);
 }
