@@ -35,10 +35,10 @@ body.theme_dark #Settings>.mini_button {
   border: 1px solid hsl(252, 23%, 43%);
 }
 body.theme_dark #DailyGoal .progress_inner {
-    border-top: 1px solid hsl(106, 100%, 24%);
-    border-right: 1px solid hsl(106, 100%, 24%);
-    border-bottom: 1px solid hsl(106, 100%, 24%);
-    background-color: hsl(111, 53%, 54%);
+  border-top: 1px solid hsl(106, 100%, 24%);
+  border-right: 1px solid hsl(106, 100%, 24%);
+  border-bottom: 1px solid hsl(106, 100%, 24%);
+  background-color: hsl(111, 53%, 54%);
 }
 body.theme_dark #DailyGoal .progress_outer {
   background-color: hsl(147, 30%, 80%);
@@ -59,16 +59,13 @@ body.theme_dark #SpanCreator label {
   color:hsl(90, 26%, 84%);
 }
 body.theme_dark .ModalDialogue .box {
-  background-color: hsl(252, 23%, 22%);
+  background-color: hsl(172, 21%, 28%);
+  border: 1px solid hsl(172, 21%, 38%);
 }
-body.theme_dark .ModalDialogue .button.secondary {
-  /*background-color: hsl(252, 23%, 33%);*/
-  /*border: none;*/
-}
-body.theme_dark .ModalDialogue .button.primary {
-  /*background-color: hsl(143, 100%, 33%);*/
-  /*border:none;*/
-  /*color: hsl(0, 0%, 85%);*/
+body.theme_dark .ModalDialogue button.primary {
+  background-color:hsl(38, 73%, 45%);
+  border:none;
+  color: hsl(0, 0%, 100%);
 }
 body.theme_dark #SpanCreator .project_suggestions .suggestion:first-child {
   border-top: 1px solid hsl(172, 22%, 15%);
