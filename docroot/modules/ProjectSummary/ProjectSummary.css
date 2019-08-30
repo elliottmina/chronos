@@ -1,21 +1,29 @@
-#ProjectSummary table {
-	min-width: 40em;
+#ProjectSummary .item_container>li {
+  position: relative;
+  list-style: none;
+  margin:1em 0;
+  padding:0.5em;
+  border:1px solid #CCC;
+  border-radius: 2px;
 }
-#ProjectSummary thead {
-	display: none;
+#ProjectSummary .item_container>li header {
+  margin-bottom: 1em;
 }
-#ProjectSummary .hours,
-#ProjectSummary .time {
-	text-align: center;
-}
-#ProjectSummary tbody .project {
-	font-weight: bold;
+#ProjectSummary .hours {
+  white-space: nowrap;
+  float: right;
 }
 #ProjectSummary li.copy {
-	border:0;
-	cursor: pointer;
+  border:none;
+  background-color:transparent;
 }
-#ProjectSummary .button.copy {
-	vertical-align: text-bottom;
-	color: hsl(106, 100%, 24%);
+#ProjectSummary i.copy {
+  cursor: pointer;
+  min-width: 1em;
+  color:hsl(0, 0%, 44%);
+}
+#ProjectSummary .project_copy {
+  position: absolute;
+  right: 0.2em;
+  bottom: 0.2em;
 }

@@ -1,165 +1,175 @@
 * {
-	font-family: 'Roboto', sans-serif;
-	font-weight: normal;
-	padding:0;
-	margin:0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  padding:0;
+  margin:0;
 }
 body {
-	font-size: 16px;
-	padding:1em 1em 2em 1em;
-	color:hsl(0, 0%, 25%);
-	background-color: hsl(0, 0%, 97%);
-}
-.pos_wrapper {
-	position: relative;
-}
-table {
-	border-collapse: collapse;
-}
-th {
-	text-align: left;
-	font-weight: bold;
-}
-td {
-	border-top: 1px solid hsl(0, 0%, 88%);
-	border-right: 1px solid hsl(0, 0%,88%);
-	padding: .5em;
-}
-tr:first-child td {
-	border-top:none;
-}
-td:last-child {
-	border-right: none;
-}
-dd {
-	display: inline-block;
-	width:50%;
-}
-dt {
-	display: inline-block;
-	width: 45%;
+  font-size: 16px;
+  padding:0.25em 1em 2em 1em;
+  color:hsl(0, 0%, 25%);
+  background-color: hsl(0, 0%, 97%);
 }
 input {
-	border: 1px solid hsl(0, 0%, 80%);
-	padding: 0.5em;
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 0.5em;
 }
 .widget {
-	border-radius: 2px;
-	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
-	background-color: hsl(0, 0%, 100%);
-	padding: 1em;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	position: relative;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
+  background-color: hsl(0, 0%, 100%);
+  padding: 1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  position: relative;
 }
 .task_list li {
-	list-style: none;
-	display: inline-block;
-	border: 1px solid #CCC;
-	padding: 0.25em 0.5em 0.25em 0.25em;
-	border-radius: 4px;
-	margin:0.2em;
-	background-color:hsl(0, 0%, 99%);
-}
-.logo {
-	position: fixed;
-	bottom:0;
-	left:0;
-	display: inline-block;
-	background-color: hsl(0, 0%, 90%);
-	padding:0.3em 0.5em;
-}
-.logo .version {
-	display: inline-block;
-	color:hsl(0, 0%, 50%);
-	font-size: 0.8em;
-	margin-left:0.25em;
-}
-.logo .version:before {
-	content: "v";
+  list-style: none;
+  display: inline-block;
+  border: 1px solid #CCC;
+  padding: 0.2em;
+  border-radius: 2px;
+  margin:0.1em;
+  background-color:hsla(0, 0%, 100%, 0.5);
+  font-size:0.9em;
 }
 .no_content_container {
-	font-size:0.9em;
-	font-style: italic;
+  font-size:0.9em;
+  font-style: italic;
+}
+.hidden {
+  display: none;
 }
 section>header {
-	margin-bottom: 1em;
-}
-@keyframes shake {
-	10%, 90% { transform: translate3d(-1px, 0, 0); }
-	20%, 80% { transform: translate3d(2px, 0, 0); }
-	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-	40%, 60% { transform: translate3d(4px, 0, 0); }
-}
-@keyframes shake2 {
-	10%, 90% { transform: translate3d(-1px, 0, 0); }
-	20%, 80% { transform: translate3d(2px, 0, 0); }
-	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-	40%, 60% { transform: translate3d(4px, 0, 0); }
-}
-.shake {
-	animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
-	perspective: 1000px;
-}
-.shake2 {
-	animation: shake2 0.42s cubic-bezier(.36,.07,.19,.97) both;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
-	perspective: 1000px;
+  margin-bottom: 1em;
 }
 .mini_button {
-	cursor: pointer;
-	color:hsl(0, 0%, 70%);
-	padding: 0.2em;
-	font-size: 0.9em;
-	display: inline-block;
+  cursor: pointer;
+  color:hsl(0, 0%, 70%);
+  padding: 0.2em;
+  font-size: 0.9em;
+  display: inline-block;
 }
 .mini_button:hover {
-	color:hsl(217, 89%, 61%);
+  color:hsl(217, 89%, 61%);
+}
+#Settings section {
+  margin:1em 0;
+}
+
+#head {
+  padding-bottom: 1em;
 }
 
 /* POS */
-section.auxiliary>div {
-	position: fixed;
-	bottom: 0;
-	background-color: hsl(0, 0%, 100%);
-	border-top: 1px solid hsl(0, 0%, 90%);
-	border-left: 1px solid hsl(0, 0%, 90%);
-	border-right: 1px solid hsl(0, 0%, 90%);
+#body {
+  display: flex;
+  align-items: flex-start;
 }
-#Blasticator {
-	right: 9.5em;
+#summary_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
-#JsonExport {
-	right: 5em;
+#summary_container>section {
+  flex:1;
 }
-#JsonImport {
-	right:0.5em;
+#head #settings_button {
+  float:right;
+  margin-top:0.75em;
+  font-size: 0.9em;
 }
-#ThemeSelector {
-	right:15.25em
+
+.segment {
+  display: inline-block;
+  margin-right: 0.5em;
 }
-#summary_nav {
-    margin-bottom: 1em;
+.segment_1 {
+  font-weight: bold;
 }
-#SpanSummary {
-	display: inline-block;
+.segment_2 {
 }
-#JsonSummary {
-	position: relative;
+.segment_separator {
+  display: inline-block;
+  margin-right: 0.5em;
 }
-#DateLine {
+
+#Settings>.mini_button {
+  background-color: hsl(0, 0%, 100%);
+  border-top: 1px solid hsl(0, 0%, 90%);
+  border-left: 1px solid hsl(0, 0%, 90%);
+  border-right: 1px solid hsl(0, 0%, 90%);
 }
-#DailyGoal {
-	position: absolute;
-	top:0;
-	right:0;
+#Settings .background {
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1000;
+  background-color: hsla(0, 0%, 0%, 0.35);
 }
-#DateSelector {
-	margin-top: 0.5em;
+#Settings .content {
+  display: inline-block;
+  background-color: white;
+  text-align: left;
+  padding:1em;
+  margin-top:4em;
+  position: relative;
+  z-index: 10000;
+  border-radius: 4px;
 }
-section.summaries {
-	margin-bottom:1em;
+#Settings .close {
+  position: absolute;
+  top: -0.25em;
+  right: -0.25em;
+  font-size: 2em;
+  color: hsl(191, 92%, 33%);
+  cursor: pointer;
+}
+#Settings .fa-toggle-on,
+#Settings .fa-toggle-off {
+  font-size: 1.5em;
+  position: relative;
+  top:0.1em;
+  margin-right:0.25em;
+  color:hsl(191, 92%, 33%);
+}
+#Settings label {
+  display: inline-block;
+}
+#Settings .settings_group {
+  margin-bottom: 2em;
+}
+#Settings .settings_group_label {
+  font-size: 1.5em;
+  min-width: 12em;
+  margin-bottom: 0.3em;
+}
+#Settings h2 {
+  font-size: 1.8em;
+}
+#Settings .field_wrapper {
+  min-height: 1.5em;
+  padding:0.25em;
+}
+#Settings .field_wrapper label {
+  min-width: 15em;
+}
+#Settings .field_wrapper .button label {
+  min-width: auto;
+}
+#Settings .field_wrapper .button label,
+#Settings .field_wrapper .button {
+  cursor: pointer;
+}
+#settings_button {
+  cursor: pointer;
+} 
+
+#metrics {
+  margin-right: 0;
+  width:300px;
 }

@@ -1,237 +1,253 @@
 var SpanCreatorTimeField = function(
-	topContainer, 
-	analyzer, 
-	timeResolver,
-	timeUtil) {
-	
-	var topContainer;
-	var date; 
-	var timeEl;
-	var periodEl;
-	var nowButton;
-	var ONE_MINUTE = 60*1000;
-	var integers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  topContainer, 
+  analyzer, 
+  timeResolver,
+  timeUtil) {
+  
+  var topContainer;
+  var date; 
+  var timeEl;
+  var periodEl;
+  var nowButton;
+  var ONE_MINUTE = 60*1000;
+  var integers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-	var init = function() {
-		gatherComponents();
-		addBehavior();
-	};
+  var init = function() {
+    gatherComponents();
+    addBehavior();
+  };
 
-	var gatherComponents = function() {
-		timeEl = topContainer.find('.time');
-		periodEl = topContainer.find('.period');
-		nowButton = topContainer.find('button.now');
-	};
+  var gatherComponents = function() {
+    timeEl = topContainer.find('.time');
+    periodEl = topContainer.find('.period');
+    nowButton = topContainer.find('button.now');
+  };
 
-	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		timeEl
-			.keydown(onKeyDown)
-			.blur(onBlur)
-			.focus(onFocus);
-		periodEl.click(togglePeriod);
-		nowButton.click(now);
-	};
+  var addBehavior = function() {
+    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+    timeEl
+      .keydown(onKeyDown)
+      .blur(onBlur)
+      .focus(onFocus);
+    periodEl.click(togglePeriod);
+    nowButton.click(now);
+  };
 
-	var onDateChanged = function(data) {
-		date = timeUtil.parseUtcYmd(data.date);
-	};
+  var onDateChanged = function(data) {
+    date = timeUtil.parseUtcYmd(data.date);
+  };
 
-	var onFocus = function() {
-		topContainer.addClass('has_focus');
-	};
+  var onFocus = function() {
+    topContainer.addClass('has_focus');
+  };
 
-	var onBlur = function() {
-		topContainer.removeClass('has_focus');
-		timeEl.text(timeResolver.resolve(timeEl.text()));
-		adjustInvalidTreatment();
-	};
+  var onBlur = function() {
+    topContainer.removeClass('has_focus');
+    timeEl.text(timeResolver.resolve(timeEl.text()));
+    adjustInvalidTreatment();
+  };
 
-	var onKeyDown = function(e) {
-		switch (e.key) {
+  var onKeyDown = function(e) {
+    switch (e.key) {
 
-			case 'a':
-			case 'A':
-				return setPeriodAm();
+      case 'a':
+      case 'A':
+        setPeriodAm();
+        break;
 
-			case 'p':
-			case 'P':
-				return setPeriodPm();
+      case 'p':
+      case 'P':
+        setPeriodPm();
+        break;
 
-			case 'Backspace':
-				return removeChar();
+      case 'Backspace':
+        removeChar();
+        break;
 
-			case ':':
-				return addColon();
+      case ':':
+        addColon();
+        break;
 
-			case 'n':
-				return now();
+      case 'n':
+        now();
+        break;
 
-			case 'ArrowUp':
-				return minuteUp(e);
+      case 'ArrowUp':
+        minuteUp(e);
+        break;
 
-			case 'ArrowDown':
-				return minuteDown(e);
+      case 'ArrowDown':
+        minuteDown(e);
+        break;
 
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-				return addNumber(e.key);
-		}
-	};
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        addNumber(e.key);
+        break;
+    }
 
-	var minuteUp = function(e) {
-		adjustMinute(e, 1);
-	};
+    App.dispatcher.publish('SPAN_CHANGED');
+  };
 
-	var minuteDown = function(e) {
-		adjustMinute(e, -1);
-	};
+  var minuteUp = function(e) {
+    adjustMinute(e, 1);
+  };
 
-	var adjustMinute = function(e, valueFlipper) {
-		if (!isEmpty() && !isValid())
-			return;
+  var minuteDown = function(e) {
+    adjustMinute(e, -1);
+  };
 
-		e.preventDefault();
-		var delta = ONE_MINUTE*valueFlipper;
-		var oldDate = isEmpty() ? getNow() : getTimeFromElements();
-		var newDate = new Date(oldDate.getTime() + delta);
-		setTime(newDate);
-	};
+  var adjustMinute = function(e, valueFlipper) {
+    if (!isEmpty() && !isValid())
+      return;
 
-	var setTime = function(dateObj) {
-		var munged = timeUtil.get12Hour(dateObj);
-		timeEl.text(munged.time);
-		if (munged.period == 'AM')
-			setPeriodAm();
-		else
-			setPeriodPm();
-		checkForFix();
-	};
+    e.preventDefault();
+    var delta = ONE_MINUTE*valueFlipper;
+    var oldDate = isEmpty() ? getNow() : getTimeFromElements();
+    var newDate = new Date(oldDate.getTime() + delta);
+    setTime(newDate);
+  };
 
-	var removeChar = function() {
-		var text = timeEl.text();
-		if (text.length > 0)
-			timeEl.text(text.substr(0, text.length -1));
-	};
+  var setTime = function(dateObj) {
+    var munged = timeUtil.get12Hour(dateObj);
+    timeEl.text(munged.time);
+    if (munged.period == 'AM')
+      setPeriodAm();
+    else
+      setPeriodPm();
+    checkForFix();
+  };
 
-	var addNumber = function(key) {
-		var text = timeEl.text();
-		if (analyzer.isNumerable(text)) {
-			timeEl.text(text + key);
-			checkForFix();
-			checkForErrorOnCompletion();
-		}
-	};
+  var removeChar = function() {
+    var text = timeEl.text();
+    if (text.length > 0)
+      timeEl.text(text.substr(0, text.length -1));
+  };
 
-	var addColon = function() {
-		var text = timeEl.text();
-		if (analyzer.isColonable(text))
-			timeEl.text(text + ':');
-	};
+  var addNumber = function(key) {
+    var text = timeEl.text();
+    if (analyzer.isNumerable(text)) {
+      timeEl.text(text + key);
+      checkForFix();
+      checkForErrorOnCompletion();
+    }
+  };
 
-	var setPeriodAm = function() {
-		periodEl.text('AM');
-	};
+  var addColon = function() {
+    var text = timeEl.text();
+    if (analyzer.isColonable(text))
+      timeEl.text(text + ':');
+  };
 
-	var setPeriodPm = function() {
-		periodEl.text('PM');
-	};
+  var setPeriodAm = function() {
+    periodEl.text('AM');
+  };
 
-	var togglePeriod = function() {
-		if (periodEl.text() == 'AM')
-			periodEl.text('PM');
-		else 
-			periodEl.text('AM');
-	};
+  var setPeriodPm = function() {
+    periodEl.text('PM');
+  };
 
-	var checkForErrorOnCompletion = function() {
-		var timeStr = timeEl.text();
-		if (analyzer.isCorrectFormat(timeStr) && !isValid())
-			timeEl.addClass('error');
-	};
+  var togglePeriod = function() {
+    if (periodEl.text() == 'AM')
+      periodEl.text('PM');
+    else 
+      periodEl.text('AM');
+    App.dispatcher.publish('SPAN_CHANGED');
+  };
 
-	var adjustInvalidTreatment = function() {
-		if (isValid())
-			timeEl.removeClass('error');
-		else
-			timeEl.addClass('error');
-	};
+  var checkForErrorOnCompletion = function() {
+    var timeStr = timeEl.text();
+    if (analyzer.isCorrectFormat(timeStr) && !isValid())
+      timeEl.addClass('error');
+  };
 
-	var isValid = function() {
-		return analyzer.isValid(timeEl.text());
-	};
+  var adjustInvalidTreatment = function() {
+    if (isValid())
+      timeEl.removeClass('error');
+    else
+      timeEl.addClass('error');
+  };
 
-	var isEmpty = function() {
-		return timeEl.text() == '';
-	};
+  var isValid = function() {
+    return analyzer.isValid(timeEl.text());
+  };
 
-	var checkForFix = function() {
-		if (timeEl.hasClass('error') && isValid())
-			timeEl.removeClass('error')
-	};
+  var isEmpty = function() {
+    return timeEl.text() == '';
+  };
 
-	var now = function() {
-		setTime(new Date());
-		timeEl.focus();
-	};
+  var checkForFix = function() {
+    if (timeEl.hasClass('error') && isValid())
+      timeEl.removeClass('error')
+  };
 
-	var getTimeFromElements = function() {
-		var dateCopy = new Date(date.getTime());
+  var now = function() {
+    setTime(new Date());
+    timeEl.focus();
+    App.dispatcher.publish('SPAN_CHANGED');
+  };
 
-		var parts = timeEl.text().split(':');
-		dateCopy.setMinutes(parts[1]);
+  var getTimeFromElements = function() {
+    if (!date)
+      return;
+    
+    var dateCopy = new Date(date.getTime());
 
-		var hours = parseInt(parts[0]);
-		if (periodEl.text() == 'PM' && hours != 12)
-			 hours += 12;
-		if (periodEl.text() == 'AM' && hours == 12)
-			hours = 0;
-		dateCopy.setHours(hours);
+    var parts = timeEl.text().split(':');
+    dateCopy.setMinutes(parts[1]);
 
-		return dateCopy;
-	};
+    var hours = parseInt(parts[0]);
+    if (periodEl.text() == 'PM' && hours != 12)
+       hours += 12;
+    if (periodEl.text() == 'AM' && hours == 12)
+      hours = 0;
+    dateCopy.setHours(hours);
 
-	var getNow = function() {
-		var nowDate = new Date();
-		var dateCopy = new Date(date.getTime());
-		dateCopy.setHours(nowDate.getHours());
-		dateCopy.setMinutes(nowDate.getMinutes());
-		return dateCopy;
-	};
+    return dateCopy;
+  };
 
-	init();
+  var getNow = function() {
+    var nowDate = new Date();
+    var dateCopy = new Date(date.getTime());
+    dateCopy.setHours(nowDate.getHours());
+    dateCopy.setMinutes(nowDate.getMinutes());
+    return dateCopy;
+  };
 
-	return {
-		getTime:function() {
-			adjustInvalidTreatment();
-			if (!isValid())
-				return;
+  init();
 
-			if (isEmpty())
-				return getNow();
-			return getTimeFromElements();
-		},
-		clear:function() {
-			timeEl.text('');
+  return {
+    getTime:function() {
+      adjustInvalidTreatment();
+      if (!isValid())
+        return;
 
-			var date = new Date();
-			if (date.getHours() >= 12)
-				setPeriodPm();
-			else
-				setPeriodAm();
-		},
-		now:now,
-		setTime:setTime,
-		focus:function() {
-			timeEl.focus();
-		}
-	};
+      if (isEmpty())
+        return;
+
+      return getTimeFromElements();
+    },
+    clear:function() {
+      timeEl.text('');
+
+      var date = new Date();
+      if (date.getHours() >= 12)
+        setPeriodPm();
+      else
+        setPeriodAm();
+    },
+    now:now,
+    setTime:setTime,
+    focus:function() {
+      timeEl.focus();
+    }
+  };
 };

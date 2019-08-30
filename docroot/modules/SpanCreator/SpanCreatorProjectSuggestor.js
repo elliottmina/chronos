@@ -1,172 +1,200 @@
 var SpanCreatorProjectSuggestor = function(
-	recentProjectBuilder, 
-	todaysProjectBuilder) {
+  recentProjectBuilder, 
+  todaysProjectBuilder,
+  regEx) {
 
-	var itemTemplate = `<li class="suggestion"></li>`;
-	var projectsContainer;
-	var recentProjects;
-	var todaysProjects;
-	var selectedIndex;
+  var itemTemplate = `
+    <li class="suggestion">
+      <i class="far fa-clock recent_indicator"></i>
+      <i class="far fa-chevron-right selected_indicator"></i>
+      <span class="text"></span>
+    </li>`;
+  var projectsContainer;
+  var recentProjects;
+  var todaysProjects;
+  var selectedIndex;
+  var showing = false;
 
-	var init = function() {
-		gatherComponents();
-		recentProjects = recentProjectBuilder.build();
-		recentProjects.sort();
-		addBehavior();
-	};
+  var init = function() {
+    gatherComponents();
+    recentProjects = recentProjectBuilder.build();
+    recentProjects.sort();
+    addBehavior();
+  };
 
-	var gatherComponents = function() {
-		projectsContainer = jQuery('#SpanCreator .project_suggestions ul');
-		projectInput = jQuery('#SpanCreator input[name="project"]');
-	};
+  var gatherComponents = function() {
+    projectsContainer = jQuery('#SpanCreator .project_suggestions ul');
+    projectInput = jQuery('#SpanCreator input[name="project"]');
+  };
 
-	var addBehavior = function() {
-		projectInput.focus(show);
-		projectInput.blur(onBlur);
-		projectInput.keyup(onKeyUp);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
-		new InputSizeAdjuster(projectInput);
-	};
+  var addBehavior = function() {
+    projectInput.focus(considerShowing);
+    projectInput.blur(onBlur);
+    projectInput.keyup(onKeyUp);
+    projectInput.keyup(publishChange);
+    App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
+    new InputSizeAdjuster(projectInput);
+  };
 
-	var onSpanSaved = function(data) {
-		if (jQuery.inArray(data.span.project, recentProjects) == -1) {
-			recentProjects.push(data.span.project);
-			recentProjects.sort();
-		}
-	};
+  var onSpanSaved = function(data) {
+    if (jQuery.inArray(data.span.project, recentProjects) == -1) {
+      recentProjects.push(data.span.project);
+      recentProjects.sort();
+    }
+  };
 
-	var show = function() {
-		var suggestions = getSuggestions();
-		if (suggestions.length == 0) {
-			hide();
-			return;
-		}
+  var show = function() {
+    if (showing)
+      return;
 
-		todaysProjects = todaysProjectBuilder.build();
+    projectsContainer.show();
+    showing = true;
+  };
 
-		projectsContainer.empty();
-		jQuery.each(suggestions, populateSuggestion);
-		selectFirst();
-		projectsContainer.show();
-	};
+  var populate = function(suggestions) {
+    todaysProjects = todaysProjectBuilder.build();
+    projectsContainer.empty();
+    jQuery.each(suggestions, populateSuggestion);
+    reorder();
+    selectFirst();
+  };
 
-	var populateSuggestion = function(index, suggestion) {
-		var li = jQuery(itemTemplate)
-			.clone()
-			.appendTo(projectsContainer)
-			.text(suggestion)
-			.click(selectSuggestion);
+  var populateSuggestion = function(index, suggestion) {
+    var li = jQuery(itemTemplate)
+      .clone()
+      .appendTo(projectsContainer)
+      .click(selectSuggestion);
 
-		if (jQuery.inArray(suggestion, todaysProjects) != -1) {
-			li.addClass('today');
-			jQuery('<i class="fa fa-clock-o"></i>')
-				.appendTo(li);
-		}
-	};
+    li.find('.text').text(suggestion)
 
-	var selectSuggestion = function() {
-		projectInput.val(jQuery(this).text());
-		hide();
-	};
+    if (jQuery.inArray(suggestion, todaysProjects) != -1)
+      li.addClass('today');
+  };
 
-	var getSuggestions = function() {
-		var projectFilter = projectInput.val().toLowerCase();
-		var re = new RegExp(projectFilter.split('').join('.*'));
+  var reorder = function() {
+    projectsContainer.find('li.today').each(function(index, el) {
+      projectsContainer.prepend(el);
+    });
+  };
 
-		if (projectFilter == '')
-			return recentProjects;
+  var selectSuggestion = function() {
+    projectInput.val(jQuery(this).find('.text').text());
+    hide();
+    publishChange();
+  };
 
-		var suggestions = [];
-		jQuery.each(recentProjects, function(index, project) {
-			if (re.test(project.toLowerCase()))
-				suggestions.push(project);
-		});
-		return suggestions;
-	};
+  var getSuggestions = function() {
+    var projectText = projectInput.val().toLowerCase();
+    if (projectText == '')
+      return recentProjects;
 
-	var hide = function() {
-		deselectAll();
-		projectsContainer.hide();
-	};
+    var re = regEx.squishyMatch(projectText);
+    var suggestions = [];
+    jQuery.each(recentProjects, function(index, project) {
+      if (re.test(project.toLowerCase()))
+        suggestions.push(project);
+    });
+    return suggestions;
+  };
 
-	var onBlur = function() {
-		setTimeout(hide, 100);
-	};
+  var hide = function() {
+    if(!showing)
+      return;
 
-	var onKeyUp = function(e) {
-		switch (e.key) {
-			case 'Enter':
-				useSelected();
-				break;
-			case 'Escape':
-				hide();
-				break;
-			case 'ArrowUp':
-				selectUp();
-				break;
-			case 'ArrowDown':
-				selectDown();
-				break;
-			default:
-				show();
-				// adjustSize();
-		}
-	};
+    deselectAll();
+    projectsContainer.hide();
+    showing = false;
+  };
 
-	var selectUp = function() {
-		ensureShowing();
+  var onBlur = function() {
+    setTimeout(hide, 200);
+  };
 
-		selectedIndex--;
-		selectedIndex = Math.max(selectedIndex, 0);
-		showSelected();
-	};
+  var onKeyUp = function(e) {
+    switch (e.key) {
+      case 'Enter':
+        useSelected();
+        break;
+      case 'Escape':
+        hide();
+        break;
+      case 'ArrowUp':
+        selectUp();
+        break;
+      case 'ArrowDown':
+        selectDown();
+        break;
+      default:
+        considerShowing();
+    }
+  };
 
-	var selectDown = function() {
-		ensureShowing();
+  var considerShowing = function() {
+    var suggestions = getSuggestions();
+    if (suggestions.length == 0) {
+      hide();
+      return;
+    }
+    populate(suggestions);
+    show();
+  }
 
-		selectedIndex++;
-		selectedIndex = Math.min(selectedIndex, getSuggestions().length -1);
-		showSelected();
-	};
+  var selectUp = function() {
+    ensureShowing();
 
-	var selectFirst = function() {
-		selectedIndex = 0;
-		showSelected();
-	};
+    selectedIndex--;
+    selectedIndex = Math.max(selectedIndex, 0);
+    showSelected();
+  };
 
-	var showSelected = function() {
-		deselectAll();
-		projectsContainer.find('li').eq(selectedIndex).addClass('selected');
-	};
+  var selectDown = function() {
+    selectedIndex++;
+    selectedIndex = Math.min(selectedIndex, getSuggestions().length -1);
+    showSelected();
+  };
 
-	var deselectAll = function() {
-		projectsContainer.find('.selected').removeClass('selected');
-	};
+  var selectFirst = function() {
+    selectedIndex = 0;
+    showSelected();
+  };
 
-	var useSelected = function() {
-		projectsContainer.find('.selected').click();
-	};
+  var showSelected = function() {
+    deselectAll();
+    projectsContainer.find('li').eq(selectedIndex).addClass('selected');
+  };
 
-	var ensureShowing = function() {
-		if (projectsContainer.is(':hidden'))
-			show();
-	};
+  var deselectAll = function() {
+    projectsContainer.find('.selected').removeClass('selected');
+  };
 
-	init();
+  var useSelected = function() {
+    projectsContainer.find('.selected').click();
+  };
 
-	return {
-		getProject:function() {
-			return jQuery.trim(projectInput.val());
-		},
-		clear:function() {
-			projectInput.val('');
-		},
-		focus:function() {
-			projectInput.focus();
-		},
-		set:function(val) {
-			projectInput.val(val);
-		}
-	};
+  var ensureShowing = function() {
+    if (projectsContainer.is(':hidden'))
+      show();
+  };
+
+  var publishChange = function() {
+    App.dispatcher.publish('SPAN_CHANGED');
+  };
+
+  init();
+
+  return {
+    clear:function() {
+      projectInput.val('');
+    },
+    focus:function() {
+      projectInput.focus();
+    },
+    get:function() {
+      return jQuery.trim(projectInput.val());
+    },
+    set:function(val) {
+      projectInput.val(val);
+    }
+  };
 
 };

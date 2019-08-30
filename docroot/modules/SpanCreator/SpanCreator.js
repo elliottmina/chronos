@@ -1,165 +1,202 @@
 var SpanCreator = function() {
-	
-	var guidGenerator;
-	var timeUtil;
-	var topContainer;
-	var startTimeField;
-	var finishTimeField;
-	var projectSuggestor;
-	var taskList;
-	var validator;
-	var date;
-	var record;
-	var activeSpan;
-	var saveAndRepeatButton;
-	var stateSetter;
+  
+  var guidGenerator;
+  var timeUtil;
+  var topContainer;
+  var startTimeField;
+  var finishTimeField;
+  var projectSuggestor;
+  var taskList;
+  var validator;
+  var record;
+  var activeSpan;
+  var saveAndRepeatButton;
+  var cancelButton;
+  var stateSetter;
+  var spanAssembler;
+  var wipSaver;
 
-	var init = function() {
-		gatherDependencies();
-		buildHtml();
-		build();
-		addBehavior();
-	};
+  var init = function() {
+    gatherDependencies();
+    buildHtml();
+    build();
+    stateSetter.reset();
+    addBehavior();
+    restoreWip();
+  };
 
-	var gatherDependencies = function() {
-		guidGenerator = new GuidGenerator();
-		timeUtil = new TimeUtil();
-	};
-	
-	var buildHtml = function() {
-		topContainer = jQuery('#SpanCreator');
-		topContainer.html(SpanCreatorTemplate);
-		saveAndRepeatButton = topContainer.find('.duplicate');
-	};
+  var gatherDependencies = function() {
+    guidGenerator = new GuidGenerator();
+    timeUtil = new TimeUtil();
+  };
+  
+  var buildHtml = function() {
+    topContainer = jQuery('#SpanCreator');
+    topContainer.html(SpanCreatorTemplate);
+    saveAndRepeatButton = topContainer.find('.duplicate');
+    cancelButton = topContainer.find('.cancel');
+  };
 
-	var build = function() {
+  var build = function() {
 
-		var analyzer = new SpanCreatorAnalyzer();
-		var timeResolver = new SpanCreatorTimeResolver(analyzer);
+    var analyzer = new SpanCreatorAnalyzer();
+    var timeResolver = new SpanCreatorTimeResolver(analyzer);
 
-		startTimeField = new SpanCreatorTimeField(
-			topContainer.find('.start .time_field_container'),
-			analyzer,
-			timeResolver,
-			timeUtil);
+    startTimeField = new SpanCreatorTimeField(
+      topContainer.find('.start .time_field_container'),
+      analyzer,
+      timeResolver,
+      timeUtil);
 
-		finishTimeField = new SpanCreatorTimeField(
-			topContainer.find('.finish .time_field_container'),
-			analyzer,
-			timeResolver,
-			timeUtil);
+    finishTimeField = new SpanCreatorTimeField(
+      topContainer.find('.finish .time_field_container'),
+      analyzer,
+      timeResolver,
+      timeUtil);
 
-		projectSuggestor = new SpanCreatorProjectSuggestor(
-			new SpanCreatorRecentProjectBuilder(),
-			new SpanCreatorTodaysProjectBuilder());
+    projectSuggestor = new SpanCreatorProjectSuggestor(
+      new SpanCreatorRecentProjectBuilder(),
+      new SpanCreatorTodaysProjectBuilder(),
+      new RegEx());
 
-		taskList = new SpanCreatorTaskList(
-			topContainer.find('.task_list'));
+    taskList = new SpanCreatorTaskList(
+      topContainer.find('.task_list'));
 
-		validator = new SpanCreatorValidator();
+    validator = new SpanCreatorValidator();
 
-		new SpanCreatorShortcuts(
-			projectSuggestor, 
-			save, 
-			startTimeField, 
-			finishTimeField,
-			taskList);
+    new SpanCreatorShortcuts(
+      projectSuggestor, 
+      save, 
+      saveAndRepeat,
+      startTimeField, 
+      finishTimeField,
+      taskList);
 
-		stateSetter = new SpanCreatorStateSetter(
-			startTimeField,
-			finishTimeField,
-			projectSuggestor,
-			taskList,
-			topContainer.find('.save .text'),
-			saveAndRepeatButton);
-	};
+    stateSetter = new SpanCreatorStateSetter(
+      startTimeField,
+      finishTimeField,
+      projectSuggestor,
+      taskList,
+      topContainer.find('.save .text'),
+      saveAndRepeatButton,
+      cancelButton,
+      timeUtil);
 
-	var addBehavior = function() {
-		saveAndRepeatButton.click(saveAndRepeat);
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('EDIT_SPAN_REQUESTED', onEditSpanRequested);
-		App.dispatcher.register('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
-	};
+    spanAssembler = new SpanCreatorSpanAssembler(
+      startTimeField, 
+      finishTimeField,
+      taskList,
+      projectSuggestor);
 
+    wipSaver = new SpanCreatorWipSaver(spanAssembler);
+  };
 
-	var save = function() {
-		if (timeUtil.getYmd(new Date()) != record.date)
-			confirmPreviousDate();
-		else 
-			confirmedSave();
-	};
+  var addBehavior = function() {
+    jQuery('#SpanCreator').find('.save').click(save);
+    saveAndRepeatButton.click(saveAndRepeat);
+    cancelButton.click(cancel);
+    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+    App.dispatcher.subscribe('EDIT_SPAN_REQUESTED', onEditSpanRequested);
+    App.dispatcher.subscribe('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
+    topContainer.find('.hotkeys_button').click(function() {
+      topContainer.find('section.hotkeys').toggleClass('active');
+    })
+  };
 
-	var confirmPreviousDate = function() {
-		new ModalDialogue({
-			message:'This record is not for today.  Is that cool?',
-			buttons:[{
-				label:'No, not cool.',
-				role:'secondary',
-				autoClose:true
-			},{
-				label:'Yeah man, it\'s totally chill',
-				role:'primary',
-				autoClose:true,
-				callback:confirmedSave
-			}]
-		});
-	};
+  var cancel = function() {
+    activeSpan = undefined;
+    stateSetter.reset();
+  };
 
-	var confirmedSave = function() {
-		if (submit())
-			stateSetter.reset();
-	};
+  var save = function() {
+    console.trace();
+    preSubmit(resetCleanup);
+  };
 
-	var submit = function() {
-		taskList.addCurrent();
-		var span = {
-			start:startTimeField.getTime(),
-			finish:getFinishDate(),
-			project:projectSuggestor.getProject(),
-			tasks:taskList.getTasks(),
-			guid:activeSpan ? activeSpan.guid : guidGenerator.generate()
-		};
+  var saveAndRepeat = function() {
+    preSubmit(repeatCleanup);
+  };
 
-		if (!validator.validate(span))
-			return false;
-		
-		App.dispatcher.update('SPAN_SUBMITTED', span);
-		activeSpan = undefined;
-		return true;
-	};
+  var resetCleanup = function() {
+    setTimeout(stateSetter.reset, 100);
+  };
 
-	var getFinishDate = function() {
-		var finish = finishTimeField.getTime();
-		if (finish)
-			return finish;
+  var repeatCleanup = function() {
+    startTimeField.now();
+    finishTimeField.clear();
+  };
 
-		var now = new Date();
-		now.setFullYear(date.getFullYear());
-		now.setMonth(date.getMonth());
-		now.setDate(date.getDate());
-		return now;
-	};
+  var preSubmit = function(cleanupFunc) {
+    if (isToday())
+      submit(cleanupFunc);
+    else 
+      confirmPreviousDate(cleanupFunc);
+  };
 
-	var onDateChanged = function(data) {
-		record = data;
-		date = timeUtil.parseUtcYmd(data.date);
-	};
+  var isToday = function() {
+    return timeUtil.getYmd(new Date()) == record.date;
+  };
 
-	var onEditSpanRequested = function(guid) {
-		activeSpan = record.spans[guid];
-		stateSetter.edit(activeSpan);
-	};
+  var confirmPreviousDate = function(cleanupFunc) {
+    new ModalDialogue({
+      message:'This record is not for today.  Is that cool?',
+      buttons:[{
+        label:'No, not cool.',
+        role:'secondary',
+        autoClose:true
+      },{
+        label:'Yeah man, it\'s totally chill',
+        role:'primary',
+        autoClose:true,
+        callback:function() { submit(cleanupFunc); }
+      }]
+    });
+  };
 
-	var onRepeatSpanRequested = function(guid) {
-		stateSetter.repeat(record.spans[guid]);
-	};
+  var submit = function(cleanupFunc) {
+    var span = buildSpan();
+    if (!validator.validate(span))
+      return;
 
-	var saveAndRepeat = function() {
-		submit();
-		startTimeField.now();
-		finishTimeField.clear();
-	};
+    App.dispatcher.publish('SPAN_SUBMITTED', span);
+    activeSpan = undefined;
+    cleanupFunc();
+  };
 
-	init();
+  var buildSpan = function() {
+    commitPartialWork();
+    var span = spanAssembler.assemble();
+    span.guid = activeSpan ? activeSpan.guid : guidGenerator.generate();
+    return span;
+  };
+
+  var commitPartialWork = function() {
+    taskList.addCurrent();
+
+    if (!finishTimeField.getTime()) {
+      finishTimeField.now();
+    }
+  };
+
+  var onDateChanged = function(data) {
+    record = data;
+  };
+
+  var onEditSpanRequested = function(guid) {
+    activeSpan = record.spans[guid];
+    stateSetter.edit(activeSpan);
+  };
+
+  var onRepeatSpanRequested = function(guid) {
+    stateSetter.repeat(record.spans[guid]);
+  };
+
+  var restoreWip = function() {
+    var span = wipSaver.get();
+    if (span)
+      stateSetter.restore(span);
+  };
+
+  init();
 
 };

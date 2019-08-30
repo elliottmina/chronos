@@ -1,131 +1,112 @@
 var ProjectSummary = function() {
 
-	var itemTemplate = `
-		<tr>
-			<td class="project"></td>
-			<td class="hours"></td>
-			<td class="time"></td>
-			<td class="tasks"><ul class="task_list"></ul></td>
-		</li>
-	`;
+  var html = `
+    <header>Projects</header>
+    <div class="no_content_container">Nothing to see here.  Move along.</div>
+    <div class="content_container">
+      <input type="text" placeholder="filter" class="filter" />
+      <ul class="item_container"></ul>
+    </div>`;
 
-	var copyTemplate = `
-		<li class="copy">
-			<span class="copy button">
-				<i class="fa fa-copy"></i>
-			</span>
-		</li>`;
-	
-	var html = `
-		<header>Project summary</header>
-		<div class="no_content_container">Nothing to see here.  Move along.</div>
-		<table>
-			<thead>
-				<tr>
-					<th class="project">Project</th>
-					<th class="hours">Hours</th>
-					<th class="time">Time</th>
-					<th class="tasks">Tasks</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>`;
+  var dataBuilder;
+  var copier;
+  var itemContainer;
+  var noContentContainer;
+  var spans;
 
-	var dataBuilder;
-	var padder;
-	var copier;
-	var listEl;
-	var noContentContainer;
+  var init = function() {
+    dataBuilder = new ProjectSummaryDataBuilder();
+    copier = new Copier();
+    build();
+    gatherComponents();
+    addBehavior();
 
-	var init = function() {
-		dataBuilder = new ProjectSummaryDataBuilder();
-		padder = new Padder();
-		copier = new Copier();
-		build();
-		addBehavior();
-	};
+    itemBuilder = new ProjectSummaryItemBuilder(
+      copier,
+      new Padder(),
+      itemContainer);
+  };
 
-	var build = function() {
-		var renderTo = jQuery('#ProjectSummary');
-		renderTo.html(html);
-		listEl = renderTo.find('tbody');
-		noContentContainer = renderTo.find('.no_content_container');
-	};
+  var build = function() {
+    var renderTo = jQuery('#ProjectSummary');
+    renderTo.html(html);
+  };
 
-	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-		App.dispatcher.register('SPAN_SAVED', onSpanSaved);
-		App.dispatcher.register('SPAN_DELETED', onSpanDeleted);
-	};
+  var gatherComponents = function() {
+    itemContainer = jQuery('#ProjectSummary .item_container');
+    noContentContainer = jQuery('#ProjectSummary .no_content_container');
+    contentContainer = jQuery('#ProjectSummary .content_container');
+  };
 
-	var onDateChanged = function(date) {
-		populate(date.spans);
-	};
+  var addBehavior = function() {
+    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+    App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
+    App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
+    App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateDisplay);
+    jQuery('#ProjectSummary input.filter').keyup(onFilterChange);
+  };
 
-	var onSpanSaved = function(data) {
-		populate(data.record.spans);
-	};
+  var onDateChanged = function(date) {
+    spans = date.spans;
+    updateDisplay();
+  };
 
-	var onSpanDeleted = function(data) {
-		populate(data.record.spans);
-	};
+  var onSpanSaved = function(data) {
+    spans = data.record.spans;
+    updateDisplay();
+  };
 
-	var populate = function(spans) {
-		var summaryData = dataBuilder.build(spans);
-		if (Object.keys(summaryData).length) {
-			noContentContainer.hide();
-			listEl.empty().show();
-			jQuery.each(summaryData, addProject);
-		} else {
-			noContentContainer.show();
-			listEl.hide();
-		}
-	};
+  var onSpanDeleted = function(data) {
+    spans = data.record.spans;
+    updateDisplay();
+  };
 
-	var addProject = function(key, project) {
-		var itemContainer = jQuery(itemTemplate)
-			.appendTo(listEl);
+  var updateDisplay = function() {
+    var summaryData = dataBuilder.build(spans);
 
-		itemContainer.find('.project').text(project.label);
-		itemContainer.find('.hours').text(formatHours(project.time));
-		itemContainer.find('.time').text(formatTime(project.time));
-		
-		var tasksContainer = itemContainer.find('ul');
-		jQuery.each(project.tasks, function(index, task) {
-			jQuery('<li>')
-				.appendTo(tasksContainer)
-				.text(task);
-		});
+    if (Object.keys(summaryData).length)
+      populate(summaryData);
+    else
+      showNoContent();
+  };
 
-		var li = jQuery(copyTemplate)
-			.appendTo(tasksContainer)
-			.click(copy)
-			.data('tasks', project.tasks);
-	};
+  var populate = function(summaryData) {
+    noContentContainer.hide();
 
-	var formatTime = function(minutes) {
-		var hours = parseInt(minutes/60);
-		var remainder = Math.ceil(minutes%60);
-		remainder = padder.twoDigit(remainder);
-		return hours + ':' + remainder;
-	};
-	
-	var formatHours = function(minutes) {
-		return round(minutes/60, 2);
-	};
-	
-	var round = function(number, precision) {
-		var factor = Math.pow(10, precision);
-		var tempNumber = number * factor;
-		var roundedTempNumber = Math.round(tempNumber);
-		return roundedTempNumber / factor;
-	};
+    itemContainer.empty();
+    var sortedKeys = Object.keys(summaryData).sort();
 
-	var copy = function() {
-		var text = jQuery(this).data('tasks').join('\n');
-		copier.copy(text);
-	};
+    for (var i = 0; i < sortedKeys.length; i++) {
+      var key = sortedKeys[i];
+      itemBuilder.build(summaryData[key]);
+    }
 
-	init();
+    contentContainer.show();
+  };
+
+  var showNoContent = function() {
+    noContentContainer.show();
+    contentContainer.hide();
+  };
+
+  var onFilterChange = function() {
+    itemContainer.find('li').show();
+
+    var projectText = jQuery(this).val().toLowerCase();
+    if (projectText == '')
+      return;
+    
+    var re = new RegExp(projectText.split('').join('.*'));
+
+    itemContainer.find('li').each(function(index, container) {
+      container = jQuery(container);
+      var project = container.find('.project').text().toLowerCase();
+      if (!re.test(project))
+        container.hide();
+    });
+  };
+
+  init();
 
 };

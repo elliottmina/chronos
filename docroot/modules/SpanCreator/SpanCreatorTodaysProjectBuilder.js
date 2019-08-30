@@ -1,30 +1,30 @@
 var SpanCreatorTodaysProjectBuilder = function() {
-	
-	var date;
+  
+  var date;
 
-	var init = function() {
-		addBehavior();
-	};
+  var init = function() {
+    addBehavior();
+  };
 
-	var addBehavior = function() {
-		App.dispatcher.register('DATE_CHANGED', onDateChanged);
-	};
+  var addBehavior = function() {
+    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
+  };
 
-	var onDateChanged = function(data) {
-		date = data.date;
-	};
+  var onDateChanged = function(data) {
+    date = data.date;
+  };
 
-	init();
+  init();
 
-	return {
-		build:function() {
-			var today = App.persister.fetch(date);
-			projects = [];
-			jQuery.each(today.spans, function(index, span) {
-				if (jQuery.inArray(span.project, projects) == -1)
-					projects.push(span.project);
-			});
-			return projects;
-		}
-	};
+  return {
+    build:function() {
+      var today = App.persister.fetch(date);
+      projects = [];
+      jQuery.each(today.spans, function(index, span) {
+        if (jQuery.inArray(span.project, projects) == -1)
+          projects.push(span.project);
+      });
+      return projects;
+    }
+  };
 };

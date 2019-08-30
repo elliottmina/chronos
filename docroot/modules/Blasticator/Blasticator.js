@@ -1,41 +1,37 @@
 var Blasticator = function() {
 
-	var html = `
-		<span class="mini_button blasticate">
-			<i class="fa fa-trash"></i> Blasticate
-		</span>`;
+  var init = function() {
+    registerSettings();
+  };
 
-	var init = function() {
-		build();
-		addBehavior();
-	};
+  var showDialogue = function() {
+    new ModalDialogue({
+      message:'This will destroy EVERYTHING.  FOREVER.',
+      buttons:[{
+        label:'Keep my data',
+        role:'secondary',
+        autoClose:true
+      },{
+        label:'BURN IT ALL',
+        role:'primary',
+        autoClose:true,
+        callback:function() {
+          App.persister.clear();
+          window.location.reload(true);
+        }
+      }]
+    });
+  };
 
-	var build = function() {
-		jQuery('#Blasticator').html(html);
-	};
+  var registerSettings = function() {
+    App.settings.register([{
+      section:'Data',
+      label:'Clear data',
+      type:'button',
+      iconClass:'fa-trash',
+      callback:showDialogue
+    }]);
+  };
 
-	var addBehavior = function() {
-		jQuery('#Blasticator').find('.mini_button').click(showDialogue);
-	};
-
-	var showDialogue = function() {
-		new ModalDialogue({
-			message:'This will destroy EVERYTHING.  FOREVER.',
-			buttons:[{
-				label:'Keep my data',
-				role:'secondary',
-				autoClose:true
-			},{
-				label:'BURN IT ALL',
-				role:'primary',
-				autoClose:true,
-				callback:function() {
-					App.persister.clear();
-					window.location.reload(true);
-				}
-			}]
-		});
-	};
-
-	init();
+  init();
 };

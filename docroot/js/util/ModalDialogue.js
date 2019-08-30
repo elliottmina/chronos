@@ -1,57 +1,61 @@
 var ModalDialogue = function(config) {
 
-	var dialogueTemplate = `
-		<div class="ModalDialogue">
-			<div class="box">
-				<header></header>
-				<div class="contents"></div>
-				<div class="button_container">
-				</div>
-			</div>
-		</div>`;
+  var dialogueTemplate = `
+    <div class="ModalDialogue">
+      <div class="box">
+        <header></header>
+        <div class="contents"></div>
+        <div class="button_container">
+        </div>
+      </div>
+    </div>`;
 
-	var buttonTemplate = `
-		<span class="button"></span>`;
+  var buttonTemplate = `
+    <button></button`;
 
-	var topContainer;
+  var topContainer;
 
-	var build = function() {
-		jQuery(document.body).css('overflow', 'hidden');
+  var build = function() {
+    jQuery(document.body).css('overflow', 'hidden');
 
-		topContainer = jQuery(dialogueTemplate).appendTo(document.body);
-		var buttonContainer = topContainer.find('.button_container');
-		var header = topContainer.find('header');
+    topContainer = jQuery(dialogueTemplate).appendTo(document.body);
+    var buttonContainer = topContainer.find('.button_container');
+    var header = topContainer.find('header');
 
-		header.text(config.message);
+    header.text(config.message);
 
-		if (config.contents)
-			topContainer
-				.find('.contents')
-				.append(config.contents);
+    if (config.contents)
+      topContainer
+        .find('.contents')
+        .append(config.contents);
 
-		jQuery.each(config.buttons, function(index, button) {
-			jQuery(buttonTemplate)
-				.appendTo(buttonContainer)
-				.text(button.label)
-				.addClass(button.role)
-				.click(function() {
-					if (button.autoClose)
-						close();
-					if (button.callback)
-						button.callback();
-				});
-		});
-	};
+    jQuery.each(config.buttons, function(index, button) {
+      jQuery(buttonTemplate)
+        .appendTo(buttonContainer)
+        .text(button.label)
+        .addClass(button.role)
+        .click(function() {
+          if (button.autoClose)
+            close();
+          if (button.callback)
+            button.callback();
+        });
+    });
 
-	var close = function() {
-		jQuery(document.body).css('overflow', 'auto');
-		topContainer.remove();
-	};
+    var buttons = topContainer.find('button');
+    if (buttons.length)
+      buttons[0].focus();
+  };
 
-	build();
+  var close = function() {
+    jQuery(document.body).css('overflow', 'auto');
+    topContainer.remove();
+  };
 
-	return {
-		close:close
-	};
+  build();
+
+  return {
+    close:close
+  };
 
 };
