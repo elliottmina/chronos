@@ -126,7 +126,7 @@ section>header {
   top: -0.25em;
   right: -0.25em;
   font-size: 2em;
-  color: blue;
+  color: hsl(191, 92%, 33%);
   cursor: pointer;
 }
 #Settings .fa-toggle-on,
@@ -135,7 +135,7 @@ section>header {
   position: relative;
   top:0.1em;
   margin-right:0.25em;
-  color:blue;
+  color:hsl(191, 92%, 33%);
 }
 #Settings label {
   display: inline-block;
