@@ -109,7 +109,6 @@ var SpanCreator = function() {
   };
 
   var save = function() {
-    console.trace();
     preSubmit(resetCleanup);
   };
 
