@@ -112,17 +112,16 @@ var SpanCreator = function() {
     preSubmit(resetCleanup);
   };
 
-  var saveAndRepeat = function() {
-    preSubmit(repeatCleanup);
-  };
-
   var resetCleanup = function() {
     setTimeout(stateSetter.reset, 100);
   };
 
-  var repeatCleanup = function() {
-    startTimeField.now();
-    finishTimeField.clear();
+  var saveAndRepeat = function() {
+    preSubmit(repeatCleanup);
+  };
+
+  var repeatCleanup = function(span) {
+    stateSetter.repeat(span);
   };
 
   var preSubmit = function(cleanupFunc) {
@@ -159,7 +158,7 @@ var SpanCreator = function() {
 
     App.dispatcher.publish('SPAN_SUBMITTED', span);
     activeSpan = undefined;
-    cleanupFunc();
+    cleanupFunc(span);
   };
 
   var buildSpan = function() {
