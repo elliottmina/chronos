@@ -38,7 +38,6 @@ var SpanSummary = function() {
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', populateSpans);
-    jQuery('#SpanSummary input.filter').keyup(onFilterChange);
   };
 
   var onDateChanged = function(data) {
@@ -82,23 +81,6 @@ var SpanSummary = function() {
     delete(spanMap[guid]);
     if (spansContainer.children().length == 0)
       noContentContainer.show();
-  };
-
-  var onFilterChange = function() {
-    spansContainer.find('li').show();
-
-    var projectText = jQuery(this).val().toLowerCase();
-    if (projectText == '')
-      return;
-    
-    var re = regEx.squishyMatch(projectText);
-
-    spansContainer.find('li').each(function(index, container) {
-      container = jQuery(container);
-      var project = container.find('label').text().toLowerCase();
-      if (!re.test(project))
-        container.hide();
-    });
   };
 
   init();
