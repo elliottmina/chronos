@@ -170,5 +170,9 @@ section>header {
 } 
 
 #metrics {
-  margin-right: 0;
+  display: flex;
+}
+#metrics h2 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
 }
