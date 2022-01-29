@@ -95,7 +95,7 @@ var SpanSummary = function() {
 
     spansContainer.find('li').each(function(index, container) {
       container = jQuery(container);
-      var project = container.find('.project').text().toLowerCase();
+      var project = container.find('label').text().toLowerCase();
       if (!re.test(project))
         container.hide();
     });

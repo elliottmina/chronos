@@ -4,16 +4,18 @@
 #SpanSummary .item_container {
   margin-top:1em;
 }
+#SpanSummary .item_container label {
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.5rem;
+}
 #SpanSummary .item_container>li {
+  border-left: 3px solid transparent;
   position: relative;
   list-style: none;
-  padding:0.5em;
-  border-left:3px solid #CCC;
-  border-right:3px solid #CCC;
-  border-bottom:1px solid #CCC;
+  padding:0 0.5rem 0.25rem 0;
 }
-#SpanSummary .item_container>li:first-child {
-  border-top:1px solid #CCC;
+#SpanSummary .item_container>li:nth-child(even) {
+  background-color: hsla(0, 0%, 100%, 0.05);
 }
 #SpanSummary .item_container>li header {
 }
@@ -26,22 +28,23 @@
 #SpanSummary .item_container>li .time>span {
   display: inline-block;
 }
-#SpanSummary .item_container>li .start:after {
-  content: " - ";
-}
-#SpanSummary .item_container>li .elapsed {
-  margin-left:1em;
-}
 #SpanSummary .item_container>li .elapsed:after {
   content: " hours";
 }
 #SpanSummary .task_list {
-  margin-top:1em;
+  margin-top:0.2em;
 }
 #SpanSummary li.selected {
   left:-0.5em;
 }
 #SpanSummary .mini_button {
   color:hsl(0, 0%, 44%);
+  background-color: hsla(0, 0%, 100%, 0.075);
+  padding: 0.2rem;
+  border-radius: 4px;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
 }
-
+#SpanSummary .mini_button:hover {
+  background-color: hsla(0, 0%, 100%, 0.2);
+  border: 1px solid hsla(0, 0%, 100%, 0.3);
+}

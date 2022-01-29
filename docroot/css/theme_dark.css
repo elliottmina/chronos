@@ -26,10 +26,6 @@ body.theme_dark #SpanCreator .task_list li {
   background-color: hsla(0, 0%, 100%, 0.1);
   border: 1px solid hsl(0, 0%, 55%);
 }
-body.theme_dark .task_list li {
-  background-color: hsl(0, 0%, 0%, 0.1);
-  border: 1px solid hsl(0, 0%, 0%, 0.2);
-}
 body.theme_dark #Settings>.mini_button {
   background-color: hsla(252, 23%, 32%, 1);
   border: 1px solid hsl(252, 23%, 43%);
