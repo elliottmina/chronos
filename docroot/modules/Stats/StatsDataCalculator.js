@@ -9,7 +9,12 @@ var StatsDataCalculator = function() {
       distribution[project] += calcHours(span);
     });
 
-    return distribution;
+    var list = Object.entries(distribution);
+    list.sort((a, b) => {
+      return b[1] - a[1];
+    });
+
+    return list;
   };
 
   var initProject = function(distribution, project) {

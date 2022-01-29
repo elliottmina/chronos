@@ -1,17 +1,24 @@
 var StatsTemplate = `
 <section class="pie" id="StatsEfficiency">
-  <label>Efficiency</label>
-  <div class="percent"></div>
-  <canvas id="StatsEfficiencyChart" height="150" width="300"></canvas>
+  <h2>Efficiency</h2>
+  <canvas id="StatsEfficiencyChart" height="50" width="50"></canvas>
 </section>
 <section class="pie" id="StatsTodayRoot">
-  <label>Daily distribution</label>
-  <canvas id="StatsTodayRootChart" height="150" width="300"></canvas>
-  <ul class="legend"></ul>
+  <h2>Daily distribution</h2>
+  <div class="content">
+    <canvas-wrapper>
+      <canvas id="StatsTodayRootChart" height="50" width="50"></canvas>
+    </canvas-wrapper>
+    <ul class="legend"></ul>
+  </div>
 </section>
 <section class="pie" id="StatsWeeklyRoot">
-  <label>Weekly distribution</label>
-  <canvas id="StatsWeeklyRootChart" height="150" width="300"></canvas>
-  <ul class="legend"></ul>
+  <h2>Weekly distribution</h2>
+  <div class="content">
+    <canvas-wrapper>
+      <canvas id="StatsWeeklyRootChart" height="50" width="50"></canvas>
+    </canvas-wrapper>
+    <ul class="legend"></ul>
+  </div>
 </section>
 `;
