@@ -1,16 +1,15 @@
 var GoalTemplate = `
-<section class="doughnut" id="GoalToday">
-  <label>Daily progress</label>
-  <canvas id="GoalTodayChart" height="150" width="300"></canvas>
-  <div class="hour_value text"></div>
-  <div class="percent_value text"></div>
-  <div class="hours_remaining"></div>
+<h2>Progress</h2>
+<section id="goal-daily">
+  <progress-bar><inner-bar></inner-bar></progress-bar>
+  <label>Daily</label>
+  <span class="hour_value text"></span>
+  <span class="hours_remaining"></span>
 </section>
-<section class="doughnut" id="GoalWeekly">
-  <label>Weekly progress</label>
-  <canvas id="GoalWeeklyChart" height="150" width="300"></canvas>
-  <div class="hour_value text"></div>
-  <div class="percent_value text"></div>
-  <div class="hours_remaining"></div>
+<section id="goal-weekly">
+  <progress-bar><inner-bar></inner-bar></progress-bar>
+  <label>Weekly</label>
+  <span class="hour_value text"></span>
+  <span class="hours_remaining"></span>
 </section>
 `;

@@ -10,7 +10,6 @@ var Goal = function() {
   var weeklyContainer;
   var weeklyCalculator;
   var durationCalculator;
-  var chartBuilder;
   var spans;
 
   var init = function() {
@@ -27,19 +26,18 @@ var Goal = function() {
   var buildDependencies = function() {
     durationCalculator = new GoalSpanDurationCalculator();
     weeklyCalculator = new GoalWeeklyCalculator(durationCalculator);
-    chartBuilder = new GoalPieChartBuilder();
   };
 
   var build = function() {
     jQuery('#Goal').html(GoalTemplate);
 
-    dailyChart = chartBuilder.build('GoalTodayChart', '#5bdd81', '#e7f9ec');
-    weeklyChart = chartBuilder.build('GoalWeeklyChart', '#2982db', '#f3f9ff');
+    dailyChart = new GoalProgressBar('goal-daily');
+    weeklyChart = new GoalProgressBar('goal-weekly');
   };
 
   var gatherComponents = function() {
-    dailyContainer = jQuery('#GoalToday');
-    weeklyContainer = jQuery('#GoalWeekly');
+    dailyContainer = jQuery('#goal-daily');
+    weeklyContainer = jQuery('#goal-weekly');
   };
 
   var addBehavior = function() {
@@ -75,23 +73,11 @@ var Goal = function() {
 
   var updateChartNumbers = function(container, value, goal) {
     var hours = Number.parseFloat(value).toFixed(2);
-    var remaining = Number.parseFloat(goal - hours).toFixed(2);
-    if (remaining < 0)
-      remaining = 0;
-    var percent = Math.round((value/goal)*100);
-
     container.find('.hour_value').text(hours);
-    container.find('.percent_value').text(percent);
-    container.find('.hours_remaining').text(remaining);
   };
 
   var updateChart = function(chart, value, goal) {
-    var percent = calcMaxPercent(value/goal);
-
-    chart.data.datasets[0].data = [
-      percent, 100-percent
-    ];
-    chart.update();
+    chart.update(calcMaxPercent(value/goal));
   };
 
   var calcMaxPercent = function(ratio) {

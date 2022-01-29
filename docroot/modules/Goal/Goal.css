@@ -1,40 +1,45 @@
 #Goal {
 }
-#Goal section>label {
+#Goal h2 {
+  font-size: 1.2rem;
 }
 #Goal section {
   position: relative;
-  margin-bottom: 2em;
 }
-#Goal canvas {
+#Goal section>* {
+  display: inline-block;
 }
-#Goal section.doughnut .hour_value {
-  top:2.75em;
-  font-size:1.8em;
+#Goal progress-bar {
+  width: 200px;
+  height: 13px;
+  border: 1px solid hsla(0, 0%, 80%, 0.5);
 }
-#Goal section.doughnut .hour_value:after {
+#Goal progress-bar inner-bar {
+  height: 13px;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+}
+#Goal #goal-daily progress-bar {
+  background-color: #e7f9ec;
+}
+#Goal #goal-daily progress-bar inner-bar {
+  background-color: #5bdd81;
+}
+#Goal #goal-weekly progress-bar {
+  background-color: #f3f9ff;
+}
+#Goal #goal-weekly progress-bar inner-bar {
+  background-color: #2982db;
+}
+#Goal label {
+  position: absolute;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  color: white;
+}
+#Goal .hour_value {
+}
+#Goal .hour_value:after {
   content:' hr';
-  font-size:0.5em;
-}
-#Goal section.doughnut .percent_value {
-  top:7.5em;
-  font-size:1em;
-}
-#Goal section.doughnut .percent_value:after {
-  content:'%';
-}
-#Goal section.doughnut .hours_remaining {
-  top:14em;
-  font-size:0.8em;
-  position: absolute;
-  left:0;
-  top:1.75em;
-}
-#Goal section.doughnut .hours_remaining:after {
-  content:' remaining';
-}
-#Goal .text {
-  position: absolute;
-  width:100%;
-  text-align: center;
 }
