@@ -28,7 +28,8 @@ var SpanSummaryItemBuilder = function(
     var projectRoot = App.projectSegmentor.segment(span.project)[0];
     var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
     var color = App.colorGenerator.generate(projectRoot);
-    container.css('background-color', colorTrans);
+    const label = container.find('label');
+    label.css('background-color', colorTrans);
     container.css('border-color', color);
   };
 
@@ -54,7 +55,7 @@ var SpanSummaryItemBuilder = function(
 
     container.find('.start').text(timeFormatter.format(span.start));
     container.find('.finish').text(timeFormatter.format(span.finish));
-    container.find('.project').html(buildLabel(span.project));
+    container.find('label').html(buildLabel(span.project));
     container.find('.elapsed').text(elapsed);
   };
 
