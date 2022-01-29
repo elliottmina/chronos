@@ -4,7 +4,6 @@ var ProjectSummary = function() {
     <header>Projects</header>
     <div class="no_content_container">Nothing to see here.  Move along.</div>
     <div class="content_container">
-      <input type="text" placeholder="filter" class="filter" />
       <ul class="item_container"></ul>
     </div>`;
 
@@ -44,7 +43,6 @@ var ProjectSummary = function() {
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateDisplay);
-    jQuery('#ProjectSummary input.filter').keyup(onFilterChange);
   };
 
   var onDateChanged = function(date) {
@@ -88,23 +86,6 @@ var ProjectSummary = function() {
   var showNoContent = function() {
     noContentContainer.show();
     contentContainer.hide();
-  };
-
-  var onFilterChange = function() {
-    itemContainer.find('li').show();
-
-    var projectText = jQuery(this).val().toLowerCase();
-    if (projectText == '')
-      return;
-    
-    var re = new RegExp(projectText.split('').join('.*'));
-
-    itemContainer.find('li').each(function(index, container) {
-      container = jQuery(container);
-      var project = container.find('.project').text().toLowerCase();
-      if (!re.test(project))
-        container.hide();
-    });
   };
 
   init();
