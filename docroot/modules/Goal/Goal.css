@@ -1,4 +1,6 @@
 #Goal {
+  min-width: 275px;
+  margin-right: 0.5rem;
 }
 #Goal section {
   position: relative;
@@ -36,6 +38,7 @@
   color: white;
 }
 #Goal .hour_value {
+  font-size: 0.9rem;
 }
 #Goal .hour_value:after {
   content:' hr';

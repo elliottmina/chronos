@@ -6,19 +6,14 @@ var StatsLegendBuilder = function() {
       <span class="text"></span>
     </li>`;
 
-  var getTopKeys = function(distribution) {
-    var keys = Object.keys(distribution);
-    keys.sort(function(a, b) {
-      return distribution[b] - distribution[a];
-    });
-    return keys.splice(0, 8);  
-  }
-
   return {
     build:function(container, distribution) {
-      var keys = getTopKeys(distribution);
       var list = container.find('ul.legend');
       list.empty();
+
+      const keys = distribution.map(item => {
+        return item[0];
+      });
 
       keys.forEach(function(key) {
         var li = jQuery(itemTemplate)

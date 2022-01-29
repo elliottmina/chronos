@@ -70,17 +70,41 @@ var Stats = function() {
   };
 
   var updateDay = function() {
-    var distribution = statsCalculator.buildDistribution(today.spans);
-    updateChart(dailyChart, distribution);
-    legendBuilder.build(dailyChartContainer, distribution);
+    updateDisplay(
+      dailyChart,
+      dailyChartContainer,
+      today.spans);
   };
 
   var updateWeek = function() {
-    var spans = gatherWeekSpans();
-    var distribution = statsCalculator.buildDistribution(spans);
+    updateDisplay(
+      weeklyChart,
+      weeklyChartContainer,
+      gatherWeekSpans());
+  };
 
-    updateChart(weeklyChart, distribution);
-    legendBuilder.build(weeklyChartContainer, distribution);
+  var updateDisplay = function(chart, chartContainer, spans) {
+    var distribution = statsCalculator.buildDistribution(spans);
+    condenseDistribution(distribution);
+    updateChart(chart, distribution);
+    legendBuilder.build(chartContainer, distribution);
+  };
+
+  var condenseDistribution = function(distribution) {
+    if (distribution.length <= 4)
+      return distribution;
+
+    const excessTime = extractExcessTime(distribution);
+    distribution.push(['Misc', excessTime]);
+
+    return distribution;
+  };
+
+  var extractExcessTime = function(distribution) {
+    const excess = distribution.splice(3);
+    return excess.reduce((total, item) => {
+      return total + item[1];
+    }, 0);
   };
 
   var gatherWeekSpans = function() {
@@ -97,11 +121,16 @@ var Stats = function() {
   };
 
   var updateChart = function(chart, distribution) {
-    var labels = Object.keys(distribution);
-    var values = Object.values(distribution);
+    distribution.forEach(item => {
+      item[1] = item[1].toFixed(1);
+    });
 
-    for (var i = 0; i < values.length; i++)
-      values[i] = values[i].toFixed(1);
+    var labels = distribution.map(item => {
+        return item[0];
+    });
+    const values = distribution.map(item => {
+      return item[1];
+    });
 
     var dataSet = chart.data.datasets[0];
     dataSet.data = values;
@@ -119,9 +148,6 @@ var Stats = function() {
 
     var totalWorked, waste, elapsed;
     [totalWorked, waste, elapsed] = result;
-
-    var percent = (totalWorked/elapsed)*100;
-    efficiencyChartContainer.find('.percent').text(percent.toFixed(0));
 
     efficiencyChartContainer.show();
     efficiencyChart.data.datasets[0].data = [
