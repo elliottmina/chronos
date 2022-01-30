@@ -2,6 +2,10 @@ var ProjectSummary = function() {
 
   var html = `
     <header>Projects</header>
+    <span class="quarter-hour-toggle">
+      <label>0.25</label>
+      <i class="fas fa-toggle-on"></i>
+    </span>
     <div class="no_content_container">Nothing to see here.  Move along.</div>
     <div class="content_container">
       <ul class="item_container"></ul>
@@ -11,7 +15,9 @@ var ProjectSummary = function() {
   var copier;
   var itemContainer;
   var noContentContainer;
+  var quarterHourToggle;
   var spans;
+  var useQuarterHour;
 
   var init = function() {
     dataBuilder = new ProjectSummaryDataBuilder();
@@ -19,12 +25,18 @@ var ProjectSummary = function() {
     build();
     gatherComponents();
     addBehavior();
+    initUseQuarterHour();
+    setQuarterHourDisplay();
 
     itemBuilder = new ProjectSummaryItemBuilder(
       copier,
       new Padder(),
       itemContainer);
   };
+
+  var initUseQuarterHour =  function() {
+    useQuarterHour = localStorage.getItem('use_quarter_hour') == 'true' ? true : false;
+  }
 
   var build = function() {
     var renderTo = jQuery('#ProjectSummary');
@@ -35,6 +47,7 @@ var ProjectSummary = function() {
     itemContainer = jQuery('#ProjectSummary .item_container');
     noContentContainer = jQuery('#ProjectSummary .no_content_container');
     contentContainer = jQuery('#ProjectSummary .content_container');
+    quarterHourToggle = jQuery('#ProjectSummary .quarter-hour-toggle i');
   };
 
   var addBehavior = function() {
@@ -43,6 +56,7 @@ var ProjectSummary = function() {
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateDisplay);
+    jQuery('#ProjectSummary .quarter-hour-toggle').click(onToggleQuarterHour);
   };
 
   var onDateChanged = function(date) {
@@ -86,6 +100,17 @@ var ProjectSummary = function() {
   var showNoContent = function() {
     noContentContainer.show();
     contentContainer.hide();
+  };
+
+  var onToggleQuarterHour = function() {
+    useQuarterHour = !useQuarterHour;
+    localStorage.setItem('use_quarter_hour', useQuarterHour);
+    setQuarterHourDisplay();
+  };
+
+  var setQuarterHourDisplay = function() {
+    var className = useQuarterHour ? 'fa-toggle-on' : 'fa-toggle-off';
+    quarterHourToggle.removeClass('fa-toggle-on', 'fa-toggle-off').addClass(className);
   };
 
   init();
