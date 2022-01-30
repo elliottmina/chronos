@@ -2,23 +2,23 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var itemTemplate = `
     <li>
-      <header>
-        <span class="project"></span>
-        <span class="hours">
+      <label></label>
+      <content>
+        <div class="hours">
           <span class="value"></span>
-          <i class="far fa-copy copy"></i>
+          <i class="far fa-copy copy"><span>Hours</span></i>
         </div>
-      </header>
-      <div class="tasks">
-        <ul class="task_list"></ul>
-      </div>
-      <i class="far fa-copy copy project_copy"></i>
+        <div class="tasks">
+          <ul class="task_list"></ul>
+        </div>
+        <i class="far fa-copy copy project_copy"><span>Summary</span></i>
+      </content>
     </li>
   `;
 
   var copyTemplate = `
     <li class="copy">
-      <i class="far fa-copy copy"></i>
+      <i class="far fa-copy copy"><span>Tasks</span></i>
     </li>`;
 
   var build = function(project) {
@@ -33,7 +33,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var buildLabel = function(container, project) {
     var projectLabel = App.projectSegmentor.getFormatted(project.label);
-    container.find('.project').html(projectLabel);
+    container.find('label').html(projectLabel);
   };
 
   var buildTime = function(container, project) {
@@ -48,7 +48,8 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
     var projectRoot = App.projectSegmentor.segment(project.label)[0];
     var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
     var color = App.colorGenerator.generate(projectRoot);
-    container.css('background-color', colorTrans);
+    const label = container.find('label');
+    label.css('background-color', colorTrans);
     container.css('border-color', color);
   };
 
