@@ -89,6 +89,9 @@ var ProjectSummary = function() {
     itemContainer.empty();
     var sortedKeys = Object.keys(summaryData).sort();
 
+    if (useQuarterHour)
+      applyQuarterHour(summaryData);
+
     for (var i = 0; i < sortedKeys.length; i++) {
       var key = sortedKeys[i];
       itemBuilder.build(summaryData[key]);
@@ -106,11 +109,18 @@ var ProjectSummary = function() {
     useQuarterHour = !useQuarterHour;
     localStorage.setItem('use_quarter_hour', useQuarterHour);
     setQuarterHourDisplay();
+    updateDisplay();
   };
 
   var setQuarterHourDisplay = function() {
     var className = useQuarterHour ? 'fa-toggle-on' : 'fa-toggle-off';
     quarterHourToggle.removeClass('fa-toggle-on', 'fa-toggle-off').addClass(className);
+  };
+
+  var applyQuarterHour = function(summaryData) {
+    Object.entries(summaryData).forEach(project =>{
+      project[1].time = Math.round(project[1].time/15)*15;
+    });
   };
 
   init();
