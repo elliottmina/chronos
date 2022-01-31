@@ -7,6 +7,7 @@
 #Stats #StatsTodayRoot,
 #Stats #StatsWeeklyRoot {
   flex: 3;
+  min-width: 10rem;
 }
 #Stats section {
   display: inline-block;
