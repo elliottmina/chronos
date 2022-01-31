@@ -75,3 +75,19 @@
 }
 #ProjectSummary .fa-toggle-off {
 }
+#ProjectSummary .round_delta {
+  font-style: italic;
+  font-size: 0.8rem;
+  display: none;
+}
+#ProjectSummary .round_delta:before {
+  content: "(";
+}
+#ProjectSummary .round_delta:after {
+  content: ")";
+}
+#ProjectSummary .delta:after,
+#ProjectSummary .value:after,
+#ProjectSummary .raw:after {
+  content: " hours";
+}
