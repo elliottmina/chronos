@@ -10,7 +10,7 @@
 }
 #ProjectSummary label {
   padding: 0.5rem;
-  display: block;
+  display: inline-block;
 }
 #ProjectSummary .hours {
   white-space: nowrap;
@@ -80,6 +80,12 @@
   font-size: 0.8rem;
   display: none;
 }
+#ProjectSummary .weight {
+  font-size: 0.8rem;
+}
+#ProjectSummary .weight .value:after {
+  content: '%';
+}
 #ProjectSummary .round_delta:before {
   content: "(";
 }
@@ -87,7 +93,12 @@
   content: ")";
 }
 #ProjectSummary .delta:after,
-#ProjectSummary .value:after,
+#ProjectSummary .hours .value:after,
 #ProjectSummary .raw:after {
   content: " hours";
+}
+
+#ProjectSummary .weight,
+#ProjectSummary .tasks {
+  margin-top: 0.5rem;
 }

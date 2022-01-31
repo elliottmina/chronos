@@ -92,9 +92,13 @@ var ProjectSummary = function() {
     if (useQuarterHour)
       applyQuarterHour(summaryData);
 
+    const totalMinutes = Object.entries(summaryData).reduce((total, item) => {
+      return total + item[1].time;
+    }, 0);
+
     for (var i = 0; i < sortedKeys.length; i++) {
       var key = sortedKeys[i];
-      itemBuilder.build(summaryData[key]);
+      itemBuilder.build(summaryData[key], totalMinutes);
     }
 
     contentContainer.show();
