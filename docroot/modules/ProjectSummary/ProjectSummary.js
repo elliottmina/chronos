@@ -119,7 +119,11 @@ var ProjectSummary = function() {
 
   var applyQuarterHour = function(summaryData) {
     Object.entries(summaryData).forEach(project =>{
-      project[1].time = Math.round(project[1].time/15)*15;
+      const rawMinutes = project[1].time;
+      const roundedMinutes = Math.round(rawMinutes/15)*15;
+      project[1].time = roundedMinutes;
+      project[1].rawMinutes = rawMinutes;
+      project[1].roundDelta = rawMinutes - roundedMinutes;
     });
   };
 

@@ -8,6 +8,10 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
           <span class="value"></span>
           <i class="far fa-copy copy"><span>Hours</span></i>
         </div>
+        <div class="round_delta">
+          <span class="sign"></span><span class="delta"></span>,
+          originally <span class="raw"></span>
+        </div>
         <div class="tasks">
           <ul class="task_list"></ul>
         </div>
@@ -37,11 +41,22 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   };
 
   var buildTime = function(container, project) {
-    var time = formatTime(project.time)
+    var time = formatTime(project.time);
     container.find('.hours .value').text(time);
+
+    if (project.rawMinutes)
+      container.find('.round_delta').show();
+      populateRoundDelta(container, project);
+
     container.find('.hours .copy')
       .click(copy)
       .data('copy', time);
+  };
+
+  var populateRoundDelta = function(container, project) {
+    container.find('.raw').text(formatTime(project.rawMinutes));
+    container.find('.sign').text(project.roundDelta ? '+' : '-');
+    container.find('.delta').text(formatTime(Math.abs(project.roundDelta)));
   };
 
   var buildColorTreatment = function(container, project) {
@@ -61,7 +76,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
     container.find('.project_copy')
       .data('copy', text)
       .click(copy);
-  }
+  };
 
   var formatTime = function(minutes) {
     if (App.globalSettings.use_decimal_hours)
