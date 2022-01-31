@@ -12,6 +12,9 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
           <span class="sign"></span><span class="delta"></span>,
           originally <span class="raw"></span>
         </div>
+        <div class="weight">
+          <span class="value"></span> of total hours
+        </div>
         <div class="tasks">
           <ul class="task_list"></ul>
         </div>
@@ -25,12 +28,15 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
       <i class="far fa-copy copy"><span>Tasks</span></i>
     </li>`;
 
-  var build = function(project) {
+  var build = function(project, totalMinutes) {
     var container = jQuery(itemTemplate).appendTo(listEl);
 
     buildLabel(container, project);
     buildColorTreatment(container, project);
     buildTime(container, project);
+    if (project.rawMinutes)
+      buildRoundData(container, project);
+    buildWeight(container, project, totalMinutes);
     buildTasks(container, project);
     buildProjectCopy(container, project);
   };
@@ -43,17 +49,18 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   var buildTime = function(container, project) {
     var time = formatTime(project.time);
     container.find('.hours .value').text(time);
-
-    if (project.rawMinutes)
-      container.find('.round_delta').show();
-      populateRoundDelta(container, project);
-
     container.find('.hours .copy')
       .click(copy)
       .data('copy', time);
   };
 
-  var populateRoundDelta = function(container, project) {
+  var buildWeight = function(container, project, totalMinutes) {
+    const weight = (project.time/totalMinutes)*100;
+    container.find('.weight .value').text(Math.floor(weight));
+  }
+
+  var buildRoundData = function(container, project) {
+    container.find('.round_delta').show();
     container.find('.raw').text(formatTime(project.rawMinutes));
     container.find('.sign').text(project.roundDelta ? '+' : '-');
     container.find('.delta').text(formatTime(Math.abs(project.roundDelta)));
