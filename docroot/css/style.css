@@ -66,16 +66,16 @@ section>header {
   font-size: 0.9em;
 }
 
-.segment {
-  display: inline-block;
-}
-.segment:not(:last-child) {
-  margin-right: 0.5em;
-}
-.segment_1 {
+.segments .segment:first-child {
   font-weight: bold;
+  border-left: 1px solid #ccc;
 }
-.segment_2 {
+.segment {
+  padding: 0.2rem 0.4rem;
+  display: inline-block;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 .segment_separator {
   display: inline-block;

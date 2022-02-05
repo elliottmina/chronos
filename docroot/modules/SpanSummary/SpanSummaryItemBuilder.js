@@ -2,21 +2,11 @@ var SpanSummaryItemBuilder = function(
   padder, 
   roundDecimal, 
   timeFormatter,
-  regEx,
   spansContainer) {
 
   var init = function() {
-    buildMatcher();
   };
   
-  var buildMatcher = function() {
-    var chars = App.globalSettings.project_delimiters;
-    if (chars.trim() == '')
-      re = undefined;
-    else
-      re = regEx.delimiter(chars);
-  };
-
   var populateSpan = function(span, container) {
     setColorTreatment(span, container);
     addBehavior(span, container);
@@ -29,8 +19,9 @@ var SpanSummaryItemBuilder = function(
     var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
     var color = App.colorGenerator.generate(projectRoot);
     const label = container.find('label');
-    label.css('background-color', colorTrans);
-    container.css('border-color', color);
+    // label.css('background-color', colorTrans);
+    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.5));
+    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
   };
 
   var addBehavior = function(span, container) {
@@ -55,23 +46,8 @@ var SpanSummaryItemBuilder = function(
 
     container.find('.start').text(timeFormatter.format(span.start));
     container.find('.finish').text(timeFormatter.format(span.finish));
-    container.find('label').html(buildLabel(span.project));
+    container.find('label').html(App.projectSegmentor.getFormatted(span.project));
     container.find('.elapsed').text(elapsed);
-  };
-
-  var buildLabel = function(project) {
-    if (!re)
-      return segmentify(project, 1);
-
-    var parts = project.split(re);
-    if (parts.length == 1)
-      return segmentify(project, 1);
-
-    parts[0] = segmentify(parts[0], 1);
-    parts[1] = segmentify(parts[1], 2);
-
-    return parts.join(
-      '<span class="segment_separator fal fa-angle-right"></span>');
   };
 
   var segmentify = function(text, num) {

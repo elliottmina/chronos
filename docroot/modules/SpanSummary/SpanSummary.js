@@ -4,7 +4,6 @@ var SpanSummary = function() {
   var nonContentContainer;
   var contentContainer;
   var itemBuilder
-  var regEx;
   var spans;
   var spanMap = {};
 
@@ -15,12 +14,10 @@ var SpanSummary = function() {
   };
 
   var buildDependencies = function() {
-    regEx = new RegEx();
     itemBuilder = new SpanSummaryItemBuilder(
       new Padder(),
       Rounder.roundDecimal,
       new TimeFormatter12Hr(),
-      regEx,
       spansContainer);
   };
 

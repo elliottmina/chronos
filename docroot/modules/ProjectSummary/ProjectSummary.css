@@ -1,15 +1,15 @@
 #ProjectSummary .item_container>li {
   position: relative;
   list-style: none;
-  border:1px solid #CCC;
   margin-bottom: 1rem;
+  padding: 0.4rem;
+  border: 1px solid #CCC;
 }
 #ProjectSummary .item_container content {
   display: block;
   padding: 0.5rem 0.25rem 0.25rem 0.25rem;
 }
 #ProjectSummary label {
-  padding: 0.5rem;
   display: inline-block;
 }
 #ProjectSummary .hours {

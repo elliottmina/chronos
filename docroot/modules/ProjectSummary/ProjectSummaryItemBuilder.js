@@ -42,8 +42,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   };
 
   var buildLabel = function(container, project) {
-    var projectLabel = App.projectSegmentor.getFormatted(project.label);
-    container.find('label').html(projectLabel);
+    container.find('label').append(App.projectSegmentor.getFormatted(project.label));
   };
 
   var buildTime = function(container, project) {
@@ -68,11 +67,8 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var buildColorTreatment = function(container, project) {
     var projectRoot = App.projectSegmentor.segment(project.label)[0];
-    var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
-    var color = App.colorGenerator.generate(projectRoot);
-    const label = container.find('label');
-    label.css('background-color', colorTrans);
-    container.css('border-color', color);
+    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
+    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.5));
   };
 
   var buildProjectCopy = function(container, project) {
