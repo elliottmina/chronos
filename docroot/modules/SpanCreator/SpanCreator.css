@@ -152,6 +152,7 @@
 #SpanCreator .project_suggestions .suggestion .selected_indicator {
   display: none;
 }
+#SpanCreator .project_suggestions .suggestion.yesterday .recent_indicator,
 #SpanCreator .project_suggestions .suggestion.today .recent_indicator {
   display: inline;
 }
@@ -162,6 +163,9 @@
 }
 #SpanCreator .project_suggestions .suggestion.today {
   background-color: hsla(215, 88%, 95%, 0.95);
+}
+#SpanCreator .project_suggestions .suggestion.yesterday {
+  background-color: hsla(115, 88%, 95%, 0.95);
 }
 #SpanCreator .project_suggestions .suggestion .recent_indicator {
   position: absolute;

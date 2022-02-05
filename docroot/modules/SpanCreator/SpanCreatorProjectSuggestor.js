@@ -1,6 +1,7 @@
 var SpanCreatorProjectSuggestor = function(
   recentProjectBuilder, 
-  todaysProjectBuilder,
+  todayProjectBuilder,
+  yesterdayProjectBuilder,
   regEx) {
 
   var itemTemplate = `
@@ -12,6 +13,7 @@ var SpanCreatorProjectSuggestor = function(
   var projectsContainer;
   var recentProjects;
   var todaysProjects;
+  var yesterdaysProjects;
   var selectedIndex;
   var showing = false;
 
@@ -52,7 +54,8 @@ var SpanCreatorProjectSuggestor = function(
   };
 
   var populate = function(suggestions) {
-    todaysProjects = todaysProjectBuilder.build();
+    todaysProjects = todayProjectBuilder.build();
+    yesterdaysProjects = yesterdayProjectBuilder.build();
     projectsContainer.empty();
     jQuery.each(suggestions, populateSuggestion);
     reorder();
@@ -69,11 +72,16 @@ var SpanCreatorProjectSuggestor = function(
 
     if (jQuery.inArray(suggestion, todaysProjects) != -1)
       li.addClass('today');
+    else if (jQuery.inArray(suggestion, yesterdaysProjects) != -1)
+      li.addClass('yesterday');
   };
 
   var reorder = function() {
+    projectsContainer.find('li.yesterday').each(function(index, el) {
+      projectsContainer.prepend(el);
     projectsContainer.find('li.today').each(function(index, el) {
       projectsContainer.prepend(el);
+    });
     });
   };
 

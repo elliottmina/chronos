@@ -36,9 +36,9 @@ var TimeUtil = function() {
   return {
     parseUtcYmd:parseUtcYmd,
     getYmd:function(date) {
-      return date.getFullYear() + '-' +
-        padder.twoDigit(date.getMonth()+1) + '-' +
-        padder.twoDigit(date.getDate());
+      return date.getUTCFullYear() + '-' +
+        padder.twoDigit(date.getUTCMonth()+1) + '-' +
+        padder.twoDigit(date.getUTCDate());
     },
     addDays:addDays,
     get12Hour(date) {
