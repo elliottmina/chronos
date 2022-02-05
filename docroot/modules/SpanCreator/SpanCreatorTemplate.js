@@ -31,6 +31,7 @@ var SpanCreatorTemplate = `
           <span class="cursor"></span>
         </span>
       </span>
+      <span class="elapsed_minutes"></span>
     </div>
     <div class="button_container">
       <div class="button save" tabindex="1">
