@@ -5,6 +5,7 @@ var SpanCreator = function() {
   var topContainer;
   var startTimeField;
   var finishTimeField;
+  var elapsedMinutesIndicator;
   var projectSuggestor;
   var taskList;
   var validator;
@@ -54,6 +55,8 @@ var SpanCreator = function() {
       timeResolver,
       timeUtil);
 
+    elapsedMinutesIndicator = topContainer.find('.elapsed_minutes');
+
     projectSuggestor = new SpanCreatorProjectSuggestor(
       new SpanCreatorRecentProjectBuilder(),
       new SpanCreatorTodaysProjectBuilder(),
@@ -100,7 +103,8 @@ var SpanCreator = function() {
     App.dispatcher.subscribe('REPEAT_SPAN_REQUESTED', onRepeatSpanRequested);
     topContainer.find('.hotkeys_button').click(function() {
       topContainer.find('section.hotkeys').toggleClass('active');
-    })
+    });
+    setInterval(updateElapsedMinutes, 1000*60);
   };
 
   var cancel = function() {
@@ -193,6 +197,25 @@ var SpanCreator = function() {
     var span = wipSaver.get();
     if (span)
       stateSetter.restore(span);
+  };
+
+  var updateElapsedMinutes = function() {
+    const start = startTimeField.getTime();
+    const finish = finishTimeField.getTime();
+    if (start == undefined || finish != undefined) {
+      elapsedMinutesIndicator.text('');
+      return;
+    }
+
+    const now = new Date();
+    start.setFullYear(now.getFullYear());
+    start.setMonth(now.getMonth());
+    start.setDate(now.getDate());
+
+    const elapsedMillis = now - start;
+    const elapsed = timeUtil.formatTime(elapsedMillis/1000/60);
+    
+    elapsedMinutesIndicator.text(elapsed);
   };
 
   init();
