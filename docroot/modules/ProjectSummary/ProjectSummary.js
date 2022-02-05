@@ -29,6 +29,7 @@ var ProjectSummary = function() {
     setQuarterHourDisplay();
 
     itemBuilder = new ProjectSummaryItemBuilder(
+      new  TimeUtil(),
       copier,
       new Padder(),
       itemContainer);

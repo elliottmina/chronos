@@ -15,6 +15,24 @@ var TimeUtil = function() {
       0, 0, 0));
   };
 
+  var formatMinutes = function(minutes) {
+    var hours = parseInt(minutes/60);
+    var remainder = Math.ceil(minutes%60);
+    remainder = padder.twoDigit(remainder);
+    return hours + ':' + remainder;
+  };
+  
+  var formatDecimal = function(minutes) {
+    return round(minutes/60, 2);
+  };
+  
+  var round = function(number, precision) {
+    var factor = Math.pow(10, precision);
+    var tempNumber = number * factor;
+    var roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
+  };
+
   return {
     parseUtcYmd:parseUtcYmd,
     getYmd:function(date) {
@@ -56,6 +74,11 @@ var TimeUtil = function() {
       if (d.getDay() != 6)
         d.setDate(d.getDate() - d.getDay());
       return d;
+    },
+    formatTime:function(minutes) {
+      if (App.globalSettings.use_decimal_hours)
+        return formatDecimal(minutes);
+      return formatMinutes(minutes);
     }
   };
 

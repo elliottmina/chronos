@@ -1,4 +1,4 @@
-var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
+var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
 
   var itemTemplate = `
     <li>
@@ -46,7 +46,7 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
   };
 
   var buildTime = function(container, project) {
-    var time = formatTime(project.time);
+    var time = timeUtil.formatTime(project.time);
     container.find('.hours .value').text(time);
     container.find('.hours .copy')
       .click(copy)
@@ -60,9 +60,9 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var buildRoundData = function(container, project) {
     container.find('.round_delta').show();
-    container.find('.raw').text(formatTime(project.rawMinutes));
+    container.find('.raw').text(timeUtil.formatTime(project.rawMinutes));
     container.find('.sign').text(project.roundDelta ? '+' : '-');
-    container.find('.delta').text(formatTime(Math.abs(project.roundDelta)));
+    container.find('.delta').text(timeUtil.formatTime(Math.abs(project.roundDelta)));
   };
 
   var buildColorTreatment = function(container, project) {
@@ -73,36 +73,12 @@ var ProjectSummaryItemBuilder = function(copier, padder, listEl) {
 
   var buildProjectCopy = function(container, project) {
     var text = project.label + '\n' + 
-      formatTime(project.time) + '\n' + 
+      timeUtil.formatTime(project.time) + '\n' + 
       project.tasks.join('\n');
 
     container.find('.project_copy')
       .data('copy', text)
       .click(copy);
-  };
-
-  var formatTime = function(minutes) {
-    if (App.globalSettings.use_decimal_hours)
-      return formatDecimal(minutes);
-    return formatMinutes(minutes);
-  };
-
-  var formatMinutes = function(minutes) {
-    var hours = parseInt(minutes/60);
-    var remainder = Math.ceil(minutes%60);
-    remainder = padder.twoDigit(remainder);
-    return hours + ':' + remainder;
-  };
-  
-  var formatDecimal = function(minutes) {
-    return round(minutes/60, 2);
-  };
-  
-  var round = function(number, precision) {
-    var factor = Math.pow(10, precision);
-    var tempNumber = number * factor;
-    var roundedTempNumber = Math.round(tempNumber);
-    return roundedTempNumber / factor;
   };
 
   var buildTasks = function(container, project) {
