@@ -28,13 +28,17 @@ var ProjectSegmentor = function() {
   };
 
   var getFormatted = function(project) {
-    var segments = segment(project);
-    var parts = [];
+    const container = jQuery('<span class="segments">');
     
-    for (var i = 0, j = 1; i < segments.length; i++, j++)
-      parts.push(addMarkup(segments[i], j));
-    
-    return parts.join('<span class="segment_separator fal fa-angle-right"></span>');
+    segment(project).forEach(segment => {
+      const el = jQuery('<span class="segment">');
+      el.append(segment);
+      el.css('background-color', App.colorGenerator.generate(segment, 0.3));
+      el.css('border-color', App.colorGenerator.generate(segment, 0.7));
+      container.append(el);
+    });
+
+    return container;
   };
 
   var addMarkup = function(text, num) {

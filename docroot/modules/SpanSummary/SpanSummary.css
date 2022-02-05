@@ -11,6 +11,7 @@
 }
 #SpanSummary .item_container>li {
   border-left: 3px solid transparent;
+  border-bottom: 1px solid transparent;
   position: relative;
   list-style: none;
   padding:0 0.5rem 0.5rem 0;
