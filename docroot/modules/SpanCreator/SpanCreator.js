@@ -6,7 +6,8 @@ var SpanCreator = function() {
   var startTimeField;
   var finishTimeField;
   var elapsedMinutesIndicator;
-  var todaysProjectBuilder;
+  var todayProjectBuilder;
+  var yesterdayProjectBuilder;
   var projectSuggestor;
   var taskList;
   var validator;
@@ -58,10 +59,12 @@ var SpanCreator = function() {
 
     elapsedMinutesIndicator = topContainer.find('.elapsed_minutes');
 
-    todaysProjectBuilder = new SpanCreatorSpecificDayProjectBuilder();
+    todayProjectBuilder = new SpanCreatorSpecificDayProjectBuilder();
+    yesterdayProjectBuilder = new SpanCreatorSpecificDayProjectBuilder();
     projectSuggestor = new SpanCreatorProjectSuggestor(
       new SpanCreatorRecentProjectBuilder(),
-      todaysProjectBuilder,
+      todayProjectBuilder,
+      yesterdayProjectBuilder,
       new RegEx());
 
     taskList = new SpanCreatorTaskList(
@@ -184,7 +187,11 @@ var SpanCreator = function() {
 
   var onDateChanged = function(data) {
     record = data;
-    todaysProjectBuilder.setDate(data.date);
+    todayProjectBuilder.setDate(data.date);
+
+    const yesterday = timeUtil.addDays(new Date(data.date), -1);
+    const yesterdayYmd = timeUtil.getYmd(yesterday);
+    yesterdayProjectBuilder.setDate(yesterdayYmd);
   };
 
   var onEditSpanRequested = function(guid) {

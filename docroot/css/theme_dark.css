@@ -81,6 +81,9 @@ body.theme_dark #SpanCreator .project_suggestions .suggestion:hover {
 body.theme_dark #SpanCreator .project_suggestions .suggestion.today {
   background-color: hsla(172, 21%, 33%, 95%);
 }
+body.theme_dark #SpanCreator .project_suggestions .suggestion.today {
+  background-color: hsla(272, 21%, 33%, 95%);
+}
 body.theme_dark #SpanCreator .project_suggestions .suggestion.selected.today .selected_indicator,
 body.theme_dark #SpanCreator .project_suggestions .suggestion.selected .selected_indicator {
   color:hsl(0, 0, 100%);
