@@ -1,22 +1,11 @@
-var SpanCreatorTodaysProjectBuilder = function() {
+var SpanCreatorSpecificDayProjectBuilder = function() {
   
   var date;
 
-  var init = function() {
-    addBehavior();
-  };
-
-  var addBehavior = function() {
-    App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
-  };
-
-  var onDateChanged = function(data) {
-    date = data.date;
-  };
-
-  init();
-
   return {
+    setDate:function(newDate) {
+      date = newDate;
+    },
     build:function() {
       var today = App.persister.fetch(date);
       projects = [];
