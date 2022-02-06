@@ -33,6 +33,7 @@ var SpanSummary = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    App.dispatcher.subscribe('SPAN_EDIT_CANCELLED', clearSelectedTreatment);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', populateSpans);
   };
@@ -60,7 +61,7 @@ var SpanSummary = function() {
       itemBuilder.build(span, container);
     else
       addSpan(span);
-    spansContainer.find('.selected').removeClass('selected');
+    clearSelectedTreatment();
   };
 
   var addSpan = function(span) {
@@ -78,6 +79,10 @@ var SpanSummary = function() {
     delete(spanMap[guid]);
     if (spansContainer.children().length == 0)
       noContentContainer.show();
+  };
+
+  var clearSelectedTreatment = function () {
+    spansContainer.find('.selected').removeClass('selected');
   };
 
   init();
