@@ -46,6 +46,7 @@
   vertical-align: top;
 }
 #SpanCreator .time_field_container .time {
+  border: 1px solid hsl(0, 0%, 80%);
   display: inline-block;
   width: 3em;
   height: 1.25em;
@@ -193,8 +194,12 @@
   display: inline-block;
   padding:0.25em;
 }
+#SpanCreator .task_list ul.available {
+  border-top: 1px solid hsl(0, 0%, 80%);
+}
 #SpanCreator .task_list ul.available li {
   cursor: pointer;
+  font-size: 0.8rem;
 }
 #SpanCreator .task_list ul.available li:hover {
     background-color:hsla(0, 0%, 100%, 0.25);

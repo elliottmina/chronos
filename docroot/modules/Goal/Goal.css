@@ -10,14 +10,12 @@
 }
 #Goal progress-bar {
   width: 200px;
-  height: 13px;
+  height: 20px;
   border: 1px solid hsla(0, 0%, 80%, 0.5);
 }
 #Goal progress-bar inner-bar {
-  height: 13px;
+  height: 100%;
   display: inline-block;
-  position: relative;
-  top: -2px;
 }
 #Goal #goal-daily progress-bar {
   background-color: #e7f9ec;
@@ -32,10 +30,10 @@
   background-color: #2982db;
 }
 #Goal label {
-  position: absolute;
   left: 0.5rem;
   font-size: 0.8rem;
-  color: white;
+  display: block;
+  margin-bottom: 0.2rem;
 }
 #Goal .hour_value {
   font-size: 0.9rem;
