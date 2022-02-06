@@ -19,7 +19,8 @@ var SpanCreatorTemplate = `
     <div class="task_list">
       <label for="SpanCreatorTask">Tasks</label>
       <input type="text" id="SpanCreatorTask" tabindex="1" />
-      <ul></ul>
+      <ul class="assigned"></ul>
+      <ul class="available"></ul>
     </div>
     <div class="time_field_wrapper">
       <label>Finish time</label>

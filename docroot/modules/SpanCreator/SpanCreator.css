@@ -193,6 +193,16 @@
   display: inline-block;
   padding:0.25em;
 }
+#SpanCreator .task_list ul.available li {
+  cursor: pointer;
+}
+#SpanCreator .task_list ul.available li:hover {
+    background-color:hsla(0, 0%, 100%, 0.25);
+}
+#SpanCreator .task_list ul.available i {
+  display: inline-block;
+  margin-right: 0.25rem;
+}
 
 #SpanCreator .button_container {
   margin-bottom: 1em;
