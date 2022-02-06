@@ -46,7 +46,7 @@ var PersistenceMarshaller = function() {
 
   return {
     ready:function() {
-      loadDate(timeUtil.getYmd(new Date()));
+      loadDate(timeUtil.getLocalYmd(new Date()));
     }
   };
   

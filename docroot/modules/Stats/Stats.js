@@ -111,7 +111,7 @@ var Stats = function() {
     var spans = [];
     for (var i = 1; i < 7; i++) {
       var currDay = timeUtil.addDays(weekStart, i);
-      var day = App.persister.fetch(timeUtil.getYmd(currDay));
+      var day = App.persister.fetch(timeUtil.getLocalYmd(currDay));
 
       jQuery.each(day.spans, function(index, span) {
         spans.push(span);

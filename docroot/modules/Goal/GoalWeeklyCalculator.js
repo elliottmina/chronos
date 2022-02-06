@@ -17,7 +17,7 @@ var GoalWeeklyCalculator = function(durationCalculator) {
   };
 
   var extractTime = function(day) {
-    var dayStr = timeUtil.getYmd(day);
+    var dayStr = timeUtil.getLocalYmd(day);
     var day = App.persister.fetch(dayStr);
     return durationCalculator.calcHours(day.spans);
   };

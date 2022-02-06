@@ -50,7 +50,7 @@ var DateLine = function() {
   };
 
   var updateTodayTreatment = function() {
-    if (dateYmd == timeUtil.getYmd(new Date()))
+    if (dateYmd == timeUtil.getLocalYmd(new Date()))
       topContainer.addClass('today');
     else 
       topContainer.removeClass('today');
