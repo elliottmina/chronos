@@ -55,9 +55,6 @@
   background-color: #fff;
   user-select: none;
 }
-#SpanCreator .time {
-  border: 1px solid hsl(0, 0%, 80%)
-}
 #SpanCreator .time_field_container.has_focus .time {
   box-shadow: 0 0 4px 0 hsla(220, 100%, 50%, 0.4);
   border:1px solid #FFF;
