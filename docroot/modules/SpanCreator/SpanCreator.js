@@ -113,6 +113,7 @@ var SpanCreator = function() {
   };
 
   var cancel = function() {
+    App.dispatcher.publish('SPAN_EDIT_CANCELLED', activeSpan);
     activeSpan = undefined;
     stateSetter.reset();
   };
