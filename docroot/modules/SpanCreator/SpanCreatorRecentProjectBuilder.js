@@ -9,7 +9,7 @@ var SpanCreatorRecentProjectBuilder = function() {
 
   var buildDay = function(recent, delta) {
     var date = timeUtil.addDays(new Date(), delta*-1);
-    var record = App.persister.fetch(timeUtil.getYmd(date));
+    var record = App.persister.fetch(timeUtil.getLocalYmd(date));
     
     jQuery.each(record.spans, function(index, span) {
       if (jQuery.inArray(span.project, recent) == -1)

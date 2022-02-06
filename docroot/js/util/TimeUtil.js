@@ -40,6 +40,11 @@ var TimeUtil = function() {
         padder.twoDigit(date.getUTCMonth()+1) + '-' +
         padder.twoDigit(date.getUTCDate());
     },
+    getLocalYmd:function(date) {
+      return date.getFullYear() + '-' +
+        padder.twoDigit(date.getMonth()+1) + '-' +
+        padder.twoDigit(date.getDate());
+    },
     addDays:addDays,
     get12Hour(date) {
       var hours = date.getHours();

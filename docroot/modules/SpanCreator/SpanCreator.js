@@ -141,7 +141,7 @@ var SpanCreator = function() {
   };
 
   var isToday = function() {
-    return timeUtil.getYmd(new Date()) == record.date;
+    return timeUtil.getLocalYmd(new Date()) == record.date;
   };
 
   var confirmPreviousDate = function(cleanupFunc) {
@@ -190,7 +190,7 @@ var SpanCreator = function() {
     todayProjectBuilder.setDate(data.date);
 
     const yesterday = timeUtil.addDays(new Date(data.date), -1);
-    const yesterdayYmd = timeUtil.getYmd(yesterday);
+    const yesterdayYmd = timeUtil.getLocalYmd(yesterday);
     yesterdayProjectBuilder.setDate(yesterdayYmd);
   };
 
