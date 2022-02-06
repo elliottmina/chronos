@@ -79,9 +79,9 @@ var SpanCreatorProjectSuggestor = function(
   var reorder = function() {
     projectsContainer.find('li.yesterday').each(function(index, el) {
       projectsContainer.prepend(el);
+    });
     projectsContainer.find('li.today').each(function(index, el) {
       projectsContainer.prepend(el);
-    });
     });
   };
 
