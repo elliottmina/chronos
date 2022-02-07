@@ -3,29 +3,31 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
   var itemTemplate = `
     <li>
       <label></label>
-      <div>
-        <div class="weight">
-          <progress-bar><inner-bar></inner-bar></progress-bar>
+      <div class="content">
+        <div>
+          <div class="weight">
+            <progress-bar><inner-bar></inner-bar></progress-bar>
+          </div>
+          <div class="hours">
+            <span class="value"></span>
+            <i class="mini_button far fa-copy copy"><span>Hours</span></i>
+          </div>
         </div>
-        <div class="hours">
-          <span class="value"></span>
-          <i class="far fa-copy copy"><span>Hours</span></i>
+        <div class="round_delta">
+          <span class="sign"></span><span class="delta"></span>,
+          originally <span class="raw"></span>
+        </div>
+        <div class="tasks">
+          <ul class="task_list"></ul>
         </div>
       </div>
-      <div class="round_delta">
-        <span class="sign"></span><span class="delta"></span>,
-        originally <span class="raw"></span>
-      </div>
-      <div class="tasks">
-        <ul class="task_list"></ul>
-      </div>
-      <i class="far fa-copy copy project_copy"><span>Summary</span></i>
+      <i class="mini_button far fa-copy copy project_copy"><span>Summary</span></i>
     </li>
   `;
 
   var copyTemplate = `
     <li class="copy">
-      <i class="far fa-copy copy"><span>Tasks</span></i>
+      <i class="mini_button far fa-copy copy"><span>Tasks</span></i>
     </li>`;
 
   var build = function(project, totalMinutes) {

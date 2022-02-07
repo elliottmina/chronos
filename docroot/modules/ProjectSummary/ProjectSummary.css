@@ -2,8 +2,10 @@
   position: relative;
   list-style: none;
   margin-bottom: 1rem;
+  border: 1px solid transparent;
+}
+#ProjectSummary .content {
   padding: 0.4rem;
-  border: 1px solid #CCC;
 }
 #ProjectSummary label {
   display: inline-block;
@@ -104,6 +106,11 @@
 #ProjectSummary .hours .value:after,
 #ProjectSummary .raw:after {
   content: " hours";
+}
+
+#ProjectSummary .hours .value {
+  display: inline-block;
+  margin-right: 0.2rem;
 }
 
 #ProjectSummary .tasks {
