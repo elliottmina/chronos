@@ -44,8 +44,9 @@ section>header {
 .mini_button {
   cursor: pointer;
   color:hsl(0, 0%, 45%);
-  padding: 0.2em;
-  font-size: 0.9em;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  border-radius: 2px;
   display: inline-block;
 }
 .mini_button:hover {

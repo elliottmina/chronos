@@ -42,7 +42,6 @@
 }
 #ProjectSummary .far span {
   display: inline-block;
-  color: white;
   user-select: none;
 }
 #ProjectSummary i.fa-check {
@@ -63,17 +62,16 @@
   display: inline-block;
   position: absolute;
   right: 1.5rem;
-  top: 0;
+  top:1rem;
   cursor: pointer;
 }
 #ProjectSummary .quarter-hour-toggle label {
   cursor: pointer;
   display: inline-block;
 }
-#ProjectSummary .fa-toggle-on {
-  color: hsl(191, 92%, 33%);
-}
+#ProjectSummary .fa-toggle-on,
 #ProjectSummary .fa-toggle-off {
+  color: hsl(191, 92%, 33%);
 }
 #ProjectSummary .round_delta {
   font-style: italic;
@@ -101,4 +99,16 @@
 #ProjectSummary .weight,
 #ProjectSummary .tasks {
   margin-top: 0.5rem;
+}
+
+#ProjectSummary .mini_button {
+  color:hsla(0, 0%, 0%, 0.35);
+  background-color: hsla(0, 0%, 100%, 0.4);
+  border: 1px solid hsla(0, 0%, 100%, 0.7);
+  border-radius: 4px;
+}
+#ProjectSummary .mini_button:hover {
+  color:hsla(0, 0%, 0%, 0.5);
+  background-color: hsla(0, 0%, 100%, 0.7);
+  border: 1px solid hsla(0, 0%, 100%, 1);
 }

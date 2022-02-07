@@ -68,7 +68,7 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
   var buildColorTreatment = function(container, project) {
     var projectRoot = App.projectSegmentor.segment(project.label)[0];
     container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
-    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.5));
+    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
   };
 
   var buildProjectCopy = function(container, project) {
