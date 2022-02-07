@@ -19,7 +19,7 @@ var SpanSummaryItemBuilder = function(
     var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
     var color = App.colorGenerator.generate(projectRoot);
     const label = container.find('label');
-    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.5));
+    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
     container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
   };
 
