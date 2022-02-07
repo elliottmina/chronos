@@ -3,7 +3,8 @@
   margin-right: 0.5rem;
 }
 #Goal section {
-  position: relative;
+  display: inline-block;
+  margin-right: 1rem;
 }
 #Goal section>* {
   display: inline-block;
