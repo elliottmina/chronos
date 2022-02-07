@@ -22,24 +22,12 @@ var StatsDataCalculator = function() {
       distribution[project] = 0;
   };
 
-  var buildKeysValues = function(distribution) {
-    var keys = [];
-    var values = [];
-    jQuery.each(distribution, function(k, v) {
-      keys.push(k);
-      values.push(v.toFixed(2));
-    });
-
-    return [keys, values];
-  };
-
   var calcHours = function(span) {
     var milliDelta = new Date(span.finish) - new Date(span.start);
     return milliDelta/1000/60/60;
   };
 
   return {
-    calc:buildKeysValues,
     buildDistribution:buildDistribution
   };
 

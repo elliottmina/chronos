@@ -15,6 +15,15 @@ var TimeUtil = function() {
       0, 0, 0));
   };
 
+  var parseLocalYmd = function(ymd) {
+    var parts = ymd.split('-');
+    return new Date(
+      parts[0],
+      parseInt(parts[1]) -1, 
+      parts[2],
+      0, 0, 0);
+  };
+
   var formatMinutes = function(minutes) {
     var hours = parseInt(minutes/60);
     var remainder = Math.ceil(minutes%60);
@@ -75,9 +84,11 @@ var TimeUtil = function() {
       return d instanceof Date && !isNaN(d);
     },
     getWeekStart:function(date) {
-      var d = parseUtcYmd(date);
-      if (d.getDay() != 6)
-        d.setDate(d.getDate() - d.getDay());
+      var d = parseLocalYmd(date);
+      if (d.getDay() == 0)
+        d.setDate(d.getDate() - 6);
+      else 
+        d.setDate(d.getDate() - d.getDay() + 1);
       return d;
     },
     formatTime:function(minutes) {

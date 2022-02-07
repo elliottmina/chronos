@@ -1,41 +1,14 @@
-#Stats {
-  display: flex;
-}
-#Stats #StatsEfficiency {
-  flex: 1;
-  min-width: 5rem;
-}
-#Stats #StatsTodayRoot,
-#Stats #StatsWeeklyRoot {
-  flex: 3;
-  min-width: 10rem;
-}
 #Stats section {
   display: inline-block;
-  margin-right: 0.5rem;
-  max-height: 4rem;
-  background-color: hsla(0, 100%, 0%, 0.2);
-  padding: 0.3rem;
+  width: 17rem;
+  font-size: 0;
 }
-#Stats .content {
-  display: flex;
-}
-#Stats canvas-wrapper {
+#Stats .distribution {
   display: inline-block;
-  margin-right: 1rem;
+  width: 202px;
+  height: 10px;
 }
-#Stats .legend {
+#Stats segment {
   display: inline-block;
-}
-#Stats .legend li {
-  list-style: none;
-  display: inline-block;
-  margin-right:1em;
-  margin-bottom: 0.5em;
-  font-size: 0.8rem;
-}
-#Stats .legend .color {
-  display:inline-block;
-  height:1rem;
-  width:1.5rem;
+  height: 100%;
 }
