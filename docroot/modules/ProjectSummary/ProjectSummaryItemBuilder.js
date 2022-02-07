@@ -3,23 +3,23 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
   var itemTemplate = `
     <li>
       <label></label>
-      <content>
+      <div>
+        <div class="weight">
+          <progress-bar><inner-bar></inner-bar></progress-bar>
+        </div>
         <div class="hours">
           <span class="value"></span>
           <i class="far fa-copy copy"><span>Hours</span></i>
         </div>
-        <div class="round_delta">
-          <span class="sign"></span><span class="delta"></span>,
-          originally <span class="raw"></span>
-        </div>
-        <div class="weight">
-          <span class="value"></span> of total hours
-        </div>
-        <div class="tasks">
-          <ul class="task_list"></ul>
-        </div>
-        <i class="far fa-copy copy project_copy"><span>Summary</span></i>
-      </content>
+      </div>
+      <div class="round_delta">
+        <span class="sign"></span><span class="delta"></span>,
+        originally <span class="raw"></span>
+      </div>
+      <div class="tasks">
+        <ul class="task_list"></ul>
+      </div>
+      <i class="far fa-copy copy project_copy"><span>Summary</span></i>
     </li>
   `;
 
@@ -54,8 +54,13 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
   };
 
   var buildWeight = function(container, project, totalMinutes) {
-    const weight = (project.time/totalMinutes)*100;
-    container.find('.weight .value').text(Math.floor(weight));
+    var projectRoot = App.projectSegmentor.segment(project.label)[0];
+    const weight = Math.round((project.time/totalMinutes)*100);
+    const innerBar = container.find('.weight inner-bar')
+    const progressBar = container.find('progress-bar');
+    innerBar.css('width', weight.toString() + '%');
+    innerBar.css('background-color', App.colorGenerator.generate(projectRoot, 0.8));
+    progressBar.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
   }
 
   var buildRoundData = function(container, project) {

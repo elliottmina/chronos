@@ -18,6 +18,7 @@ var ProjectSummary = function() {
   var quarterHourToggle;
   var spans;
   var useQuarterHour;
+  var itemBuilder;
 
   var init = function() {
     dataBuilder = new ProjectSummaryDataBuilder();
