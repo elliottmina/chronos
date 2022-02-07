@@ -157,11 +157,7 @@ section>header {
   cursor: pointer;
 } 
 
-#metrics {
-  display: flex;
-}
-#metrics h2 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  background-color: hsla(0, 0%, 100%, 0.2);
+#Stats,
+#Goal {
+  display: block;
 }

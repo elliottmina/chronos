@@ -1,52 +1,29 @@
 var Stats = function() {
   
-  var chartBuilder;
   var statsCalculator;
   var timeUtil;
-  var efficiencyCalculator;
-  var legendBuilder;
   var date;
   var weekStart;
   var today;
 
   var dailyChart;
   var weeklyChart;
-  var efficiencyChart;
-
-  var dailyChartContainer;
-  var weeklyChartContainer;
-  var efficiencyChartContainer;
 
   var init = function() {
     buildDependencies();
     build();
-    gatherComponents();
     addBehavior();
   };
 
   var buildDependencies = function() {
-    chartBuilder = new StatsPieChartBuilder();
     statsCalculator = new StatsDataCalculator();
     timeUtil = new TimeUtil();
-    efficiencyCalculator =  new StatsEfficiencyCalculator();
-    legendBuilder = new StatsLegendBuilder();
   };
 
   var build = function() {
     jQuery('#Stats').html(StatsTemplate);
-    dailyChart = chartBuilder.build('StatsTodayRootChart');
-    weeklyChart = chartBuilder.build('StatsWeeklyRootChart');
-    efficiencyChart = chartBuilder.build('StatsEfficiencyChart');
-    
-    var data = efficiencyChart.data;
-    data.labels = ['Work', 'Waste'];
-    data.datasets[0].backgroundColor = ['#f97677', '#ffe9ea'];
-  };
-
-  var gatherComponents = function() {
-    dailyChartContainer = jQuery('#StatsTodayRoot');
-    weeklyChartContainer = jQuery('#StatsWeeklyRoot');
-    efficiencyChartContainer = jQuery('#StatsEfficiency');
+    dailyChart = new StatusChartBuilder(jQuery('#StatsToday .distribution'));
+    weeklyChart = new StatusChartBuilder(jQuery('#StatsWeekly .distribution'));
   };
 
   var addBehavior = function() {
@@ -66,45 +43,23 @@ var Stats = function() {
     today = App.persister.fetch(date);
     updateDay();
     updateWeek();
-    updateEfficiency();
   };
 
   var updateDay = function() {
     updateDisplay(
       dailyChart,
-      dailyChartContainer,
       today.spans);
   };
 
   var updateWeek = function() {
     updateDisplay(
       weeklyChart,
-      weeklyChartContainer,
       gatherWeekSpans());
   };
 
-  var updateDisplay = function(chart, chartContainer, spans) {
+  var updateDisplay = function(chart, spans) {
     var distribution = statsCalculator.buildDistribution(spans);
-    condenseDistribution(distribution);
-    updateChart(chart, distribution);
-    legendBuilder.build(chartContainer, distribution);
-  };
-
-  var condenseDistribution = function(distribution) {
-    if (distribution.length <= 4)
-      return distribution;
-
-    const excessTime = extractExcessTime(distribution);
-    distribution.push(['Misc', excessTime]);
-
-    return distribution;
-  };
-
-  var extractExcessTime = function(distribution) {
-    const excess = distribution.splice(3);
-    return excess.reduce((total, item) => {
-      return total + item[1];
-    }, 0);
+    chart.render(distribution);
   };
 
   var gatherWeekSpans = function() {
@@ -118,42 +73,6 @@ var Stats = function() {
       });
     }
     return spans;
-  };
-
-  var updateChart = function(chart, distribution) {
-    distribution.forEach(item => {
-      item[1] = item[1].toFixed(1);
-    });
-
-    var labels = distribution.map(item => {
-        return item[0];
-    });
-    const values = distribution.map(item => {
-      return item[1];
-    });
-
-    var dataSet = chart.data.datasets[0];
-    dataSet.data = values;
-    dataSet.backgroundColor = App.colorGenerator.generateList(labels);
-    chart.data.labels = labels;
-    chart.update();
-  };
-
-  var updateEfficiency = function() {
-    result = efficiencyCalculator.calc(today.spans);
-    if (result == undefined) {
-      efficiencyChartContainer.hide();
-      return;
-    }
-
-    var totalWorked, waste, elapsed;
-    [totalWorked, waste, elapsed] = result;
-
-    efficiencyChartContainer.show();
-    efficiencyChart.data.datasets[0].data = [
-      totalWorked.toFixed(2), 
-      waste.toFixed(2)];
-    efficiencyChart.update();
   };
 
   init();

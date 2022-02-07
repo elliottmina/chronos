@@ -4,7 +4,7 @@
 }
 #Goal section {
   display: inline-block;
-  margin-right: 1rem;
+  width: 17rem;
 }
 #Goal section>* {
   display: inline-block;
@@ -12,7 +12,7 @@
 #Goal progress-bar {
   width: 200px;
   height: 20px;
-  border: 1px solid hsla(0, 0%, 80%, 0.5);
+  border: 1px solid transparent;
 }
 #Goal progress-bar inner-bar {
   height: 100%;
@@ -20,19 +20,20 @@
 }
 #Goal #goal-daily progress-bar {
   background-color: #e7f9ec;
+  border-color: #5bdd81;
 }
 #Goal #goal-daily progress-bar inner-bar {
   background-color: #5bdd81;
 }
 #Goal #goal-weekly progress-bar {
   background-color: #f3f9ff;
+  border-color: #2982db;
 }
 #Goal #goal-weekly progress-bar inner-bar {
   background-color: #2982db;
 }
 #Goal label {
-  left: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   display: block;
   margin-bottom: 0.2rem;
 }
