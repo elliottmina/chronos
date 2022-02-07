@@ -11,10 +11,13 @@
 }
 #SpanSummary .item_container>li {
   border-left: 3px solid transparent;
-  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
   position: relative;
   list-style: none;
   padding:0 0.5rem 0.5rem 0;
+}
+#SpanSummary .item_container>li:last-child {
+  border-bottom: 1px solid transparent;
 }
 #SpanSummary .item_container>li:nth-child(odd) {
   background-color: hsla(0, 0%, 100%, 0.05);
