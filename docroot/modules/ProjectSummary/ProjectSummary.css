@@ -5,10 +5,6 @@
   padding: 0.4rem;
   border: 1px solid #CCC;
 }
-#ProjectSummary .item_container content {
-  display: block;
-  padding: 0.5rem 0.25rem 0.25rem 0.25rem;
-}
 #ProjectSummary label {
   display: inline-block;
 }
@@ -78,11 +74,25 @@
   font-size: 0.8rem;
   display: none;
 }
+#ProjectSummary .hours,
 #ProjectSummary .weight {
-  font-size: 0.8rem;
+  display: inline-block;
 }
-#ProjectSummary .weight .value:after {
-  content: '%';
+#ProjectSummary .weight {
+  margin-right: 1rem;
+}
+#ProjectSummary .weight progress-bar {
+  display: inline-block;
+  width: 200px;
+  height: 10px;
+  background-color: hsla(0, 0%, 100%, 0.5);
+  border: 1px solid transparent;
+  font-size: 0;
+}
+#ProjectSummary .weight inner-bar {
+  display: inline-block;
+  height:100%;
+  background-color: blue;
 }
 #ProjectSummary .round_delta:before {
   content: "(";
@@ -96,7 +106,6 @@
   content: " hours";
 }
 
-#ProjectSummary .weight,
 #ProjectSummary .tasks {
   margin-top: 0.5rem;
 }
