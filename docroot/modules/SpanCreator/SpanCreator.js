@@ -191,7 +191,7 @@ var SpanCreator = function() {
     todayProjectBuilder.setDate(data.date);
 
     const yesterday = timeUtil.addDays(new Date(data.date), -1);
-    const yesterdayYmd = timeUtil.getLocalYmd(yesterday);
+    const yesterdayYmd = timeUtil.getYmd(yesterday);
     yesterdayProjectBuilder.setDate(yesterdayYmd);
   };
 
