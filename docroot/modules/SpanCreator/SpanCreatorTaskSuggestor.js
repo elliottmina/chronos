@@ -10,8 +10,7 @@ var SpanCreatorTaskSuggestor = function(availableList, taskList) {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
-    // NOT SURE ABOUT THIS - spans not udpated
-    App.dispatcher.subscribe('SPAN_CHANGED', updateSpansAvailable);
+    App.dispatcher.subscribe('SPAN_CHANGED', updateSpansAvailable);// SPAMMY
   };
 
   var onDateChanged = function(date) {
@@ -30,22 +29,22 @@ var SpanCreatorTaskSuggestor = function(availableList, taskList) {
   };
 
   var addAvailableTask = function() {
-    addTask(this.innerText);
+    taskList.addTask(this.innerText);
     updateSpansAvailable();
   };
 
   var updateSpansAvailable = function() {
-    // availableList.empty();
+    availableList.empty();
 
     if (spans === undefined)
       return;
 
     buildUnassignedTasks(spans).forEach(task => {
       console.log(task);
-      // const item = jQuery('<li><i class="far fa-plus"></i></li>');
-      // item.append(task);
-      // item.click(addAvailableTask);
-      // availableList.append(item);
+      const item = jQuery('<li></li>');
+      item.append(task);
+      item.click(addAvailableTask);
+      availableList.append(item);
     });
   };
 

@@ -80,6 +80,7 @@ var SpanCreatorTaskList = function(topContainer) {
         addTask(task);
       });
     },
+    addTask:addTask,
     focus:function() {
       input.focus();
     }
