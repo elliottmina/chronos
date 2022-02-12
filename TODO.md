@@ -1,9 +1,5 @@
 # TODO
 
-## Backlog
-
-Modal dialogue (blasticate) colors.
-
 ## Future
 
 * Replace .button with <button>
@@ -11,5 +7,3 @@ Modal dialogue (blasticate) colors.
 * Persister as a replaceable module (SQLite, XHR, git)
 * Move current date to App, so modules don't have to track it
 * Move to modules
-
-## Change list
