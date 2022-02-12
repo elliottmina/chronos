@@ -25,7 +25,8 @@ var StatusChartBuilder = function (container) {
         buildSegment(percent, project);
       });
 
-      buildSegment(100-totalPercent, 'Misc');
+      if (totalPercent != 0)
+        buildSegment(100-totalPercent, 'Misc');
     }
   };
 };
