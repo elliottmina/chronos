@@ -145,7 +145,7 @@ var SpanCreatorProjectSuggestor = function(
     }
     populate(suggestions);
     show();
-  }
+  };
 
   var selectUp = function() {
     ensureShowing();
