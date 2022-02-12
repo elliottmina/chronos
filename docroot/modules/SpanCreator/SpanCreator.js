@@ -97,6 +97,8 @@ var SpanCreator = function() {
       projectSuggestor);
 
     wipSaver = new SpanCreatorWipSaver(spanAssembler);
+
+    new SpanCreatorTaskSuggestor(topContainer.find('.available'), taskList);
   };
 
   var addBehavior = function() {
