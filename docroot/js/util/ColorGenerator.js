@@ -1,6 +1,7 @@
 var ColorGenerator = function() {
   
   var assignedColors = {};
+  // https://loading.io/color/random/
   var pallete = [
     ['82',  '131', '251'],
     ['40',  '227', '28'],
