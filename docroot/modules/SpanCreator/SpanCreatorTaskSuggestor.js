@@ -40,7 +40,6 @@ var SpanCreatorTaskSuggestor = function(availableList, taskList) {
       return;
 
     buildUnassignedTasks(spans).forEach(task => {
-      console.log(task);
       const item = jQuery('<li></li>');
       item.append(task);
       item.click(addAvailableTask);
