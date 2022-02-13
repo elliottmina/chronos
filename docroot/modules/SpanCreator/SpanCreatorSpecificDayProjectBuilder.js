@@ -13,6 +13,7 @@ var SpanCreatorSpecificDayProjectBuilder = function() {
         if (jQuery.inArray(span.project, projects) == -1)
           projects.push(span.project);
       });
+      projects.sort();
       return projects;
     }
   };
