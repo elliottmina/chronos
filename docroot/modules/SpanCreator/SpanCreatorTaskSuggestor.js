@@ -58,7 +58,6 @@ var SpanCreatorTaskSuggestor = function(availableList, taskList) {
     });
 
     const assignedTasks = taskList.getTasks();
-    console.log(assignedTasks);
     const unassignedTasks = uniqueTasks.filter((task, index) => {
       return assignedTasks.indexOf(task) === -1;
     });
