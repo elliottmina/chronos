@@ -21,7 +21,7 @@ var SpanCreator = function() {
     gatherDependencies();
     buildHtml();
     build();
-    stateSetter.reset();
+    stateSetter.init();
     addBehavior();
     restoreWip();
   };
@@ -57,10 +57,14 @@ var SpanCreator = function() {
 
     elapsedMinutesIndicator = topContainer.find('.elapsed_minutes');
 
+    const projSuggestionUl = jQuery('#SpanCreator .project_suggestions ul');
+    const projectSuggestionTreatmenApplicator = new SpanCreatorProjectTreatmentApplicator();
+
     const projSuggestionList = SpanCreatorSuggestionList(
       new RegEx(),
       jQuery('#SpanCreator input[name="project"]'), 
-      jQuery('#SpanCreator .project_suggestions ul'), 
+      projSuggestionUl, 
+      projectSuggestionTreatmenApplicator,
       `<li class="suggestion">
         <i class="far fa-clock recent_indicator"></i>
         <i class="far fa-chevron-right selected_indicator"></i>
@@ -69,8 +73,10 @@ var SpanCreator = function() {
 
     projectSuggestor = new SpanCreatorProjectSuggestor(
       projSuggestionList,
+      projSuggestionUl,
       new SpanCreatorRecentProjectBuilder(),
-      timeUtil);
+      timeUtil,
+      projectSuggestionTreatmenApplicator);
 
     taskList = new SpanCreatorTaskList(
       topContainer.find('.task_list'));

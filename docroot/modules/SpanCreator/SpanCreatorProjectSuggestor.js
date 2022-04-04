@@ -1,7 +1,9 @@
 var SpanCreatorProjectSuggestor = function(
   projectSuggestor,
+  projSuggestionUl,
   recentProjectBuilder,
-  timeUtil) {
+  timeUtil,
+  treatmentApplicator) {
 
   var todayProjectBuilder;
   var yesterdayProjectBuilder;
@@ -48,30 +50,23 @@ var SpanCreatorProjectSuggestor = function(
     const yesterdayYmd = timeUtil.getYmd(yesterday);
     yesterdayProjectBuilder.setDate(yesterdayYmd);
     updateSuggestions();
+    projectInput.focus();
   };
 
   var updateSuggestions = function() {
-    recentProjects.sort();
-    projectSuggestor.setSuggestions(reorder(recentProjects));
-  };
-
-  var reorder = function() {
     const todaysProjects = todayProjectBuilder.build();
     const yesterdaysProjects = yesterdayProjectBuilder.build();
-    console.log(todaysProjects, yesterdaysProjects);
 
-    var suggestions = [...recentProjects];
-    suggestions = suggestions.filter(proj => {
-      if (todaysProjects.includes(proj))
-        return false;
-      if (yesterdaysProjects.includes(proj))
-        return false;
-      return true;
-    });
+    recentProjects.sort();
+    treatmentApplicator.todaysProjects = todaysProjects;
+    treatmentApplicator.yesterdaysProjects = yesterdaysProjects;
 
-    suggestions = [...todaysProjects, ...yesterdaysProjects, ...suggestions];
+    const uniqueProjects = new Set([
+      ...todaysProjects, 
+      ...yesterdaysProjects,
+      ...recentProjects]);
 
-    return suggestions;
+    projectSuggestor.setSuggestions(Array.from(uniqueProjects));
   };
 
   var publishChange = function() {
