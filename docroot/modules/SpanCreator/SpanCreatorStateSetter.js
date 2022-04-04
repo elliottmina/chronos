@@ -9,6 +9,15 @@ var SpanCreatorStateSetter = function(
   timeUtil) {
 
   return {
+    init:function() {
+      startTimeField.now();
+      finishTimeField.clear();
+      taskList.clear();
+      saveButtonText.text('Create');
+      saveAndRepeatButton.show();
+      projectSuggestor.clear();
+      cancelButton.hide();
+    },
     reset:function() {
       startTimeField.now();
       finishTimeField.clear();

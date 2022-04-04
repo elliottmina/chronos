@@ -1,4 +1,9 @@
-var SpanCreatorSuggestionList = function(regEx, input, list, template) {
+var SpanCreatorSuggestionList = function(
+  regEx, 
+  input, 
+  list, 
+  treatmentApplicator,
+  template) {
 
   var index;
   var showing = false;
@@ -37,6 +42,7 @@ var SpanCreatorSuggestionList = function(regEx, input, list, template) {
     if (showing)
       return;
 
+    treatmentApplicator.apply(list);
     list.show();
     showing = true;
   };
