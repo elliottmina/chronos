@@ -1,3 +1,7 @@
+#ProjectSummary {
+  display: inline-block;
+  vertical-align: top;
+}
 #ProjectSummary .item_container>li {
   position: relative;
   list-style: none;
