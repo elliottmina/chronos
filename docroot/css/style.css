@@ -157,3 +157,12 @@ section>header {
 #Goal {
   display: block;
 }
+
+summary-container {
+  display: flex;
+}
+@media (max-width: 800px) {
+  summary-container {
+    flex-direction: column;
+  }
+}
