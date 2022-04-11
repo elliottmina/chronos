@@ -1,7 +1,16 @@
 #ProjectSummary {
   display: inline-block;
   vertical-align: top;
-  background-color: hsl(2, 65%, 88%);
+  padding: 0;
+  background-color:white;
+}
+#ProjectSummary>header {
+  padding: 1rem;
+  display: block;
+  background-color: hsl(46, 100%, 87%);
+}
+#ProjectSummary .item_container {
+  padding: 0.5rem 1rem;
 }
 #ProjectSummary .item_container>li {
   position: relative;
