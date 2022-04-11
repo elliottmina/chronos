@@ -76,7 +76,7 @@ body.theme_dark #SpanCreator .project_suggestions .suggestion.today.selected,
 body.theme_dark #SpanCreator .project_suggestions .suggestion.selected,
 body.theme_dark #SpanCreator .project_suggestions .suggestion.today:hover,
 body.theme_dark #SpanCreator .project_suggestions .suggestion:hover {
-  background-color: hsla(191, 92%, 33%, 0.95);
+  background-color: hsla(16, 65%, 45%, 0.95);
 }
 body.theme_dark #SpanCreator .project_suggestions .suggestion.today {
   background-color: hsla(172, 21%, 33%, 95%);
@@ -99,5 +99,5 @@ body.theme_dark #SpanSummary .mini_button {
   color: hsl(90, 26%, 68%);
 }
 body.theme_dark #DateLine.today h1 {
-  color:hsl(191, 92%, 33%)
+  color:hsl(16, 65%, 45%)
 }
