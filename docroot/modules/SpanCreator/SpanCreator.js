@@ -79,15 +79,6 @@ var SpanCreator = function() {
 
     validator = new SpanCreatorValidator();
 
-    const taskList = null;// TODO: remove
-    new SpanCreatorShortcuts(
-      projectSuggestor, 
-      save, 
-      saveAndRepeat,
-      startTimeField, 
-      finishTimeField,
-      taskList);
-
     const taskSuggestorInput = jQuery('.task_list input');
     const taskAvailableList = topContainer.find('.task_list .available');
     const taskSuggestorList = new SpanCreatorSuggestionList(
@@ -123,6 +114,14 @@ var SpanCreator = function() {
       saveAndRepeatButton,
       cancelButton,
       timeUtil);
+
+    new SpanCreatorShortcuts(
+      projectSuggestor, 
+      save, 
+      saveAndRepeat,
+      startTimeField, 
+      finishTimeField,
+      taskSuggestor);
   };
 
   var initState = function() {
