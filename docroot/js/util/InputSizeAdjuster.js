@@ -10,6 +10,7 @@ var InputSizeAdjuster = function(input, conf) {
   var init = function() {
     applyDefaults();
     input.keyup(onKeyUp);
+    input.change(onKeyUp);
     input.width(input.width());
     input.height(input.height());
   };

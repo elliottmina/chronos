@@ -1,7 +1,7 @@
 var SpanCreatorSpanAssembler = function(
   startTimeField, 
   finishTimeField,
-  taskList,
+  taskSuggestor,
   projectSuggestor) {
 
   return {
@@ -10,7 +10,7 @@ var SpanCreatorSpanAssembler = function(
         start:startTimeField.getTime(),
         finish:finishTimeField.getTime(),
         project:projectSuggestor.get(),
-        tasks:taskList.getTasks()
+        tasks:taskSuggestor.getTasks()
       };
     }
   };

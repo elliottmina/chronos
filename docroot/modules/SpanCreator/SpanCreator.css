@@ -118,7 +118,7 @@
 #SpanCreator .project_suggestions .suggestion:first-child {
   border-top:1px solid hsla(0, 0%, 80%, 1);
 }
-#SpanCreator .task_list ul.available li,
+#SpanCreator .task_list .available li,
 #SpanCreator .project_suggestions .suggestion {
   min-width: 17em;
   position: relative;
@@ -130,6 +130,7 @@
   border-left:1px solid hsla(0, 0%, 80%, 1);
   background-color: hsla(0, 0%, 97%, 0.95);
 }
+#SpanCreator .task_list li.selected,
 #SpanCreator .task_list ul.available li:hover,
 #SpanCreator .project_suggestions .suggestion.today.selected,
 #SpanCreator .project_suggestions .suggestion.selected,
@@ -137,6 +138,7 @@
 #SpanCreator .project_suggestions .suggestion:hover {
   background-color: hsla(220, 100%, 90%, 0.95);
 }
+#SpanCreator .task_list .selected_indicator,
 #SpanCreator .project_suggestions .suggestion .recent_indicator,
 #SpanCreator .project_suggestions .suggestion .selected_indicator {
   display: none;
@@ -145,6 +147,7 @@
 #SpanCreator .project_suggestions .suggestion.today .recent_indicator {
   display: inline;
 }
+#SpanCreator .task_list .available .suggestion.selected .selected_indicator,
 #SpanCreator .project_suggestions .suggestion.selected.today .selected_indicator,
 #SpanCreator .project_suggestions .suggestion.selected .selected_indicator {
   display: inline-block;
@@ -177,7 +180,7 @@
 }
 #SpanCreator .task_list ul.assigned li {
   list-style: none;
-  display: inline-block;
+  display: block;
   border:1px solid #CCC;
   padding: 0.25em 0.5em 0.25em 0.25em;
   border-radius: 4px;
@@ -194,7 +197,7 @@
 }
 
 #SpanCreator .task_list ul.available {
-  /*display: none;*/
+  display: none;
   z-index: 10;
   position: absolute;
   top: 4.5em;

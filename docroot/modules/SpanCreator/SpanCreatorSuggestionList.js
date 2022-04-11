@@ -57,7 +57,7 @@ var SpanCreatorSuggestionList = function(
     var li = jQuery(template)
       .clone()
       .appendTo(list)
-      .click(selectSuggestion);
+      .click(onSelectionClick);
 
     li.find('.text').text(suggestion)
   };
@@ -69,7 +69,10 @@ var SpanCreatorSuggestionList = function(
   var onKeyUp = function(e) {
     switch (e.key) {
       case 'Enter':
-        useSelected();
+        if (showing) {
+          e.stopImmediatePropagation();
+          useSelected();
+        }
         break;
       case 'Escape':
         hide();
@@ -114,7 +117,9 @@ var SpanCreatorSuggestionList = function(
   };
 
   var useSelected = function() {
-    list.find('.selected').click();
+    input.val(list.find('.selected').find('.text').text());
+    hide();
+    input.change();
   };
 
   var ensureShowing = function() {
@@ -122,9 +127,11 @@ var SpanCreatorSuggestionList = function(
       show();
   };
 
-  var selectSuggestion = function() {
+  var onSelectionClick = function() {
     input.val(jQuery(this).find('.text').text());
     hide();
+    input.change();
+    input.focus();
   };
 
   var getFilteredSuggestions = function() {
