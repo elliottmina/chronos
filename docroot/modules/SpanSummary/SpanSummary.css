@@ -19,7 +19,7 @@
   position: relative;
   list-style: none;
   padding:0 0.5rem 0.5rem 0;
-  min-width: 30rem;
+  min-width: 31rem;
 }
 #SpanSummary .item_container>li:last-child {
   border-bottom: 1px solid transparent;
