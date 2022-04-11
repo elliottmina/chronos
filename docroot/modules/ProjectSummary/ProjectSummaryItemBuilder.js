@@ -10,7 +10,9 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
           </div>
           <div class="hours">
             <span class="value"></span>
-            <i class="mini_button far fa-copy copy"><span>Hours</span></i>
+            <i class="mini_button far fa-copy copy" title="Copy time">
+              <i class="far fa-clock"></i>
+            </i>
           </div>
         </div>
         <div class="round_delta">
@@ -21,13 +23,17 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
           <ul class="task_list"></ul>
         </div>
       </div>
-      <i class="mini_button far fa-copy copy project_copy"><span>Summary</span></i>
+      <i class="mini_button far fa-copy copy project_copy" title="Copy everything">
+        <i class="fas fa-file"></i>
+      </i>
     </li>
   `;
 
   var copyTemplate = `
     <li class="copy">
-      <i class="mini_button far fa-copy copy"><span>Tasks</span></i>
+      <i class="mini_button far fa-copy copy" title="Copy tasks">
+        <i class="fas fa-list"></i>
+      </i>
     </li>`;
 
   var build = function(project, totalMinutes) {
@@ -74,7 +80,7 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
 
   var buildColorTreatment = function(container, project) {
     var projectRoot = App.projectSegmentor.segment(project.label)[0];
-    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
+    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.1));
     container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
   };
 

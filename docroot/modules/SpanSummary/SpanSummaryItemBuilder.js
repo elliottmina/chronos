@@ -20,7 +20,7 @@ var SpanSummaryItemBuilder = function(
     var color = App.colorGenerator.generate(projectRoot);
     const label = container.find('label');
     container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
-    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.2));
+    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.1));
   };
 
   var addBehavior = function(span, container) {
