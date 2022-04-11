@@ -1,5 +1,7 @@
 #SpanSummary {
   background-color: white;
+  display: inline-block;
+  vertical-align: top;
 }
 #SpanSummary .content_container {
   display: none;
