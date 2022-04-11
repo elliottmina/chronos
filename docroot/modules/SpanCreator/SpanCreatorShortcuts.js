@@ -50,7 +50,7 @@ var SpanCreatorShortcuts = function(
   
       case 'L':
         stopPropagation(e);
-        taskList.focus();
+        // taskList.focus();
         return;
 
       case ';':

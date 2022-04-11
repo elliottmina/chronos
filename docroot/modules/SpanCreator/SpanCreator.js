@@ -7,7 +7,7 @@ var SpanCreator = function() {
   var finishTimeField;
   var elapsedMinutesIndicator;
   var projectSuggestor;
-  var taskList;
+  var taskSuggestor;
   var validator;
   var record;
   var activeSpan;
@@ -60,7 +60,7 @@ var SpanCreator = function() {
     const projSuggestionUl = jQuery('#SpanCreator .project_suggestions ul');
     const projectSuggestionTreatmenApplicator = new SpanCreatorProjectTreatmentApplicator();
 
-    const projSuggestionList = SpanCreatorSuggestionList(
+    const projSuggestionList = new SpanCreatorSuggestionList(
       new RegEx(),
       jQuery('#SpanCreator input[name="project"]'), 
       projSuggestionUl, 
@@ -78,11 +78,9 @@ var SpanCreator = function() {
       timeUtil,
       projectSuggestionTreatmenApplicator);
 
-    taskList = new SpanCreatorTaskList(
-      topContainer.find('.task_list'));
-
     validator = new SpanCreatorValidator();
 
+    const taskList = null;// TODO: remove
     new SpanCreatorShortcuts(
       projectSuggestor, 
       save, 
@@ -91,25 +89,42 @@ var SpanCreator = function() {
       finishTimeField,
       taskList);
 
+    const taskSuggestorInput = jQuery('.task_list input');
+    const taskAvailableList = topContainer.find('.task_list .available');
+    const taskSuggestorList = new SpanCreatorSuggestionList(
+      new RegEx(),
+      taskSuggestorInput, 
+      taskAvailableList, 
+      { apply: () => {} },
+      `<li class="suggestion">
+        <i class="far fa-chevron-right selected_indicator"></i>
+        <span class="text"></span>
+      </li>`)
+
+    taskSuggestor = new SpanCreatorTaskSuggestor(
+      taskAvailableList, 
+      topContainer.find('.task_list .assigned'), 
+      taskSuggestorInput,
+      taskSuggestorList);
+
+    spanAssembler = new SpanCreatorSpanAssembler(
+      startTimeField, 
+      finishTimeField,
+      taskSuggestor,
+      projectSuggestor);
+
+    wipSaver = new SpanCreatorWipSaver(spanAssembler);
+
     stateSetter = new SpanCreatorStateSetter(
       startTimeField,
       finishTimeField,
       projectSuggestor,
-      taskList,
+      taskSuggestor,
       topContainer.find('.save .text'),
       saveAndRepeatButton,
       cancelButton,
       timeUtil);
 
-    spanAssembler = new SpanCreatorSpanAssembler(
-      startTimeField, 
-      finishTimeField,
-      taskList,
-      projectSuggestor);
-
-    wipSaver = new SpanCreatorWipSaver(spanAssembler);
-
-    new SpanCreatorTaskSuggestor(topContainer.find('.available'), taskList);
   };
 
   var addBehavior = function() {
@@ -192,7 +207,7 @@ var SpanCreator = function() {
   };
 
   var commitPartialWork = function() {
-    taskList.addCurrent();
+    taskSuggestor.addCurrent();
 
     if (!finishTimeField.getTime()) {
       finishTimeField.now();
