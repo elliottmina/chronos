@@ -1,5 +1,5 @@
 #SpanSummary {
-  background-color: white;
+  background-color: hsl(166, 44%, 88%);
   display: inline-block;
   vertical-align: top;
 }
@@ -19,6 +19,7 @@
   position: relative;
   list-style: none;
   padding:0 0.5rem 0.5rem 0;
+  min-width: 30rem;
 }
 #SpanSummary .item_container>li:last-child {
   border-bottom: 1px solid transparent;

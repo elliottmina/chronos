@@ -1,6 +1,7 @@
 #ProjectSummary {
   display: inline-block;
   vertical-align: top;
+  background-color: hsl(2, 65%, 88%);
 }
 #ProjectSummary .item_container>li {
   position: relative;
