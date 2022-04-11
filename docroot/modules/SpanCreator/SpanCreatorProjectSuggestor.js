@@ -51,7 +51,6 @@ var SpanCreatorProjectSuggestor = function(
     const yesterdayYmd = timeUtil.getYmd(yesterday);
     yesterdayProjectBuilder.setDate(yesterdayYmd);
     updateSuggestions();
-    projectInput.focus();
   };
 
   var updateSuggestions = function() {
