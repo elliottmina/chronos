@@ -1,5 +1,5 @@
 #metrics {
-  background-color: #3134BA;
+  background-color: hsl(23, 84%, 59%);
 }
 #Stats section {
   display: inline-block;
@@ -10,7 +10,7 @@
   display: inline-block;
   width: 202px;
   height: 10px;
-  border: 1px solid hsl(0,0%, 75%);
+  background-color: #e7f9ec;
 }
 #Stats segment {
   display: inline-block;
