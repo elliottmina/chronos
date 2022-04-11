@@ -104,6 +104,7 @@ var SpanCreatorTaskSuggestor = function(
     input.val('');
     assignedTasks = [];
     assignedList.empty();
+    publishChange();
   };
 
   init();
@@ -115,6 +116,7 @@ var SpanCreatorTaskSuggestor = function(
     setTasks:(tasks) => {
       clear();
       tasks.forEach(task => addTask(task));
+      publishChange();
     }
   };
 

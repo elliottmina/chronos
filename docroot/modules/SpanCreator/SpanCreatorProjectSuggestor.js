@@ -31,6 +31,7 @@ var SpanCreatorProjectSuggestor = function(
 
   var addBehavior = function() {
     projectInput.keyup(publishChange);
+    projectInput.change(publishChange);
     App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
     new InputSizeAdjuster(projectInput);
