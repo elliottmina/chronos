@@ -7,11 +7,10 @@
   margin-right:0.25em;
 }
 #DateLine.today h1 {
-  color:hsl(213, 51%, 49%);
+  color:hsl(357, 72%, 62%);
 }
 #DateLine h2 {
   display: inline-block;
   font-size: 1.3em;
-  color:hsl(0, 0%, 45%);
   margin-right:0.25em;
 }
