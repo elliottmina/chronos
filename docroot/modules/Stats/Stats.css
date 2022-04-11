@@ -7,6 +7,7 @@
   display: inline-block;
   width: 202px;
   height: 10px;
+  border: 1px solid hsl(0,0%, 75%);
 }
 #Stats segment {
   display: inline-block;
