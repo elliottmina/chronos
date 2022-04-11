@@ -4,7 +4,7 @@ var SpanCreatorShortcuts = function(
   saveAndRepeat,
   startTimeField, 
   finishTimeField,
-  taskList) {
+  taskSuggestor) {
 
   var keyEvaluator;
   var container;
@@ -50,7 +50,7 @@ var SpanCreatorShortcuts = function(
   
       case 'L':
         stopPropagation(e);
-        // taskList.focus();
+        taskSuggestor.focus();
         return;
 
       case ';':

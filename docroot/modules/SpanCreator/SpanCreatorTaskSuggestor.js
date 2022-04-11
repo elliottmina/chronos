@@ -117,7 +117,8 @@ var SpanCreatorTaskSuggestor = function(
       clear();
       tasks.forEach(task => addTask(task));
       publishChange();
-    }
+    },
+    focus:() => input.focus()
   };
 
 };
