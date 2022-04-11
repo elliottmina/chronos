@@ -21,9 +21,8 @@ var SpanCreator = function() {
     gatherDependencies();
     buildHtml();
     build();
-    stateSetter.init();
+    initState();
     addBehavior();
-    restoreWip();
   };
 
   var gatherDependencies = function() {
@@ -124,7 +123,14 @@ var SpanCreator = function() {
       saveAndRepeatButton,
       cancelButton,
       timeUtil);
+  };
 
+  var initState = function() {
+    var span = wipSaver.get();
+    if (span.project || span.tasks)
+      stateSetter.restore(span);
+    else
+      stateSetter.init();
   };
 
   var addBehavior = function() {
@@ -225,12 +231,6 @@ var SpanCreator = function() {
 
   var onRepeatSpanRequested = function(guid) {
     stateSetter.repeat(record.spans[guid]);
-  };
-
-  var restoreWip = function() {
-    var span = wipSaver.get();
-    if (span)
-      stateSetter.restore(span);
   };
 
   var updateElapsedMinutes = function() {
