@@ -127,6 +127,11 @@ var SpanCreator = function() {
 
   var initState = function() {
     var span = wipSaver.get();
+    if (!span) {
+      stateSetter.init();
+      return;
+    }
+
     if (span.project || span.tasks)
       stateSetter.restore(span);
     else
