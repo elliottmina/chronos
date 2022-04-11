@@ -96,7 +96,7 @@ section>header {
 }
 #Settings .content {
   display: inline-block;
-  background-color: white;
+  background-color: hsl(0, 0%, 95%);
   text-align: left;
   padding:1em;
   margin-top:4em;

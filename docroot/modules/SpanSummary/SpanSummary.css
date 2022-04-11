@@ -8,6 +8,7 @@
   padding: 1rem;
   display: block;
   background-color: hsl(36, 93%, 83%);
+  border-bottom: 1px solid hsl(36, 93%, 73%);
 }
 #SpanSummary .content_container {
   display: none;
