@@ -2,7 +2,7 @@
   display: inline-block;
   vertical-align: top;
   padding: 0;
-  background-color:white;
+  background-color:hsl(0, 0%, 95%);
 }
 #ProjectSummary>header {
   padding: 1rem;
