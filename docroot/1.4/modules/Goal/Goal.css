@@ -1,0 +1,42 @@
+#Goal {
+  min-width: 275px;
+  margin-right: 0.5rem;
+}
+#Goal section {
+  display: inline-block;
+  width: 17rem;
+}
+#Goal section>* {
+  display: inline-block;
+}
+#Goal progress-bar {
+  width: 200px;
+  height: 20px;
+}
+#Goal progress-bar inner-bar {
+  height: 100%;
+  display: inline-block;
+}
+#Goal #goal-daily progress-bar {
+  background-color: hsl(166, 44%, 88%);
+}
+#Goal #goal-daily progress-bar inner-bar {
+  background-color: hsl(166, 44%, 38%);
+}
+#Goal #goal-weekly progress-bar {
+  background-color: hsl(2, 65%, 88%);
+}
+#Goal #goal-weekly progress-bar inner-bar {
+  background-color: hsl(2, 65%, 38%);
+}
+#Goal label {
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+#Goal .hour_value {
+  font-size: 0.9rem;
+}
+#Goal .hour_value:after {
+  content:' hr';
+}

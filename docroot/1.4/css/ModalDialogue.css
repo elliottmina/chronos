@@ -1,0 +1,52 @@
+.ModalDialogue {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1000;
+  background-color: hsla(0, 0%, 0%, 0.35);
+}
+.ModalDialogue .box {
+  display: inline-block;
+  position: relative;
+  top:20%;
+  min-width: 25em;
+  min-height:10em;
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 98%);
+  padding:2em;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.6);
+}
+.ModalDialogue header {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+.ModalDialogue .contents {
+  padding:1em;
+}
+.ModalDialogue button {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  margin:1em;
+}
+.ModalDialogue button.primary {
+  background-color: hsl(46, 100%, 67%);
+  color: hsl(25, 24%, 30%);
+  border: 0;
+}
+.ModalDialogue button:hover {
+    background-color: hsl(46, 100%, 72%);
+}
+.ModalDialogue button.secondary {
+  background-color: hsl(25, 24%, 30%);
+  color: hsl(46, 100%, 67%);
+  border: 0;
+}
+.ModalDialogue button.secondary:hover {
+  background-color: hsl(25, 24%, 35%);
+}

@@ -1,0 +1,16 @@
+#DateLine {
+  display: inline-block;
+}
+#DateLine h1 {
+  display: inline-block;
+  font-size: 2em;
+  margin-right:0.25em;
+}
+#DateLine.today h1 {
+  color:hsl(357, 72%, 62%);
+}
+#DateLine h2 {
+  display: inline-block;
+  font-size: 1.3em;
+  margin-right:0.25em;
+}

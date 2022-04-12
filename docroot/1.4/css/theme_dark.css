@@ -1,0 +1,9 @@
+body.theme_dark #ProjectSummary,
+body.theme_dark #SpanSummary {
+  background-color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 90%);
+}
+body.theme_dark #ProjectSummary>header,
+body.theme_dark #SpanSummary>header {
+  color:hsl(0, 0%, 10%);
+}
