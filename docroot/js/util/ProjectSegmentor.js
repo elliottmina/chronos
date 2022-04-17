@@ -29,13 +29,22 @@ var ProjectSegmentor = function() {
 
   var getFormatted = function(project) {
     const container = jQuery('<span class="segments">');
-    
-    segment(project).forEach(segment => {
+
+    const parts = segment(project);
+
+    const icon = jQuery('<i class="icon fas fa-folder-open"></i>');
+    icon.css('color', App.colorGenerator.generate(parts[0], 1));
+    icon.css('border-color', App.colorGenerator.generate(parts[0], 1));
+    icon.css('background-color', App.colorGenerator.generate(parts[0], 0.1));
+    container.append(icon);
+
+    parts.forEach((segment, index, array) => {
       const el = jQuery('<span class="segment">');
       el.append(segment);
-      el.css('background-color', App.colorGenerator.generate(segment, 0.3));
-      el.css('border-color', App.colorGenerator.generate(segment, 0.7));
       container.append(el);
+
+      if (array.length > 1 && index != array.length-1)
+        container.append('<i class="segment_separator fas fa-caret-right"></i>');
     });
 
     return container;
