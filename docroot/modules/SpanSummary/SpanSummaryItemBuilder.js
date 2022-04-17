@@ -76,8 +76,11 @@ var SpanSummaryItemBuilder = function(
   };
 
   var setHearts = function(span, container) {
+    const heartContainer = container.find('.heart-container');
+    heartContainer.empty();
+
     var elapsedHours = (span.finish - span.start)/1000/60/60;
-    heartBuilder.build(elapsedHours, container.find('.heart-container')[0]);
+    heartBuilder.build(elapsedHours, heartContainer[0]);
   };
 
   init();

@@ -188,8 +188,6 @@
   padding: 0.25em 0.5em 0.25em 0.25em;
   border-radius: 4px;
   margin:0.2em;
-  background-color:hsl(35, 95%, 83%);
-  border:1px solid hsl(35, 95%, 63%);
 }
 #SpanCreator .task_list li a {
   cursor: pointer;
