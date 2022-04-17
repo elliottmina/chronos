@@ -33,7 +33,7 @@ var HeartBuilder = function() {
     const heart = document.createElement('i');
     heart.classList.add('heart');
     heart.classList.add('fas');
-    heart.classList.add('fa-heart');
+    heart.classList.add('fa-clock');
     return heart;
   };
   

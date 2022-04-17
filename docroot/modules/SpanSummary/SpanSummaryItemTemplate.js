@@ -11,7 +11,7 @@ var SpanSummaryItemTemplate = `
     <div class="time">
       <span class="start"></span> - <span class="finish"></span>
     </div>
-    <div>
+    <div class="elapsed-container">
       <span class="elapsed"></span>
       <span class="heart-container"></span>
     </div>
