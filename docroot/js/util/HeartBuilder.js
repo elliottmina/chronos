@@ -7,6 +7,9 @@ var HeartBuilder = function() {
   };
 
   var buildPartialHeart = function(width, container) {
+    const wrapper = document.createElement('span');
+    wrapper.classList.add('heart-wrapper');
+
     const outer = buildBaseHeart();
     outer.classList.add('outer');
 
@@ -19,8 +22,9 @@ var HeartBuilder = function() {
 
 
 
-    container.append(outer);
-    outer.append(truncator);
+    container.append(wrapper);
+    wrapper.append(outer);
+    wrapper.append(truncator);
     truncator.append(inner);
 
   };
