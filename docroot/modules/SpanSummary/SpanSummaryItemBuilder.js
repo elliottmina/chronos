@@ -8,19 +8,9 @@ var SpanSummaryItemBuilder = function(
   };
   
   var populateSpan = function(span, container) {
-    setColorTreatment(span, container);
     addBehavior(span, container);
     setText(span, container);
     buildTasks(span, container);
-  };
-
-  var setColorTreatment = function(span, container) {
-    var projectRoot = App.projectSegmentor.segment(span.project)[0];
-    var colorTrans = App.colorGenerator.generate(projectRoot, 0.3);
-    var color = App.colorGenerator.generate(projectRoot);
-    const label = container.find('label');
-    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
-    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.1));
   };
 
   var addBehavior = function(span, container) {
@@ -47,10 +37,6 @@ var SpanSummaryItemBuilder = function(
     container.find('.finish').text(timeFormatter.format(span.finish));
     container.find('label').html(App.projectSegmentor.getFormatted(span.project));
     container.find('.elapsed').text(elapsed);
-  };
-
-  var segmentify = function(text, num) {
-    return '<span class="segment segment_' + num + '">' + text + '</span>';
   };
 
   var formatElapsed = function(elapsedHours) {

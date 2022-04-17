@@ -20,7 +20,6 @@ input {
 }
 .task_list li {
   list-style: none;
-  display: inline-block;
   padding: 0.2em;
   border-radius: 2px;
   margin:0.1em;
@@ -62,20 +61,27 @@ section>header {
   font-size: 0.9em;
 }
 
-.segments .segment:first-child {
-  font-weight: bold;
-  border-left: 1px solid #ccc;
+.segments i.icon {
+  border: 1px solid transparent;
+  padding: 0.15rem;
+  border-radius: 4px;
+  margin-right: 0.1rem;
 }
-.segment {
-  padding: 0.2rem 0.4rem;
+.segments .segment:nth-child(2) {
+  font-weight: bold;
+}
+/*.segments .segment:not(:first-child)::after {
+  font-weight: normal;
+  content: " > ";
+}
+*/.segment {
+  padding: 0.2rem;
   display: inline-block;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
 }
 .segment_separator {
   display: inline-block;
-  margin-right: 0.5em;
+  margin: 0 0.25rem;
+  font-size: 0.8rem;
 }
 
 #Settings>.mini_button {
