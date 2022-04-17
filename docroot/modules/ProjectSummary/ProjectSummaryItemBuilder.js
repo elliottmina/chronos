@@ -40,7 +40,6 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
     var container = jQuery(itemTemplate).appendTo(listEl);
 
     buildLabel(container, project);
-    buildColorTreatment(container, project);
     buildTime(container, project);
     if (project.rawMinutes)
       buildRoundData(container, project);
@@ -76,12 +75,6 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
     container.find('.raw').text(timeUtil.formatTime(project.rawMinutes));
     container.find('.sign').text(project.roundDelta ? '+' : '-');
     container.find('.delta').text(timeUtil.formatTime(Math.abs(project.roundDelta)));
-  };
-
-  var buildColorTreatment = function(container, project) {
-    var projectRoot = App.projectSegmentor.segment(project.label)[0];
-    container.css('background-color', App.colorGenerator.generate(projectRoot, 0.1));
-    container.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
   };
 
   var buildProjectCopy = function(container, project) {
