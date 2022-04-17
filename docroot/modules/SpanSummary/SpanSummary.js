@@ -18,6 +18,7 @@ var SpanSummary = function() {
       new Padder(),
       Rounder.roundDecimal,
       new TimeFormatter12Hr(),
+      new HeartBuilder(),
       spansContainer);
   };
 

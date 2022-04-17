@@ -65,16 +65,12 @@ section>header {
   border: 1px solid transparent;
   padding: 0.15rem;
   border-radius: 4px;
-  margin-right: 0.1rem;
+  margin-right: 0.2rem;
 }
 .segments .segment:nth-child(2) {
   font-weight: bold;
 }
-/*.segments .segment:not(:first-child)::after {
-  font-weight: normal;
-  content: " > ";
-}
-*/.segment {
+.segment {
   padding: 0.2rem;
   display: inline-block;
 }
@@ -162,6 +158,27 @@ section>header {
 #Stats,
 #Goal {
   display: block;
+}
+
+.heart {
+  color: red;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 0.1rem;
+}
+.heart.outer {
+  position: relative;
+  color: grey;
+
+}
+.heart .truncator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: clip;
+}
+.heart.inner {
+  border: 1px solid transparent;
 }
 
 summary-container {

@@ -17,7 +17,9 @@
   position: relative;
   list-style: none;
   margin-bottom: 1rem;
-  border: 1px solid transparent;
+  border: 1px solid purple;
+  border-radius: 4px;
+  padding: 0.5rem;
 }
 #ProjectSummary .content {
   padding: 0.4rem;

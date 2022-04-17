@@ -2,6 +2,7 @@ var SpanSummaryItemBuilder = function(
   padder, 
   roundDecimal, 
   timeFormatter,
+  heartBuilder,
   spansContainer) {
 
   var init = function() {
@@ -11,6 +12,7 @@ var SpanSummaryItemBuilder = function(
     addBehavior(span, container);
     setText(span, container);
     buildTasks(span, container);
+    setHearts(span, container);
   };
 
   var addBehavior = function(span, container) {
@@ -71,6 +73,11 @@ var SpanSummaryItemBuilder = function(
   var repeatSpan = function() {
     var guid = jQuery(this).data('guid');
     App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
+  };
+
+  var setHearts = function(span, container) {
+    var elapsedHours = (span.finish - span.start)/1000/60/60;
+    heartBuilder.build(elapsedHours, container.find('.heart-container')[0]);
   };
 
   init();
