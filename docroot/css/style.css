@@ -24,6 +24,8 @@ input {
   border-radius: 2px;
   margin:0.1em;
   font-size:0.9em;
+  background-color: hsl(35, 95%, 83%);
+  border:1px solid hsl(35, 95%, 63%);
 }
 .no_content_container {
   font-size:0.9em;
@@ -160,17 +162,23 @@ section>header {
   display: block;
 }
 
+.heart-container {
+  display: inline-block;
+}
 .heart {
   color: red;
   border: 1px solid red;
   border-radius: 4px;
   padding: 0.1rem;
+  margin-right: 0.1rem;
 }
 .heart-wrapper {
+  display: inline-block;
   position: relative;
 }
 .heart.outer {
   color: grey;
+  border: 1px solid grey;
 }
 .heart-wrapper .truncator {
   display: inline-block;
@@ -178,9 +186,6 @@ section>header {
   left: 0;
   right: 0;
   overflow: clip;
-}
-.heart.inner {
-  border: 1px solid transparent;
 }
 
 summary-container {
