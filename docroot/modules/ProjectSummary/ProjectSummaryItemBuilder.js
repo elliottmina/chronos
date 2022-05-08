@@ -1,23 +1,25 @@
-var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
+var ProjectSummaryItemBuilder = function(
+  timeUtil, 
+  copier, 
+  padder, 
+  heartBuilder,
+  listEl) {
 
   var itemTemplate = `
     <li>
       <label></label>
       <div class="content">
-        <div>
-          <div class="weight">
-            <progress-bar><inner-bar></inner-bar></progress-bar>
-          </div>
-          <div class="hours">
-            <span class="value"></span>
-            <i class="mini_button far fa-copy copy" title="Copy time">
-              <i class="far fa-clock"></i>
-            </i>
-          </div>
+        <div class="hours">
+          <span class="value"></span>
+          <span class="heart-container"></span>
+          <i class="mini_button far fa-copy copy" title="Copy time"></i>
         </div>
         <div class="round_delta">
           <span class="sign"></span><span class="delta"></span>,
           originally <span class="raw"></span>
+        </div>
+        <div class="weight">
+          <progress-bar><inner-bar></inner-bar></progress-bar>
         </div>
         <div class="tasks">
           <ul class="task_list"></ul>
@@ -41,6 +43,7 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
 
     buildLabel(container, project);
     buildTime(container, project);
+    buildHearts(container, project);
     if (project.rawMinutes)
       buildRoundData(container, project);
     buildWeight(container, project, totalMinutes);
@@ -71,9 +74,13 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
   }
 
   var buildRoundData = function(container, project) {
+    if (project.roundDelta == 0) {
+      container.find('.round_delta').hide();
+      return;
+    }
     container.find('.round_delta').show();
     container.find('.raw').text(timeUtil.formatTime(project.rawMinutes));
-    container.find('.sign').text(project.roundDelta ? '+' : '-');
+    container.find('.sign').text(project.roundDelta < 0 ? '-' : '+');
     container.find('.delta').text(timeUtil.formatTime(Math.abs(project.roundDelta)));
   };
 
@@ -102,6 +109,14 @@ var ProjectSummaryItemBuilder = function(timeUtil, copier, padder, listEl) {
         .click(copy)
         .data('copy', project.tasks.join('\n'));      
     }
+  };
+
+  var buildHearts = function(container, project) {
+    const heartContainer = container.find('.heart-container');
+    heartContainer.empty();
+
+    var elapsedHours = project.time/60;
+    heartBuilder.build(elapsedHours, heartContainer[0]);
   };
 
   var copy = function() {

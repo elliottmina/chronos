@@ -1,14 +1,12 @@
 #SpanSummary {
-  background-color: hsl(0, 0%, 95%);
   display: inline-block;
-  vertical-align: top;
   padding: 0;
 }
 #SpanSummary>header {
   padding: 1rem;
   display: block;
-  background-color: hsl(36, 93%, 83%);
-  border-bottom: 1px solid hsl(36, 93%, 73%);
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 #SpanSummary .content_container {
   display: none;
@@ -26,7 +24,7 @@
   position: relative;
   list-style: none;
   padding: 0.5rem;
-  min-width: 31rem;
+  min-width: 20rem;
   margin-bottom: 1rem;
 }
 #SpanSummary .item_container>li:nth-child(odd) {
