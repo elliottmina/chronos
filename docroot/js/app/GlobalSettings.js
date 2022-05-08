@@ -10,7 +10,8 @@ var GlobalSettings = function() {
   var initSettings = function() {
     settings = {
       use_decimal_hours: getWithDefault('use_decimal_hours', true),
-      project_delimiters: getWithDefault('project_delimiters', ':|/')
+      project_delimiters: getWithDefault('project_delimiters', ':|/'),
+      quarter_hour: getWithDefault('quarter_hour', false),
     };
   };
   
@@ -31,6 +32,12 @@ var GlobalSettings = function() {
       callback:function(newValue) { 
         saveAndPublish('project_delimiters', newValue)
       }
+    },{
+      section:'General',
+      label:'Round to quarter hour',
+      value: settings.quarter_hour,
+      type:'boolean',
+      callback:newValue => saveAndPublish('quarter_hour', newValue)
     }]);
   };
 
