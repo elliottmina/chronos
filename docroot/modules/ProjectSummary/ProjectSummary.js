@@ -33,6 +33,7 @@ var ProjectSummary = function() {
       new  TimeUtil(),
       copier,
       new Padder(),
+      new HeartBuilder(),
       itemContainer);
   };
 
@@ -124,12 +125,15 @@ var ProjectSummary = function() {
   };
 
   var applyQuarterHour = function(summaryData) {
-    Object.entries(summaryData).forEach(project =>{
-      const rawMinutes = project[1].time;
+    Object.entries(summaryData).forEach(projectInfo =>{
+      const projNumbers = projectInfo[1];
+
+      const rawMinutes = projNumbers.time;
       const roundedMinutes = Math.round(rawMinutes/15)*15;
-      project[1].time = roundedMinutes;
-      project[1].rawMinutes = rawMinutes;
-      project[1].roundDelta = rawMinutes - roundedMinutes;
+
+      projNumbers.time = roundedMinutes;
+      projNumbers.rawMinutes = rawMinutes;
+      projNumbers.roundDelta = roundedMinutes - rawMinutes;
     });
   };
 

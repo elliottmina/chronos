@@ -1,11 +1,18 @@
 var DateLine = function() {
 
   var html = `
-    <h1></h1>
-    <h2><span class="day"></span></h2>`;
+    <h1>
+      <day-of-week></day-of-week>
+      <date>
+        <month></month>/<day></day>
+      </date>
+      <today>(today)</today>
+    </h1>
+    `;
   
   var topContainer;
-  var dateContainer;
+  var monthContainer;
+  var dayContainer;
   var dayOfWeekContainer;
   var timeUtil;
   var dateYmd;
@@ -28,8 +35,9 @@ var DateLine = function() {
   var build = function() {
     topContainer = jQuery('#DateLine');
     topContainer.html(html);
-    dayOfWeekContainer = topContainer.find('h1');
-    dateContainer = topContainer.find('h2');
+    monthContainer = topContainer.find('month');
+    dayContainer = topContainer.find('day');
+    dayOfWeekContainer = topContainer.find('day-of-week');
   };
 
   var addBehavior = function() {
@@ -41,11 +49,11 @@ var DateLine = function() {
     date = timeUtil.parseUtcYmd(data.date);
     month = parseInt(date.getUTCMonth()) +1;
 
-    dateContainer.text(
-      month + '/' + date.getUTCDate());
-
-    dayOfWeekContainer.text(days[date.getUTCDay()]);
     dateYmd = data.date;
+
+    monthContainer.text(month);
+    dayContainer.text(date.getUTCDate());
+    dayOfWeekContainer.text(days[date.getUTCDay()]);
     updateTodayTreatment();
   };
 

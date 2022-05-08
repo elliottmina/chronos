@@ -1,5 +1,5 @@
 #SpanCreator {
-  background-color: hsl(30, 100%, 70%);
+  background-color: hsl(12, 83%, 62%);
   padding-top: 1.5rem;
 }
 #SpanCreator>*{
@@ -227,14 +227,14 @@
   vertical-align: text-bottom;
 }
 #SpanCreator .save {
-  background-color: hsl(46, 100%, 67%);
-  color: hsl(25, 24%, 30%);
+  background-color: hsl(214, 35%, 37%);
+  color: hsl(0, 0%, 100%);
 }
 #SpanCreator .save:hover {
   background-color: hsl(46, 100%, 72%);
 }
 #SpanCreator .duplicate {
-  background-color: hsl(25, 24%, 30%);
+  background-color: hsl(202, 46%, 72%);
   color: hsl(46, 100%, 67%);
 }
 #SpanCreator .duplicate:hover {
