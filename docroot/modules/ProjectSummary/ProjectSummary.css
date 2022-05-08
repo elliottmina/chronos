@@ -70,17 +70,6 @@
   background-color: hsla(0, 0%, 100%, 0.2);
   border: 1px solid hsla(0, 0%, 100%, 0.35);
 }
-#ProjectSummary .quarter-hour-toggle {
-  display: inline-block;
-  position: absolute;
-  right: 1.5rem;
-  top:1rem;
-  cursor: pointer;
-}
-#ProjectSummary .quarter-hour-toggle label {
-  cursor: pointer;
-  display: inline-block;
-}
 #ProjectSummary .fa-toggle-on,
 #ProjectSummary .fa-toggle-off {
   color: hsl(16, 65%, 45%);

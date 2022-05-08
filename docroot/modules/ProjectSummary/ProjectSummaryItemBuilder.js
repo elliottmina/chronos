@@ -44,7 +44,7 @@ var ProjectSummaryItemBuilder = function(
     buildLabel(container, project);
     buildTime(container, project);
     buildHearts(container, project);
-    if (project.rawMinutes)
+    if (App.globalSettings.quarter_hour)
       buildRoundData(container, project);
     buildWeight(container, project, totalMinutes);
     buildTasks(container, project);
