@@ -46,6 +46,7 @@ var TableSummary = function() {
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', updateDisplay);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', updateDisplay);
     App.dispatcher.subscribe('QUARTER_HOUR_CHANGED', updateDisplay);
+    App.dispatcher.subscribe('GOAL_HOURS_DAY_CHANGED', updateDisplay);
   };
 
   var onDateChanged = function(date) {

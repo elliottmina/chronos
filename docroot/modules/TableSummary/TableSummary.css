@@ -13,6 +13,8 @@
 #TableSummary tbody td.delta {
   font-style: italic;
   font-size: 0.9rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 #TableSummary outer,
 #TableSummary inner {
@@ -36,10 +38,10 @@
   font-weight: bold;
   text-align: right;
 }
-#TableSummary td.hours:after {
-  content: " hr";
+#TableSummary .unit {
   font-size: 0.8rem;
   font-weight: normal;
+  margin-right: 0.5rem;
 }
 #TableSummary percent-text {
   margin-left: 0.5rem;
@@ -51,4 +53,14 @@
 #TableSummary .totals .label {
   font-weight: bold;
   padding-left: 1rem;
+}
+#TableSummary i.copy {
+  font-size: 0.8rem;
+  cursor: pointer;
+  border:  1px solid hsl(214, 35%, 27%);
+  padding:  0.25rem;
+  border-radius: 4px;
+  width: 0.9em;
+  background-color: hsl(214, 35%, 37%);
+  color: white;
 }

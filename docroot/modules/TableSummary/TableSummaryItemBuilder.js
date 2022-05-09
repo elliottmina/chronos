@@ -35,9 +35,15 @@ var TableSummaryItemBuilder = function(
   };
 
   var buildHours = function(tr, minutes) {
-    jQuery('<td class="hours">')
+    const hours = timeUtil.formatTime(minutes);
+    const td = jQuery('<td class="hours">')
       .appendTo(tr)
-      .text(timeUtil.formatTime(minutes));
+      .text(hours);
+    jQuery('<span class="unit"> hr</span>').appendTo(td);
+    jQuery('<i class="fas fa-copy copy">')
+      .data('copy', hours)
+      .appendTo(td)
+      .click(copy)
   };
 
   var buildDelta = function(tr, project) {
@@ -67,31 +73,6 @@ var TableSummaryItemBuilder = function(
 
   };
 
-  // var copyTemplate = `
-  //   <li class="copy">
-  //     <i class="mini_button far fa-copy copy" title="Copy tasks">
-  //       <i class="fas fa-list"></i>
-  //     </i>
-  //   </li>`;
-
-  // var buildTime = function(container, project) {
-  //   var time = timeUtil.formatTime(project.time);
-  //   container.find('.hours .value').text(time);
-  //   container.find('.hours .copy')
-  //     .click(copy)
-  //     .data('copy', time);
-  // };
-
-  // var buildWeight = function(container, project, totalMinutes) {
-  //   var projectRoot = App.projectSegmentor.segment(project.label)[0];
-  //   const weight = Math.round((project.time/totalMinutes)*100);
-  //   const innerBar = container.find('.weight inner-bar')
-  //   const progressBar = container.find('progress-bar');
-  //   innerBar.css('width', weight.toString() + '%');
-  //   innerBar.css('background-color', App.colorGenerator.generate(projectRoot, 0.8));
-  //   progressBar.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
-  // }
-
   // var buildProjectCopy = function(container, project) {
   //   var text = project.label + '\n' + 
   //     timeUtil.formatTime(project.time) + '\n' + 
@@ -119,17 +100,17 @@ var TableSummaryItemBuilder = function(
   //   }
   // };
 
-  // var copy = function() {
-  //   var button = jQuery(this);
-  //   var text = button.data('copy');
+  var copy = function() {
+    var button = jQuery(this);
+    var text = button.data('copy');
 
-  //   button.removeClass('fa-copy').addClass('fa-check');
-  //   setTimeout(function() {
-  //     button.removeClass('fa-check').addClass('fa-copy');
-  //   }, 400);
+    button.removeClass('fa-copy').addClass('fa-check');
+    setTimeout(function() {
+      button.removeClass('fa-check').addClass('fa-copy');
+    }, 400);
 
-  //   copier.copy(text);
-  // };
+    copier.copy(text);
+  };
 
   return {
     build:build

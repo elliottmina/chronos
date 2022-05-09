@@ -155,11 +155,6 @@ input {
   cursor: pointer;
 } 
 
-#Stats,
-#Goal {
-  display: block;
-}
-
 .heart {
   color: hsl(12, 83%, 62%);
   border: 1px solid hsl(12, 83%, 62%);
