@@ -86,6 +86,6 @@ var SpanSummary = function() {
     spansContainer.find('.selected').removeClass('selected');
   };
 
-  init();
+  // init();
 
 };

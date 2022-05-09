@@ -1,6 +1,5 @@
 #ProjectSummary {
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   padding: 0;
 }
 #ProjectSummary>header {

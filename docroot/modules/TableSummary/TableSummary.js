@@ -1,33 +1,21 @@
-var ProjectSummary = function() {
+var TableSummary = function() {
 
   var html = `
-    <header>Projects</header>
-    <div class="no_content_container">Nothing to see here.  Move along.</div>
-    <div class="content_container">
-      <table>
-        <thead>
-          <tr>
-            <th>Project</th>
-            <th colspan="3">Hours</th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>Raw</th>
-            <th>Rounded</th>
-            <th>Delta</th>
-            <th><3</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>`;
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Project</th>
+          <th colspan="3" class="raw">Raw</th>
+          <th colspan="4">Rounded</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>`;
 
   var dataBuilder;
   var copier;
   var tbody;
-  var contentContainer;
-  var noContentContainer;
   var spans;
   var itemBuilder;
 
@@ -38,7 +26,7 @@ var ProjectSummary = function() {
     gatherComponents();
     addBehavior();
 
-    itemBuilder = new ProjectSummaryItemBuilder(
+    itemBuilder = new TableSummaryItemBuilder(
       new  TimeUtil(),
       copier,
       new Padder(),
@@ -47,14 +35,11 @@ var ProjectSummary = function() {
   };
 
   var build = function() {
-    var renderTo = jQuery('#ProjectSummary');
-    renderTo.html(html);
+    jQuery('#TableSummary').html(html);
   };
 
   var gatherComponents = function() {
-    tbody = jQuery('#ProjectSummary tbody');
-    noContentContainer = jQuery('#ProjectSummary .no_content_container');
-    contentContainer = jQuery('#ProjectSummary .content_container');
+    tbody = jQuery('#TableSummary tbody');
   };
 
   var addBehavior = function() {
@@ -83,6 +68,7 @@ var ProjectSummary = function() {
 
   var updateDisplay = function() {
     var summaryData = dataBuilder.build(spans);
+    applyQuarterHour(summaryData);
 
     if (Object.keys(summaryData).length)
       populate(summaryData);
@@ -91,11 +77,7 @@ var ProjectSummary = function() {
   };
 
   var populate = function(summaryData) {
-    noContentContainer.hide();
-
     tbody.empty();
-
-    applyQuarterHour(summaryData);
 
     const totalMinutes = Object.entries(summaryData).reduce((total, item) => {
       return total + item[1].time;
@@ -107,12 +89,16 @@ var ProjectSummary = function() {
       itemBuilder.build(summaryData[key], totalMinutes);
     }
 
-    contentContainer.show();
+    addTotals(summaryData);
+
   };
 
   var showNoContent = function() {
-    noContentContainer.show();
-    contentContainer.hide();
+    // TODO: it's shite
+    tbody.empty();
+    const tr = jQuery('<tr>').appendTo(tbody);
+    const td = jQuery('<td colspan="5">').appendTo(tr);
+    td.text('nope');
   };
 
   var applyQuarterHour = function(summaryData) {
@@ -128,6 +114,37 @@ var ProjectSummary = function() {
     });
   };
 
-  // init();
+  var addTotals = function(summaryData) {
+    [raw, rounded] = calcTotals(summaryData);
+    const delta = (rounded - raw).toFixed(2);
+    const sign = delta < 0 ? '-' : '+'; 
+
+
+    const tr = jQuery('<tr>').appendTo(tbody);
+    jQuery('<td>').appendTo(tr).text('Total');    
+    jQuery('<td class="raw hours">').appendTo(tr).text(raw);
+    jQuery('<td class="raw">').appendTo(tr);
+    jQuery('<td class="raw">').appendTo(tr);
+    jQuery('<td class="rounded hours">').appendTo(tr).text(rounded);
+    jQuery('<td class="rounded delta">').appendTo(tr).text(sign + delta);
+  };
+
+  var calcTotals = function(summaryData) {
+    var totalRaw = 0;
+    var totalRounded = 0;
+
+    Object.entries(summaryData).forEach(projectInfo =>{
+      const projNumbers = projectInfo[1];
+      totalRaw += projNumbers.rawMinutes;
+      totalRounded += Math.round(projNumbers.time/15)*15;
+    });
+
+    return [
+      (totalRaw/60).toFixed(2), 
+      (totalRounded/60).toFixed(2)
+    ];
+  };
+
+  init();
 
 };

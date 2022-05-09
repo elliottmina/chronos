@@ -1,0 +1,46 @@
+#TableSummary table {
+  border-collapse: collapse;
+}
+#TableSummary .raw {
+  background-color: hsl(202, 46%, 85%);
+}
+#TableSummary th,
+#TableSummary td {
+  padding: 0.25rem;
+}
+#TableSummary tbody tr {
+  border-top: 1px solid hsl(202, 46%, 72%);
+}
+#TableSummary tbody tr:nth-child(even) {
+  /*background-color: hsl(202, 46%, 72%);*/
+}
+#TableSummary tbody td.delta {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+#TableSummary outer,
+#TableSummary inner {
+  font-size: 0rem;
+  display: inline-block;
+  height: 12px;
+}
+#TableSummary outer {
+  width: 100px;
+  background-color: grey;
+}
+#TableSummary inner {
+  background-color: blue;
+}
+#TableSummary percent-text {
+  font-size: 0.9rem;
+}
+#TableSummary td.hours {
+  padding-left: 1rem;
+  font-weight: bold;
+}
+#TableSummary td.weight {
+  padding-right: 1rem;
+}
+#TableSummary td.weight percent-text {
+  margin-left: 0.5rem;
+}

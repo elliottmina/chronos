@@ -1,35 +1,9 @@
-var ProjectSummaryItemBuilder = function(
+var TableSummaryItemBuilder = function(
   timeUtil, 
   copier, 
   padder, 
   heartBuilder,
   tbody) {
-
-  // var itemTemplate = `
-  //   <li>
-  //     <label></label>
-  //     <div class="content">
-  //       <div class="hours">
-  //         <span class="value"></span>
-  //         <span class="heart-container"></span>
-  //         <i class="mini_button far fa-copy copy" title="Copy time"></i>
-  //       </div>
-  //       <div class="round_delta">
-  //         <span class="sign"></span><span class="delta"></span>,
-  //         originally <span class="raw"></span>
-  //       </div>
-  //       <div class="weight">
-  //         <progress-bar><inner-bar></inner-bar></progress-bar>
-  //       </div>
-  //       <div class="tasks">
-  //         <ul class="task_list"></ul>
-  //       </div>
-  //     </div>
-  //     <i class="mini_button far fa-copy copy project_copy" title="Copy everything">
-  //       <i class="fas fa-file"></i>
-  //     </i>
-  //   </li>
-  // `;
 
   // var copyTemplate = `
   //   <li class="copy">
@@ -39,51 +13,52 @@ var ProjectSummaryItemBuilder = function(
   //   </li>`;
 
   var build = function(project, totalMinutes) {
-    console.log(project, totalMinutes)
     var tr = jQuery('<tr>');
     tr.appendTo(tbody);
 
     var td;
 
-    td = buildTd(tr);
+    td = jQuery('<td class="project">').appendTo(tr);
     td.append(App.projectSegmentor.getFormatted(project.label));
 
-    td = buildTd(tr);
+
+    td = jQuery('<td class="hours">').appendTo(tr);
+    td.addClass('raw');
     td.text(timeUtil.formatTime(project.rawMinutes));
     
-    td = buildTd(tr);
-    td.text(timeUtil.formatTime(project.time));
-
-    td = buildTd(tr);
-    td.text(
-      project.roundDelta < 0 ? '-' : '+' + 
-      timeUtil.formatTime(Math.abs(project.roundDelta)));
-    
-    td = buildTd(tr);
+    td = jQuery('<td class="hearts">').appendTo(tr);
+    td.addClass('raw');
     heartBuilder.build(project.time/60, td);
 
+    td = jQuery('<td class="weight">').appendTo(tr);;
+    td.addClass('raw');
+    buildWeight(td, project.rawMinutes, totalMinutes);
 
-    // container.find('.raw').text(timeUtil.formatTime(project.rawMinutes));
-    // container.find('.sign').text(project.roundDelta < 0 ? '-' : '+');
-    // container.find('.delta').text(timeUtil.formatTime(Math.abs(project.roundDelta)));
 
-    // var container = jQuery(itemTemplate).appendTo(listEl);
+    td = jQuery('<td class="hours">').appendTo(tr);;
+    td.text(timeUtil.formatTime(project.time));
 
-    // buildLabel(container, project);
-    // buildTime(container, project);
-    // buildHearts(container, project);
-    // if (App.globalSettings.quarter_hour)
-    //   buildRoundData(container, project);
-    // buildWeight(container, project, totalMinutes);
-    // buildTasks(container, project);
-    // buildProjectCopy(container, project);
+    td = jQuery('<td class="delta">').appendTo(tr);
+    td.text(
+      (project.roundDelta < 0 ? '-' : '+') + 
+      timeUtil.formatTime(Math.abs(project.roundDelta)));
+    
+    td = jQuery('<td class="hearts">').appendTo(tr);
+    heartBuilder.build(project.time/60, td);
+
+    td = jQuery('<td class="weight">').appendTo(tr);
+    buildWeight(td, project.time, totalMinutes);
   };
 
-  var buildTd= function(tr) {
-    var td = jQuery('<td>');
-    td.appendTo(tr);
-    return td;
-  }
+  var buildWeight = function(td, minutes, totalMinutes) {
+    const outer = jQuery('<outer>').appendTo(td);
+    const inner = jQuery('<inner>').appendTo(outer);
+    const percentEl = jQuery('<percent-text>').appendTo(td);
+
+    const percent = Math.round(minutes*100/totalMinutes);
+    inner.width(percent);
+    percentEl.text(percent + '%');
+  };
 
   // var buildLabel = function(container, project) {
   //   container.find('label').append(App.projectSegmentor.getFormatted(project.label));
@@ -106,17 +81,6 @@ var ProjectSummaryItemBuilder = function(
   //   innerBar.css('background-color', App.colorGenerator.generate(projectRoot, 0.8));
   //   progressBar.css('border-color', App.colorGenerator.generate(projectRoot, 0.8));
   // }
-
-  // var buildRoundData = function(container, project) {
-  //   if (project.roundDelta == 0) {
-  //     container.find('.round_delta').hide();
-  //     return;
-  //   }
-  //   container.find('.round_delta').show();
-  //   container.find('.raw').text(timeUtil.formatTime(project.rawMinutes));
-  //   container.find('.sign').text(project.roundDelta < 0 ? '-' : '+');
-  //   container.find('.delta').text(timeUtil.formatTime(Math.abs(project.roundDelta)));
-  // };
 
   // var buildProjectCopy = function(container, project) {
   //   var text = project.label + '\n' + 
@@ -143,14 +107,6 @@ var ProjectSummaryItemBuilder = function(
   //       .click(copy)
   //       .data('copy', project.tasks.join('\n'));      
   //   }
-  // };
-
-  // var buildHearts = function(container, project) {
-  //   const heartContainer = container.find('.heart-container');
-  //   heartContainer.empty();
-
-  //   var elapsedHours = project.time/60;
-  //   heartBuilder.build(elapsedHours, heartContainer[0]);
   // };
 
   // var copy = function() {
