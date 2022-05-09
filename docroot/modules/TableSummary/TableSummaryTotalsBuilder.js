@@ -10,21 +10,31 @@ var TableSummaryTotalsBuilder = function(heartBuilder, tbody) {
   var buildRaw = function(summaryData) {
     const minutes = calcTotalRawMinutes(summaryData);
 
-    const tr = jQuery('<tr>').appendTo(tbody);
-    jQuery('<td>').appendTo(tr).text('Total'); 
+    const tr = buildRow();
+    buildProjectLabel(tr); 
     buildHours(tr, minutes);
     buildHearts(tr, minutes);
+    buildProgress(tr, minutes);
   };
 
   var buildRounded = function(summaryData) {
     const roundedMinutes = calcTotalRoundedMinutes(summaryData);
     const rawMinutes = calcTotalRawMinutes(summaryData);
 
-    const tr = jQuery('<tr>').appendTo(tbody);
-    jQuery('<td>').appendTo(tr).text('Total');    
+    const tr = buildRow();
+    buildProjectLabel(tr);    
     buildHours(tr, roundedMinutes);
     buildDelta(tr, roundedMinutes, rawMinutes)
     buildHearts(tr, roundedMinutes);
+    buildProgress(tr, roundedMinutes);
+  };
+
+  var buildRow = function() {
+    return jQuery('<tr class="totals">').appendTo(tbody);
+  };
+
+  var buildProjectLabel = function(tr) {
+    jQuery('<td class="label">').appendTo(tr).text('Total');    
   };
 
   var buildHours = function(tr, minutes) {
@@ -42,6 +52,19 @@ var TableSummaryTotalsBuilder = function(heartBuilder, tbody) {
   var buildHearts = function(tr, minutes) {
     const td = jQuery('<td class="hearts">').appendTo(tr);
     heartBuilder.build(minutes/60, td);
+  };
+
+  var buildProgress = function(tr, minutes) {
+    const td = jQuery('<td class="daily-progress">').appendTo(tr);
+
+    const outer = jQuery('<outer>').appendTo(td);
+    const inner = jQuery('<inner>').appendTo(outer);
+    const percentEl = jQuery('<percent-text>').appendTo(td);
+
+    const goalMinutes = App.globalSettings.goal_hours_day * 60;
+    const percent = Math.round(minutes*100/goalMinutes);
+    inner.width(percent);
+    percentEl.text(percent + '%');
   };
 
   var calcTotalRawMinutes = function(summaryData) {

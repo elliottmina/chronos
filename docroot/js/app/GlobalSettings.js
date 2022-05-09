@@ -20,18 +20,18 @@ var GlobalSettings = function() {
   var registerSettings = function() {
     App.settings.register([{
       section:'General',
-      label:'Use decimal hours',
-      value:settings.use_decimal_hours,
-      type:'boolean',
-      callback: val => saveAndPublish('use_decimal_hours', val)
-    },{
-      section:'General',
       label:'Project delimiter characters',
       value:settings.project_delimiters,
       type:'text',
       callback: val => saveAndPublish('project_delimiters', val)
     },{
-      section:'General',
+      section:'Hours',
+      label:'Use decimal hours',
+      value:settings.use_decimal_hours,
+      type:'boolean',
+      callback: val => saveAndPublish('use_decimal_hours', val)
+    },{
+      section:'Hours',
       label:'Round to quarter hour',
       value: settings.quarter_hour,
       type:'boolean',

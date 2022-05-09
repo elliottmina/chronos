@@ -161,19 +161,20 @@ input {
 }
 
 .heart {
-  color: red;
-  border: 1px solid red;
+  color: hsl(12, 83%, 62%);
+  border: 1px solid hsl(12, 83%, 62%);
   border-radius: 4px;
   padding: 0.1rem;
   margin-right: 0.1rem;
+  background-color: white;
 }
 .heart-wrapper {
   display: inline-block;
   position: relative;
 }
 .heart.outer {
-  color: grey;
-  border: 1px solid grey;
+  color: hsl(0, 0%, 77%);
+  border: 1px solid hsl(0, 0%, 57%);
 }
 .heart-wrapper .truncator {
   display: inline-block;
