@@ -12,6 +12,8 @@ var GlobalSettings = function() {
       use_decimal_hours: getWithDefault('use_decimal_hours', true),
       project_delimiters: getWithDefault('project_delimiters', ':|/'),
       quarter_hour: getWithDefault('quarter_hour', false),
+      goal_hours_day: getWithDefault('goal_hours_day', 8),
+      goal_hours_week: getWithDefault('goal_hours_week', 40),
     };
   };
   
@@ -21,23 +23,31 @@ var GlobalSettings = function() {
       label:'Use decimal hours',
       value:settings.use_decimal_hours,
       type:'boolean',
-      callback:function(newValue) {
-        saveAndPublish('use_decimal_hours', newValue)
-      }
+      callback: val => saveAndPublish('use_decimal_hours', val)
     },{
       section:'General',
       label:'Project delimiter characters',
       value:settings.project_delimiters,
       type:'text',
-      callback:function(newValue) { 
-        saveAndPublish('project_delimiters', newValue)
-      }
+      callback: val => saveAndPublish('project_delimiters', val)
     },{
       section:'General',
       label:'Round to quarter hour',
       value: settings.quarter_hour,
       type:'boolean',
-      callback:newValue => saveAndPublish('quarter_hour', newValue)
+      callback:val => saveAndPublish('quarter_hour', val)
+    },{
+      section:'Goal',
+      label:'Hours per day',
+      value:settings.goal_hours_day,
+      type:'integer',
+      callback:val => saveAndPublish('goal_hours_day', val)
+    },{
+      section:'Goal',
+      label:'Hours per week',
+      value:settings.goal_hours_week,
+      type:'integer',
+      callback:val => saveAndPublish('goal_hours_week', val)
     }]);
   };
 
