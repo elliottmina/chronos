@@ -5,52 +5,55 @@ var TableSummaryItemBuilder = function(
   heartBuilder,
   tbody) {
 
-  // var copyTemplate = `
-  //   <li class="copy">
-  //     <i class="mini_button far fa-copy copy" title="Copy tasks">
-  //       <i class="fas fa-list"></i>
-  //     </i>
-  //   </li>`;
-
   var build = function(project, totalMinutes) {
-    var tr = jQuery('<tr>');
-    tr.appendTo(tbody);
-
-    var td;
-
-    td = jQuery('<td class="project">').appendTo(tr);
-    td.append(App.projectSegmentor.getFormatted(project.label));
-
-
-    td = jQuery('<td class="hours">').appendTo(tr);
-    td.addClass('raw');
-    td.text(timeUtil.formatTime(project.rawMinutes));
-    
-    td = jQuery('<td class="hearts">').appendTo(tr);
-    td.addClass('raw');
-    heartBuilder.build(project.time/60, td);
-
-    td = jQuery('<td class="weight">').appendTo(tr);;
-    td.addClass('raw');
-    buildWeight(td, project.rawMinutes, totalMinutes);
-
-
-    td = jQuery('<td class="hours">').appendTo(tr);;
-    td.text(timeUtil.formatTime(project.time));
-
-    td = jQuery('<td class="delta">').appendTo(tr);
-    td.text(
-      (project.roundDelta < 0 ? '-' : '+') + 
-      timeUtil.formatTime(Math.abs(project.roundDelta)));
-    
-    td = jQuery('<td class="hearts">').appendTo(tr);
-    heartBuilder.build(project.time/60, td);
-
-    td = jQuery('<td class="weight">').appendTo(tr);
-    buildWeight(td, project.time, totalMinutes);
+    if (App.globalSettings.quarter_hour)
+      buildRounded(project, totalMinutes);
+    else
+      buildRaw(project, totalMinutes);
   };
 
-  var buildWeight = function(td, minutes, totalMinutes) {
+  var buildRaw = function(project, totalMinutes) {
+    const tr = jQuery('<tr>').appendTo(tbody);
+    buildProjectLabel(tr, project.label);
+    buildHours(tr, project.rawMinutes);
+    buildHearts(tr, project.rawMinutes); 
+    buildWeight(tr, project.rawMinutes, totalMinutes);
+  };
+
+  var buildRounded = function(project, totalMinutes) {
+    const tr = jQuery('<tr>').appendTo(tbody);
+    buildProjectLabel(tr, project.label);
+    buildHours(tr, project.time);
+    buildDelta(tr, project);
+    buildHearts(tr, project.time); 
+    buildWeight(tr, project.time, totalMinutes);
+  };
+
+  var buildProjectLabel = function(tr, label) {
+    const td = jQuery('<td class="project">').appendTo(tr);
+    td.append(App.projectSegmentor.getFormatted(label));
+  };
+
+  var buildHours = function(tr, minutes) {
+    jQuery('<td class="hours">')
+      .appendTo(tr)
+      .text(timeUtil.formatTime(minutes));
+  };
+
+  var buildDelta = function(tr, project) {
+    const sign = project.roundDelta < 0 ? '-' : '+';
+    const delta = timeUtil.formatTime(Math.abs(project.roundDelta));
+    jQuery('<td class="delta">').appendTo(tr).text(sign + delta);
+  };
+
+  var buildHearts = function(tr, minutes) {
+    const td = jQuery('<td class="hearts">').appendTo(tr);
+    heartBuilder.build(minutes/60, td);
+  };
+
+  var buildWeight = function(tr, minutes, totalMinutes) {
+    const td = jQuery('<td class="weight">').appendTo(tr);
+
     const outer = jQuery('<outer>').appendTo(td);
     const inner = jQuery('<inner>').appendTo(outer);
     const percentEl = jQuery('<percent-text>').appendTo(td);
@@ -60,9 +63,12 @@ var TableSummaryItemBuilder = function(
     percentEl.text(percent + '%');
   };
 
-  // var buildLabel = function(container, project) {
-  //   container.find('label').append(App.projectSegmentor.getFormatted(project.label));
-  // };
+  // var copyTemplate = `
+  //   <li class="copy">
+  //     <i class="mini_button far fa-copy copy" title="Copy tasks">
+  //       <i class="fas fa-list"></i>
+  //     </i>
+  //   </li>`;
 
   // var buildTime = function(container, project) {
   //   var time = timeUtil.formatTime(project.time);

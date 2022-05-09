@@ -1,15 +1,14 @@
 #TableSummary table {
   border-collapse: collapse;
 }
-#TableSummary .raw {
-  background-color: hsl(202, 46%, 85%);
-}
-#TableSummary th,
 #TableSummary td {
   padding: 0.25rem;
 }
 #TableSummary tbody tr {
   border-top: 1px solid hsl(202, 46%, 72%);
+}
+#TableSummary tbody tr:nth-child(1) {
+  border: none;
 }
 #TableSummary tbody tr:nth-child(even) {
   /*background-color: hsl(202, 46%, 72%);*/
@@ -37,9 +36,14 @@
 #TableSummary td.hours {
   padding-left: 1rem;
   font-weight: bold;
+  text-align: right;
+}
+#TableSummary td.hours:after {
+  content: " hr";
+  font-size: 0.8rem;
+  font-weight: normal;
 }
 #TableSummary td.weight {
-  padding-right: 1rem;
 }
 #TableSummary td.weight percent-text {
   margin-left: 0.5rem;

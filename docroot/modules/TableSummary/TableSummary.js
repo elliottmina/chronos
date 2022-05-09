@@ -2,15 +2,7 @@ var TableSummary = function() {
 
   var html = `
     <table>
-      <thead>
-        <tr>
-          <th rowspan="2">Project</th>
-          <th colspan="3" class="raw">Raw</th>
-          <th colspan="4">Rounded</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
+      <tbody></tbody>
     </table>`;
 
   var dataBuilder;
@@ -18,6 +10,7 @@ var TableSummary = function() {
   var tbody;
   var spans;
   var itemBuilder;
+  var totalsBuilder;
 
   var init = function() {
     dataBuilder = new ProjectSummaryDataBuilder();
@@ -31,6 +24,10 @@ var TableSummary = function() {
       copier,
       new Padder(),
       new HeartBuilder(),
+      tbody);
+
+    totalsBuilder = new TableSummaryTotalsBuilder(
+      new HeartBuilder(), 
       tbody);
   };
 
@@ -89,7 +86,7 @@ var TableSummary = function() {
       itemBuilder.build(summaryData[key], totalMinutes);
     }
 
-    addTotals(summaryData);
+    totalsBuilder.build(summaryData);
 
   };
 
@@ -112,37 +109,6 @@ var TableSummary = function() {
       projNumbers.rawMinutes = rawMinutes;
       projNumbers.roundDelta = roundedMinutes - rawMinutes;
     });
-  };
-
-  var addTotals = function(summaryData) {
-    [raw, rounded] = calcTotals(summaryData);
-    const delta = (rounded - raw).toFixed(2);
-    const sign = delta < 0 ? '-' : '+'; 
-
-
-    const tr = jQuery('<tr>').appendTo(tbody);
-    jQuery('<td>').appendTo(tr).text('Total');    
-    jQuery('<td class="raw hours">').appendTo(tr).text(raw);
-    jQuery('<td class="raw">').appendTo(tr);
-    jQuery('<td class="raw">').appendTo(tr);
-    jQuery('<td class="rounded hours">').appendTo(tr).text(rounded);
-    jQuery('<td class="rounded delta">').appendTo(tr).text(sign + delta);
-  };
-
-  var calcTotals = function(summaryData) {
-    var totalRaw = 0;
-    var totalRounded = 0;
-
-    Object.entries(summaryData).forEach(projectInfo =>{
-      const projNumbers = projectInfo[1];
-      totalRaw += projNumbers.rawMinutes;
-      totalRounded += Math.round(projNumbers.time/15)*15;
-    });
-
-    return [
-      (totalRaw/60).toFixed(2), 
-      (totalRounded/60).toFixed(2)
-    ];
   };
 
   init();
