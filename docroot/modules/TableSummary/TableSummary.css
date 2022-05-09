@@ -25,10 +25,10 @@
 }
 #TableSummary outer {
   width: 100px;
-  background-color: grey;
+  background-color: hsl(0, 0%, 80%);
+  border: 1px solid hsl(0, 0%, 70%);
 }
 #TableSummary inner {
-  background-color: blue;
 }
 #TableSummary percent-text {
   font-size: 0.9rem;

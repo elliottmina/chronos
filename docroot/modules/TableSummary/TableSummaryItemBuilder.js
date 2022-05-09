@@ -17,7 +17,7 @@ var TableSummaryItemBuilder = function(
     buildProjectLabel(tr, project.label);
     buildHours(tr, project.rawMinutes);
     buildHearts(tr, project.rawMinutes); 
-    buildWeight(tr, project.rawMinutes, totalMinutes);
+    buildWeight(tr, project.rawMinutes, totalMinutes, project.label);
   };
 
   var buildRounded = function(project, totalMinutes) {
@@ -26,7 +26,7 @@ var TableSummaryItemBuilder = function(
     buildHours(tr, project.time);
     buildDelta(tr, project);
     buildHearts(tr, project.time); 
-    buildWeight(tr, project.time, totalMinutes);
+    buildWeight(tr, project.time, totalMinutes, project.label);
   };
 
   var buildProjectLabel = function(tr, label) {
@@ -51,7 +51,7 @@ var TableSummaryItemBuilder = function(
     heartBuilder.build(minutes/60, td);
   };
 
-  var buildWeight = function(tr, minutes, totalMinutes) {
+  var buildWeight = function(tr, minutes, totalMinutes, label) {
     const td = jQuery('<td class="weight">').appendTo(tr);
 
     const outer = jQuery('<outer>').appendTo(td);
@@ -61,6 +61,10 @@ var TableSummaryItemBuilder = function(
     const percent = Math.round(minutes*100/totalMinutes);
     inner.width(percent);
     percentEl.text(percent + '%');
+
+    const projectRoot = App.projectSegmentor.segment(label)[0];
+    inner.css('background-color', App.colorGenerator.generate(projectRoot, 0.8));
+
   };
 
   // var copyTemplate = `
