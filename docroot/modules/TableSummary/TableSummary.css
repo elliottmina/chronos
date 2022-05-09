@@ -4,7 +4,7 @@
 #TableSummary td {
   padding: 0.25rem;
 }
-#TableSummary tbody tr {
+#TableSummary tbody tr:nth-child(odd) {
   border-top: 1px solid hsl(202, 46%, 72%);
 }
 #TableSummary tbody tr:nth-child(1) {
@@ -63,4 +63,22 @@
   width: 0.9em;
   background-color: hsl(214, 35%, 37%);
   color: white;
+}
+#TableSummary tr.extra td {
+  padding: 1em;
+  font-size: 0.9rem;
+}
+#TableSummary a {
+  text-decoration: none;
+  color: black;
+}
+#TableSummary .task-label {
+  margin-right: 0.5rem;
+}
+#TableSummary .task-label i {
+  width: 0.75rem;
+}
+#TableSummary li {
+  list-style: none; 
+  margin-top: 1em;
 }

@@ -1,7 +1,6 @@
 var TableSummaryItemBuilder = function(
   timeUtil, 
   copier, 
-  padder, 
   heartBuilder,
   tbody) {
 
@@ -21,12 +20,18 @@ var TableSummaryItemBuilder = function(
   };
 
   var buildRounded = function(project, totalMinutes) {
-    const tr = jQuery('<tr>').appendTo(tbody);
+    var tr;
+
+    tr = jQuery('<tr>').appendTo(tbody);
     buildProjectLabel(tr, project.label);
     buildHours(tr, project.time);
     buildDelta(tr, project);
     buildHearts(tr, project.time); 
     buildWeight(tr, project.time, totalMinutes, project.label);
+
+    tr = jQuery('<tr class="extra">').appendTo(tbody);
+    const td = jQuery('<td colspan="5">').appendTo(tr);
+    buildTasks(td, project.tasks);
   };
 
   var buildProjectLabel = function(tr, label) {
@@ -73,32 +78,37 @@ var TableSummaryItemBuilder = function(
 
   };
 
-  // var buildProjectCopy = function(container, project) {
-  //   var text = project.label + '\n' + 
-  //     timeUtil.formatTime(project.time) + '\n' + 
-  //     project.tasks.join('\n');
+  var buildTasks = function(td, tasks) {
+    const toggle = jQuery('<a href="javascript:void(0);"><i class="fas fa-caret-right"></i> Tasks</a>')
+      .addClass('task-label')
+      .addClass('collapsed')
+      .appendTo(td);
 
-  //   container.find('.project_copy')
-  //     .data('copy', text)
-  //     .click(copy);
-  // };
+    jQuery('<i class="fas fa-copy copy">')
+      .data('copy', tasks.join('\n'))
+      .appendTo(td)
+      .click(copy)
 
-  // var buildTasks = function(container, project) {
-  //   var tasksContainer = container.find('ul');
-  //   jQuery.each(project.tasks, function(index, task) {
-  //     jQuery('<li>')
-  //       .appendTo(tasksContainer)
-  //       .text(task);
-  //   });
+    const listEl = jQuery('<ul>').appendTo(td);
+    listEl.toggle();
 
-  //   if (project.tasks.length) {
-  //     var li = jQuery(copyTemplate)
-  //       .appendTo(tasksContainer);
-  //     li.find('i')
-  //       .click(copy)
-  //       .data('copy', project.tasks.join('\n'));      
-  //   }
-  // };
+    jQuery.each(tasks, function(index, task) {
+      jQuery('<li>')
+        .appendTo(listEl)
+        .text(task);
+    });
+
+    toggle.click(() => {
+      listEl.toggle();
+
+      console.log(listEl[0])
+      if (listEl[0].style.display == 'none')
+        toggle.find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+      else
+        toggle.find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+    });
+
+  };
 
   var copy = function() {
     var button = jQuery(this);

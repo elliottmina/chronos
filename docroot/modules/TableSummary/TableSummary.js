@@ -22,7 +22,6 @@ var TableSummary = function() {
     itemBuilder = new TableSummaryItemBuilder(
       new  TimeUtil(),
       copier,
-      new Padder(),
       new HeartBuilder(),
       tbody);
 
