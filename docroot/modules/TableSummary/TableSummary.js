@@ -1,7 +1,7 @@
 var TableSummary = function() {
 
   var html = `
-    <table>
+    <table class="summary">
       <tbody></tbody>
     </table>`;
 
@@ -21,6 +21,7 @@ var TableSummary = function() {
 
     itemBuilder = new TableSummaryItemBuilder(
       new  TimeUtil(),
+      new TimeFormatter12Hr(),
       copier,
       new HeartBuilder(),
       tbody);
@@ -83,7 +84,7 @@ var TableSummary = function() {
     var sortedKeys = Object.keys(summaryData).sort();
     for (var i = 0; i < sortedKeys.length; i++) {
       var key = sortedKeys[i];
-      itemBuilder.build(summaryData[key], totalMinutes);
+      itemBuilder.build(summaryData[key], totalMinutes, spans);
     }
 
     totalsBuilder.build(summaryData);

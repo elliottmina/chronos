@@ -1,29 +1,33 @@
 var TableSummaryItemBuilder = function(
   timeUtil, 
+  timeFormatter,
   copier, 
   heartBuilder,
   tbody) {
 
-  var build = function(project, totalMinutes) {
+  var build = function(project, totalMinutes, spans) {
     if (App.globalSettings.quarter_hour)
-      buildRounded(project, totalMinutes);
+      buildRounded(project, totalMinutes, spans);
     else
-      buildRaw(project, totalMinutes);
+      buildRaw(project, totalMinutes, spans);
   };
 
-  var buildRaw = function(project, totalMinutes) {
+  var buildRaw = function(project, totalMinutes, spans) {
     const tr = jQuery('<tr>').appendTo(tbody);
     buildProjectLabel(tr, project.label);
     buildHours(tr, project.rawMinutes);
     buildHearts(tr, project.rawMinutes); 
     buildWeight(tr, project.rawMinutes, totalMinutes, project.label);
     buildMoreToggle(tr);
+    
+    // buildTasks(secondaryTd, project.tasks);
   };
 
-  var buildRounded = function(project, totalMinutes) {
+  var buildRounded = function(project, totalMinutes, spans) {
     var primaryTr = jQuery('<tr>').appendTo(tbody);
     var secondaryTr = jQuery('<tr>').appendTo(tbody).toggle();
-    var secondaryTd = jQuery('<td colspan="5">').appendTo(secondaryTr);
+    var secondaryTd = jQuery('<td colspan="6" class="extra">').appendTo(secondaryTr);
+    var extraContainer = jQuery('<div class="extra-container">').appendTo(secondaryTd);
 
     buildProjectLabel(primaryTr, project.label);
     buildHours(primaryTr, project.time);
@@ -32,7 +36,8 @@ var TableSummaryItemBuilder = function(
     buildWeight(primaryTr, project.time, totalMinutes, project.label);
     buildMoreToggle(primaryTr, secondaryTr);
 
-    buildTasks(secondaryTd, project.tasks);
+    buildTasks(extraContainer, project.tasks);
+    buildSpans(extraContainer, project.label, spans);
   };
 
   var buildProjectLabel = function(tr, label) {
@@ -97,9 +102,7 @@ var TableSummaryItemBuilder = function(
   var buildTasks = function(td, tasks) {
     const container = jQuery('<div class="tasks">').appendTo(td);
 
-    const header = jQuery('<div>').appendTo(container).text('Tasks');
-
-
+    const header = jQuery('<header>').appendTo(container).text('Tasks');
 
     jQuery('<i class="fas fa-copy copy">')
       .data('copy', tasks.join('\n'))
@@ -112,6 +115,31 @@ var TableSummaryItemBuilder = function(
         .appendTo(listEl)
         .text(task);
     });
+  };
+
+  var buildSpans = function(td, projectLabel, spans) {
+    const container = jQuery('<div class="spans">').appendTo(td);
+    const header = jQuery('<header>').appendTo(container).text('Spans');
+    const table = jQuery('<table>').appendTo(container);
+    const tbody = jQuery('<tbody>').appendTo(table);
+
+    Object.entries(spans).forEach(spanSet => {
+      const span = spanSet[1];
+      if (span.project == projectLabel) {
+        buildSpan(tbody, span);
+      }
+    });
+  };
+
+  var buildSpan = function(tbody, span) {
+    const tr = jQuery('<tr>').appendTo(tbody);
+    
+    jQuery('<td>').appendTo(tr).text(timeFormatter.format(span.start));
+    jQuery('<td>').appendTo(tr).text(timeFormatter.format(span.finish));
+    
+    const taskContainer = jQuery('<td>').appendTo(tr);
+    const listEl = jQuery('<ul>').appendTo(taskContainer);
+    span.tasks.forEach(task => jQuery('<li>').appendTo(listEl).text(task));
   };
 
   var copy = function() {
