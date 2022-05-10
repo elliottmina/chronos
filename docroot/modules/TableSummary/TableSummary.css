@@ -3,6 +3,7 @@
 }
 #TableSummary td {
   padding: 0.25rem;
+  vertical-align: top;
 }
 #TableSummary tbody tr:nth-child(odd) {
   border-top: 1px solid hsl(202, 46%, 72%);
@@ -72,13 +73,24 @@
   text-decoration: none;
   color: black;
 }
-#TableSummary .task-label {
-  margin-right: 0.5rem;
+#TableSummary .more {
+  font-size: 0.9rem;
+  padding-left: 1rem;
 }
-#TableSummary .task-label i {
-  width: 0.75rem;
+#TableSummary .more i {
+  width: 0.5em;
+  margin-right: 0.25rem;
+}
+#TableSummary ul {
+  margin-left: 1em;
 }
 #TableSummary li {
-  list-style: none; 
-  margin-top: 1em;
+  list-style: none;
+  padding: 0.2em;
+  border-radius: 2px;
+  margin:0.2em 0;
+  font-size:0.9em;
+  /*background-color: white;*/
+  background-color: hsl(182, 82%, 80%);
+  border:1px solid hsl(182, 82%, 47%);
 }

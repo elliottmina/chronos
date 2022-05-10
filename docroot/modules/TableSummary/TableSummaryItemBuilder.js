@@ -17,21 +17,22 @@ var TableSummaryItemBuilder = function(
     buildHours(tr, project.rawMinutes);
     buildHearts(tr, project.rawMinutes); 
     buildWeight(tr, project.rawMinutes, totalMinutes, project.label);
+    buildMoreToggle(tr);
   };
 
   var buildRounded = function(project, totalMinutes) {
-    var tr;
+    var primaryTr = jQuery('<tr>').appendTo(tbody);
+    var secondaryTr = jQuery('<tr>').appendTo(tbody).toggle();
+    var secondaryTd = jQuery('<td colspan="5">').appendTo(secondaryTr);
 
-    tr = jQuery('<tr>').appendTo(tbody);
-    buildProjectLabel(tr, project.label);
-    buildHours(tr, project.time);
-    buildDelta(tr, project);
-    buildHearts(tr, project.time); 
-    buildWeight(tr, project.time, totalMinutes, project.label);
+    buildProjectLabel(primaryTr, project.label);
+    buildHours(primaryTr, project.time);
+    buildDelta(primaryTr, project);
+    buildHearts(primaryTr, project.time); 
+    buildWeight(primaryTr, project.time, totalMinutes, project.label);
+    buildMoreToggle(primaryTr, secondaryTr);
 
-    tr = jQuery('<tr class="extra">').appendTo(tbody);
-    const td = jQuery('<td colspan="5">').appendTo(tr);
-    buildTasks(td, project.tasks);
+    buildTasks(secondaryTd, project.tasks);
   };
 
   var buildProjectLabel = function(tr, label) {
@@ -75,39 +76,42 @@ var TableSummaryItemBuilder = function(
 
     const projectRoot = App.projectSegmentor.segment(label)[0];
     inner.css('background-color', App.colorGenerator.generate(projectRoot, 0.8));
+  };
 
+  var buildMoreToggle = function(tr, toggleTarget) {
+    const td = jQuery('<td class="more">').appendTo(tr);
+    
+    const toggle = jQuery('<a href="javascript:void(0);"><i class="fas fa-caret-right"></i>more</a>')
+      .addClass('collapsed')
+      .appendTo(td)
+      .click(() => {
+        toggleTarget.toggle();
+
+        if (toggleTarget[0].style.display == 'none')
+          toggle.find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+        else
+          toggle.find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+    });
   };
 
   var buildTasks = function(td, tasks) {
-    const toggle = jQuery('<a href="javascript:void(0);"><i class="fas fa-caret-right"></i> Tasks</a>')
-      .addClass('task-label')
-      .addClass('collapsed')
-      .appendTo(td);
+    const container = jQuery('<div class="tasks">').appendTo(td);
+
+    const header = jQuery('<div>').appendTo(container).text('Tasks');
+
+
 
     jQuery('<i class="fas fa-copy copy">')
       .data('copy', tasks.join('\n'))
-      .appendTo(td)
+      .appendTo(header)
       .click(copy)
 
-    const listEl = jQuery('<ul>').appendTo(td);
-    listEl.toggle();
-
+    const listEl = jQuery('<ul>').appendTo(container);
     jQuery.each(tasks, function(index, task) {
       jQuery('<li>')
         .appendTo(listEl)
         .text(task);
     });
-
-    toggle.click(() => {
-      listEl.toggle();
-
-      console.log(listEl[0])
-      if (listEl[0].style.display == 'none')
-        toggle.find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
-      else
-        toggle.find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
-    });
-
   };
 
   var copy = function() {
