@@ -155,6 +155,9 @@ input {
   cursor: pointer;
 } 
 
+.headert-container {
+  white-space: nowrap;
+}
 .heart {
   color: hsl(12, 83%, 62%);
   border: 1px solid hsl(12, 83%, 62%);
@@ -186,4 +189,7 @@ summary-container {
   summary-container {
     flex-direction: column;
   }
+}
+summary-container>* {
+  flex: 1;
 }

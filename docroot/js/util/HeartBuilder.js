@@ -38,7 +38,11 @@ var HeartBuilder = function() {
   };
   
   return {
-    build:function(numHearts, container) {
+    build:function(numHearts, target) {
+      const container = document.createElement('span');
+      container.classList.add('headert-container');
+      target.append(container);
+
       buildFullHearts(Math.floor(numHearts), container);
 
       const partial = numHearts % 1;

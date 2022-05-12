@@ -3,43 +3,74 @@ var SpanSummaryItemBuilder = function(
   roundDecimal, 
   timeFormatter,
   heartBuilder,
-  spansContainer) {
-
-  var init = function() {
-  };
+  tobdy) {
   
-  var populateSpan = function(span, container) {
-    addBehavior(span, container);
-    setText(span, container);
-    buildTasks(span, container);
-    setHearts(span, container);
+  var populateSpan = function(span, tr) {
+    tr.empty();
+    buildLabel(tr, span);
+    buildStart(tr, span);
+    buildFinish(tr, span);
+    buildElapsed(tr, span);
+    buildHearts(tr, span);
+    buildTasks(tr, span);
+    buildButtons(tr, span);
+
+    // buttons
+
+    // addBehavior(span, container);
   };
 
-  var addBehavior = function(span, container) {
-    container.find('.edit').data('guid', span.guid).click(editSpan);
-    container.find('.delete').data('guid', span.guid).click(deleteSpan);
-    container.find('.repeat').data('guid', span.guid).click(repeatSpan);
+  var buildLabel = function(tr, span) {
+    const td = jQuery('<td class="project">').appendTo(tr);
+    td.append(App.projectSegmentor.getFormatted(span.project));
   };
 
-  var buildTasks = function(span, container) {
-    var taskContainer = container.find('.task_list');
-    taskContainer.empty();
+  var buildStart = function(tr, span) {
+    jQuery('<td class="start">').appendTo(tr).text(timeFormatter.format(span.start));
+  };
+
+  var buildFinish = function(tr, span) {
+    jQuery('<td class="finish">').appendTo(tr).text(timeFormatter.format(span.finish));
+  };
+
+  var buildElapsed = function(tr, span) {
+    var elapsedHours = (span.finish - span.start)/1000/60/60;
+    var elapsed = formatElapsed(elapsedHours);
+    jQuery('<td class="elapsed">').appendTo(tr).text(elapsed);
+
+  };
+
+  var buildHearts = function(tr, span) {
+    const td = jQuery('<td class="heart-container">').appendTo(tr);
+
+    var elapsedHours = (span.finish - span.start)/1000/60/60;
+    heartBuilder.build(elapsedHours, td[0]);
+  };
+
+  var buildTasks = function(tr, span) {
+    const td = jQuery('<td class="tasks">').appendTo(tr);
+    const listEl = jQuery('<ul>').appendTo(td);
+
     jQuery.each(span.tasks, function(index, task) {
       var li = jQuery('<li>')
-        .appendTo(taskContainer)
+        .appendTo(listEl)
         .text(task);
     });
   };
 
-  var setText = function(span, container) {
-    var elapsedHours = (span.finish - span.start)/1000/60/60;
-    var elapsed = formatElapsed(elapsedHours);
+  var buildButtons = function(tr, span) {
+    const td = jQuery('<td class="buttons">').appendTo(tr);
 
-    container.find('.start').text(timeFormatter.format(span.start));
-    container.find('.finish').text(timeFormatter.format(span.finish));
-    container.find('label').html(App.projectSegmentor.getFormatted(span.project));
-    container.find('.elapsed').text(elapsed);
-  };
+    jQuery('<span class="mini_button edit far fa-pencil"></span>')
+      .appendTo(td)
+      .data('guid', span.guid)
+      .click(editSpan);
+
+  }
+
+  //   container.find('.delete').data('guid', span.guid).click(deleteSpan);
+  //   container.find('.repeat').data('guid', span.guid).click(repeatSpan);
+  // };
 
   var formatElapsed = function(elapsedHours) {
     if (App.globalSettings.use_decimal_hours)
@@ -61,29 +92,20 @@ var SpanSummaryItemBuilder = function(
     var el = jQuery(this);
     var guid = el.data('guid');
     App.dispatcher.publish('EDIT_SPAN_REQUESTED', guid);
-    spansContainer.find('.selected').removeClass('selected');
-    el.closest('li').addClass('selected');
+    tobdy.find('.selected').removeClass('selected');
+    el.closest('tr').addClass('selected');
   };
 
-  var deleteSpan = function() {
-    var guid = jQuery(this).data('guid');
-    App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
-  };
+  // var deleteSpan = function() {
+  //   var guid = jQuery(this).data('guid');
+  //   App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
+  // };
 
-  var repeatSpan = function() {
-    var guid = jQuery(this).data('guid');
-    App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
-  };
+  // var repeatSpan = function() {
+  //   var guid = jQuery(this).data('guid');
+  //   App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
+  // };
 
-  var setHearts = function(span, container) {
-    const heartContainer = container.find('.heart-container');
-    heartContainer.empty();
-
-    var elapsedHours = (span.finish - span.start)/1000/60/60;
-    heartBuilder.build(elapsedHours, heartContainer[0]);
-  };
-
-  init();
 
   return {
     build:populateSpan

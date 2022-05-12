@@ -1,8 +1,6 @@
 var SpanSummary = function() {
 
-  var spansContainer;
-  var nonContentContainer;
-  var contentContainer;
+  var tbody;
   var itemBuilder
   var spans;
   var spanMap = {};
@@ -13,21 +11,18 @@ var SpanSummary = function() {
     addBehavior();
   };
 
+  var build = function() {
+    const table = jQuery('<table>').appendTo('#SpanSummary');
+    tbody = jQuery('<tbody>').appendTo(table);
+  };
+
   var buildDependencies = function() {
     itemBuilder = new SpanSummaryItemBuilder(
       new Padder(),
       Rounder.roundDecimal,
       new TimeFormatter12Hr(),
       new HeartBuilder(),
-      spansContainer);
-  };
-
-  var build = function() {
-    var renderTo = jQuery('#SpanSummary');
-    renderTo.html(SpanSummaryTemplate);
-    spansContainer = renderTo.find('.item_container');
-    noContentContainer = renderTo.find('.no_content_container');
-    contentContainer = renderTo.find('.content_container');
+      tbody);
   };
 
   var addBehavior = function() {
@@ -45,9 +40,7 @@ var SpanSummary = function() {
   };
 
   var populateSpans = function() {
-    noContentContainer.show();
-    contentContainer.hide();
-    spansContainer.empty();
+    tbody.empty();
     spanMap = {};
 
     jQuery.each(spans, function(index, span) {
@@ -56,36 +49,31 @@ var SpanSummary = function() {
   };
 
   var onSpanSaved = function(data) {
-    var span = data.span;
-    var container = spanMap[span.guid];
-    if (container)
-      itemBuilder.build(span, container);
+    const span = data.span;
+    const tr = spanMap[span.guid];
+    if (tr)
+      itemBuilder.build(span, tr);
     else
       addSpan(span);
     clearSelectedTreatment();
   };
 
   var addSpan = function(span) {
-    noContentContainer.hide();
-    contentContainer.show();
-    var container = jQuery(SpanSummaryItemTemplate)
-      .prependTo(spansContainer);
-    spanMap[span.guid] = container;
-    itemBuilder.build(span, container);
+    var tr = jQuery('<tr>').prependTo(tbody);
+    spanMap[span.guid] = tr;
+    itemBuilder.build(span, tr);
   };
 
   var onSpanDeleted = function(data) {
     var guid = data.span.guid;
     spanMap[guid].remove();
     delete(spanMap[guid]);
-    if (spansContainer.children().length == 0)
-      noContentContainer.show();
   };
 
   var clearSelectedTreatment = function () {
-    spansContainer.find('.selected').removeClass('selected');
+    tbody.find('.selected').removeClass('selected');
   };
 
-  // init();
+  init();
 
 };

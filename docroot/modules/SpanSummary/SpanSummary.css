@@ -1,62 +1,14 @@
-#SpanSummary {
-  display: inline-block;
-  padding: 0;
-}
-#SpanSummary>header {
-  padding: 1rem;
-  display: block;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-#SpanSummary .content_container {
-  display: none;
-  padding: 0.5rem 1rem;
-}
-#SpanSummary .item_container {
-}
-#SpanSummary .item_container label {
-  margin-right: 0.5rem;
-  display: inline-block;
-}
-#SpanSummary .item_container>li {
-  border: 1px solid hsl(166, 44%, 38%);
-  border-radius: 4px;
-  position: relative;
+#SpanSummary li {
   list-style: none;
-  padding: 0.5rem;
-  min-width: 20rem;
-  margin-bottom: 1rem;
-}
-#SpanSummary .item_container>li:nth-child(odd) {
-  background-color: hsla(0, 0%, 100%, 0.05);
-}
-#SpanSummary .item_container>li .actions {
-  position: absolute;
-  right: 0.3rem;
-  top: 0.3rem;
-}
-#SpanSummary .item_container>li .elapsed-container,
-#SpanSummary .item_container>li .time {
-  font-size: 0.8em;
-}
-#SpanSummary .item_container>li .time>span {
   display: inline-block;
+  font-size:0.8em;
 }
-#SpanSummary .item_container>li .elapsed:after {
-  content: " hours";
+#SpanSummary li:after {
+  content: "|";
 }
-#SpanSummary .task_list {
-  margin-top:0.2em;
+#SpanSummary table {
+  border-collapse: collapse;
 }
-#SpanSummary li.selected {
-  left:-0.5em;
-}
-#SpanSummary .mini_button {
-  color: hsl(217, 40%, 62%);
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-#SpanSummary .mini_button:hover {
-  border: 1px solid hsl(217, 40%, 62%);
-  background-color: hsla(0, 0%, 100%, 0.5);
+#SpanSummary tr.selected {
+  background-color: blue;
 }
