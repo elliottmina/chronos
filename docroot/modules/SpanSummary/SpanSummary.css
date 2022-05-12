@@ -12,3 +12,9 @@
 #SpanSummary tr.selected {
   background-color: blue;
 }
+#SpanSummary tr:nth-child(odd) {
+  border-top: 1px solid hsl(202, 46%, 72%);
+}
+#SpanSummary tr:nth-child(1) {
+  border: none;
+}

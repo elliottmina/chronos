@@ -5,16 +5,18 @@ var SpanSummaryItemBuilder = function(
   heartBuilder,
   tobdy) {
   
-  var populateSpan = function(span, tr) {
-    tr.empty();
-    buildLabel(tr, span);
-    buildStart(tr, span);
-    buildFinish(tr, span);
-    buildElapsed(tr, span);
-    buildHearts(tr, span);
-    buildTasks(tr, span);
-    buildButtons(tr, span);
+  var populateSpan = function(span, tr1, tr2) {
+    tr1.empty();
+    tr2.empty();
 
+    buildLabel(tr1, span);
+    buildStart(tr1, span);
+    buildFinish(tr1, span);
+    buildElapsed(tr1, span);
+    buildHearts(tr1, span);
+    buildButtons(tr1, span);
+
+    buildTasks(tr2, span);
     // buttons
 
     // addBehavior(span, container);
@@ -47,17 +49,6 @@ var SpanSummaryItemBuilder = function(
     heartBuilder.build(elapsedHours, td[0]);
   };
 
-  var buildTasks = function(tr, span) {
-    const td = jQuery('<td class="tasks">').appendTo(tr);
-    const listEl = jQuery('<ul>').appendTo(td);
-
-    jQuery.each(span.tasks, function(index, task) {
-      var li = jQuery('<li>')
-        .appendTo(listEl)
-        .text(task);
-    });
-  };
-
   var buildButtons = function(tr, span) {
     const td = jQuery('<td class="buttons">').appendTo(tr);
 
@@ -66,11 +57,27 @@ var SpanSummaryItemBuilder = function(
       .data('guid', span.guid)
       .click(editSpan);
 
+    jQuery('<span class="mini_button delete far fa-trash"></span>')
+      .appendTo(td)
+      .data('guid', span.guid)
+      .click(deleteSpan);
+
+    jQuery('<span class="mini_button repeat far fa-repeat"></span>')
+      .appendTo(td)
+      .data('guid', span.guid)
+      .click(repeatSpan);
   }
 
-  //   container.find('.delete').data('guid', span.guid).click(deleteSpan);
-  //   container.find('.repeat').data('guid', span.guid).click(repeatSpan);
-  // };
+  var buildTasks = function(tr, span) {
+    const td = jQuery('<td class="tasks" colspan="6">').appendTo(tr);
+    const listEl = jQuery('<ul>').appendTo(td);
+
+    jQuery.each(span.tasks, function(index, task) {
+      var li = jQuery('<li>')
+        .appendTo(listEl)
+        .text(task);
+    });
+  };
 
   var formatElapsed = function(elapsedHours) {
     if (App.globalSettings.use_decimal_hours)
@@ -91,21 +98,24 @@ var SpanSummaryItemBuilder = function(
   var editSpan = function() {
     var el = jQuery(this);
     var guid = el.data('guid');
+    
     App.dispatcher.publish('EDIT_SPAN_REQUESTED', guid);
+    
     tobdy.find('.selected').removeClass('selected');
-    el.closest('tr').addClass('selected');
+    
+    const tr1 = el.closest('tr').addClass('selected');
+    tr1.next().addClass('selected');
   };
 
-  // var deleteSpan = function() {
-  //   var guid = jQuery(this).data('guid');
-  //   App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
-  // };
+  var deleteSpan = function() {
+    var guid = jQuery(this).data('guid');
+    App.dispatcher.publish('DELETE_SPAN_REQUESTED', guid);
+  };
 
-  // var repeatSpan = function() {
-  //   var guid = jQuery(this).data('guid');
-  //   App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
-  // };
-
+  var repeatSpan = function() {
+    var guid = jQuery(this).data('guid');
+    App.dispatcher.publish('REPEAT_SPAN_REQUESTED', guid);
+  };
 
   return {
     build:populateSpan

@@ -50,23 +50,24 @@ var SpanSummary = function() {
 
   var onSpanSaved = function(data) {
     const span = data.span;
-    const tr = spanMap[span.guid];
-    if (tr)
-      itemBuilder.build(span, tr);
+    const trList = spanMap[span.guid];
+    if (trList)
+      itemBuilder.build(span, trList[0], trList[1]);
     else
       addSpan(span);
     clearSelectedTreatment();
   };
 
   var addSpan = function(span) {
-    var tr = jQuery('<tr>').prependTo(tbody);
-    spanMap[span.guid] = tr;
-    itemBuilder.build(span, tr);
+    var tr2 = jQuery('<tr>').prependTo(tbody);
+    var tr1 = jQuery('<tr>').prependTo(tbody);
+    spanMap[span.guid] = [tr1, tr2];
+    itemBuilder.build(span, tr1, tr2);
   };
 
   var onSpanDeleted = function(data) {
     var guid = data.span.guid;
-    spanMap[guid].remove();
+    spanMap[guid].forEach(tr => tr.remove());
     delete(spanMap[guid]);
   };
 
