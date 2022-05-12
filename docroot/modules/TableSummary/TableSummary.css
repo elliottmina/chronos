@@ -77,47 +77,21 @@
   font-size: 0.9rem;
   padding-left: 1rem;
 }
-#TableSummary .more i {
-  width: 0.5em;
-  margin-right: 0.25rem;
-}
-#TableSummary .extra-container {
-  display: flex;
-}
-#TableSummary .extra-container>* {
-  padding: 0 1rem;
-}
-#TableSummary .tasks {
-  flex: 2;
-}
-#TableSummary .spans {
-  flex: 3;
-}
 #TableSummary td header {
   margin-bottom: 0.5em;
   font-weight: bold;
 }
 #TableSummary ul {
-  margin-left: 1rem;
+  display: inline;
 }
 #TableSummary li {
-  padding: 0.2em;
-  font-size:0.9em;
+  list-style: none;
+  display: inline-block;
+  font-size:0.8em;
+}
+#TableSummary li:after {
+  content: "|";
 }
 #TableSummary .tasks i {
   margin-left: 0.5rem;
-}
-#TableSummary .spans table {
-  width: 100%;
-}
-#TableSummary .spans tr {
-  border: none;
-}
-#TableSummary .spans tr:nth-child(odd) {
-  background-color: hsl(0, 0%, 90%);
-}
-#TableSummary .spans tr:nth-child(1) {
-  border: none;
-}
-#TableSummary .spans td {
 }

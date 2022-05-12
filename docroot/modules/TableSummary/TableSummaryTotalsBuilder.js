@@ -46,7 +46,7 @@ var TableSummaryTotalsBuilder = function(heartBuilder, tbody) {
     const minutesDelta = roundedMinutes - rawMinutes;
     const hoursDelta = (minutesDelta/60).toFixed(2);
     const sign = minutesDelta < 0 ? '-' : '+'; 
-    jQuery('<td class="delta">').appendTo(tr).text(sign + hoursDelta);
+    jQuery('<td class="delta">').appendTo(tr).text(sign + Math.abs(hoursDelta));
   };
 
   var buildHearts = function(tr, minutes) {
