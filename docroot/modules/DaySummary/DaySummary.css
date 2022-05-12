@@ -1,61 +1,61 @@
-#TableSummary table {
+#DaySummary table {
   border-collapse: collapse;
 }
-#TableSummary td {
+#DaySummary td {
   padding: 0.25rem;
   vertical-align: top;
 }
-#TableSummary tr:nth-child(odd) {
+#DaySummary tr:nth-child(odd) {
   border-top: 1px solid hsl(202, 46%, 72%);
 }
-#TableSummary tr:nth-child(1) {
+#DaySummary tr:nth-child(1) {
   border: none;
 }
-#TableSummary td.delta {
+#DaySummary td.delta {
   font-style: italic;
   font-size: 0.9rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
-#TableSummary outer,
-#TableSummary inner {
+#DaySummary outer,
+#DaySummary inner {
   font-size: 0rem;
   display: inline-block;
   height: 12px;
 }
-#TableSummary outer {
+#DaySummary outer {
   width: 100px;
   background-color: hsl(0, 0%, 80%);
   border: 1px solid hsl(0, 0%, 70%);
 }
-#TableSummary .daily-progress inner {
+#DaySummary .daily-progress inner {
   background-color: hsl(12, 83%, 62%);
 }
-#TableSummary percent-text {
+#DaySummary percent-text {
   font-size: 0.9rem;
 }
-#TableSummary td.hours {
+#DaySummary td.hours {
   padding-left: 1rem;
   font-weight: bold;
   text-align: right;
 }
-#TableSummary .unit {
+#DaySummary .unit {
   font-size: 0.8rem;
   font-weight: normal;
   margin-right: 0.5rem;
 }
-#TableSummary percent-text {
+#DaySummary percent-text {
   margin-left: 0.5rem;
 }
-#TableSummary .totals td {
+#DaySummary .totals td {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-#TableSummary .totals .label {
+#DaySummary .totals .label {
   font-weight: bold;
   padding-left: 1rem;
 }
-#TableSummary i.copy {
+#DaySummary i.copy {
   font-size: 0.8rem;
   cursor: pointer;
   border:  1px solid hsl(214, 35%, 27%);
@@ -65,33 +65,33 @@
   background-color: hsl(214, 35%, 37%);
   color: white;
 }
-#TableSummary tr.extra td {
+#DaySummary tr.extra td {
   padding: 1em;
   font-size: 0.9rem;
 }
-#TableSummary a {
+#DaySummary a {
   text-decoration: none;
   color: black;
 }
-#TableSummary .more {
+#DaySummary .more {
   font-size: 0.9rem;
   padding-left: 1rem;
 }
-#TableSummary td header {
+#DaySummary td header {
   margin-bottom: 0.5em;
   font-weight: bold;
 }
-#TableSummary ul {
+#DaySummary ul {
   display: inline;
 }
-#TableSummary li {
+#DaySummary li {
   list-style: none;
   display: inline-block;
   font-size:0.8em;
 }
-#TableSummary li:after {
+#DaySummary li:after {
   content: "|";
 }
-#TableSummary .tasks i {
+#DaySummary .tasks i {
   margin-left: 0.5rem;
 }

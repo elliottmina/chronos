@@ -1,4 +1,4 @@
-var TableSummary = function() {
+var DaySummary = function() {
 
   var html = `
     <table class="summary">
@@ -19,24 +19,24 @@ var TableSummary = function() {
     gatherComponents();
     addBehavior();
 
-    itemBuilder = new TableSummaryItemBuilder(
+    itemBuilder = new DaySummaryItemBuilder(
       new  TimeUtil(),
       new TimeFormatter12Hr(),
       copier,
       new HeartBuilder(),
       tbody);
 
-    totalsBuilder = new TableSummaryTotalsBuilder(
+    totalsBuilder = new DaySummaryTotalsBuilder(
       new HeartBuilder(), 
       tbody);
   };
 
   var build = function() {
-    jQuery('#TableSummary').html(html);
+    jQuery('#DaySummary').html(html);
   };
 
   var gatherComponents = function() {
-    tbody = jQuery('#TableSummary tbody');
+    tbody = jQuery('#DaySummary tbody');
   };
 
   var addBehavior = function() {

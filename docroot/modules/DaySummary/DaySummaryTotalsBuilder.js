@@ -1,4 +1,4 @@
-var TableSummaryTotalsBuilder = function(heartBuilder, tbody) {
+var DaySummaryTotalsBuilder = function(heartBuilder, tbody) {
   
   var build = function(summaryData) {
     if (App.globalSettings.quarter_hour)

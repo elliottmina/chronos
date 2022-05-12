@@ -1,4 +1,4 @@
-var TableSummaryItemBuilder = function(
+var DaySummaryItemBuilder = function(
   timeUtil, 
   timeFormatter,
   copier, 
