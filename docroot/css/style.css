@@ -13,10 +13,6 @@ input {
   border: 1px solid hsl(0, 0%, 80%);
   padding: 0.5em;
 }
-.widget {
-  padding: 1em;
-  position: relative;
-}
 .task_list li {
   list-style: none;
   padding: 0.2em;
@@ -155,7 +151,7 @@ input {
   cursor: pointer;
 } 
 
-.headert-container {
+.heart-container {
   white-space: nowrap;
 }
 .heart {
@@ -190,6 +186,9 @@ summary-container {
     flex-direction: column;
   }
 }
-summary-container>* {
-  flex: 1;
+summary-container #SpanSummary {
+  flex: 2;
+}
+summary-container #DaySummary {
+  flex: 3;
 }

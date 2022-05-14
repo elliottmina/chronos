@@ -58,12 +58,12 @@
 #DaySummary i.copy {
   font-size: 0.8rem;
   cursor: pointer;
-  border:  1px solid hsl(214, 35%, 27%);
   padding:  0.25rem;
   border-radius: 4px;
   width: 0.9em;
-  background-color: hsl(214, 35%, 37%);
-  color: white;
+  border: 1px solid hsl(202, 46%, 72%);
+  background-color: hsl(202, 46%, 82%);
+  color: hsl(0, 0%, 20%);
 }
 #DaySummary tr.extra td {
   padding: 1em;
@@ -90,8 +90,15 @@
   font-size:0.8em;
 }
 #DaySummary li:after {
-  content: "|";
+  content: "\22C4";
+  margin: 0 0.25em;
+}
+#DaySummary li:last-child:after {
+  content: none;
 }
 #DaySummary .tasks i {
   margin-left: 0.5rem;
+}
+#DaySummary .project {
+  white-space: nowrap;
 }

@@ -48,7 +48,7 @@ var DaySummaryItemBuilder = function(
       .appendTo(tr)
       .text(hours);
     jQuery('<span class="unit"> hr</span>').appendTo(td);
-    jQuery('<i class="fas fa-copy copy">')
+    jQuery('<i class="far fa-copy copy">')
       .data('copy', hours)
       .appendTo(td)
       .click(copy)
@@ -62,7 +62,7 @@ var DaySummaryItemBuilder = function(
 
   var buildHearts = function(tr, minutes) {
     const td = jQuery('<td class="hearts">').appendTo(tr);
-    heartBuilder.build(minutes/60, td);
+    td.append(heartBuilder.build(minutes/60));
   };
 
   var buildWeight = function(tr, minutes, totalMinutes, label) {
@@ -88,7 +88,7 @@ var DaySummaryItemBuilder = function(
         .text(task);
     });
 
-    jQuery('<i class="fas fa-copy copy">')
+    jQuery('<i class="far fa-copy copy">')
       .data('copy', tasks.join('\n'))
       .appendTo(td)
       .click(copy)

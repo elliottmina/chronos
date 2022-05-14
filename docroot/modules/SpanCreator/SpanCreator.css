@@ -1,6 +1,6 @@
 #SpanCreator {
   background-color: hsl(12, 83%, 62%);
-  padding-top: 1.5rem;
+  padding: 1rem;
 }
 #SpanCreator>*{
   vertical-align: top;

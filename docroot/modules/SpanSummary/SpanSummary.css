@@ -1,20 +1,56 @@
+#SpanSummary {
+  margin-right: 1rem;
+}
+#SpanSummary span-item {
+  display: block;
+  border-bottom: 1px solid hsl(202, 46%, 72%);
+  padding: 0.5rem 1rem;
+}
+#SpanSummary span-item:last-child {
+  border-bottom: none;
+}
+#SpanSummary span-item.selected {
+  background-color: hsla(208.5, 100%, 79.8%, 0.5);
+  padding: 1.5rem;
+}
 #SpanSummary li {
   list-style: none;
   display: inline-block;
   font-size:0.8em;
 }
 #SpanSummary li:after {
-  content: "|";
+  content: "\22C4";
+  margin: 0 0.25em;
 }
-#SpanSummary table {
-  border-collapse: collapse;
+#SpanSummary li:last-child:after {
+  content: none;
 }
-#SpanSummary tr.selected {
-  background-color: blue;
+#SpanSummary time {
+  font-size: 0.9rem;
 }
-#SpanSummary tr:nth-child(odd) {
-  border-top: 1px solid hsl(202, 46%, 72%);
+#SpanSummary header {
+  display: flex;
+  justify-content: space-between;
 }
-#SpanSummary tr:nth-child(1) {
-  border: none;
+#SpanSummary span-item label{
+  display: inline-block;
+}
+#SpanSummary elapsed {
+  font-weight: bold;
+}
+#SpanSummary unit {
+  font-size: 0.8rem;
+}
+#SpanSummary unit,
+#SpanSummary finish {
+  margin-right: 1rem;
+}
+#SpanSummary ul {
+  margin-top: 0.25rem;
+}
+#SpanSummary .mini_button {
+  border: 1px solid hsl(202, 46%, 72%);
+  border-radius: 4px;
+  background-color: hsl(202, 46%, 82%);
+  color: hsl(0, 0%, 20%);
 }

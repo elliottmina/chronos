@@ -1,34 +1,32 @@
 var SpanSummary = function() {
 
-  var tbody;
+  var container;
   var itemBuilder
   var spans;
   var spanMap = {};
 
   var init = function() {
-    build();
+    gatherComponents();
     buildDependencies();
     addBehavior();
   };
 
-  var build = function() {
-    const table = jQuery('<table>').appendTo('#SpanSummary');
-    tbody = jQuery('<tbody>').appendTo(table);
+  var gatherComponents = function() {
+    container = document.getElementById('SpanSummary');
   };
 
   var buildDependencies = function() {
     itemBuilder = new SpanSummaryItemBuilder(
-      new Padder(),
-      Rounder.roundDecimal,
       new TimeFormatter12Hr(),
+      new TimeUtil(),
       new HeartBuilder(),
-      tbody);
+      container);
   };
 
   var addBehavior = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
-    App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
-    App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    App.dispatcher.subscribe('SPAN_SAVED', populateSpans);
+    App.dispatcher.subscribe('SPAN_DELETED', populateSpans);
     App.dispatcher.subscribe('SPAN_EDIT_CANCELLED', clearSelectedTreatment);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', populateSpans);
@@ -40,39 +38,20 @@ var SpanSummary = function() {
   };
 
   var populateSpans = function() {
-    tbody.empty();
-    spanMap = {};
-
-    jQuery.each(spans, function(index, span) {
-      addSpan(span)
-    });
+    empty();
+    Object.entries(spans).forEach(([k, span]) => itemBuilder.build(span));
   };
 
-  var onSpanSaved = function(data) {
-    const span = data.span;
-    const trList = spanMap[span.guid];
-    if (trList)
-      itemBuilder.build(span, trList[0], trList[1]);
-    else
-      addSpan(span);
-    clearSelectedTreatment();
-  };
-
-  var addSpan = function(span) {
-    var tr2 = jQuery('<tr>').prependTo(tbody);
-    var tr1 = jQuery('<tr>').prependTo(tbody);
-    spanMap[span.guid] = [tr1, tr2];
-    itemBuilder.build(span, tr1, tr2);
-  };
-
-  var onSpanDeleted = function(data) {
-    var guid = data.span.guid;
-    spanMap[guid].forEach(tr => tr.remove());
-    delete(spanMap[guid]);
+  var empty = function () {
+    while (container.lastChild) {
+      container.removeChild(container.lastChild);
+    }
   };
 
   var clearSelectedTreatment = function () {
-    tbody.find('.selected').removeClass('selected');
+    const selected = container.querySelector('.selected');
+    if (selected)
+      selected.classList.remove('selected');
   };
 
   init();

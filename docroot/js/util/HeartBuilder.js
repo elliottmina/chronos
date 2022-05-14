@@ -38,16 +38,17 @@ var HeartBuilder = function() {
   };
   
   return {
-    build:function(numHearts, target) {
+    build:function(numHearts) {
       const container = document.createElement('span');
-      container.classList.add('headert-container');
-      target.append(container);
-
+      container.classList.add('heart-container');
+      
       buildFullHearts(Math.floor(numHearts), container);
 
       const partial = numHearts % 1;
       if (partial)
         buildPartialHeart(Math.round(partial*100), container);
+
+      return container;
     }
   };
 
