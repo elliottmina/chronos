@@ -1,21 +1,21 @@
-#DaySummary table {
-  border-collapse: collapse;
+#DaySummary day-item {
+  display: block;
+  border-bottom: 1px solid hsl(202, 46%, 72%);
+  padding: 0.5rem 1rem;
 }
-#DaySummary td {
-  padding: 0.25rem;
-  vertical-align: top;
-}
-#DaySummary tr:nth-child(odd) {
-  border-top: 1px solid hsl(202, 46%, 72%);
-}
-#DaySummary tr:nth-child(1) {
+#DaySummary day-item:last-child {
   border: none;
 }
-#DaySummary td.delta {
-  font-style: italic;
+#DaySummary header {
+  display: flex;
+  justify-content: space-between;
+}
+#DaySummary label {
+  display: inline-block;
+}
+#DaySummary time {
+  display: block;
   font-size: 0.9rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 #DaySummary outer,
 #DaySummary inner {
@@ -28,61 +28,9 @@
   background-color: hsl(0, 0%, 80%);
   border: 1px solid hsl(0, 0%, 70%);
 }
-#DaySummary .daily-progress inner {
-  background-color: hsl(12, 83%, 62%);
-}
-#DaySummary percent-text {
-  font-size: 0.9rem;
-}
-#DaySummary td.hours {
-  padding-left: 1rem;
-  font-weight: bold;
-  text-align: right;
-}
-#DaySummary .unit {
-  font-size: 0.8rem;
-  font-weight: normal;
-  margin-right: 0.5rem;
-}
 #DaySummary percent-text {
   margin-left: 0.5rem;
-}
-#DaySummary .totals td {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-#DaySummary .totals .label {
-  font-weight: bold;
-  padding-left: 1rem;
-}
-#DaySummary i.copy {
-  font-size: 0.8rem;
-  cursor: pointer;
-  padding:  0.25rem;
-  border-radius: 4px;
-  width: 0.9em;
-  border: 1px solid hsl(202, 46%, 72%);
-  background-color: hsl(202, 46%, 82%);
-  color: hsl(0, 0%, 20%);
-}
-#DaySummary tr.extra td {
-  padding: 1em;
   font-size: 0.9rem;
-}
-#DaySummary a {
-  text-decoration: none;
-  color: black;
-}
-#DaySummary .more {
-  font-size: 0.9rem;
-  padding-left: 1rem;
-}
-#DaySummary td header {
-  margin-bottom: 0.5em;
-  font-weight: bold;
-}
-#DaySummary ul {
-  display: inline;
 }
 #DaySummary li {
   list-style: none;
@@ -96,9 +44,43 @@
 #DaySummary li:last-child:after {
   content: none;
 }
-#DaySummary .tasks i {
-  margin-left: 0.5rem;
+#DaySummary hours {
+  font-weight: bold;
 }
-#DaySummary .project {
-  white-space: nowrap;
+#DaySummary unit {
+  font-size: 0.8rem;
 }
+#DaySummary i.copy {
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding:  0.25rem;
+  border-radius: 4px;
+  width: 0.9em;
+  border: 1px solid hsl(202, 46%, 72%);
+  background-color: hsl(202, 46%, 82%);
+  color: hsl(0, 0%, 20%);
+}
+#DaySummary delta {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+#DaySummary heart-container {
+  margin-left: 1rem;
+}
+#DaySummary ul {
+  margin-top: 0.25rem;
+}
+/*
+#DaySummary .daily-progress inner {
+  background-color: hsl(12, 83%, 62%);
+}
+#DaySummary .totals td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+#DaySummary .totals .label {
+  font-weight: bold;
+  padding-left: 1rem;
+}
+*/
