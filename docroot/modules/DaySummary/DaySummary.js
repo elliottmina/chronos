@@ -17,7 +17,7 @@ var DaySummary = function() {
   };
 
   var buildDependencies = function() {
-    dataBuilder = new ProjectSummaryDataBuilder();
+    dataBuilder = new DaySummaryDataBuilder();
    
     itemBuilder = new DaySummaryItemBuilder(
       new  TimeUtil(),

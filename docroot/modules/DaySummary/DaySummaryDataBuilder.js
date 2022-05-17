@@ -1,4 +1,4 @@
-var ProjectSummaryDataBuilder = function() {
+var DaySummaryDataBuilder = function() {
 
   var projects = {};
 
