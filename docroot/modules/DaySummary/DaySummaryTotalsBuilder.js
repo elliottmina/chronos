@@ -8,28 +8,24 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
   };
 
   var buildRaw = function(summaryData) {
-    // const minutes = calcTotalRawMinutes(summaryData);
-
-    // const tr = buildRow();
-    // buildProjectLabel(tr); 
-    // buildHours(tr, minutes);
-    // buildHearts(tr, minutes);
-    // buildProgress(tr, minutes);
+    const container = buildGeneric(calcTotalRawMinutes(summaryData), 0);
+    container.querySelector('delta').remove();
   };
 
   var buildRounded = function(summaryData) {
-    const roundedMinutes = calcTotalRoundedMinutes(summaryData);
-    const rawMinutes = calcTotalRawMinutes(summaryData);
+    buildGeneric(
+      calcTotalRoundedMinutes(summaryData), 
+      calcTotalRawMinutes(summaryData));
+  };
 
-    const container = document.createElement('day-item');
-    container.classList.add('totals');
-    topContainer.appendChild(container);
+  var buildGeneric = function(primaryMinutes, secondaryMinutes) {
+    const container = createContainer();
 
     container.innerHTML = `
       <header>
         <time>
-          <hours>${hours(roundedMinutes)} <unit>hr</unit></hours>
-          <delta>${delta(roundedMinutes, rawMinutes)}</delta>
+          <hours>${hours(primaryMinutes)} <unit>hr</unit></hours>
+          <delta>${delta(primaryMinutes, secondaryMinutes)}</delta>
           <heart-container></heart-container>
         </time>
         <weight>
@@ -39,10 +35,17 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
       </header>
         `;
 
-    container.querySelector('heart-container').appendChild(
-      heartBuilder.build(roundedMinutes/60));
+    buildHearts(container, primaryMinutes);
+    buildProgress(container, primaryMinutes);
 
-    buildProgress(container, roundedMinutes);
+    return container;
+  };
+
+  var createContainer = function() {
+    const container = document.createElement('day-item');
+    container.classList.add('totals');
+    topContainer.appendChild(container);
+    return container;
   };
 
   var hours = function(minutes) {
@@ -54,6 +57,11 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
     const hoursDelta = (minutesDelta/60).toFixed(2);
     const sign = minutesDelta < 0 ? '-' : '+'; 
     return sign + Math.abs(hoursDelta);
+  };
+
+  var buildHearts = function(container, minutes) {
+    container.querySelector('heart-container').appendChild(
+      heartBuilder.build(minutes/60));
   };
 
   var buildProgress = function(container, minutes) {
