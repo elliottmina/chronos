@@ -9,6 +9,7 @@
 #DaySummary header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 #DaySummary label {
   display: inline-block;
@@ -16,6 +17,7 @@
 #DaySummary time {
   display: block;
   font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 #DaySummary outer,
 #DaySummary inner {
@@ -50,8 +52,12 @@
 #DaySummary unit {
   font-size: 0.8rem;
 }
+#DaySummary ul {
+  display: inline;
+}
 #DaySummary i.copy {
-  font-size: 0.8rem;
+  display: inline-block;
+  font-size: 0.75rem;
   cursor: pointer;
   padding:  0.25rem;
   border-radius: 4px;
@@ -76,4 +82,7 @@
 }
 #DaySummary .totals inner {
   background-color: hsl(12, 83%, 62%);
+}
+#DaySummary task-container {
+  display: block;
 }
