@@ -77,7 +77,7 @@ var DaySummary = function() {
 
     var sortedKeys = Object.keys(summaryData).sort();
 
-    sortedKeys.forEach(key => itemBuilder.build(summaryData[key], totalMinutes, spans));
+    sortedKeys.forEach(key => itemBuilder.build(summaryData[key], totalMinutes));
 
     totalsBuilder.build(summaryData);
   };

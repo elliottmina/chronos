@@ -5,14 +5,23 @@ var DaySummaryItemBuilder = function(
   heartBuilder,
   topContainer) {
 
-  var build = function(project, totalMinutes, spans) {
-    // if (App.globalSettings.quarter_hour)
-      buildRounded(project, totalMinutes, spans);
-    // else
-    //   buildRaw(project, totalMinutes, spans);
+  var build = function(project, totalMinutes) {
+    if (App.globalSettings.quarter_hour)
+      buildRounded(project, totalMinutes);
+    else
+      buildRaw(project, totalMinutes);
   };
 
-  var buildRounded = function(project, totalMinutes, spans) {
+  var buildRounded = function(project, totalMinutes) {
+    buildGeneric(project.time, project)
+  };
+
+  var buildRaw = function(project, totalMinutes) {
+    const container = buildGeneric(project.rawMinutes, project);
+    container.querySelector('delta').remove();
+  };
+
+  var buildGeneric = function(time, project, totalMinutes) {
     const container = document.createElement('day-item');
     topContainer.append(container);
 
@@ -25,7 +34,7 @@ var DaySummaryItemBuilder = function(
         </weight>
       </header>
       <time>
-        <hours>${hours(project.time)} <unit>hr</unit></hours>
+        <hours>${hours(time)} <unit>hr</unit></hours>
         <i class="far fa-copy copy"></i>
         <delta>${delta(project)}</delta>
         <heart-container></heart-container>
@@ -50,6 +59,8 @@ var DaySummaryItemBuilder = function(
     buildTasks(container.querySelector('ul'), project.tasks);
 
     addBehavior(container, project);
+
+    return container;
   };
 
   var label = function(label) {
