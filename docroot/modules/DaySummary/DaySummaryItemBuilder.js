@@ -13,11 +13,11 @@ var DaySummaryItemBuilder = function(
   };
 
   var buildRounded = function(project, totalMinutes) {
-    buildGeneric(project.time, project)
+    buildGeneric(project.time, project, totalMinutes)
   };
 
   var buildRaw = function(project, totalMinutes) {
-    const container = buildGeneric(project.rawMinutes, project);
+    const container = buildGeneric(project.rawMinutes, project, totalMinutes);
     container.querySelector('delta').remove();
   };
 
@@ -52,7 +52,7 @@ var DaySummaryItemBuilder = function(
 
     buildWeight(
       container,
-      project.time, 
+      time, 
       totalMinutes, 
       project.label);
 
