@@ -71,16 +71,9 @@
 #DaySummary ul {
   margin-top: 0.25rem;
 }
-/*
-#DaySummary .daily-progress inner {
+#DaySummary .totals label {
+
+}
+#DaySummary .totals inner {
   background-color: hsl(12, 83%, 62%);
 }
-#DaySummary .totals td {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-#DaySummary .totals .label {
-  font-weight: bold;
-  padding-left: 1rem;
-}
-*/
