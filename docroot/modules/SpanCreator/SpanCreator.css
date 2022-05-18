@@ -300,3 +300,12 @@
   display:inline-block;
   margin-left: 0.25em;
 }
+#SpanCreator .elapsed_minutes {
+  display: block;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: right;
+}
+#SpanCreator unit {
+  font-size: 0.9em;
+}

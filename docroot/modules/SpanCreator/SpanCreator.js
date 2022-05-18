@@ -239,21 +239,31 @@ var SpanCreator = function() {
 
   var updateElapsedMinutes = function() {
     const start = startTimeField.getTime();
-    const finish = finishTimeField.getTime();
-    if (start == undefined || finish != undefined) {
+    var finish = finishTimeField.getTime();
+    
+    if (start == undefined) {
       elapsedMinutesIndicator.text('');
       return;
     }
 
     const now = new Date();
+
+    if (finish != undefined) {
+      finish.setFullYear(now.getFullYear());
+      finish.setMonth(now.getMonth());
+      finish.setDate(now.getDate());
+    } else {
+      finish = new Date();
+    }
+
     start.setFullYear(now.getFullYear());
     start.setMonth(now.getMonth());
     start.setDate(now.getDate());
 
-    const elapsedMillis = now - start;
+    const elapsedMillis = finish - start;
     const elapsed = timeUtil.formatTime(elapsedMillis/1000/60);
     
-    elapsedMinutesIndicator.text(elapsed);
+    elapsedMinutesIndicator.html(elapsed + ' <unit>hr</unit>');
   };
 
   init();
