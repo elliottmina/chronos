@@ -108,7 +108,7 @@ input {
   top: -0.25em;
   right: -0.25em;
   font-size: 2em;
-  color: hsl(16, 65%, 45%);
+  color: hsl(12, 83%, 62%);
   cursor: pointer;
 }
 #Settings .fa-toggle-on,
@@ -117,7 +117,9 @@ input {
   position: relative;
   top:0.1em;
   margin-right:0.25em;
-  color:hsl(16, 65%, 45%);
+}
+#Settings .field_wrapper .fas {
+  color:hsl(214, 35%, 37%);
 }
 #Settings label {
   display: inline-block;
