@@ -48,26 +48,22 @@
 }
 #DaySummary hours {
   font-weight: bold;
+  border-bottom: 1px dashed hsl(214, 35%, 37%);
+  cursor: pointer;
+}
+#DaySummary .totals hours {
+  border:none;
+  cursor: default;
 }
 #DaySummary unit {
   font-size: 0.8rem;
+  cursor: pointer;
+}
+#DaySummary .totals unit {
+  cursor: default;
 }
 #DaySummary ul {
   display: inline;
-}
-#DaySummary i.copy {
-  display: inline-block;
-  font-size: 0.75rem;
-  cursor: pointer;
-  padding:  0.25rem;
-  border-radius: 4px;
-  width: 0.9em;
-  border: 1px solid hsl(202, 46%, 62%);
-  background-color: hsl(202, 46%, 72%);
-  color: hsl(0, 0%, 20%);
-}
-#DaySummary i.copy:hover {
-  background-color: hsl(202, 46%, 76%);
 }
 #DaySummary delta {
   font-style: italic;
@@ -79,13 +75,16 @@
 }
 #DaySummary ul {
   margin-top: 0.25rem;
-}
-#DaySummary .totals label {
-
+  border-bottom: 1px dashed hsl(214, 35%, 37%);
+  cursor: pointer;
 }
 #DaySummary .totals inner {
   background-color: hsl(12, 83%, 62%);
 }
 #DaySummary task-container {
   display: block;
+}
+#DaySummary i.copy {
+  font-size: 0.8em;
+  cursor: pointer;
 }

@@ -34,8 +34,10 @@ var DaySummaryItemBuilder = function(
         </weight>
       </header>
       <time>
-        <hours>${hours(time)} <unit>hr</unit></hours>
+        <hours>${timeUtil.formatTime(time)}</hours>
+        <unit>hr</unit>
         <i class="far fa-copy copy"></i>
+        
         <delta>${delta(project)}</delta>
         <heart-container></heart-container>
       </time>
@@ -67,10 +69,6 @@ var DaySummaryItemBuilder = function(
     return App.projectSegmentor.getFormatted(label)[0];
   };
 
-  var hours = function(minutes) {
-    return timeUtil.formatTime(minutes);
-  };
-
   var delta = function(project) {
     const sign = project.roundDelta < 0 ? '-' : '+';
     const delta = timeUtil.formatTime(Math.abs(project.roundDelta));
@@ -98,11 +96,11 @@ var DaySummaryItemBuilder = function(
   };
 
   var addBehavior = function(container, project) {
-    const hourCopy = container.querySelector('time i');
+    const hourCopy = container.querySelector('time');
     hourCopy.setAttribute('copy', timeUtil.formatTime(project.time));
     hourCopy.addEventListener('click', copy);
 
-    const taskCopy = container.querySelector('tasks-container i');
+    const taskCopy = container.querySelector('tasks-container');
     taskCopy.setAttribute('copy', project.tasks.join('\n'));
     taskCopy.addEventListener('click', copy);
   };
@@ -110,12 +108,14 @@ var DaySummaryItemBuilder = function(
   var copy = function() {
     const val = this.getAttribute('copy');
 
-    this.classList.remove('fa-copy');
-    this.classList.add('fa-check');
+    const indicator = this.querySelector('i');
+
+    indicator.classList.remove('fa-copy');
+    indicator.classList.add('fa-check');
 
     setTimeout(() => {
-      this.classList.remove('fa-check');
-      this.classList.add('fa-copy');
+      indicator.classList.remove('fa-check');
+      indicator.classList.add('fa-copy');
     }, 400);
 
     copier.copy(val);
