@@ -19,6 +19,9 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
   };
 
   var buildGeneric = function(primaryMinutes, secondaryMinutes) {
+    if (!primaryMinutes) 
+      return;
+    
     const container = createContainer();
 
     container.innerHTML = `

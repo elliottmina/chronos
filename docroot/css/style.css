@@ -7,7 +7,11 @@
 body {
   font-size: 16px;
   color:hsl(0, 0%, 10%);
-  background-color: hsl(182, 82%, 93%);
+  margin: 0 auto;
+  max-width: 65rem;
+  background-color: hsl(0, 0%, 23%);
+  border-left: 2px solid hsl(0, 0%, 25%);
+  border-right: 2px solid hsl(0, 0%, 25%);
 }
 input {
   border: 1px solid hsl(0, 0%, 80%);
@@ -182,15 +186,16 @@ input {
 
 summary-container {
   display: flex;
-}
+  background-color: hsl(182, 82%, 93%);
+  }
 @media (max-width: 800px) {
   summary-container {
     flex-direction: column;
   }
 }
 summary-container #SpanSummary {
-  flex: 2;
+  flex: 1;
 }
 summary-container #DaySummary {
-  flex: 3;
+  flex: 1;
 }

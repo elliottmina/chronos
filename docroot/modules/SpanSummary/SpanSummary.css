@@ -10,7 +10,7 @@
   border-bottom: none;
 }
 #SpanSummary span-item.selected {
-  background-color: hsla(208.5, 100%, 79.8%, 0.5);
+  background-color: hsla(209, 100%, 80%, 0.5);
   padding: 1.5rem;
 }
 #SpanSummary li {

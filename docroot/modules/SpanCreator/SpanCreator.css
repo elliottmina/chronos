@@ -31,7 +31,7 @@
 #SpanCreator .time_field_container {
   display: inline-block;
   position: relative;
-  font-size: 1.3em;
+  font-size: 1.35rem;
   letter-spacing: .1em;
 }
 #SpanCreator .time_field_container>* {
@@ -99,7 +99,6 @@
 }
 #SpanCreator .time_field_container .time,
 #SpanCreator input {
-  border: none;
   background-color: hsl(0, 0%, 97%);
 }
 #SpanCreator .project_suggestions, 
@@ -134,10 +133,10 @@
   cursor: pointer;
   list-style: none;
   padding:1em 1em;
-  border-bottom:1px solid hsla(46, 100%, 67%, 1);
-  border-right:1px solid hsla(46, 100%, 67%, 1);
-  border-left:1px solid hsla(46, 100%, 67%, 1);
-  background-color: hsl(0, 0%, 97%);
+  border-bottom:1px solid hsl(0, 0%, 82%);
+  border-right:1px solid hsl(0, 0%, 82%);
+  border-left:1px solid hsl(0, 0%, 82%);
+  background-color: hsla(0, 0%, 97%, 0.9);
   margin: 0;
 }
 #SpanCreator .task_list li.selected,
@@ -146,7 +145,7 @@
 #SpanCreator .project_suggestions .suggestion.selected,
 #SpanCreator .project_suggestions .suggestion.today:hover,
 #SpanCreator .project_suggestions .suggestion:hover {
-  background-color: hsla(46, 100%, 77%, 0.85);
+  background-color: hsl(209, 70%, 67%);
 }
 #SpanCreator .task_list .selected_indicator,
 #SpanCreator .project_suggestions .suggestion .recent_indicator,
