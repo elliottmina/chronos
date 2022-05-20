@@ -1,4 +1,4 @@
-var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
+var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, topContainer) {
   
   var build = function(summaryData) {
     if (App.globalSettings.quarter_hour)
@@ -9,7 +9,8 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
 
   var buildRaw = function(summaryData) {
     const container = buildGeneric(calcTotalRawMinutes(summaryData), 0);
-    container.querySelector('delta').remove();
+    if (container)
+      container.querySelector('delta').remove();
   };
 
   var buildRounded = function(summaryData) {
@@ -27,7 +28,7 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
     container.innerHTML = `
       <header>
         <time>
-          <hours>${hours(primaryMinutes)} <unit>hr</unit></hours>
+          <hours>${timeUtil.formatTime(primaryMinutes)} <unit>hr</unit></hours>
           <delta>${delta(primaryMinutes, secondaryMinutes)}</delta>
           <heart-container></heart-container>
         </time>
@@ -51,15 +52,10 @@ var DaySummaryTotalsBuilder = function(heartBuilder, topContainer) {
     return container;
   };
 
-  var hours = function(minutes) {
-    return (minutes/60).toFixed(2);
-  };
-
   var delta = function(roundedMinutes, rawMinutes) {
     const minutesDelta = roundedMinutes - rawMinutes;
-    const hoursDelta = (minutesDelta/60).toFixed(2);
     const sign = minutesDelta < 0 ? '-' : '+'; 
-    return sign + Math.abs(hoursDelta);
+    return sign + timeUtil.formatTime(Math.abs(minutesDelta));
   };
 
   var buildHearts = function(container, minutes) {

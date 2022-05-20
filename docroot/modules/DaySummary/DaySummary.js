@@ -18,15 +18,18 @@ var DaySummary = function() {
 
   var buildDependencies = function() {
     dataBuilder = new DaySummaryDataBuilder();
+
+    const timeUtil = new TimeUtil();
    
     itemBuilder = new DaySummaryItemBuilder(
-      new  TimeUtil(),
+      timeUtil,
       new TimeFormatter12Hr(),
       new Copier(),
       new HeartBuilder(),
       container);
 
     totalsBuilder = new DaySummaryTotalsBuilder(
+      timeUtil,
       new HeartBuilder(), 
       container);
   };
