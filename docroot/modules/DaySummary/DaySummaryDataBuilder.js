@@ -1,28 +1,31 @@
 var DaySummaryDataBuilder = function() {
 
-  var projects = {};
-
-  var processSpan = function(index, span) {
-    initProject(span);
-
-    var project = projects[getKey(span)];
-
-    project.time += (span.finish - span.start)/1000/60;
-
-    jQuery.each(span.tasks, function(index, task) {
-      if (jQuery.inArray(task, project.tasks) == -1) {
-        project.tasks.push(task);
-      }
-    })
+  var build = function(spans) {
+    projects = {};
+    Object.entries(spans).forEach(([key, span]) => processSpan(span, projects));
+    applyRounding(projects);
+    return projects;
   };
 
-  var initProject = function(span) {
+  var processSpan = function(span) {
+    initProject(span, projects);
+    var project = projects[getKey(span)];
+
+    project.rawMinutes += (span.finish - span.start)/1000/60;
+
+    span.tasks.forEach(task => {
+      if (!project.tasks.includes(task))
+        project.tasks.push(task);
+    });
+  };
+
+  var initProject = function(span, projects) {
     if (projects[getKey(span)])
       return;
 
     projects[getKey(span)] = {
       label:span.project,
-      time:0,
+      rawMinutes:0,
       tasks:[]
     };
   };
@@ -31,11 +34,14 @@ var DaySummaryDataBuilder = function() {
     return span.project.toLowerCase();
   };
 
+  var applyRounding = function(projects) {
+    Object.entries(projects).forEach(([key, project]) => {
+      project.roundedMinutes = Math.round(project.rawMinutes/15)*15;
+      project.roundDelta = project.roundedMinutes - project.rawMinutes;
+    });
+  };
+
   return {
-    build:function(spans) {
-      projects = {};
-      jQuery.each(spans, processSpan);
-      return projects;
-    }
-  }
+    build:build
+  };
 };

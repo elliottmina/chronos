@@ -1,22 +1,20 @@
 var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, topContainer) {
   
-  var build = function(summaryData) {
+  var build = function(totalRawMinutes, totalRoundedMinutes) {
     if (App.globalSettings.quarter_hour)
-      buildRounded(summaryData);
+      buildRounded(totalRawMinutes, totalRoundedMinutes);
     else 
-      buildRaw(summaryData);
+      buildRaw(totalRawMinutes);
   };
 
-  var buildRaw = function(summaryData) {
-    const container = buildGeneric(calcTotalRawMinutes(summaryData), 0);
+  var buildRaw = function(totalRawMinutes) {
+    const container = buildGeneric(totalRawMinutes, 0);
     if (container)
       container.querySelector('delta').remove();
   };
 
-  var buildRounded = function(summaryData) {
-    buildGeneric(
-      calcTotalRoundedMinutes(summaryData), 
-      calcTotalRawMinutes(summaryData));
+  var buildRounded = function(totalRawMinutes, totalRoundedMinutes) {
+    buildGeneric(totalRoundedMinutes, totalRawMinutes);
   };
 
   var buildGeneric = function(primaryMinutes, secondaryMinutes) {
@@ -71,18 +69,6 @@ var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, topContainer) {
     inner.style.width = percent + 'px';
 
     container.querySelector('percent-text').textContent = percent + '%';
-  };
-
-  var calcTotalRawMinutes = function(summaryData) {
-    return Object.entries(summaryData).reduce((total, projectInfo) =>{
-      return total + projectInfo[1].rawMinutes;
-    }, 0);
-  };
-
-  var calcTotalRoundedMinutes = function(summaryData) {
-    return Object.entries(summaryData).reduce((total, projectInfo) =>{
-      return total + Math.round(projectInfo[1].time/15)*15;
-    }, 0);
   };
 
   return {

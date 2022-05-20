@@ -55,34 +55,19 @@ var DaySummary = function() {
   };
 
   var updateDisplay = function() {
-    var summaryData = dataBuilder.build(spans);
-    applyQuarterHour(summaryData);
-    populate(summaryData);
-  };
-
-  var applyQuarterHour = function(summaryData) {
-    Object.entries(summaryData).forEach(projectInfo =>{
-      const projNumbers = projectInfo[1];
-
-      const rawMinutes = projNumbers.time;
-      const roundedMinutes = Math.round(rawMinutes/15)*15;
-
-      projNumbers.time = roundedMinutes;
-      projNumbers.rawMinutes = rawMinutes;
-      projNumbers.roundDelta = roundedMinutes - rawMinutes;
-    });
+    populate(dataBuilder.build(spans));
   };
 
   var populate = function(summaryData) {
     empty();
 
-    const totalMinutes = calcTotalMinutes(summaryData);
+    const totalRawMinutes = calcTotalMinutes(summaryData, 'rawMinutes');
+    const totalRoundedMinutes = calcTotalMinutes(summaryData, 'roundedMinutes');
 
     var sortedKeys = Object.keys(summaryData).sort();
+    sortedKeys.forEach(key => itemBuilder.build(summaryData[key], totalRawMinutes, totalRoundedMinutes));
 
-    sortedKeys.forEach(key => itemBuilder.build(summaryData[key], totalMinutes));
-
-    totalsBuilder.build(summaryData);
+    totalsBuilder.build(totalRawMinutes, totalRoundedMinutes);
   };
 
   var empty = function () {
@@ -91,9 +76,9 @@ var DaySummary = function() {
     }
   };
 
-  var calcTotalMinutes = function(summaryData) {
-    return Object.entries(summaryData).reduce((total, item) => {
-      return total + item[1].time;
+  var calcTotalMinutes = function(summaryData, key) {
+    return Object.entries(summaryData).reduce((total, [_, project]) => {
+      return total + project[key];
     }, 0);
  };
 

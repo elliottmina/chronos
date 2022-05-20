@@ -5,15 +5,15 @@ var DaySummaryItemBuilder = function(
   heartBuilder,
   topContainer) {
 
-  var build = function(project, totalMinutes) {
+  var build = function(project, totalRawMinutes, totalRoundedMinutes) {
     if (App.globalSettings.quarter_hour)
-      buildRounded(project, totalMinutes);
+      buildRounded(project, totalRoundedMinutes);
     else
-      buildRaw(project, totalMinutes);
+      buildRaw(project, totalRawMinutes);
   };
 
   var buildRounded = function(project, totalMinutes) {
-    buildGeneric(project.time, project, totalMinutes)
+    buildGeneric(project.roundedMinutes, project, totalMinutes)
   };
 
   var buildRaw = function(project, totalMinutes) {
@@ -50,7 +50,7 @@ var DaySummaryItemBuilder = function(
     container.querySelector('label').appendChild(label(project.label));
 
     container.querySelector('heart-container').appendChild(
-      heartBuilder.build(project.time/60));
+      heartBuilder.build(time/60));
 
     buildWeight(
       container,
@@ -97,7 +97,8 @@ var DaySummaryItemBuilder = function(
 
   var addBehavior = function(container, project) {
     const hourCopy = container.querySelector('time');
-    hourCopy.setAttribute('copy', timeUtil.formatTime(project.time));
+    const val = App.globalSettings.quarter_hour ? project.roundedMinutes : project.rawMinutes;
+    hourCopy.setAttribute('copy', timeUtil.formatTime(val));
     hourCopy.addEventListener('click', copy);
 
     const taskCopy = container.querySelector('tasks-container');
