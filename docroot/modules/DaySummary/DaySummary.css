@@ -85,6 +85,7 @@
   display: block;
 }
 #DaySummary i.copy {
+  width: 0.9em;
   font-size: 0.8em;
   cursor: pointer;
 }
