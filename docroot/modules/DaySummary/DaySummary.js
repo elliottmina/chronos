@@ -2,7 +2,7 @@ var DaySummary = function() {
 
   var container;
   var spans;
-  var dataBuilder;
+  var summaryBuilder;
   var itemBuilder;
   var totalsBuilder;
 
@@ -17,7 +17,7 @@ var DaySummary = function() {
   };
 
   var buildDependencies = function() {
-    dataBuilder = new DaySummaryDataBuilder();
+    summaryBuilder = new SummaryBuilder();
 
     const timeUtil = new TimeUtil();
    
@@ -55,7 +55,7 @@ var DaySummary = function() {
   };
 
   var updateDisplay = function() {
-    populate(dataBuilder.build(spans));
+    populate(summaryBuilder.build(spans));
   };
 
   var populate = function(summaryData) {
