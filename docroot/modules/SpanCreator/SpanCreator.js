@@ -207,6 +207,7 @@ var SpanCreator = function() {
     App.dispatcher.publish('SPAN_SUBMITTED', span);
     activeSpan = undefined;
     cleanupFunc(span);
+    playRewardSound(span);
   };
 
   var buildSpan = function() {
@@ -264,6 +265,27 @@ var SpanCreator = function() {
     const elapsed = timeUtil.formatTime(elapsedMillis/1000/60);
     
     elapsedMinutesIndicator.html(elapsed + ' <unit>hr</unit>');
+  };
+
+  var playRewardSound = function(span) {
+    const elapsedMinutes = (span.finish - span.start)/1000/60;
+    var numPlays = Math.ceil(elapsedMinutes/30)+1;
+    numPlays = Math.min(numPlays, 5);
+
+    var currDelay = 0;
+    for (let i = 0; i < numPlays; i++) {
+      setTimeout(() => {
+        var sound = new Audio('/modules/SpanCreator/coin.flac');
+        sound.volume = random(3, 4) * 0.1;
+        sound.play()
+      }, currDelay);
+
+      currDelay += random(90, 250);
+    }
+  };
+
+  var random = function(min, max) {
+    return Math.random() * (max - min) + min;
   };
 
   init();
