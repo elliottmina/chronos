@@ -240,9 +240,9 @@
   background-color: hsl(214, 35%, 42%);
 }
 #SpanCreator .cancel {
-  background-color: hsl(16, 65%, 45%);
-  border: 1px solid hsl(191, 34%, 32%);
-  color: hsl(0, 0%, 100%);
+  background-color: hsl(202, 46%, 72%);
+  border:  none;
+  color: black;
 }
 #SpanCreator .editing_indicator {
   display: none;
