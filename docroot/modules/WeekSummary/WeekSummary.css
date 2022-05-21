@@ -25,10 +25,20 @@ week-summary outer {
   width: 100px;
   background-color: hsl(0, 0%, 80%);
   border: 1px solid hsl(0, 0%, 70%);
+  margin-left: 0.25rem;
 }
 week-summary unit {
   font-size: 0.8em;
 }
+week-summary delta {
+  display: inline-block;
+  width: 2.75em;
+  text-align: right;
+  font-style: italic;
+  text-align: right;
+  margin-left: 0.1em;
+}
+
 @media (max-width: 800px) {
   week-summary {
     flex-direction: column;

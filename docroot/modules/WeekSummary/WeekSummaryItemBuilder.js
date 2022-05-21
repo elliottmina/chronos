@@ -4,7 +4,7 @@ var WeekSummaryItemBuilder = function(timeUtil) {
     var percent;
     var minutes;
 
-    if (App.globalSettings.use_decimal_hours) {
+    if (App.globalSettings.quarter_hour) {
       percent = Math.floor((project.roundedMinutes/totalRoundedMinutes)*100);
       minutes = project.roundedMinutes;
     } else {
@@ -18,6 +18,7 @@ var WeekSummaryItemBuilder = function(timeUtil) {
       <label></label>
       <data>
         <hours>${timeUtil.formatTime(minutes)} <unit>hr</unit></hours>
+        <delta>${delta(project)}</delta>
         <outer><inner></inner></outer>
         <percent-text>${percent}%</percent-text>
       </data>
@@ -25,10 +26,19 @@ var WeekSummaryItemBuilder = function(timeUtil) {
 
     container.querySelector('label').appendChild(label(project.label));
     buildWeight(container, project.label, percent);
+
+    if (!App.globalSettings.quarter_hour)
+      container.querySelector('delta').remove();
   };
 
   var label = function(label) {
     return App.projectSegmentor.getFormatted(label)[0];
+  };
+
+  var delta = function(project) {
+    const sign = project.roundDelta < 0 ? '-' : '+';
+    const delta = timeUtil.formatTime(Math.abs(project.roundDelta));
+    return sign + delta;
   };
 
   var buildWeight = function(tr, label, percent) {
