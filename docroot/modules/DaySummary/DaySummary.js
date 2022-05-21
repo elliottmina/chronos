@@ -1,10 +1,11 @@
 var DaySummary = function() {
 
   var container;
-  var spans;
   var summaryBuilder;
   var itemBuilder;
   var totalsBuilder;
+  var timeUtil;
+  var isToday;
 
   var init = function() {
     gatherComponents();
@@ -19,7 +20,7 @@ var DaySummary = function() {
   var buildDependencies = function() {
     summaryBuilder = new SummaryBuilder();
 
-    const timeUtil = new TimeUtil();
+    timeUtil = new TimeUtil();
    
     itemBuilder = new DaySummaryItemBuilder(
       timeUtil,
@@ -45,27 +46,25 @@ var DaySummary = function() {
   };
 
   var onDateChanged = function(date) {
-    spans = date.spans;
-    updateDisplay();
+    isToday = date.date == timeUtil.getLocalYmd(new Date());
+    const summaries = summaryBuilder.build(date.spans);
+    updateDisplay(summaries);
   };
 
   var onSpansChanged = function(data) {
-    spans = data.record.spans;
-    updateDisplay();
+    const summaries = summaryBuilder.build(data.record.spans);
+    updateDisplay(summaries);
+    considerVictory(summaries);
   };
 
-  var updateDisplay = function() {
-    populate(summaryBuilder.build(spans));
-  };
-
-  var populate = function(summaryData) {
+  var updateDisplay = function(summaries) {
     empty();
 
-    const totalRawMinutes = calcTotalMinutes(summaryData, 'rawMinutes');
-    const totalRoundedMinutes = calcTotalMinutes(summaryData, 'roundedMinutes');
+    const totalRawMinutes = calcTotalMinutes(summaries, 'rawMinutes');
+    const totalRoundedMinutes = calcTotalMinutes(summaries, 'roundedMinutes');
 
-    var sortedKeys = Object.keys(summaryData).sort();
-    sortedKeys.forEach(key => itemBuilder.build(summaryData[key], totalRawMinutes, totalRoundedMinutes));
+    var sortedKeys = Object.keys(summaries).sort();
+    sortedKeys.forEach(key => itemBuilder.build(summaries[key], totalRawMinutes, totalRoundedMinutes));
 
     totalsBuilder.build(totalRawMinutes, totalRoundedMinutes);
   };
@@ -76,11 +75,27 @@ var DaySummary = function() {
     }
   };
 
-  var calcTotalMinutes = function(summaryData, key) {
-    return Object.entries(summaryData).reduce((total, [_, project]) => {
+  var calcTotalMinutes = function(summaries, key) {
+    return Object.entries(summaries).reduce((total, [_, project]) => {
       return total + project[key];
     }, 0);
- };
+  };
+
+  var considerVictory = function(summaries) {
+    if (!isToday) return;
+
+    const totalMinutes = App.globalSettings.quarter_hour ? 
+      calcTotalMinutes(summaries, 'roundedMinutes'): 
+      calcTotalMinutes(summaries, 'rawMinutes');
+
+    const goalMinutes = App.globalSettings.goal_hours_day * 60;
+    if (totalMinutes >= goalMinutes) {
+      const sound = new Audio('modules/DaySummary/cheering.wav');
+      sound.volume = 0.6;
+      sound.play()
+    }
+
+  };
 
   init();
 
