@@ -1,15 +1,15 @@
-var WeekSummaryItemBuilder = function(timeUtil) {
+var WeekSummaryItemBuilder = function(timeUtil, progressBarSetter) {
 
   var build = function(project, totalRawMinutes, totalRoundedMinutes, targetContainer) {
-    var percent;
     var minutes;
+    var totalMinutes;
 
     if (App.globalSettings.quarter_hour) {
-      percent = Math.floor((project.roundedMinutes/totalRoundedMinutes)*100);
+      totalMinutes = totalRoundedMinutes;
       minutes = project.roundedMinutes;
     } else {
-      percent = Math.floor((project.rawMinutes/totalRawMinutes)*100);
       minutes = project.rawMinutes;
+      totalMinutes = totalRawMinutes;
     }
 
     const container = document.createElement('week-item');
@@ -20,12 +20,12 @@ var WeekSummaryItemBuilder = function(timeUtil) {
         <hours>${timeUtil.formatTime(minutes)} <unit>hr</unit></hours>
         <delta>${delta(project)}</delta>
         <outer><inner></inner></outer>
-        <percent-text>${percent}%</percent-text>
+        <percent-text></percent-text>
       </data>
     `;
 
     container.querySelector('label').appendChild(label(project.label));
-    buildWeight(container, project.label, percent);
+    buildWeight(container, project.label, minutes, totalMinutes);
 
     if (!App.globalSettings.quarter_hour)
       container.querySelector('delta').remove();
@@ -41,12 +41,12 @@ var WeekSummaryItemBuilder = function(timeUtil) {
     return sign + delta;
   };
 
-  var buildWeight = function(tr, label, percent) {
-    label = App.projectSegmentor.segment(label)[0];
-    const color = App.colorGenerator.generate(label, 0.8);
-    const inner = tr.querySelector('inner');
-    inner.style.width = percent + 'px';
-    inner.style.backgroundColor = color;
+  var buildWeight = function(tr, label, minutes, totalMinutes) {
+    progressBarSetter.set(
+      tr,
+      minutes,
+      totalMinutes,
+      label);
   };
 
   return {

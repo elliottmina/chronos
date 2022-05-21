@@ -27,11 +27,13 @@ var DaySummary = function() {
       new TimeFormatter12Hr(),
       new Copier(),
       new HeartBuilder(),
+      new ProgressBarSetter(),
       container);
 
     totalsBuilder = new DaySummaryTotalsBuilder(
       timeUtil,
       new HeartBuilder(), 
+      new ProgressBarSetter(),
       container);
   };
 

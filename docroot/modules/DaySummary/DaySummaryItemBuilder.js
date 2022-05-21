@@ -3,6 +3,7 @@ var DaySummaryItemBuilder = function(
   timeFormatter,
   copier, 
   heartBuilder,
+  progressBarSetter,
   topContainer) {
 
   var build = function(project, totalRawMinutes, totalRoundedMinutes) {
@@ -76,15 +77,11 @@ var DaySummaryItemBuilder = function(
   };
 
   var buildWeight = function(container, minutes, totalMinutes, label) {
-    const percent = Math.round(minutes*100/totalMinutes);
-    const projectRoot = App.projectSegmentor.segment(label)[0];
-    const color = App.colorGenerator.generate(projectRoot, 0.8);
-    
-    container.querySelector('percent-text').textContent = percent + '%';
-    
-    const inner = container.querySelector('inner');
-    inner.style.width = percent + 'px';
-    inner.style.backgroundColor = color;
+    progressBarSetter.set(
+      container,
+      minutes,
+      totalMinutes,
+      label);
   };
 
   var buildTasks = function(list, tasks) {

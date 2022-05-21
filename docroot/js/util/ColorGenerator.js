@@ -18,8 +18,8 @@ var ColorGenerator = function() {
   var palleteIndex = -1;
 
   var getColor = function(key) {
-    if (key == 'Misc')
-      return ['134', '134', '134'];
+    if (key == 'Misc') return ['134', '134', '134'];
+    if (key == 'day-progress') return ['239', '110', '78'];
 
     if (!assignedColors[key])
       assignedColor(key);

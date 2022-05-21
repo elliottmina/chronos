@@ -84,9 +84,6 @@
   border-bottom: 1px dashed hsl(214, 35%, 37%);
   cursor: pointer;
 }
-#DaySummary .totals inner {
-  background-color: hsl(12, 83%, 62%);
-}
 #DaySummary task-container {
   display: block;
 }

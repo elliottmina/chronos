@@ -1,4 +1,4 @@
-var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, topContainer) {
+var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, progressBarSetter, topContainer) {
   
   var build = function(totalRawMinutes, totalRoundedMinutes) {
     if (App.globalSettings.quarter_hour)
@@ -62,13 +62,11 @@ var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, topContainer) {
   };
 
   var buildProgress = function(container, minutes) {
-    const goalMinutes = App.globalSettings.goal_hours_day * 60;
-    const percent = Math.round(minutes*100/goalMinutes);
-
-    const inner = container.querySelector('inner');
-    inner.style.width = percent + 'px';
-
-    container.querySelector('percent-text').textContent = percent + '%';
+    progressBarSetter.set(
+      container,
+      minutes,
+      App.globalSettings.goal_hours_day * 60,
+      'day-progress');
   };
 
   return {

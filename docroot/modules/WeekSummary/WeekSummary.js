@@ -11,7 +11,7 @@ var WeekSummary = function() {
     build();
     timeUtil = new TimeUtil();
     aggregator = new WeekSummaryAggregator(timeUtil, new SummaryBuilder());
-    itemBuilder = new WeekSummaryItemBuilder(timeUtil);
+    itemBuilder = new WeekSummaryItemBuilder(timeUtil, new ProgressBarSetter());
     addBehavior();
   };
 
