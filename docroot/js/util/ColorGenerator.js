@@ -19,7 +19,7 @@ var ColorGenerator = function() {
 
   var getColor = function(key) {
     if (key == 'Misc')
-      return ['70', '70', '70'];
+      return ['134', '134', '134'];
 
     if (!assignedColors[key])
       assignedColor(key);
