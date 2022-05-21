@@ -18,6 +18,9 @@ var ColorGenerator = function() {
   var palleteIndex = -1;
 
   var getColor = function(key) {
+    if (key == 'Misc')
+      return ['70', '70', '70'];
+
     if (!assignedColors[key])
       assignedColor(key);
     return assignedColors[key];
@@ -40,15 +43,6 @@ var ColorGenerator = function() {
     generate:function(key, alpha) {
       alpha = alpha || 1;
       return stringify(getColor(key), alpha);
-    },
-    generateList:function(keys, alpha) {
-      alpha = alpha || 1;
-
-      var colors = [];
-      jQuery.each(keys, function(index, key) {
-        colors.push(stringify(getColor(key), alpha))
-      });
-      return colors;
     }
   };
 

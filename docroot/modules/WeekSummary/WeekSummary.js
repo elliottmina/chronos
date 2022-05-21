@@ -8,7 +8,7 @@ var WeekSummary = function() {
   var init = function() {
     build();
     timeUtil = new TimeUtil();
-    aggregator = new WeekSummaryAggregator(timeUtil);
+    aggregator = new WeekSummaryAggregator(timeUtil, new SummaryBuilder());
     addBehavior();
   };
 
@@ -26,7 +26,7 @@ var WeekSummary = function() {
     App.dispatcher.subscribe('SPAN_DELETED', draw);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', draw);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', draw);
-    // App.dispatcher.subscribe('QUARTER_HOUR_CHANGED', draw);
+    App.dispatcher.subscribe('QUARTER_HOUR_CHANGED', draw);
     App.dispatcher.subscribe('GOAL_HOURS_DAY_CHANGED', draw);
   };
 
@@ -37,14 +37,24 @@ var WeekSummary = function() {
 
   var draw = function() {
     empty();
-    const data = aggregator.aggregate(weekStart);
-    const sum = Object.entries(data).reduce((total, val) => total+val[1], 0);
-    Object.entries(data).forEach(row => drawRow(row, sum));
+    const projects = aggregator.aggregate(weekStart);
+    const totalRawMinutes = projects.reduce((total, project) => total+project.rawMinutes, 0);
+    const totalRoundedMinutes = projects.reduce((total, project) => total+project.roundedMinutes, 0);
+    
+    projects.forEach(project => drawRow(project, totalRawMinutes, totalRoundedMinutes));
   };
 
-  var drawRow = function(data, sum) {
-    const [project, minutes] = data;
-    const percent = Math.floor((minutes/sum)*100);
+  var drawRow = function(project, totalRawMinutes, totalRoundedMinutes) {
+    var percent;
+    var minutes;
+
+    if (App.globalSettings.use_decimal_hours) {
+      percent = Math.floor((project.roundedMinutes/totalRoundedMinutes)*100);
+      minutes = project.roundedMinutes;
+    } else {
+      percent = Math.floor((project.rawMinutes/totalRawMinutes)*100);
+      minutes = project.rawMinutes;
+    }
 
     const tr = document.createElement('tr');
     tbody.appendChild(tr);
@@ -57,16 +67,17 @@ var WeekSummary = function() {
       <td>${percent}%</td>
     `;
 
-    tr.querySelector('label').appendChild(label(project));
-    buildWeight(tr, project, percent);
+    tr.querySelector('label').appendChild(label(project.label));
+    buildWeight(tr, project.label, percent);
   };
 
   var label = function(label) {
     return App.projectSegmentor.getFormatted(label)[0];
   };
 
-  var buildWeight = function(tr, project, percent) {
-    const color = App.colorGenerator.generate(project, 0.8);
+  var buildWeight = function(tr, label, percent) {
+    label = App.projectSegmentor.segment(label)[0];
+    const color = App.colorGenerator.generate(label, 0.8);
     const inner = tr.querySelector('inner');
     inner.style.width = percent + 'px';
     inner.style.backgroundColor = color;
