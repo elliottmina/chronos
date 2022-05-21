@@ -1,9 +1,19 @@
 week-summary {
-  display: block;
+  display: flex;
   background-color: white;
+  font-size: 0.8rem;
+}
+week-summary .segment {
+  font-size: 1rem;
+}
+week-summary column {
+  flex: 1;
+  padding: 1em 2em;
+  margin: 0;
 }
 week-summary week-item {
-  display: block;
+  display: flex;
+  justify-content: space-between;
 }
 week-summary outer,
 week-summary inner {
@@ -15,4 +25,12 @@ week-summary outer {
   width: 100px;
   background-color: hsl(0, 0%, 80%);
   border: 1px solid hsl(0, 0%, 70%);
+}
+week-summary unit {
+  font-size: 0.8em;
+}
+@media (max-width: 800px) {
+  week-summary {
+    flex-direction: column;
+  }
 }
