@@ -4,21 +4,20 @@
   <title>Chronos v1.4</title>
   <!-- resource_files -->
 <link rel="stylesheet" type="text/css" href="css/roboto-mono.css?v=1.4">
-<link rel="stylesheet" type="text/css" href="css/theme_dark.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="css/Chart.min.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="css/style.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="css/ModalDialogue.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="css/roboto.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="modules/SpanSummary/SpanSummary.css?v=1.4">
-<link rel="stylesheet" type="text/css" href="modules/Stats/Stats.css?v=1.4">
-<link rel="stylesheet" type="text/css" href="modules/Goal/Goal.css?v=1.4">
+<link rel="stylesheet" type="text/css" href="modules/WeekSummary/WeekSummary.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="modules/SpanCreator/SpanCreator.css?v=1.4">
+<link rel="stylesheet" type="text/css" href="modules/DaySummary/DaySummary.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="modules/DateLine/DateLine.css?v=1.4">
-<link rel="stylesheet" type="text/css" href="modules/ProjectSummary/ProjectSummary.css?v=1.4">
 <link rel="stylesheet" type="text/css" href="modules/DateSelector/DateSelector.css?v=1.4">
 <script src="js/util/ButtonFieldBuilder.js?v=1.4"></script>
 <script src="js/util/InputSizeAdjuster.js?v=1.4"></script>
+<script src="js/util/SummaryBuilder.js?v=1.4"></script>
 <script src="js/util/Copier.js?v=1.4"></script>
 <script src="js/util/TextFieldBuilder.js?v=1.4"></script>
 <script src="js/util/Downloader.js?v=1.4"></script>
@@ -29,8 +28,10 @@
 <script src="js/util/ServiceRequest.js?v=1.4"></script>
 <script src="js/util/GuidGenerator.js?v=1.4"></script>
 <script src="js/util/Dispatcher.js?v=1.4"></script>
+<script src="js/util/HeartBuilder.js?v=1.4"></script>
 <script src="js/util/RegEx.js?v=1.4"></script>
 <script src="js/util/ModalDialogue.js?v=1.4"></script>
+<script src="js/util/ProgressBarSetter.js?v=1.4"></script>
 <script src="js/util/MetaKeyEvaluator.js?v=1.4"></script>
 <script src="js/util/FieldBuilder.js?v=1.4"></script>
 <script src="js/util/Padder.js?v=1.4"></script>
@@ -44,24 +45,15 @@
 <script src="js/app/App.js?v=1.4"></script>
 <script src="js/app/Settings.js?v=1.4"></script>
 <script src="js/app/ModuleLoader.js?v=1.4"></script>
-<script src="modules/SpanSummary/SpanSummaryItemTemplate.js?v=1.4"></script>
 <script src="modules/SpanSummary/SpanSummaryItemBuilder.js?v=1.4"></script>
-<script src="modules/SpanSummary/SpanSummaryTemplate.js?v=1.4"></script>
 <script src="modules/SpanSummary/SpanSummary.js?v=1.4"></script>
 <script src="modules/JsonImport/JsonImport.js?v=1.4"></script>
 <script src="modules/JsonImport/JsonImportDialogue.js?v=1.4"></script>
-<script src="modules/Stats/StatsTemplate.js?v=1.4"></script>
-<script src="modules/Stats/Stats.js?v=1.4"></script>
-<script src="modules/Stats/StatusChartBuilder.js?v=1.4"></script>
-<script src="modules/Stats/StatsDataCalculator.js?v=1.4"></script>
+<script src="modules/WeekSummary/WeekSummaryItemBuilder.js?v=1.4"></script>
+<script src="modules/WeekSummary/WeekSummaryAggregator.js?v=1.4"></script>
+<script src="modules/WeekSummary/WeekSummary.js?v=1.4"></script>
 <script src="modules/DateNudgerShortcuts/DateNudgerShortcuts.js?v=1.4"></script>
-<script src="modules/Goal/GoalTemplate.js?v=1.4"></script>
-<script src="modules/Goal/GoalWeeklyCalculator.js?v=1.4"></script>
-<script src="modules/Goal/GoalProgressBar.js?v=1.4"></script>
-<script src="modules/Goal/Goal.js?v=1.4"></script>
-<script src="modules/Goal/GoalSpanDurationCalculator.js?v=1.4"></script>
 <script src="modules/DeleteSpanDialogue/DeleteSpanDialogue.js?v=1.4"></script>
-<script src="modules/ThemeSelector/ThemeSelector.js?v=1.4"></script>
 <script src="modules/TimeFormatter12Hr/TimeFormatter12Hr.js?v=1.4"></script>
 <script src="modules/PersistenceMarshaller/PersistenceMarshaller.js?v=1.4"></script>
 <script src="modules/SpanCreator/SpanCreatorProjectSuggestor.js?v=1.4"></script>
@@ -83,17 +75,17 @@
 <script src="modules/CsvExport/CsvExportCollector.js?v=1.4"></script>
 <script src="modules/CsvExport/CsvExport.js?v=1.4"></script>
 <script src="modules/Blasticator/Blasticator.js?v=1.4"></script>
+<script src="modules/DaySummary/DaySummaryTotalsBuilder.js?v=1.4"></script>
+<script src="modules/DaySummary/DaySummaryItemBuilder.js?v=1.4"></script>
+<script src="modules/DaySummary/DaySummary.js?v=1.4"></script>
 <script src="modules/DateLine/DateLine.js?v=1.4"></script>
-<script src="modules/ProjectSummary/ProjectSummary.js?v=1.4"></script>
-<script src="modules/ProjectSummary/ProjectSummaryItemBuilder.js?v=1.4"></script>
-<script src="modules/ProjectSummary/ProjectSummaryDataBuilder.js?v=1.4"></script>
 <script src="modules/JsonExport/JsonExport.js?v=1.4"></script>
 <script src="modules/JsonExport/JsonExportCollector.js?v=1.4"></script>
 <script src="modules/DateSelector/DateSelector.js?v=1.4"></script>
 <!-- /resource_files -->
   <script>
     jQuery(document).ready(function() {
-      App.init([SpanSummary, JsonImport, Stats, DateNudgerShortcuts, Goal, DeleteSpanDialogue, ThemeSelector, TimeFormatter12Hr, PersistenceMarshaller, SpanCreator, CsvExport, Blasticator, DateLine, ProjectSummary, JsonExport, DateSelector]);
+      App.init([SpanSummary, JsonImport, WeekSummary, DateNudgerShortcuts, DeleteSpanDialogue, TimeFormatter12Hr, PersistenceMarshaller, SpanCreator, CsvExport, Blasticator, DaySummary, DateLine, JsonExport, DateSelector]);
     });
   </script>
 </head>
