@@ -5,6 +5,7 @@ var WeekSummary = function() {
   var itemBuilder;
   var weekStart;
   var columns;
+  var header;
 
   var init = function() {
     build();
@@ -15,7 +16,16 @@ var WeekSummary = function() {
   };
 
   var build = function() {
-    columns = document.querySelectorAll('week-summary column');
+    const topContainer = document.querySelector('week-summary');
+    topContainer.innerHTML = `
+    <columns>
+      <column></column>
+      <column></column>
+    </columns>
+    <header></header>
+    `;
+    columns = topContainer.querySelectorAll('column');
+    header = topContainer.querySelector('header');
   };
 
   var addBehavior = function() {
@@ -39,6 +49,11 @@ var WeekSummary = function() {
     const totalRawMinutes = projects.reduce((total, project) => total+project.rawMinutes, 0);
     const totalRoundedMinutes = projects.reduce((total, project) => total+project.roundedMinutes, 0);
 
+    buildProjects(projects, totalRawMinutes, totalRoundedMinutes);
+    buildGoal(totalRawMinutes, totalRoundedMinutes);
+  };
+
+  var buildProjects = function(projects, totalRawMinutes, totalRoundedMinutes) {
     function buildItem(project, col) {
       itemBuilder.build(project, totalRawMinutes, totalRoundedMinutes, col);
     }
@@ -48,12 +63,40 @@ var WeekSummary = function() {
     projects.forEach(project => buildItem(project, columns[1]));
   };
 
+  var buildGoal = function(totalRawMinutes, totalRoundedMinutes) {
+    const actualMinutes = App.globalSettings.quarter_hour ? totalRoundedMinutes : totalRawMinutes;
+    const goalMinutes = App.globalSettings.goal_hours_week*60;
+    const ratio = actualMinutes/goalMinutes;
+    const percent = (ratio*100).toFixed(0);
+
+    itemBuilder.build({
+      label: 'Week',
+      rawMinutes:totalRawMinutes,
+      roundedMinutes: totalRawMinutes,
+      roundDelta: totalRoundedMinutes - totalRawMinutes,
+    }, goalMinutes, goalMinutes, header);
+
+  // var goalInner;
+  // var goalPercent;
+  // var goalHours;
+  //   goalInner = topContainer.querySelector('header inner');
+  //   goalPercent = topContainer.querySelector('header percent-text');
+  //   goalHours = topContainer.querySelector('header hours');
+
+  //   goalInner.style.width = percent + 'px';
+  //   goalPercent.textContent = percent + '%';
+  //   goalHours.textContent = timeUtil.formatTime(actualMinutes);
+  };
+
   var empty = function () {
     columns.forEach(col => {
       while (col.lastChild) {
         col.removeChild(col.lastChild);
       }
     });
+    while (header.lastChild) {
+      header.removeChild(header.lastChild);
+    }
   };
 
   init();

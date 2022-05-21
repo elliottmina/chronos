@@ -1,19 +1,34 @@
 week-summary {
-  display: flex;
-  background-color: white;
+  display: block;
+  background-color: hsl(218, 23%, 21%);
+  padding: 1em 1em 0.5em 1em;
   font-size: 0.8rem;
+  color: white;
+}
+week-summary header {
+  display: block;
+  text-align: right;
+  margin-right: 2em;
+}
+week-summary columns {
+  display: flex;
 }
 week-summary .segment {
   font-size: 1rem;
 }
 week-summary column {
   flex: 1;
-  padding: 1em 2em;
-  margin: 0;
+  margin-right: 2em;
 }
 week-summary week-item {
   display: flex;
   justify-content: space-between;
+}
+week-summary header week-item {
+  display: inline-block;
+}
+week-summary header week-item i.fas {
+  display: none;
 }
 week-summary outer,
 week-summary inner {
@@ -37,9 +52,14 @@ week-summary delta {
   font-style: italic;
   margin-left: 0.1em;
 }
+week-summary percent-text {
+  display: inline-block;
+  min-width: 2em;
+  text-align: right;
+}
 
-@media (max-width: 800px) {
-  week-summary {
+@media (max-width: 950px) {
+  week-summary columns {
     flex-direction: column;
   }
 }
