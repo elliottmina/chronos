@@ -19,7 +19,7 @@ var ColorGenerator = function() {
 
   var getColor = function(key) {
     if (key == 'Misc') return ['134', '134', '134'];
-    if (key == 'day-progress') return ['239', '110', '78'];
+    if (key == 'day-progress' || key == 'Week') return ['239', '110', '78'];
 
     if (!assignedColors[key])
       assignedColor(key);

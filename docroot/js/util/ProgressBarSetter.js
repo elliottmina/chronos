@@ -11,7 +11,8 @@ var ProgressBarSetter = function() {
     const inner = container.querySelector('inner');
     inner.style.width = percentPx + 'px';
     inner.style.backgroundColor = color;
-
+    if (percent > percentPx)
+      inner.classList.add('overage');
   };
 
   return {

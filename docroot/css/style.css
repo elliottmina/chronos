@@ -191,6 +191,10 @@ input {
   overflow: clip;
 }
 
+inner.overage {
+  box-shadow: 0px 0px 7px 3px rgba(91,204,204,0.95);
+}
+
 summary-container {
   display: flex;
   background-color: hsl(182, 82%, 93%);
