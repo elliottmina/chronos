@@ -30,6 +30,9 @@ week-summary header week-item {
 week-summary header week-item i.fas {
   display: none;
 }
+week-summary header week-item label {
+  margin-right: 0.5em;
+}
 week-summary outer,
 week-summary inner {
   font-size: 0rem;

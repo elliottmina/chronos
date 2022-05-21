@@ -64,28 +64,16 @@ var WeekSummary = function() {
   };
 
   var buildGoal = function(totalRawMinutes, totalRoundedMinutes) {
-    const actualMinutes = App.globalSettings.quarter_hour ? totalRoundedMinutes : totalRawMinutes;
     const goalMinutes = App.globalSettings.goal_hours_week*60;
-    const ratio = actualMinutes/goalMinutes;
-    const percent = (ratio*100).toFixed(0);
 
-    itemBuilder.build({
+    const project = {
       label: 'Week',
       rawMinutes:totalRawMinutes,
-      roundedMinutes: totalRawMinutes,
+      roundedMinutes: totalRoundedMinutes,
       roundDelta: totalRoundedMinutes - totalRawMinutes,
-    }, goalMinutes, goalMinutes, header);
+    };
 
-  // var goalInner;
-  // var goalPercent;
-  // var goalHours;
-  //   goalInner = topContainer.querySelector('header inner');
-  //   goalPercent = topContainer.querySelector('header percent-text');
-  //   goalHours = topContainer.querySelector('header hours');
-
-  //   goalInner.style.width = percent + 'px';
-  //   goalPercent.textContent = percent + '%';
-  //   goalHours.textContent = timeUtil.formatTime(actualMinutes);
+    itemBuilder.build(project, goalMinutes, goalMinutes, header);
   };
 
   var empty = function () {
