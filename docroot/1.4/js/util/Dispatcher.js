@@ -15,9 +15,7 @@ var Dispatcher = function() {
     },
     publish:function(eventName, payload) {
       ensureKeyExists(eventName);
-      jQuery.each(list[eventName], function(index, callback) {
-        callback(payload);
-      });
+      list[eventName].forEach(callback => callback(payload));
     }
   }
 };

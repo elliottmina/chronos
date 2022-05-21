@@ -207,6 +207,7 @@ var SpanCreator = function() {
     App.dispatcher.publish('SPAN_SUBMITTED', span);
     activeSpan = undefined;
     cleanupFunc(span);
+    playRewardSound(span);
   };
 
   var buildSpan = function() {
@@ -239,21 +240,60 @@ var SpanCreator = function() {
 
   var updateElapsedMinutes = function() {
     const start = startTimeField.getTime();
-    const finish = finishTimeField.getTime();
-    if (start == undefined || finish != undefined) {
+    var finish = finishTimeField.getTime();
+    
+    if (start == undefined) {
       elapsedMinutesIndicator.text('');
       return;
     }
 
     const now = new Date();
+
+    if (finish != undefined) {
+      finish.setFullYear(now.getFullYear());
+      finish.setMonth(now.getMonth());
+      finish.setDate(now.getDate());
+    } else {
+      finish = new Date();
+    }
+
     start.setFullYear(now.getFullYear());
     start.setMonth(now.getMonth());
     start.setDate(now.getDate());
 
-    const elapsedMillis = now - start;
+    const elapsedMillis = finish - start;
     const elapsed = timeUtil.formatTime(elapsedMillis/1000/60);
     
-    elapsedMinutesIndicator.text(elapsed);
+    elapsedMinutesIndicator.html(elapsed + ' <unit>hr</unit>');
+  };
+
+  var playRewardSound = function(span) {
+    const minDelay = 50;
+    const maxDelay = 125;
+    const minVolume = 2;
+    const maxVolume = 6;
+    const minPlays = 1;;
+    const maxPlays = 10;
+    const qtyInterval = 15;
+
+    const elapsedMinutes = (span.finish - span.start)/1000/60;
+    var numPlays = Math.ceil(elapsedMinutes/qtyInterval)+minPlays;
+    numPlays = Math.min(numPlays, maxPlays);
+
+    var currDelay = 0;
+    for (let i = 0; i < numPlays; i++) {
+      setTimeout(() => {
+        var sound = new Audio('modules/SpanCreator/reward4.wav');
+        sound.volume = random(minVolume, maxVolume) * 0.1;
+        sound.play()
+      }, currDelay);
+
+      currDelay += random(minDelay, maxDelay);
+    }
+  };
+
+  var random = function(min, max) {
+    return Math.random() * (max - min) + min;
   };
 
   init();

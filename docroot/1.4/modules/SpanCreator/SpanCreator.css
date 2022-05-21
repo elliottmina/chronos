@@ -1,6 +1,6 @@
 #SpanCreator {
-  background-color: hsl(30, 100%, 70%);
-  padding-top: 1.5rem;
+  background-color: hsl(12, 83%, 62%);
+  padding: 1rem;
 }
 #SpanCreator>*{
   vertical-align: top;
@@ -31,7 +31,7 @@
 #SpanCreator .time_field_container {
   display: inline-block;
   position: relative;
-  font-size: 1.3em;
+  font-size: 1.35rem;
   letter-spacing: .1em;
 }
 #SpanCreator .time_field_container>* {
@@ -64,8 +64,8 @@
 }
 #SpanCreator .time_field_container button.now {
   display: inline-block;
-  border-left:1px solid hsl(46, 100%, 67%);
-  border-right:1px solid hsl(46, 100%, 67%);
+  border-left:1px solid hsl(202, 46%, 72%);
+  border-right:1px solid hsl(202, 46%, 72%);
   border-top: 0;
   border-bottom: 0;
   position: absolute;
@@ -75,11 +75,11 @@
   font-size: 1.25em;
   cursor: pointer;
   padding:0.2em;
-  background-color: hsl(46, 100%, 67%);
+  background-color: hsl(202, 46%, 72%);
   color:#fff;
 }
 #SpanCreator .time_field_container button.now:hover {
-  background-color: hsl(46, 100%, 72%);
+  background-color: hsl(202, 46%, 76%);
 }
 #SpanCreator .time_field_container .cursor {
   display: none;
@@ -99,8 +99,7 @@
 }
 #SpanCreator .time_field_container .time,
 #SpanCreator input {
-  border: 1px solid hsl(30, 80%, 65%);
-  background-color: hsl(46, 100%, 87%);
+  background-color: hsl(0, 0%, 97%);
 }
 #SpanCreator .project_suggestions, 
 #SpanCreator .time_field_wrapper, 
@@ -134,10 +133,10 @@
   cursor: pointer;
   list-style: none;
   padding:1em 1em;
-  border-bottom:1px solid hsla(46, 100%, 67%, 1);
-  border-right:1px solid hsla(46, 100%, 67%, 1);
-  border-left:1px solid hsla(46, 100%, 67%, 1);
-  background-color: hsla(46, 100%, 87%, 0.85);
+  border-bottom:1px solid hsl(0, 0%, 82%);
+  border-right:1px solid hsl(0, 0%, 82%);
+  border-left:1px solid hsl(0, 0%, 82%);
+  background-color: hsla(0, 0%, 97%, 0.9);
   margin: 0;
 }
 #SpanCreator .task_list li.selected,
@@ -146,7 +145,7 @@
 #SpanCreator .project_suggestions .suggestion.selected,
 #SpanCreator .project_suggestions .suggestion.today:hover,
 #SpanCreator .project_suggestions .suggestion:hover {
-  background-color: hsla(46, 100%, 77%, 0.85);
+  background-color: hsl(209, 70%, 67%);
 }
 #SpanCreator .task_list .selected_indicator,
 #SpanCreator .project_suggestions .suggestion .recent_indicator,
@@ -188,8 +187,6 @@
   padding: 0.25em 0.5em 0.25em 0.25em;
   border-radius: 4px;
   margin:0.2em;
-  background-color:hsl(35, 95%, 83%);
-  border:1px solid hsl(35, 95%, 63%);
 }
 #SpanCreator .task_list li a {
   cursor: pointer;
@@ -229,23 +226,23 @@
   vertical-align: text-bottom;
 }
 #SpanCreator .save {
-  background-color: hsl(46, 100%, 67%);
-  color: hsl(25, 24%, 30%);
+  background-color: hsl(214, 35%, 37%);
+  color: hsl(0, 0%, 100%);
 }
 #SpanCreator .save:hover {
-  background-color: hsl(46, 100%, 72%);
+  background-color: hsl(214, 35%, 42%);
 }
 #SpanCreator .duplicate {
-  background-color: hsl(25, 24%, 30%);
-  color: hsl(46, 100%, 67%);
+  background-color: hsl(214, 35%, 37%);
+  color: white;
 }
 #SpanCreator .duplicate:hover {
-  background-color: hsl(25, 24%, 35%);
+  background-color: hsl(214, 35%, 42%);
 }
 #SpanCreator .cancel {
-  background-color: hsl(16, 65%, 45%);
-  border: 1px solid hsl(191, 34%, 32%);
-  color: hsl(0, 0%, 100%);
+  background-color: hsl(202, 46%, 72%);
+  border:  none;
+  color: black;
 }
 #SpanCreator .editing_indicator {
   display: none;
@@ -301,4 +298,13 @@
 #SpanCreator .hotkeys .text {
   display:inline-block;
   margin-left: 0.25em;
+}
+#SpanCreator .elapsed_minutes {
+  display: block;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: right;
+}
+#SpanCreator unit {
+  font-size: 0.9em;
 }

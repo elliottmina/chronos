@@ -5,7 +5,7 @@ var ColorGenerator = function() {
   var pallete = [
     ['82',  '131', '251'],
     ['40',  '227', '28'],
-    ['251', '242', '130'],
+    ['208', '195', '29'],
     ['231', '198', '2'],
     ['165', '4',   '68'],
     ['216', '92',  '175'],
@@ -18,6 +18,9 @@ var ColorGenerator = function() {
   var palleteIndex = -1;
 
   var getColor = function(key) {
+    if (key == 'Misc') return ['134', '134', '134'];
+    if (key == 'day-progress' || key == 'Week') return ['239', '110', '78'];
+
     if (!assignedColors[key])
       assignedColor(key);
     return assignedColors[key];
@@ -40,15 +43,6 @@ var ColorGenerator = function() {
     generate:function(key, alpha) {
       alpha = alpha || 1;
       return stringify(getColor(key), alpha);
-    },
-    generateList:function(keys, alpha) {
-      alpha = alpha || 1;
-
-      var colors = [];
-      jQuery.each(keys, function(index, key) {
-        colors.push(stringify(getColor(key), alpha))
-      });
-      return colors;
     }
   };
 

@@ -1,38 +1,32 @@
 var SpanSummary = function() {
 
-  var spansContainer;
-  var nonContentContainer;
-  var contentContainer;
+  var container;
   var itemBuilder
   var spans;
   var spanMap = {};
 
   var init = function() {
-    build();
+    gatherComponents();
     buildDependencies();
     addBehavior();
   };
 
-  var buildDependencies = function() {
-    itemBuilder = new SpanSummaryItemBuilder(
-      new Padder(),
-      Rounder.roundDecimal,
-      new TimeFormatter12Hr(),
-      spansContainer);
+  var gatherComponents = function() {
+    container = document.getElementById('SpanSummary');
   };
 
-  var build = function() {
-    var renderTo = jQuery('#SpanSummary');
-    renderTo.html(SpanSummaryTemplate);
-    spansContainer = renderTo.find('.item_container');
-    noContentContainer = renderTo.find('.no_content_container');
-    contentContainer = renderTo.find('.content_container');
+  var buildDependencies = function() {
+    itemBuilder = new SpanSummaryItemBuilder(
+      new TimeFormatter12Hr(),
+      new TimeUtil(),
+      new HeartBuilder(),
+      container);
   };
 
   var addBehavior = function() {
     App.dispatcher.subscribe('DATE_CHANGED', onDateChanged);
-    App.dispatcher.subscribe('SPAN_SAVED', onSpanSaved);
-    App.dispatcher.subscribe('SPAN_DELETED', onSpanDeleted);
+    App.dispatcher.subscribe('SPAN_SAVED', populateSpans);
+    App.dispatcher.subscribe('SPAN_DELETED', populateSpans);
     App.dispatcher.subscribe('SPAN_EDIT_CANCELLED', clearSelectedTreatment);
     App.dispatcher.subscribe('USE_DECIMAL_HOURS_CHANGED', populateSpans);
     App.dispatcher.subscribe('PROJECT_SEGMENTOR_CHANGED', populateSpans);
@@ -44,45 +38,20 @@ var SpanSummary = function() {
   };
 
   var populateSpans = function() {
-    noContentContainer.show();
-    contentContainer.hide();
-    spansContainer.empty();
-    spanMap = {};
-
-    jQuery.each(spans, function(index, span) {
-      addSpan(span)
-    });
+    empty();
+    Object.entries(spans).forEach(([k, span]) => itemBuilder.build(span));
   };
 
-  var onSpanSaved = function(data) {
-    var span = data.span;
-    var container = spanMap[span.guid];
-    if (container)
-      itemBuilder.build(span, container);
-    else
-      addSpan(span);
-    clearSelectedTreatment();
-  };
-
-  var addSpan = function(span) {
-    noContentContainer.hide();
-    contentContainer.show();
-    var container = jQuery(SpanSummaryItemTemplate)
-      .prependTo(spansContainer);
-    spanMap[span.guid] = container;
-    itemBuilder.build(span, container);
-  };
-
-  var onSpanDeleted = function(data) {
-    var guid = data.span.guid;
-    spanMap[guid].remove();
-    delete(spanMap[guid]);
-    if (spansContainer.children().length == 0)
-      noContentContainer.show();
+  var empty = function () {
+    while (container.lastChild) {
+      container.removeChild(container.lastChild);
+    }
   };
 
   var clearSelectedTreatment = function () {
-    spansContainer.find('.selected').removeClass('selected');
+    const selected = container.querySelector('.selected');
+    if (selected)
+      selected.classList.remove('selected');
   };
 
   init();
