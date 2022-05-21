@@ -50,6 +50,9 @@
   font-weight: bold;
   border-bottom: 1px dashed hsl(214, 35%, 37%);
   cursor: pointer;
+  min-width: 2em;
+  text-align: right;
+  display: inline-block;
 }
 #DaySummary .totals hours {
   border:none;
@@ -66,9 +69,12 @@
   display: inline;
 }
 #DaySummary delta {
+  display: inline-block;
+  min-width: 2.5em;
   font-style: italic;
+  text-align: right;
   font-size: 0.9rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 #DaySummary heart-container {
   margin-left: 1rem;
