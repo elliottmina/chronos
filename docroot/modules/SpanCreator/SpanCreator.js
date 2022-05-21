@@ -268,19 +268,27 @@ var SpanCreator = function() {
   };
 
   var playRewardSound = function(span) {
+    const minDelay = 50;
+    const maxDelay = 125;
+    const minVolume = 2;
+    const maxVolume = 6;
+    const minPlays = 1;;
+    const maxPlays = 10;
+    const qtyInterval = 15;
+
     const elapsedMinutes = (span.finish - span.start)/1000/60;
-    var numPlays = Math.ceil(elapsedMinutes/30)+1;
-    numPlays = Math.min(numPlays, 5);
+    var numPlays = Math.ceil(elapsedMinutes/qtyInterval)+minPlays;
+    numPlays = Math.min(numPlays, maxPlays);
 
     var currDelay = 0;
     for (let i = 0; i < numPlays; i++) {
       setTimeout(() => {
-        var sound = new Audio('/modules/SpanCreator/coin.flac');
-        sound.volume = random(3, 4) * 0.1;
+        var sound = new Audio('modules/SpanCreator/reward4.wav');
+        sound.volume = random(minVolume, maxVolume) * 0.1;
         sound.play()
       }, currDelay);
 
-      currDelay += random(90, 250);
+      currDelay += random(minDelay, maxDelay);
     }
   };
 
