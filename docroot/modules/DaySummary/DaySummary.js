@@ -5,7 +5,8 @@ var DaySummary = function() {
   var itemBuilder;
   var totalsBuilder;
   var timeUtil;
-  var isToday;
+  var currDate;
+  var cheersPlayed = [];
 
   var init = function() {
     gatherComponents();
@@ -48,7 +49,7 @@ var DaySummary = function() {
   };
 
   var onDateChanged = function(date) {
-    isToday = date.date == timeUtil.getLocalYmd(new Date());
+    currDate = date.date;
     const summaries = summaryBuilder.build(date.spans);
     updateDisplay(summaries);
   };
@@ -84,7 +85,11 @@ var DaySummary = function() {
   };
 
   var considerVictory = function(summaries) {
-    if (!isToday) return;
+    if (!isToday()) return;
+
+    if (cheersPlayed.includes(currDate)) return;
+
+    cheersPlayed.push(currDate);
 
     const totalMinutes = App.globalSettings.quarter_hour ? 
       calcTotalMinutes(summaries, 'roundedMinutes'): 
@@ -97,6 +102,10 @@ var DaySummary = function() {
       sound.play()
     }
 
+  };
+
+  var isToday = function() {
+    return currDate == timeUtil.getLocalYmd(new Date());
   };
 
   init();
