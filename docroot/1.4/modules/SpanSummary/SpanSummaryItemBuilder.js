@@ -6,7 +6,7 @@ var SpanSummaryItemBuilder = function(
 
   var populateSpan = function(span) {
     const container = document.createElement('span-item');
-    topContainer.append(container);
+    topContainer.prepend(container);
 
     container.innerHTML = `
       <header>

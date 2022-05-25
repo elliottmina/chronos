@@ -208,6 +208,7 @@ var SpanCreator = function() {
     activeSpan = undefined;
     cleanupFunc(span);
     playRewardSound(span);
+    elapsedMinutesIndicator.text('');
   };
 
   var buildSpan = function() {

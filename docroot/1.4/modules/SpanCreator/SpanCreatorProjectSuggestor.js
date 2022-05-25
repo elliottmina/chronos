@@ -40,8 +40,8 @@ var SpanCreatorProjectSuggestor = function(
   var onSpanSaved = function(data) {
     if (jQuery.inArray(data.span.project, recentProjects) == -1) {
       recentProjects.push(data.span.project);
-      updateSuggestions();
     }
+    updateSuggestions();
   };
 
   var onDateChanged = function(data) {
