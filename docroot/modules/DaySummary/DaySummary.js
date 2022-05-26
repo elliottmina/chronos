@@ -6,6 +6,7 @@ var DaySummary = function() {
   var totalsBuilder;
   var timeUtil;
   var currDate;
+  var spans;
   var cheersPlayed = [];
 
   var init = function() {
@@ -50,18 +51,20 @@ var DaySummary = function() {
 
   var onDateChanged = function(date) {
     currDate = date.date;
-    const summaries = summaryBuilder.build(date.spans);
-    updateDisplay(summaries);
+    spans = date.spans;
+    updateDisplay();
   };
 
   var onSpansChanged = function(data) {
-    const summaries = summaryBuilder.build(data.record.spans);
-    updateDisplay(summaries);
+    spans = data.record.spans;
+    updateDisplay();
     considerVictory(summaries);
   };
 
-  var updateDisplay = function(summaries) {
+  var updateDisplay = function() {
     empty();
+
+    const summaries = summaryBuilder.build(spans);
 
     const totalRawMinutes = calcTotalMinutes(summaries, 'rawMinutes');
     const totalRoundedMinutes = calcTotalMinutes(summaries, 'roundedMinutes');
@@ -84,12 +87,14 @@ var DaySummary = function() {
     }, 0);
   };
 
-  var considerVictory = function(summaries) {
+  var considerVictory = function() {
     if (!isToday()) return;
 
     if (cheersPlayed.includes(currDate)) return;
 
     cheersPlayed.push(currDate);
+
+    const summaries = summaryBuilder.build(spans);
 
     const totalMinutes = App.globalSettings.quarter_hour ? 
       calcTotalMinutes(summaries, 'roundedMinutes'): 
