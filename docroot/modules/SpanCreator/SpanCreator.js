@@ -147,7 +147,7 @@ var SpanCreator = function() {
     topContainer.find('.hotkeys_button').click(function() {
       topContainer.find('section.hotkeys').toggleClass('active');
     });
-    setInterval(updateElapsedMinutes, 1000*60);
+    setInterval(updateElapsedMinutes, 1000*20);
   };
 
   var cancel = function() {
