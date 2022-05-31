@@ -58,7 +58,7 @@ var DaySummary = function() {
   var onSpansChanged = function(data) {
     spans = data.record.spans;
     updateDisplay();
-    considerVictory(summaries);
+    considerVictory();
   };
 
   var updateDisplay = function() {
