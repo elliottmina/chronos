@@ -69,10 +69,10 @@ var DaySummary = function() {
     const totalRawMinutes = calcTotalMinutes(summaries, 'rawMinutes');
     const totalRoundedMinutes = calcTotalMinutes(summaries, 'roundedMinutes');
 
+    totalsBuilder.build(totalRawMinutes, totalRoundedMinutes);
+
     var sortedKeys = Object.keys(summaries).sort();
     sortedKeys.forEach(key => itemBuilder.build(summaries[key], totalRawMinutes, totalRoundedMinutes));
-
-    totalsBuilder.build(totalRawMinutes, totalRoundedMinutes);
   };
 
   var empty = function () {

@@ -25,16 +25,17 @@ var DaySummaryTotalsBuilder = function(timeUtil, heartBuilder, progressBarSetter
 
     container.innerHTML = `
       <header>
-        <time>
-          <hours>${timeUtil.formatTime(primaryMinutes)} <unit>hr</unit></hours>
-          <delta>${delta(primaryMinutes, secondaryMinutes)}</delta>
-          <heart-container></heart-container>
-        </time>
+        <label><i class="far fa-sigma"></i>Total</label>
         <weight>
           <outer><inner></inner></outer>
           <percent-text>
         </weight>
       </header>
+      <time>
+        <hours>${timeUtil.formatTime(primaryMinutes)} <unit>hr</unit></hours>
+        <delta>${delta(primaryMinutes, secondaryMinutes)}</delta>
+        <heart-container></heart-container>
+      </time>
         `;
 
     buildHearts(container, primaryMinutes);
