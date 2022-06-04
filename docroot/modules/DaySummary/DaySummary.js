@@ -92,8 +92,6 @@ var DaySummary = function() {
 
     if (cheersPlayed.includes(currDate)) return;
 
-    cheersPlayed.push(currDate);
-
     const summaries = summaryBuilder.build(spans);
 
     const totalMinutes = App.globalSettings.quarter_hour ? 
@@ -105,6 +103,7 @@ var DaySummary = function() {
       const sound = new Audio('modules/DaySummary/cheering.wav');
       sound.volume = 0.6;
       sound.play()
+      cheersPlayed.push(currDate);
     }
 
   };
