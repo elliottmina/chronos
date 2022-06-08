@@ -96,6 +96,20 @@ var SpanCreatorTemplate = `
           <span class="text">Save and repeat</span>
         </li>
 
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">&nbsp;[&nbsp;</span> + <span class="icon">Enter</span>
+          </span>
+          <span class="text">Previous day</span>
+        </li>
+
+        <li>
+          <span class="keys">
+            <span class="icon">Ctrl</span> + <span class="icon">&nbsp;]&nbsp;</span> + <span class="icon">Enter</span>
+          </span>
+          <span class="text">Next day</span>
+        </li>
+
       </ul>
     </div>
     <div class="set time">
