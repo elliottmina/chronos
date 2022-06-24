@@ -189,6 +189,7 @@ input {
   left: 0;
   right: 0;
   overflow: clip;
+  border-right: 1px solid hsl(12, 83%, 62%);
 }
 
 inner.overage {

@@ -44,6 +44,7 @@ week-summary outer {
   background-color: hsl(0, 0%, 80%);
   border: 1px solid hsl(0, 0%, 70%);
   margin-left: 0.25rem;
+  text-align: left;
 }
 week-summary unit {
   font-size: 0.8em;
